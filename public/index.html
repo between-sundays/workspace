@@ -2,29 +2,38 @@
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Between Sundays HQ</title>
 <link rel="stylesheet" href="/ws.css"/></head><body>
-<div class="wrap">
- <div id="lockslot"></div>
- <div class="mission">
-  <div class="t">Current mission</div>
-  <h2>Finish Issue 001 and put it on a press.</h2>
-  <p id="mline" style="color:var(--gray)">Counting…</p>
+<div id="lockslot"></div>
+
+<div class="rowhead"><h2>In motion</h2>
+ <span class="chips" style="margin-left:auto">
+  <a class="chip" href="/control-room.html">Flatplan</a>
+  <a class="chip" href="/compare.html">Compare pages</a>
+  <a class="chip" href="/well.html">The Well</a>
+  <a class="chip" href="/atlas.html">Audience</a></span></div>
+<div class="big" id="big"></div>
+
+<div class="two" style="margin-top:14px">
+ <div class="panel">
+  <div class="rowhead" style="margin:0 0 6px"><h2>What needs you next</h2>
+   <a class="more" href="/control-room.html">Open the flatplan</a></div>
+  <p style="margin:0 0 8px;color:var(--mute);font-size:13.5px">Only Adrian can settle these.</p>
+  <table class="tb"><thead><tr><th>Page</th><th style="width:150px">Waiting on</th>
+   <th style="width:96px">Options</th></tr></thead><tbody id="queue"></tbody></table>
  </div>
- <div class="nums" id="nums"></div>
-
- <div class="slug">Adrian's decision queue</div>
- <div id="queue"><p style="color:var(--gray)">Reading…</p></div>
-
- <div class="slug">Recent activity</div>
- <ul class="feed" id="feed"></ul>
- <p style="font-size:13px;margin-top:10px"><a href="/activity.html">The full feed →</a></p>
-
- <div class="slug">The building</div>
- <div class="cards" id="cards"></div>
+ <div class="panel d">
+  <div style="font-size:13px;opacity:.7">Latest from the team</div>
+  <div id="feed" style="margin-top:12px"></div>
+  <a class="go" href="/activity.html" style="width:100%">See all activity</a>
+ </div>
 </div>
+
+<div class="rowhead"><h2>The building</h2></div>
+<div class="cards" id="cards"></div>
+<div class="nums" id="nums" style="margin-top:14px"></div>
+
 <script src="/_nav.js"></script>
 <script>
-mount("index",{kicker:"Between Sundays HQ",title:"Headquarters",
- sub:"What we're building, what needs attention, what only Adrian can decide."});
+mount("index",{title:"Headquarters"});
 document.getElementById("lockslot").innerHTML=lockbar(); wireLock();
 document.getElementById("cards").innerHTML=PILLARS.map((p,i)=>{
  const n=ROOMS.filter(r=>r.p===p.id), live=n.filter(r=>r.live).length;
@@ -35,40 +44,58 @@ document.getElementById("cards").innerHTML=PILLARS.map((p,i)=>{
  const v=await (await fetch("/data/versions.json")).json();
  const [finals,feed,cms]=await Promise.all([state("finals.jsonl"),state("feed.jsonl"),
    Promise.all(v.map(p=>state(`comments/p${String(p.n).padStart(2,"0")}.jsonl`)))]);
- const finalBy={}; (finals||[]).forEach(f=>finalBy[f.page]=f);
- const nFinal=Object.keys(finalBy).length;
- const choices=v.filter(p=>p.variants.length>1&&!finalBy[p.n]);
- const single=v.filter(p=>p.variants.length===1&&!finalBy[p.n]);
- const allCms=(cms||[]).flatMap(c=>c||[]);
- const scrip=allCms.filter(c=>c.type==="SCRIPTURE").length;
- document.getElementById("mline").textContent=
-  `${v.length} pages laid out · ${v.reduce((a,p)=>a+p.variants.length,0)} versions between them · `+
-  `${nFinal} finalled.`;
- document.getElementById("nums").innerHTML=[
-  [nFinal+" / "+v.length,"Pages finalled",0],
-  [choices.length,"Waiting on Adrian to choose",choices.length>0],
-  [single.length,"Only one candidate so far",0],
-  [scrip,"Open scripture flags",scrip>0],
-  [(feed||[]).length,"Recorded contributions",0],
- ].map(([b,s,w])=>`<div class="num1${w?" warn":""}"><b>${b}</b><span>${s}</span></div>`).join("");
+ const fin={}; (finals||[]).forEach(f=>fin[f.page]=f);
+ const nFinal=Object.keys(fin).length;
+ const choices=v.filter(p=>p.variants.length>1&&!fin[p.n]);
+ const vers=v.reduce((a,p)=>a+p.variants.length,0);
+ const scrip=((cms||[]).flatMap(c=>c||[])).filter(c=>c.type==="SCRIPTURE").length;
+ const pct=Math.round(100*nFinal/v.length);
+ const [seeds,pros,pers]=await Promise.all([state("well.jsonl"),state("prospects.jsonl"),
+   state("personas.jsonl")]);
+ const nSeeds=(seeds||[]).length, nPeople=new Set((pros||[]).map(p=>p.handle)).size;
+ const nGroups=new Set((pers||[]).map(p=>p.id)).size;
+ document.getElementById("big").innerHTML=`
+  <a class="bc y" href="/control-room.html">
+   <span class="tag">Issue 001</span><h3>I Am With You</h3>
+   <div class="sub">48 pages · ${vers} versions on the table</div>
+   <div class="foot"><div class="pr"><span>Pages finalled</span><span>${nFinal}/${v.length}</span></div>
+    <div class="bar"><i style="width:${pct}%"></i></div>
+    <button class="go">Open the flatplan</button></div></a>
+  <a class="bc p" href="/well.html">
+   <span class="tag p">The Well</span><h3>Ideas waiting to be pulled</h3>
+   <div class="sub">${nSeeds} drops · anyone can build on them</div>
+   <div class="foot"><button class="go">Drop or draw</button></div></a>
+  <a class="bc b" href="/atlas.html">
+   <span class="tag b">Grow</span><h3>Audience &amp; real people</h3>
+   <div class="sub">${nGroups} persona groups · ${nPeople} people on the desk</div>
+   <div class="foot"><button class="go">Open the atlas</button></div></a>`;
  const q=document.getElementById("queue");
- if(!getKey()){q.innerHTML='<p style="color:var(--gray)">Unlock above to see the queue.</p>';}
- else if(!choices.length){q.innerHTML='<p style="color:var(--gray)">Nothing waiting. Every page with a choice has been decided.</p>';}
- else{q.innerHTML=choices.slice(0,12).map(p=>
-   `<div class="q"><span class="k">Choose</span><span class="b">Page ${String(p.n).padStart(2,"0")}
-    — ${p.name} <span style="color:var(--gray)">(${p.variants.length} candidates)</span></span>
-    <a href="/room.html?p=${p.n}">Open</a></div>`).join("")+
-   (choices.length>12?`<p style="font-size:13px;color:var(--gray);margin-top:10px">
-     and ${choices.length-12} more in the <a href="/control-room.html">Control Room</a>.</p>`:"");}
+ q.innerHTML=!getKey()
+  ?'<tr><td colspan="3" style="color:var(--mute)">Sign in above to see the queue.</td></tr>'
+  :(choices.length?choices.slice(0,7).map(p=>
+    `<tr><td><a href="/room.html?p=${p.n}"><span class="lname">${p.name}</span>
+      <div class="lsub">Page ${String(p.n).padStart(2,"0")}</div></a></td>
+     <td><span class="pill no">pick a version</span></td>
+     <td>${p.variants.length}</td></tr>`).join("")
+   :'<tr><td colspan="3" style="color:var(--mute)">Nothing waiting. Every page with a choice is decided.</td></tr>');
+ document.getElementById("nums").innerHTML=[
+  [nFinal+" / "+v.length,"Pages finalled",0],[choices.length,"Waiting on Adrian",choices.length>0],
+  [scrip,"Open scripture flags",scrip>0],[nSeeds,"Ideas in the Well",0],
+  [nPeople,"People on the desk",0],[(feed||[]).length,"Recorded contributions",0],
+ ].map(([b,s,w])=>`<div class="num1${w?" warn":""}"><b>${b}</b><span>${s}</span></div>`).join("");
  const F=document.getElementById("feed");
- const items=(feed||[]).slice(-8).reverse();
+ const items=(feed||[]).slice(-6).reverse();
  F.innerHTML=items.length?items.map(e=>{
-  const what={comment:`left a ${e.type||""} note on page ${e.page}`,
-   score:`scored page ${e.page} a ${e.score}`,version:`submitted a version of page ${e.page}`,
-   final:`marked page ${e.page} final`,brief:`wrote the brief for page ${e.page}`,
-   space:`wrote in ${e.space}`,inbox:`dropped a ${e.kind} in the inbox`}[e.event]||e.event;
-  return `<li><span class="who">${e.by}</span><span>${what}</span>
-   <span class="when">${(e.at||"").slice(0,10)}</span></li>`;}).join("")
-  :`<li><span style="color:var(--gray)">${getKey()?"Nothing yet.":"Locked."}</span></li>`;
+  const what={comment:`noted on page ${e.page}`,score:`scored page ${e.page} · ${e.score}`,
+   version:`submitted page ${e.page}`,final:`marked page ${e.page} final`,
+   brief:`briefed page ${e.page}`,space:`wrote in ${e.space}`,seed:`dropped “${e.body||""}”`,
+   grow:`built on ${e.seed}`,status:`moved ${e.seed} → ${e.status}`,inbox:`added a ${e.kind}`,
+   persona:`defined ${e.body}`,message:`logged a message test`,
+   assignment:`posted an assignment`,outreach:`reached out`}[e.event]||e.event;
+  return `<div style="display:flex;gap:9px;align-items:baseline;padding:7px 0;
+   border-bottom:1px solid rgba(255,255,255,.09);font-size:13.5px">
+   <b style="font-size:11px;letter-spacing:.04em;opacity:.75;min-width:52px">${e.by}</b>
+   <span style="opacity:.9">${what}</span></div>`;}).join("")
+  :`<p style="opacity:.65">${getKey()?"Nothing yet.":"Sign in to see the team's activity."}</p>`;
 })();
 </script></body></html>

@@ -2,14 +2,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Space — Between Sundays HQ</title>
 <link rel="stylesheet" href="/ws.css"/></head><body>
-<div class="wrap"><div id="b"></div></div>
+<div><div id="b"></div></div>
 <script src="/_nav.js"></script>
 <script>
 const id=new URLSearchParams(location.search).get("s")||"";
 const r=ROOMS.find(x=>x.id===id);
 if(!r){location.href="/";}
 const pil=PILLARS.find(p=>p.id===r.p);
-mount(r.p,{kicker:pil.label,title:r.label,sub:r.purpose});
+mount(r.p,{title:r.label,sub:r.purpose});
 document.getElementById("b").innerHTML=`
  <div class="slug">${pil.label} · ${r.label}</div>
  <div class="blank"><div class="t">This space has not been designed yet</div>

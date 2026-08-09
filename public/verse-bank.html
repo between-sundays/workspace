@@ -2,7 +2,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Verse Bank — Between Sundays HQ</title>
 <link rel="stylesheet" href="/ws.css"/></head><body>
-<div class="wrap">
+<div>
  <div class="slug">Every verse in the issue</div>
  <p class="lede">Mined from the built pages themselves, not from a list somebody keeps by hand.
  Search before you build a page — if a verse is already carrying another page, either lean on
@@ -18,8 +18,7 @@
 </div>
 <script src="/_nav.js"></script>
 <script>
-mount("build",{kicker:"Build",title:"The Verse Bank",
- sub:"Every scripture printed in Issue 001, and where it lands."});
+mount("build",{title:"The Verse Bank", sub:"Every scripture printed in Issue 001, and where it lands."});
 let V=[];
 function draw(f){
  const q=(f||"").toLowerCase().trim();

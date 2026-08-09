@@ -2,11 +2,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Finance — Between Sundays HQ</title>
 <link rel="stylesheet" href="/ws.css"/></head><body>
-<div class="wrap"><div id="b"></div></div>
+<div><div id="b"></div></div>
 <script src="/_nav.js"></script>
 <script>
 const P="finance"; const pil=PILLARS.find(x=>x.id===P);
-mount(P,{kicker:"Between Sundays HQ",title:pil.label,sub:pil.blurb});
+mount(P,{title:pil.label,sub:pil.blurb});
 const rooms=ROOMS.filter(r=>r.p===P);
 document.getElementById("b").innerHTML=
  '<div class="slug">'+pil.label+'</div>'+

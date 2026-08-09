@@ -2,7 +2,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Relationship Desk — Between Sundays HQ</title>
 <link rel="stylesheet" href="/ws.css"/></head><body>
-<div class="wrap">
+<div>
  <div class="slug">Real people</div>
  <p class="lede">The people, not the models. Each row is somebody real, with a link to their public
  profile and the reason they fit a group — quoted from what they actually posted. Someone can sit in
@@ -33,8 +33,7 @@
 </div>
 <script src="/_nav.js"></script>
 <script>
-mount("grow",{kicker:"Grow",title:"Relationship Desk",
- sub:"Real people — links, why they fit, and where each relationship stands."});
+mount("grow",{title:"Relationship Desk", sub:"Real people — links, why they fit, and where each relationship stands."});
 document.getElementById("lockslot").innerHTML=lockbar(); wireLock();
 const S=["discovered","learning","worth-knowing","engaging","conversation","invited","ongoing"];
 let ROWS=[],PN={},filter=(new URLSearchParams(location.search).get("persona")||"");

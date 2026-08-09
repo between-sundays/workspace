@@ -1,19 +1,31 @@
 /* Between Sundays HQ — shared structure. One source for nav, hubs and blank spaces. */
+const ICONS={
+ hq:'<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/>',
+ well:'<path d="M4 8h16"/><path d="M6 8v11a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8"/><path d="M12 3v5"/>',
+ build:'<path d="M4 4h16v16H4z"/><path d="M4 9h16"/><path d="M9 9v11"/>',
+ grow:'<path d="M3 17l5-5 4 3 8-8"/><path d="M15 7h5v5"/>',
+ operate:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/>',
+ finance:'<path d="M12 2v20"/><path d="M17 6H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>',
+ company:'<path d="M4 21V6l8-4 8 4v15"/><path d="M9 21v-7h6v7"/>',
+ inbox:'<path d="M3 12h5l2 3h4l2-3h5"/><path d="M5 5h14l2 7v7H3v-7z"/>',
+ activity:'<path d="M3 12h4l3 8 4-16 3 8h4"/>',
+ book:'<path d="M4 4h11a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3z"/><path d="M18 20a2 2 0 0 0 2-2V6"/>'};
+const RAIL=[
+ {id:"index",   href:"/",              icon:"hq",       label:"HQ"},
+ {id:"well",    href:"/well.html",     icon:"well",     label:"The Well"},
+ {id:"build",   href:"/build.html",    icon:"build",    label:"Build \u2014 the paper"},
+ {id:"grow",    href:"/grow.html",     icon:"grow",     label:"Grow \u2014 audience"},
+ {id:"operate", href:"/operate.html",  icon:"operate",  label:"Operate"},
+ {id:"finance", href:"/finance.html",  icon:"finance",  label:"Finance"},
+ {id:"company", href:"/company.html",  icon:"company",  label:"Company"},
+ {id:"inbox",   href:"/inbox.html",    icon:"inbox",    label:"Inbox"},
+ {id:"activity",href:"/activity.html", icon:"activity", label:"Activity"}];
 const PILLARS=[
- {id:"build",   label:"Build",   href:"/build.html",
-  blurb:"Everything used to make what we publish."},
- {id:"operate", label:"Operate", href:"/operate.html",
-  blurb:"Everything needed to run the company reliably."},
- {id:"grow",    label:"Grow",    href:"/grow.html",
-  blurb:"Finding, serving and keeping an audience."},
- {id:"finance", label:"Finance", href:"/finance.html",
-  blurb:"What it costs, what it earns, what it becomes."},
- {id:"company", label:"Company", href:"/company.html",
-  blurb:"The shared understanding behind every decision."},
-];
-const EXTRA=[{id:"well",label:"The Well",href:"/well.html"},
-             {id:"inbox",label:"Inbox",href:"/inbox.html"},
-             {id:"activity",label:"Activity",href:"/activity.html"}];
+ {id:"build",   label:"Build",   href:"/build.html",   blurb:"Everything used to make what we publish."},
+ {id:"operate", label:"Operate", href:"/operate.html", blurb:"Everything needed to run the company reliably."},
+ {id:"grow",    label:"Grow",    href:"/grow.html",    blurb:"Finding, serving and keeping an audience."},
+ {id:"finance", label:"Finance", href:"/finance.html", blurb:"What it costs, what it earns, what it becomes."},
+ {id:"company", label:"Company", href:"/company.html", blurb:"The shared understanding behind every decision."}];
 /* Rooms. live:true = built. Otherwise it renders as an honest blank space. */
 const ROOMS=[
  // ---- BUILD ----
@@ -147,28 +159,47 @@ const ROOMS=[
   q:["What does a newcomer misread on their first day?"],
   owner:"Unassigned",inputs:"Confusion",outputs:"Shared language"},
 ];
-function plate(cur,{kicker,title,sub}={}){
- const d=new Date().toLocaleDateString("en-US",{weekday:"long",year:"numeric",month:"long",day:"numeric"});
- const well=EXTRA[0];
- const nav=[{id:"index",label:"HQ",href:"/"},well,...PILLARS,...EXTRA.slice(1)];
- return `<div class="wrap"><div class="plate">
-   <div class="kicker">${kicker||"Between Sundays HQ"}</div>
-   <h1>${title||"Between Sundays"}</h1>
-   <div class="sub">${sub||"Good news. Printed."}</div></div>
-  <div class="dateline"><span>${d}</span><span>Issue 001 · I Am With You</span>
-   <span>Adrian · Lacey · Claude · Manus · Codex</span></div>
-  <nav class="spaces">${nav.map(s=>
-    `<a href="${s.href}" class="${s.id===cur?"on":""}">${s.label}</a>`).join("")}</nav></div>`;
-}
-function foot(){return `<div class="wrap"><footer>
-  <span>Between Sundays — internal. Nothing is deleted, only added and superseded.</span>
-  <span><a href="https://github.com/between-sundays/workspace">Repo</a> ·
-   <a href="/archive/site-index-legacy.html">Archive</a> ·
-   <a href="/how-we-work.html">Contribute</a></span></footer></div>`;}
+function svg(k){return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">${ICONS[k]||""}</svg>`;}
 function mount(cur,opts){
- document.body.insertAdjacentHTML("afterbegin",plate(cur,opts));
- document.body.insertAdjacentHTML("beforeend",foot());
- quickDrop(); addPerson();}
+ const o=opts||{};
+ const kept=document.createDocumentFragment();
+ while(document.body.firstChild) kept.appendChild(document.body.firstChild);
+ const me=localStorage.getItem("bts-who");
+ document.body.innerHTML=`<div class="app">
+  <aside class="rail"><div class="logo">BS</div>
+   ${RAIL.map(r=>`<a href="${r.href}" class="${r.id===cur?"on":""}">${svg(r.icon)}
+     <span class="tip">${r.label}</span></a>`).join("")}
+   <div class="sp"></div>
+   <a href="/how-we-work.html">${svg("book")}<span class="tip">How we work</span></a></aside>
+  <div class="main">
+   <header class="top">
+    <div class="hi">Welcome to <span class="brand">Between Sundays</span> <b>HQ</b></div>
+    <div class="grow"></div>
+    <div class="search"><input id="gsearch" placeholder="Search the workspace\u2026"/>
+     <button aria-label="Search">&#8594;</button></div>
+    <div class="me"><div class="av" id="avme">${me?me.slice(0,2):"\u2014"}</div>
+     <div class="who" id="whome">${me||"Not signed in"}<span>${me?"signed in":"paste your key"}</span></div>
+    </div></header>
+   <div class="page">
+    <h1 class="title">${o.title||"Headquarters"}</h1>
+    ${o.sub?`<p class="lede" style="margin-top:-8px">${o.sub}</p>`:""}
+    <div id="__content"></div>
+    <footer><span>Between Sundays \u2014 internal. Nothing is deleted, only added and superseded.</span>
+     <a href="https://github.com/between-sundays/workspace">Repo</a>
+     <a href="/how-we-work.html">How we work</a></footer>
+   </div></div></div>`;
+ document.getElementById("__content").appendChild(kept);
+ const gs=document.getElementById("gsearch");
+ if(gs) gs.addEventListener("keydown",e=>{
+  if(e.key==="Enter"&&e.target.value.trim())
+   location.href="/search.html?q="+encodeURIComponent(e.target.value.trim());});
+ quickDrop(); addPerson();
+ if(getKey()&&!localStorage.getItem("bts-who")){
+  fetch("/api/whoami",{headers:{"x-agent-key":getKey()}}).then(r=>r.json()).then(j=>{
+   if(j&&j.you){localStorage.setItem("bts-who",j.you);
+    document.getElementById("avme").textContent=j.you.slice(0,2);
+    document.getElementById("whome").firstChild.textContent=j.you;}}).catch(()=>{});}
+}
 /* Quick Drop — on every page in the workspace. Capture must be easier than organising. */
 function quickDrop(){
  if(document.getElementById("qd")) return;

@@ -35,7 +35,7 @@
  font-family:var(--san);font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
  cursor:pointer;margin-left:6px}
 </style></head><body>
-<div class="wrap">
+<div>
  <div class="slug">The flatplan</div>
  <div class="bar">
   <span class="stat" id="cFinal">0 final</span>
@@ -56,8 +56,7 @@
 </div>
 <script src="/_nav.js"></script>
 <script>
-mount("issue",{kicker:"Issue 001 · I Am With You",title:"The Control Room",
- sub:"Forty-eight pages, and where each one stands."});
+mount("issue",{title:"The Control Room", sub:"Forty-eight pages, and where each one stands."});
 const KEYST="bts-agent-key";
 function getKey(){return (localStorage.getItem(KEYST)||"").trim();}
 async function state(path){

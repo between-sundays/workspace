@@ -48,7 +48,7 @@ button.go{width:100%;border:1px solid var(--ink);background:var(--ink);color:#ff
 #lb img{max-width:94vw;max-height:93vh;object-fit:contain;box-shadow:0 2px 26px rgba(0,0,0,.22)}
 @media(max-width:900px){.cols{grid-template-columns:1fr}}
 </style></head><body>
-<div class="wrap">
+<div>
  <div class="slug" id="slug">Page</div>
  <div class="cols">
   <div><div class="rail" id="rail"></div><div class="brief" id="brief" style="display:none"></div></div>
@@ -98,8 +98,7 @@ keyEl.onchange=()=>{localStorage.setItem(KEYST,keyEl.value.trim());location.relo
 (async()=>{
  const versions=await (await fetch("/data/versions.json")).json();
  const page=versions.find(x=>x.n===P)||{name:"",variants:[]};
- mount("issue",{kicker:"Issue 001 · page "+PP,title:page.name||("Page "+PP),
-  sub:"Every version, every note, and the decision."});
+ mount("issue",{title:page.name||("Page "+PP), sub:"Every version, every note, and the decision."});
  document.title=`Page ${PP} · ${page.name} — Between Sundays`;
  document.getElementById("slug").textContent="Page "+PP;
  const [finals,scores0,extra0,cms0]=await Promise.all([

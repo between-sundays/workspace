@@ -2,7 +2,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Activity — Between Sundays HQ</title>
 <link rel="stylesheet" href="/ws.css"/></head><body>
-<div class="wrap">
+<div>
  <div class="slug">Everything that happened</div>
  <p class="lede">Newest first. This is how you catch up in five minutes instead of asking
  everybody what they did.</p>
@@ -11,8 +11,7 @@
 </div>
 <script src="/_nav.js"></script>
 <script>
-mount("activity",{kicker:"Between Sundays HQ",title:"Activity",
- sub:"Every contribution, attributed, newest first."});
+mount("activity",{title:"Activity", sub:"Every contribution, attributed, newest first."});
 document.getElementById("lockslot").innerHTML=lockbar(); wireLock();
 (async()=>{
  const feed=await state("feed.jsonl");
