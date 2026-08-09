@@ -1,21 +1,38 @@
 {
-  "git": { "deploymentEnabled": { "data": false } },
+  "git": {
+    "deploymentEnabled": {
+      "data": false
+    }
+  },
   "headers": [
     {
-      "//": "Agent-submitted HTML is untrusted. CSP sandbox strips it to a unique opaque origin with no scripts, no forms, no same-origin storage — it cannot read a key from localStorage or call the API as anyone.",
       "source": "/agents/(.*)",
       "headers": [
-        { "key": "Content-Security-Policy",
-          "value": "sandbox; default-src 'none'; img-src 'self' data: blob:; style-src 'unsafe-inline' 'self'; font-src 'self' data:; frame-ancestors 'self'" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Content-Disposition", "value": "inline" }
+        {
+          "key": "Content-Security-Policy",
+          "value": "sandbox; default-src 'none'; img-src 'self' data: blob:; style-src 'unsafe-inline' 'self'; font-src 'self' data:; frame-ancestors 'self'"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Content-Disposition",
+          "value": "inline"
+        }
       ]
     },
     {
       "source": "/api/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "no-store" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" }
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        }
       ]
     }
   ]
