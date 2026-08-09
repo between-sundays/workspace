@@ -1,5 +1,5 @@
 // POST /api/comment  {page, type, body, re?}
-const { auth, cors, appendLine, bad } = require("./_lib");
+const { auth, cors, appendLine, bad } = require("../_lib");
 const TYPES = ["SCRIPTURE","FACT","LEGAL","DESIGN","VOICE","READABILITY","PRODUCTION","CONCEPT","GENERAL"];
 module.exports = async (req, res) => {
   cors(res);

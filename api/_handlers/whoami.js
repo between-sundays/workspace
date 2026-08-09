@@ -1,5 +1,5 @@
 // GET /api/whoami — key check + onboarding pointer.
-const { auth, cors } = require("./_lib");
+const { auth, cors } = require("../_lib");
 module.exports = async (req, res) => {
   cors(res);
   if (req.method === "OPTIONS") return res.status(204).end();

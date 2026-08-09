@@ -1,5 +1,5 @@
 // POST /api/version  {page, filename?, html_b64?, url?, notes?}
-const { auth, cors, appendLine, putFile, bad } = require("./_lib");
+const { auth, cors, appendLine, putFile, bad } = require("../_lib");
 module.exports = async (req, res) => {
   cors(res);
   if (req.method === "OPTIONS") return res.status(204).end();

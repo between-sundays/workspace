@@ -1,5 +1,5 @@
 // POST /api/inbox {kind, text, url?}  — the dump zone. Anything can enter fast, get sorted later.
-const { auth, cors, appendLine, bad } = require("./_lib");
+const { auth, cors, appendLine, bad } = require("../_lib");
 const KINDS = ["link","idea","screenshot","note","social","product","creator","prospect",
                "story","scripture","question","risk"];
 module.exports = async (req, res) => {

@@ -1,5 +1,5 @@
 // POST /api/react {id, reaction}  — teaches the system what Between Sundays finds meaningful.
-const { auth, cors, appendLine, bad } = require("./_lib");
+const { auth, cors, appendLine, bad } = require("../_lib");
 const R = ["something-here","push-further","too-obvious","not-us","scripture-needs-work",
            "strong-visual","save-for-later","build-this"];
 module.exports = async (req, res) => {

@@ -1,5 +1,5 @@
 // POST /api/score  {page, version, score}
-const { auth, cors, appendLine, bad } = require("./_lib");
+const { auth, cors, appendLine, bad } = require("../_lib");
 module.exports = async (req, res) => {
   cors(res);
   if (req.method === "OPTIONS") return res.status(204).end();

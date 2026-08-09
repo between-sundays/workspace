@@ -1,6 +1,6 @@
 // POST /api/status {id, status}  — move a drop along. Nothing is ever deleted; "sleeping" is
 // how an idea rests. "used" records where it finally appeared.
-const { auth, cors, appendLine, bad } = require("./_lib");
+const { auth, cors, appendLine, bad } = require("../_lib");
 const S = ["raw","developing","story-ready","ready-to-pull","sleeping","used"];
 module.exports = async (req, res) => {
   cors(res);

@@ -1,5 +1,5 @@
 // POST /api/seed {word, note?}  — drop something in The Well. Raw is fine. Rambling is fine.
-const { auth, cors, appendLine, bad } = require("./_lib");
+const { auth, cors, appendLine, bad } = require("../_lib");
 const slug = s => String(s).toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,42);
 module.exports = async (req, res) => {
   cors(res);

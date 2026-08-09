@@ -1,5 +1,5 @@
 // POST /api/space  {space, text}  — write a business space (Growth, Logistics, Revenue, Products).
-const { auth, cors, putFile, appendLine, bad } = require("./_lib");
+const { auth, cors, putFile, appendLine, bad } = require("../_lib");
 const OK = ["growth","logistics","revenue","products"];
 module.exports = async (req, res) => {
   cors(res);

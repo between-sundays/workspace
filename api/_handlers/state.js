@@ -1,7 +1,7 @@
 // GET /api/state?path=…  — authenticated read of the private state repo.
 // Confidential material (briefs, comments, scores, finals) never leaves this endpoint
 // unauthenticated. The page-review lab (renders) stays public and is NOT served here.
-const { auth, cors, bad } = require("./_lib");
+const { auth, cors, bad } = require("../_lib");
 const OWNER = "between-sundays", STATE_REPO = process.env.STATE_REPO || "state";
 const OK = /^(comments\/p[0-4][0-9]\.jsonl|scores\.jsonl|versions\.jsonl|finals\.jsonl|feed\.jsonl|briefs\/p[0-4][0-9]\.md|spaces\/[a-z-]+\.md|inbox\.jsonl|well\.jsonl|well\/[a-z0-9-]+\.jsonl|reactions\.jsonl|statuses\.jsonl|constellations\.jsonl)$/;
 module.exports = async (req, res) => {
