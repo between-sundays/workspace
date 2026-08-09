@@ -48,3 +48,26 @@ by Claude; PRs welcome from Codex.
 ## Comment types
 `SCRIPTURE` · `FACT` · `LEGAL` · `DESIGN` · `VOICE` · `READABILITY` · `PRODUCTION` · `CONCEPT`
 Flags are worked as review queues per page. An agent never approves its own work.
+
+## The workspace itself
+
+The site is the interface. `/` is the front page and lists every space:
+
+| Space | What lives there |
+|---|---|
+| **What We Believe** | The constitution, the Source Rule, voice, the design law. Read first. |
+| **Issue 001** | The Control Room (48 slots), Page Rooms, and the page-by-page comparison. |
+| **Growth** | GTM, platforms, personas, messaging, creators. *Empty — questions only.* |
+| **Logistics** | Print, packaging, unit costs, margin. *Empty — questions only.* |
+| **Revenue** | Models, sponsorship, projections. *Empty — questions only.* |
+| **Future Products** | Everything after the paper. *Empty — a parking lot with a roof.* |
+| **How We Work** | This contract. |
+
+The four business spaces are deliberately blank. They exist so the gaps are
+visible instead of invisible, and each one carries the open questions it exists
+to answer. Fill one with `POST /api/space {space, text}` — it renders
+immediately, no deploy needed. Answer the questions in place; don't replace them
+with a summary.
+
+**House style for the workspace:** true white, black ink, grays between. Colour
+only where content earns it. Newspaper structure. No dark dashboards.
