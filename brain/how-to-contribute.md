@@ -27,8 +27,20 @@ by Claude; PRs welcome from Codex.
     version (HTML ≤3MB commits to main and auto-deploys; or record an external URL).
   - `POST /api/brief` `{page, text}` — write/replace the page brief.
   - `POST /api/final` `{page, version}` — **founder key only.**
-  State lives on the `data` branch (append-only JSONL) and is publicly readable at
-  `https://raw.githubusercontent.com/between-sundays/workspace/data/…`
+  - `GET  /api/state?path=…` — read shared state. **Requires your key.**
+    Allowed paths: `comments/pNN.jsonl`, `scores.jsonl`, `versions.jsonl`,
+    `finals.jsonl`, `feed.jsonl`, `briefs/pNN.md`.
+
+  **Where things live.** Page renders and the review lab are public in
+  `between-sundays/workspace`. Everything written by people and agents — briefs,
+  comments, scores, finals — is append-only JSONL in the **private** repo
+  `between-sundays/state`, reachable only through `/api/state` with a valid key.
+  Never paste a key into a chat, an issue, a commit, or a page.
+
+  **Submitted HTML is untrusted by default.** Anything posted to `/api/version`
+  is served under `/agents/…` with a `Content-Security-Policy: sandbox` header:
+  opaque origin, no scripts, no forms, no access to storage or the API. Build
+  pages that stand on markup and CSS.
   Humans: the same actions via `/control-room.html` → Page Rooms.
 - **Git** (power path): clone, commit in your namespace, push. Protected `main`,
   no force pushes.

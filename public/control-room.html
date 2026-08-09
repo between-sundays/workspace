@@ -43,28 +43,57 @@ a.hdr{margin-left:auto;font-size:11px;font-weight:800;letter-spacing:.12em;text-
 <p class="legend">Every slot is a page. Click through to its Page Room for versions, comments,
 scores and the founder selection. Finals are green. Data updates within about a minute of any
 agent contribution.</p>
+
+<div id="lock" style="display:none;margin:14px 22px;padding:14px 16px;border:1px solid #2c2930;
+ border-radius:6px;background:#17161a">
+ <div style="font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#f15139">
+  Locked</div>
+ <p style="margin:6px 0 10px;font-size:13px;line-height:1.5;color:#8d8677">
+  Page renders are public. Briefs, comments, scores and finals are private — paste your workspace
+  key to unlock them. Stored in this browser only.</p>
+ <input id="keyin" placeholder="bsk_…" style="width:320px;max-width:100%;background:#111013;
+  color:#f3efe6;border:1px solid #2c2930;border-radius:5px;padding:8px;font:13px inherit"/>
+ <button id="keygo" style="background:#eff36a;color:#111013;border:0;border-radius:5px;
+  padding:9px 16px;font-weight:800;cursor:pointer;margin-left:6px">Unlock</button>
+</div>
 <div class="grid" id="grid"></div>
 <script>
-const RAW="https://raw.githubusercontent.com/between-sundays/workspace/data/";
-async function jsonl(u){try{const r=await fetch(u);if(!r.ok)return[];
- return (await r.text()).trim().split("\n").filter(Boolean).map(l=>{try{return JSON.parse(l)}catch{return null}}).filter(Boolean);
-}catch{return[]}}
+const KEYST="bts-agent-key";
+function getKey(){return (localStorage.getItem(KEYST)||"").trim();}
+async function state(path){
+  const k=getKey(); if(!k) return null;                 // null = locked, not empty
+  try{const r=await fetch("/api/state?path="+encodeURIComponent(path),{headers:{"x-agent-key":k}});
+    if(r.status===401) return null;
+    if(!r.ok) return [];
+    const t=(await r.text()).trim();
+    if(!t) return path.endsWith(".md")?"":[];
+    if(path.endsWith(".md")) return t;
+    return t.split("\n").filter(Boolean).map(l=>{try{return JSON.parse(l)}catch{return null}}).filter(Boolean);
+  }catch{return [];}
+}
 (async()=>{
  const versions=await (await fetch("/data/versions.json")).json();
- const [finals,extra]=await Promise.all([jsonl(RAW+"finals.jsonl"),jsonl(RAW+"versions.jsonl")]);
- const finalBy={}; finals.forEach(f=>finalBy[f.page]=f);
- const commentCounts={};
- await Promise.all(versions.map(async p=>{
-   const c=await jsonl(RAW+`comments/p${String(p.n).padStart(2,"0")}.jsonl`);
-   commentCounts[p.n]=c.length;}));
- const briefs={};
- await Promise.all(versions.map(async p=>{
-   try{const r=await fetch(RAW+`briefs/p${String(p.n).padStart(2,"0")}.md`,{method:"HEAD"});
-   briefs[p.n]=r.ok;}catch{briefs[p.n]=false}}));
+
+ const lk=document.getElementById("lock");
+ if(lk){ if(!getKey()) lk.style.display="block";
+  document.getElementById("keygo").onclick=()=>{
+    const v=document.getElementById("keyin").value.trim();
+    if(v){localStorage.setItem(KEYST,v);location.reload();}};
+  document.getElementById("keyin").addEventListener("keydown",e=>{
+    if(e.key==="Enter")document.getElementById("keygo").click();});}
+
+ const unlocked=!!getKey();
+ const [finals,extra]=await Promise.all([state("finals.jsonl"),state("versions.jsonl")]);
+ const finalBy={}; (finals||[]).forEach(f=>finalBy[f.page]=f);
+ const commentCounts={}, briefs={};
+ if(unlocked) await Promise.all(versions.map(async p=>{
+   const pp=String(p.n).padStart(2,"0");
+   const [c,b]=await Promise.all([state(`comments/p${pp}.jsonl`),state(`briefs/p${pp}.md`)]);
+   commentCounts[p.n]=(c||[]).length; briefs[p.n]=!!(b&&b.length);}));
  let nf=0,nb=0,nv=0;
  const g=document.getElementById("grid");
  versions.forEach(p=>{
-   const extraN=extra.filter(e=>e.page===p.n).length;
+   const extraN=(extra||[]).filter(e=>e.page===p.n).length;
    const total=p.variants.length+extraN; nv+=total;
    const fin=finalBy[p.n]; if(fin)nf++;
    if(briefs[p.n])nb++;
@@ -76,9 +105,9 @@ async function jsonl(u){try{const r=await fetch(u);if(!r.ok)return[];
     <div class="nm">${p.name}</div>
     <div class="badges">
       ${fin?'<span class="b final">FINAL ✓</span>':""}
-      ${briefs[p.n]?'<span class="b brief">brief</span>':'<span class="b">no brief</span>'}
+      ${unlocked?(briefs[p.n]?'<span class="b brief">brief</span>':'<span class="b">no brief</span>'):""}
       <span class="b vc">${total} vers</span>
-      <span class="b">${commentCounts[p.n]||0} 💬</span>
+      ${unlocked?`<span class="b">${commentCounts[p.n]||0} 💬</span>`:""}
     </div></div>`;
    g.appendChild(a);
  });

@@ -83,17 +83,27 @@ button.go{width:100%;background:var(--acc);color:#111013;border:0;border-radius:
 </div>
 <div id="lb" onclick="this.classList.remove('on')"><img id="lbi"/></div>
 <script>
-const RAW="https://raw.githubusercontent.com/between-sundays/workspace/data/";
 const P=Math.max(1,Math.min(48,parseInt(new URLSearchParams(location.search).get("p")||"1",10)));
 const PP=String(P).padStart(2,"0");
+const KEYST="bts-agent-key";
+function getKey(){return (localStorage.getItem(KEYST)||"").trim();}
+async function state(path){
+  const k=getKey(); if(!k) return null;                 // null = locked, not empty
+  try{const r=await fetch("/api/state?path="+encodeURIComponent(path),{headers:{"x-agent-key":k}});
+    if(r.status===401) return null;
+    if(!r.ok) return [];
+    const t=(await r.text()).trim();
+    if(!t) return path.endsWith(".md")?"":[];
+    if(path.endsWith(".md")) return t;
+    return t.split("\n").filter(Boolean).map(l=>{try{return JSON.parse(l)}catch{return null}}).filter(Boolean);
+  }catch{return [];}
+}
 const keyEl=document.getElementById("key");
-keyEl.value=localStorage.getItem("bts-agent-key")||"";
-keyEl.onchange=()=>localStorage.setItem("bts-agent-key",keyEl.value.trim());
-async function jsonl(u){try{const r=await fetch(u);if(!r.ok)return[];
- return (await r.text()).trim().split("\n").filter(Boolean).map(l=>{try{return JSON.parse(l)}catch{return null}}).filter(Boolean);}catch{return[]}}
+keyEl.value=getKey();
+keyEl.onchange=()=>{localStorage.setItem(KEYST,keyEl.value.trim());location.reload();};
 async function api(path,body){
  const r=await fetch("/api/"+path,{method:"POST",
-  headers:{"content-type":"application/json","x-agent-key":keyEl.value.trim()},
+  headers:{"content-type":"application/json","x-agent-key":getKey()},
   body:JSON.stringify(body)});
  const j=await r.json().catch(()=>({}));
  if(!r.ok){alert(j.error||("error "+r.status));throw 0;}
@@ -103,10 +113,12 @@ async function api(path,body){
  const page=versions.find(x=>x.n===P)||{name:"",variants:[]};
  document.getElementById("ttl").innerHTML=`Page ${PP} — <em>${page.name}</em>`;
  document.title=`p${PP} · ${page.name} — Page Room`;
- const [finals,scores,extra,cms]=await Promise.all([
-   jsonl(RAW+"finals.jsonl"),jsonl(RAW+"scores.jsonl"),
-   jsonl(RAW+"versions.jsonl"),jsonl(RAW+`comments/p${PP}.jsonl`)]);
- const fin=finals.filter(f=>f.page===P).pop();
+ const [finals,scores0,extra0,cms0]=await Promise.all([
+   state("finals.jsonl"),state("scores.jsonl"),
+   state("versions.jsonl"),state(`comments/p${PP}.jsonl`)]);
+ const unlocked=!!getKey();
+ const scores=scores0||[], extra=extra0||[], cms=cms0||[];
+ const fin=(finals||[]).filter(f=>f.page===P).pop();
  const all=[...page.variants.map(v=>({src:v.src,vers:v.vers})),
             ...extra.filter(e=>e.page===P).map(e=>({src:e.src,vers:[e.by],notes:e.notes}))];
  const rail=document.getElementById("rail");
@@ -127,12 +139,13 @@ async function api(path,body){
     await api("final",{page:P,version:v.src}); location.reload();};
   rail.appendChild(d);
  });
- try{const b=await fetch(RAW+`briefs/p${PP}.md`);
-  if(b.ok){const el=document.getElementById("brief");
-   el.style.display="block";
-   el.innerHTML="<h4>The brief</h4>"+(await b.text()).replace(/^#.*\n/,"").replace(/</g,"&lt;");}}catch{}
+ const bt=await state(`briefs/p${PP}.md`);
+ if(bt){const el=document.getElementById("brief");el.style.display="block";
+   el.innerHTML="<h4>The brief</h4>"+bt.replace(/^#.*\n/,"").replace(/</g,"&lt;");}
  const box=document.getElementById("cms");
- box.innerHTML=cms.length?"":'<div class="cm" style="color:var(--dim)">No comments yet. Start the conversation.</div>';
+ box.innerHTML=cms.length?"":(unlocked
+   ?'<div class="cm" style="color:var(--dim)">No comments yet. Start the conversation.</div>'
+   :'<div class="cm" style="color:var(--hot)">Locked — paste your workspace key below to see comments, scores and briefs.</div>');
  cms.forEach(c=>{const d=document.createElement("div");d.className="cm";
   d.innerHTML=`<span class="who ${c.by}">${c.by}</span><span class="ty">${c.type}</span>
    <span class="at">${(c.at||"").slice(0,16).replace("T"," ")}</span>

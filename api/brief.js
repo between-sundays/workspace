@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
   if (!text || String(text).length < 20) return bad(res, 400, "text required (a real brief)");
   const p = String(n).padStart(2, "0");
   const doc = `# Brief — Page ${p}\n*By ${who} · ${new Date().toISOString()}*\n\n${String(text).slice(0,6000)}\n`;
-  await putFile(`briefs/p${p}.md`, doc, `[data] brief p${n} · ${who}`, "data");
+  await putFile(`briefs/p${p}.md`, doc, `brief p${n} · ${who}`, "main", process.env.STATE_REPO || "state");
   await appendLine("feed.jsonl",
     JSON.stringify({ at: new Date().toISOString(), by: who, page: n, event: "brief" }),
     `[data] feed: brief p${n} · ${who}`);
