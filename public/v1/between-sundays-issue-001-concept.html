@@ -1,0 +1,839 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Between Sundays - Issue 001 48 Page Concept</title>
+  <style>
+    * { box-sizing: border-box; letter-spacing: 0; }
+    :root {
+      --ink: #151515;
+      --paper: #f5ead7;
+      --cream: #fff8e9;
+      --blue: #79b9f2;
+      --red: #ff4f38;
+      --green: #166f43;
+      --gold: #ffc845;
+      --violet: #b991ff;
+      --orange: #ff9f45;
+      --cyan: #42d2d6;
+      --pink: #ff8bbd;
+    }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Avenir Next", "Trebuchet MS", Verdana, sans-serif;
+    }
+    button {
+      font: inherit;
+      color: inherit;
+    }
+    .board {
+      width: 2600px;
+      min-height: 2060px;
+      padding: 34px;
+      background:
+        linear-gradient(90deg, rgba(255, 79, 56, 0.08) 0 13%, transparent 13%),
+        radial-gradient(var(--ink) 0.7px, transparent 0.7px) 0 0 / 7px 7px,
+        var(--paper);
+    }
+    .top {
+      display: grid;
+      grid-template-columns: 1fr 780px;
+      gap: 30px;
+      min-height: 206px;
+      padding: 26px;
+      background: var(--ink);
+      color: var(--paper);
+      border: 2px solid var(--ink);
+      box-shadow: 12px 12px 0 var(--red);
+    }
+    .eyebrow {
+      margin: 0 0 10px;
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+    h1, h2, h3 {
+      margin: 0;
+      font-family: Impact, "Arial Black", sans-serif;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: 1420px;
+      font-size: 72px;
+      line-height: 0.9;
+      color: var(--paper);
+    }
+    .top-copy {
+      margin: 18px 0 0;
+      max-width: 1110px;
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1.22;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      align-content: center;
+    }
+    .stat {
+      min-height: 112px;
+      padding: 18px 14px;
+      border: 2px solid rgba(245, 234, 215, 0.55);
+      background: rgba(255,255,255,0.07);
+    }
+    .stat strong {
+      display: block;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 38px;
+      color: var(--gold);
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .stat span {
+      display: block;
+      margin-top: 14px;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.12;
+      text-transform: uppercase;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 510px 1fr;
+      gap: 28px;
+      margin-top: 30px;
+    }
+    .cover,
+    .panel,
+    .wall-head,
+    .page,
+    .detail {
+      border: 2px solid var(--ink);
+      box-shadow: 7px 7px 0 rgba(21,21,21,0.18);
+    }
+    .cover {
+      position: relative;
+      height: 680px;
+      overflow: hidden;
+      background: var(--blue);
+    }
+    .cover:before {
+      content: "";
+      position: absolute;
+      left: -40px;
+      right: -40px;
+      bottom: -24px;
+      height: 210px;
+      background: var(--ink);
+      transform: skewY(-8deg);
+    }
+    .cloud {
+      position: absolute;
+      width: 108px;
+      height: 108px;
+      left: 48px;
+      top: 58px;
+      border-radius: 50%;
+      background: rgba(255,248,233,0.72);
+    }
+    .cover-ladder {
+      position: absolute;
+      right: 72px;
+      top: 74px;
+      width: 18px;
+      height: 540px;
+      background: var(--gold);
+      transform: rotate(-11deg);
+      box-shadow: 48px 0 0 var(--gold);
+    }
+    .cover-ladder:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 24px;
+      width: 66px;
+      height: 468px;
+      background: repeating-linear-gradient(180deg, transparent 0 36px, var(--gold) 36px 47px);
+    }
+    .cover .brand {
+      position: absolute;
+      left: 24px;
+      top: 34px;
+      font: 800 30px Georgia, serif;
+    }
+    .cover .issue {
+      position: absolute;
+      right: 22px;
+      top: 26px;
+      padding: 8px 10px;
+      background: var(--ink);
+      color: var(--paper);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+    .cover h2 {
+      position: absolute;
+      left: 24px;
+      top: 124px;
+      font-size: 104px;
+      line-height: 0.88;
+      color: #fff;
+      text-shadow: 5px 5px 0 rgba(21,21,21,0.82);
+    }
+    .cover .promise {
+      position: absolute;
+      left: 24px;
+      bottom: 146px;
+      width: 340px;
+      padding: 14px 16px;
+      background: var(--gold);
+      border: 2px solid var(--ink);
+      font-size: 21px;
+      font-weight: 900;
+      line-height: 1.16;
+    }
+    .cover .ticker {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--cream);
+      border-top: 2px solid var(--ink);
+    }
+    .cover .ticker span {
+      padding: 14px 16px;
+      border-right: 2px solid var(--ink);
+      font: 800 18px Georgia, serif;
+    }
+    .panel {
+      margin-top: 18px;
+      padding: 20px;
+      background: #f9f3e7;
+    }
+    .panel h2 {
+      font-size: 42px;
+      line-height: 0.95;
+    }
+    .panel p,
+    .panel li {
+      font-size: 17px;
+      font-weight: 800;
+      line-height: 1.23;
+    }
+    .mini-spine {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .mini-spine div {
+      min-height: 82px;
+      padding: 12px;
+      background: var(--cream);
+      border: 2px dashed var(--ink);
+      font-weight: 900;
+      line-height: 1.05;
+      text-transform: uppercase;
+    }
+    .rhythm {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-top: 16px;
+    }
+    .rhythm span {
+      display: block;
+      min-height: 30px;
+      border: 2px solid var(--ink);
+    }
+    .wall-head {
+      display: grid;
+      grid-template-columns: 1fr 610px;
+      gap: 24px;
+      align-items: center;
+      padding: 20px 22px;
+      background: #fff;
+    }
+    .wall-head h2 {
+      font-size: 46px;
+      line-height: 0.95;
+    }
+    .wall-head p {
+      margin: 8px 0 0;
+      font-size: 18px;
+      font-weight: 900;
+      line-height: 1.22;
+    }
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+    .filters button {
+      min-height: 34px;
+      padding: 7px 10px;
+      background: var(--cream);
+      border: 2px solid var(--ink);
+      border-radius: 0;
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .filters button.active {
+      background: var(--gold);
+      box-shadow: 4px 4px 0 var(--ink);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .page {
+      position: relative;
+      height: 206px;
+      overflow: hidden;
+      background: var(--bg);
+      color: var(--fg);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: transform 160ms ease-out, box-shadow 160ms ease-out, opacity 160ms ease-out;
+    }
+    .page:hover {
+      transform: translateY(-4px);
+      box-shadow: 10px 10px 0 rgba(21,21,21,0.28);
+    }
+    .page.dim {
+      opacity: 0.26;
+    }
+    .page.selected {
+      outline: 5px solid var(--red);
+      outline-offset: -7px;
+    }
+    .page.spine {
+      outline: 4px solid var(--red);
+      outline-offset: -7px;
+    }
+    .page .meta {
+      height: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 7px;
+      border-bottom: 2px solid currentColor;
+      font-size: 8px;
+      font-weight: 900;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .page .meta b {
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 14px;
+    }
+    .page .tag {
+      margin-left: auto;
+      padding: 2px 4px;
+      background: var(--accent);
+      color: var(--ink);
+      border: 1px solid currentColor;
+    }
+    .art {
+      position: relative;
+      height: 54px;
+      overflow: hidden;
+      background: var(--accent);
+      border-bottom: 2px solid currentColor;
+    }
+    .art:before {
+      content: "";
+      position: absolute;
+      left: -12px;
+      right: -12px;
+      bottom: -20px;
+      height: 38px;
+      background: var(--ink);
+      transform: skewY(-7deg);
+      opacity: 0.92;
+    }
+    .art:after {
+      content: "";
+      position: absolute;
+      right: 24px;
+      top: 5px;
+      width: 8px;
+      height: 72px;
+      background: var(--gold);
+      transform: rotate(-33deg);
+    }
+    .page h3 {
+      padding: 9px 9px 0;
+      font-size: 15px;
+      line-height: 0.96;
+      max-height: 44px;
+      overflow: hidden;
+    }
+    .page p {
+      padding: 0 9px;
+      margin: 7px 0 0;
+      font-size: 10.5px;
+      font-weight: 800;
+      line-height: 1.17;
+    }
+    .page.scripture .art,
+    .page.reading .art {
+      background:
+        repeating-linear-gradient(0deg, currentColor 0 1px, transparent 1px 10px),
+        var(--cream);
+      opacity: 0.78;
+    }
+    .page.scripture.feature-promise .art {
+      background: var(--ink);
+      opacity: 1;
+    }
+    .page.scripture.feature-promise .art:before {
+      background: transparent;
+    }
+    .page.scripture.feature-promise .art:after {
+      width: 34px;
+      right: 18px;
+      top: -16px;
+      height: 92px;
+      background:
+        repeating-linear-gradient(180deg, transparent 0 13px, var(--gold) 13px 18px),
+        linear-gradient(90deg, var(--gold) 0 6px, transparent 6px 28px, var(--gold) 28px 34px);
+      transform: rotate(24deg);
+    }
+    .page.games .art {
+      background:
+        repeating-linear-gradient(0deg, rgba(21,21,21,0.48) 0 2px, transparent 2px 18px),
+        repeating-linear-gradient(90deg, rgba(21,21,21,0.48) 0 2px, transparent 2px 18px),
+        #d9f2d6;
+    }
+    .page.classifieds .art {
+      background:
+        repeating-linear-gradient(0deg, var(--ink) 0 1px, transparent 1px 11px),
+        repeating-linear-gradient(90deg, var(--ink) 0 1px, transparent 1px 42px),
+        #fff069;
+    }
+    .page.movie .art {
+      background:
+        repeating-linear-gradient(90deg, rgba(21,21,21,0.85) 0 14px, rgba(245,234,215,0.8) 14px 28px),
+        var(--violet);
+    }
+    .page.weather .art {
+      background:
+        radial-gradient(circle at 24% 30%, #fff8e9 0 18px, transparent 19px),
+        linear-gradient(180deg, #79b9f2, #42d2d6);
+    }
+    .page.obit .art {
+      background: var(--ink);
+    }
+    .page.obit .art:before {
+      left: 38%;
+      right: auto;
+      bottom: 0;
+      width: 56px;
+      height: 48px;
+      border-radius: 30px 30px 0 0;
+      background: var(--paper);
+      transform: none;
+    }
+    .page.profile .art {
+      background:
+        radial-gradient(circle at 38% 38%, #8a4e2a 0 24px, transparent 25px),
+        linear-gradient(90deg, var(--gold), var(--cream));
+    }
+    .page.ad .art:before,
+    .page.back .art:before {
+      left: 18px;
+      right: 18px;
+      top: 14px;
+      bottom: auto;
+      height: 30px;
+      background: var(--ink);
+      transform: none;
+    }
+    .page.kids .art {
+      background:
+        radial-gradient(circle at 28px 30px, var(--pink) 0 19px, transparent 20px),
+        radial-gradient(circle at 80px 20px, var(--gold) 0 17px, transparent 18px),
+        var(--cyan);
+    }
+    .detail {
+      display: grid;
+      grid-template-columns: 330px 1fr 540px;
+      gap: 24px;
+      align-items: stretch;
+      margin-top: 20px;
+      padding: 20px;
+      background: #fff;
+    }
+    .detail-kicker {
+      display: inline-block;
+      padding: 8px 10px;
+      background: var(--ink);
+      color: var(--paper);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+    .detail h2 {
+      margin-top: 12px;
+      font-size: 42px;
+      line-height: 0.95;
+    }
+    .detail p {
+      margin: 10px 0 0;
+      font-size: 17px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+    .detail ul {
+      margin: 12px 0 0;
+      padding-left: 20px;
+    }
+    .detail li {
+      margin-bottom: 7px;
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.18;
+    }
+    .mini-map {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 5px;
+      align-content: start;
+    }
+    .mini-map span {
+      height: 18px;
+      background: var(--paper);
+      border: 1px solid var(--ink);
+    }
+    .mini-map span.scripture { background: var(--cream); }
+    .mini-map span.spine { background: var(--gold); }
+    .mini-map span.ad { background: var(--violet); }
+    .mini-map span.games { background: #d9f2d6; }
+    .mini-map span.story { background: #ffd19f; }
+    .mini-map span.department { background: #d8edff; }
+    .bottom {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr 1fr;
+      gap: 18px;
+      margin-top: 20px;
+    }
+    .system-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .system-list span {
+      display: inline-flex;
+      min-height: 32px;
+      align-items: center;
+      padding: 7px 9px;
+      border: 2px solid var(--ink);
+      background: var(--gold);
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    .system-list.departments span { background: #d8edff; }
+    .swatches {
+      display: flex;
+      gap: 8px;
+      margin-top: 18px;
+    }
+    .swatches span {
+      width: 45px;
+      height: 64px;
+      border: 2px solid var(--ink);
+    }
+  </style>
+</head>
+<body>
+  <main class="board">
+    <section class="top">
+      <div>
+        <p class="eyebrow">Between Sundays / Issue 001 expanded flatplan</p>
+        <h1>48 pages means the paper gets weird in the best way.</h1>
+        <p class="top-copy">The promise stays simple: I am with you. The experience gets bigger: a six-page Reading, a removable four-page Spine, recurring games, fictional ads, public-place parables, sports, movies, classifieds, obits, prayer, weather, kids, youth, opinion, and full-color campaign interruptions.</p>
+      </div>
+      <div class="stats">
+        <div class="stat"><strong>48</strong><span>pages</span></div>
+        <div class="stat"><strong>6</strong><span>direct Scripture pages</span></div>
+        <div class="stat"><strong>4</strong><span>removable Spine pages</span></div>
+        <div class="stat"><strong>8+</strong><span>games and participation beats</span></div>
+      </div>
+    </section>
+
+    <section class="layout">
+      <aside>
+        <section class="cover">
+          <div class="cloud"></div>
+          <div class="cover-ladder"></div>
+          <div class="brand">BETWEEN SUNDAYS</div>
+          <div class="issue">Issue 001 / Genesis 28</div>
+          <h2>I AM<br />WITH YOU</h2>
+          <div class="promise">God meets people in places they thought they were only passing through.</div>
+          <div class="ticker">
+            <span>Surely God is in this place.</span>
+            <span>And I was not aware of it.</span>
+          </div>
+        </section>
+        <section class="panel">
+          <h2>The Spine</h2>
+          <p>The center four pages are still the signature: readable alone, detachable, and meant to be left behind in an ordinary place.</p>
+          <div class="mini-spine">
+            <div>You found this in an ordinary place.</div>
+            <div>Genesis 28: I am with thee.</div>
+            <div>The place was not empty.</div>
+            <div>Leave this somewhere.</div>
+          </div>
+        </section>
+        <section class="panel">
+          <h2>Issue Rhythm</h2>
+          <p>Loud cover, quiet Reading, removable center, strange departments, games, and one billboard-like last word.</p>
+          <div class="rhythm">
+            <span style="background:var(--blue)"></span>
+            <span style="background:var(--cream)"></span>
+            <span style="background:var(--gold)"></span>
+            <span style="background:var(--red)"></span>
+            <span style="background:var(--ink)"></span>
+            <span style="background:var(--green)"></span>
+            <span style="background:var(--violet)"></span>
+            <span style="background:var(--paper)"></span>
+          </div>
+        </section>
+      </aside>
+
+      <section>
+        <section class="wall-head">
+          <div>
+            <p class="eyebrow">48-page issue wall</p>
+            <h2>One Bible story, a full Sunday paper around it.</h2>
+            <p>Click a page to inspect the idea. Use the filters to see the spine, Scripture, ads, games, fiction, and newspaper departments.</p>
+          </div>
+          <div class="filters" id="filters"></div>
+        </section>
+
+        <section class="grid" id="pages"></section>
+
+        <section class="detail" id="detail"></section>
+
+        <section class="bottom">
+          <section class="panel">
+            <h2>New Variety</h2>
+            <p>More than page count: weather, kids, music, letters, advice, now hiring, obits, games, prayer wall, reader submissions, and odd full-page ads.</p>
+            <div class="swatches">
+              <span style="background:var(--blue)"></span>
+              <span style="background:var(--red)"></span>
+              <span style="background:var(--green)"></span>
+              <span style="background:var(--gold)"></span>
+              <span style="background:var(--violet)"></span>
+              <span style="background:var(--orange)"></span>
+              <span style="background:var(--cyan)"></span>
+              <span style="background:var(--pink)"></span>
+            </div>
+          </section>
+          <section class="panel">
+            <h2>Campaigns</h2>
+            <div class="system-list">
+              <span>No Dead Zones</span>
+              <span>Holy Ground</span>
+              <span>Wherever You Go</span>
+              <span>Stone Pillow Co.</span>
+              <span>Daily Bread</span>
+              <span>Talk To God</span>
+              <span>Grace Return Policy</span>
+            </div>
+          </section>
+          <section class="panel">
+            <h2>Games</h2>
+            <div class="system-list">
+              <span>Crossword</span>
+              <span>Word Ladder</span>
+              <span>Map Maze</span>
+              <span>Spot The Ladder</span>
+              <span>Kids Color Page</span>
+              <span>Issue Meta Clue</span>
+            </div>
+          </section>
+          <section class="panel">
+            <h2>Departments</h2>
+            <div class="system-list departments">
+              <span>News</span>
+              <span>Reading</span>
+              <span>Spine</span>
+              <span>Sports</span>
+              <span>Movies</span>
+              <span>Food</span>
+              <span>Weather</span>
+              <span>Classifieds</span>
+              <span>Opinion</span>
+              <span>Obits</span>
+            </div>
+          </section>
+        </section>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    const pages = [
+      { n: "01", sec: "Front Page", type: "department", title: "I AM WITH YOU", deck: "A billboard-scale cover: Jacob, a road, a ladder, and a promise that refuses to stay small.", bg: "#d8edff", fg: "#151515", accent: "#79b9f2", idea: ["Make the issue visible from across a room.", "Use sports-poster confidence with newspaper masthead discipline.", "Cover line: You thought this was just a stop."] },
+      { n: "02", sec: "The Feed", type: "department", title: "Sunday Paper, Monday Places", deck: "Contents, editor note, and a social-feed style index for an analog faith paper.", bg: "#151515", fg: "#f5ead7", accent: "#ffc845", idea: ["Treat departments like a faith-based Facebook feed.", "Give quick entry points for readers who browse first.", "Promise: read, play, tear out, leave behind."] },
+      { n: "03", sec: "Special Report", type: "story", title: "The Place You Almost Walked Past", deck: "A reported feature on ordinary ground becoming holy ground.", bg: "#ffddd7", fg: "#151515", accent: "#ff4f38", idea: ["Modern language, biblical backbone.", "Photos: airport gate, laundromat, bus stop, hotel hall.", "Tone: documentary, not decorative."] },
+      { n: "04", sec: "Map Desk", type: "department", title: "No Special Address Required", deck: "An annotated map of where God meets people between places.", bg: "#d9f2d6", fg: "#151515", accent: "#166f43", idea: ["Coffee shop table, hospital waiting room, rideshare back seat.", "Map pins become prayer prompts.", "QR: I found this here."] },
+      { n: "05", sec: "Photo Essay", type: "story", title: "Five People Between Places", deck: "Short, real-feeling portraits of grief, doubt, work, family, and recovery.", bg: "#fff0b4", fg: "#151515", accent: "#ffc845", idea: ["Not perfect endings, honest middle chapters.", "One person per ordinary location.", "Photojournalism pace, caption-first reading."] },
+      { n: "06", sec: "House Campaign", type: "ad", title: "Presence. Now Available Everywhere.", deck: "Full-page ad for the promise, built like a wireless coverage campaign.", bg: "#eadfff", fg: "#151515", accent: "#b991ff", idea: ["No dead zones.", "Wherever you go coverage.", "Small print: Genesis 28:15."] },
+      { n: "07", sec: "The Reading", type: "reading", title: "Read The Story First", deck: "Opening page for a six-page Scripture section with no ads.", bg: "#fff8e9", fg: "#151515", accent: "#151515", idea: ["Rule: read the story before we tell you what to think.", "Large comfortable type.", "Scene-setting does not replace Scripture."] },
+      { n: "08", sec: "The Reading I", type: "scripture", title: "Jacob Went Out", deck: "Genesis 28:10-11. A man in transit, a night outside, a stone for a pillow.", bg: "#fff8e9", fg: "#151515", accent: "#ffc845", idea: ["Direct Scripture.", "Margin: running from home, not yet home.", "Visual pause: stone silhouette."] },
+      { n: "09", sec: "The Reading II", type: "scripture", title: "A Ladder On The Earth", deck: "Genesis 28:12. The dream interrupts the dirt.", bg: "#171717", fg: "#f5ead7", accent: "#ffc845", cls: "feature-promise", idea: ["Direct Scripture.", "Full-black page with a gold ladder.", "Page turn should feel like the sky opened."] },
+      { n: "10", sec: "The Reading III", type: "scripture", title: "I Am With Thee", deck: "Genesis 28:13-15. The promise page and editorial engine of the issue.", bg: "#fff8e9", fg: "#151515", accent: "#79b9f2", idea: ["Direct Scripture.", "Set Genesis 28:15 in huge display type.", "This is the sentence the issue gives away."] },
+      { n: "11", sec: "The Reading IV", type: "scripture", title: "Surely In This Place", deck: "Genesis 28:16-17. Jacob wakes up to a place he almost missed.", bg: "#fff8e9", fg: "#151515", accent: "#ff4f38", idea: ["Direct Scripture.", "Quiet body type after the loud promise.", "Pull quote: I was not aware of it."] },
+      { n: "12", sec: "The Reading V", type: "scripture", title: "He Called It Bethel", deck: "Genesis 28:18-22. The stone is raised, the place is named, the journey continues.", bg: "#fff8e9", fg: "#151515", accent: "#166f43", idea: ["Direct Scripture.", "Naming the ordinary place.", "End with space to breathe."] },
+      { n: "13", sec: "The Thread", type: "scripture", title: "I Am With You Across Scripture", deck: "A page of promise echoes from Abraham, Moses, Joshua, Gideon, Isaiah, and Jesus.", bg: "#d8edff", fg: "#151515", accent: "#79b9f2", idea: ["Direct Scripture excerpts.", "Shows the promise is not isolated.", "Can be 15 percent Scripture if extended."] },
+      { n: "14", sec: "Field Notes", type: "department", title: "What Happened At Bethel?", deck: "Context, geography, family tension, and why the promise lands with force.", bg: "#ffddd7", fg: "#151515", accent: "#ff4f38", idea: ["Interpretation after the full reading.", "Timeline: birthright, blessing, escape, dream.", "Short explainer, not seminary fog."] },
+      { n: "15", sec: "House Campaign", type: "ad", title: "Stone Pillow Co.", deck: "A fictional product ad for hard places where God still shows up.", bg: "#fff0b4", fg: "#151515", accent: "#ffc845", idea: ["Tagline: Better rest for unresolved people.", "Product shot: ordinary stone, luxury copy.", "Funny, then piercing."] },
+      { n: "16", sec: "Reader Signal", type: "department", title: "Where Did You Find This?", deck: "A tiny data layer: QR code, found-location prompt, and prayer request entry.", bg: "#d9f2d6", fg: "#151515", accent: "#166f43", idea: ["No app requirement.", "Just enough digital continuation.", "Question: what place did this find you in?"] },
+      { n: "17", sec: "The Spine 01", type: "spine", title: "You Found This", deck: "Opening page of the detachable mini paper. No insider language.", bg: "#d8edff", fg: "#151515", accent: "#ffc845", idea: ["This part belongs to whoever finds it next.", "Written for a cafe, airport, waiting room, or bus seat.", "Make it complete without the full issue."] },
+      { n: "18", sec: "The Spine 02", type: "spine scripture", title: "Read This First", deck: "Genesis 28 excerpt set beautifully and readably.", bg: "#fff069", fg: "#151515", accent: "#ff4f38", idea: ["Direct Scripture.", "Promise in giant type.", "Short enough to finish standing up."] },
+      { n: "19", sec: "The Spine 03", type: "spine", title: "It Was Not Nowhere", deck: "Reflection: God met Jacob before Jacob fixed everything.", bg: "#d9f2d6", fg: "#151515", accent: "#79b9f2", idea: ["Meaning page.", "Plain voice, not preachy.", "Connect Jacob to the finder."] },
+      { n: "20", sec: "The Spine 04", type: "spine", title: "Leave It Somewhere", deck: "Prayer, invitation to Jesus, and instruction to pass it along.", bg: "#ffddd7", fg: "#151515", accent: "#ffc845", idea: ["The paper becomes participatory.", "Prayer that a non-church reader can say honestly.", "Line: this was never meant to stay with you."] },
+      { n: "21", sec: "After The Tear", type: "department", title: "If The Middle Is Missing, Good.", deck: "A page that treats absence as evidence that the object is working.", bg: "#151515", fg: "#f5ead7", accent: "#ff4f38", idea: ["Print a torn gutter mark.", "Message to the reader after the center is removed.", "Turns damage into mission."] },
+      { n: "22", sec: "Fiction", type: "story", title: "Room 28 At The Sunbelt Inn", deck: "A modern parable about a night auditor, a runaway, and a flickering ladder sign.", bg: "#ffd19f", fg: "#151515", accent: "#ff9f45", idea: ["Cinematic short story.", "Real-looking image of a roadside motel.", "Jacob reimagined without becoming a costume drama."] },
+      { n: "23", sec: "Fiction", type: "story", title: "The Night Auditor's Log", deck: "A found-text page: receipts, room notes, and prayers written like shift records.", bg: "#151515", fg: "#f5ead7", accent: "#42d2d6", idea: ["Experimental typography.", "Timestamped entries.", "A normal job becomes sacred record."] },
+      { n: "24", sec: "Comic Strip", type: "story", title: "The Ladder In The Laundromat", deck: "A two-page cartoon parable where the broken ceiling tile becomes a window.", bg: "#d9f2d6", fg: "#151515", accent: "#ff8bbd", idea: ["Cartoon mode, not photo mode.", "Funny first, meaningful second.", "Recurring comic possibility."] },
+      { n: "25", sec: "Sports", type: "department", title: "The Race Set Before Us", deck: "Sports page energy: motion blur, endurance, stats, and a holy finish line.", bg: "#d8edff", fg: "#151515", accent: "#79b9f2", idea: ["Inspired by track posters.", "Faith as endurance, not performance.", "Box score: what kept you going this week?"] },
+      { n: "26", sec: "Sports", type: "department", title: "Box Scores For The Invisible", deck: "A parody stat page: prayers whispered, calls returned, grudges released.", bg: "#fff0b4", fg: "#151515", accent: "#ffc845", idea: ["Humor with emotional truth.", "Looks like sports agate type.", "Tiny wins get counted."] },
+      { n: "27", sec: "Profile", type: "story", title: "Coach Said Keep Running", deck: "A fictional interview with a coach who learned presence at a bus station.", bg: "#ffddd7", fg: "#151515", accent: "#ff4f38", cls: "profile", idea: ["Real-looking portrait.", "Sports section becomes discipleship without losing energy.", "Story of endurance in public life."] },
+      { n: "28", sec: "House Campaign", type: "ad", title: "Wherever You Go Coverage", deck: "A full-page insurance/phone-plan parody for Genesis 28:15.", bg: "#eadfff", fg: "#151515", accent: "#b991ff", idea: ["Headline: no roaming fees for grace.", "Map coverage graphic.", "A believable ad that becomes theology."] },
+      { n: "29", sec: "Movies", type: "department", title: "Now Showing At The Bethel 3", deck: "Fictional movie reviews for The Long Way Home, Three-Star Grace, and Exit 28.", bg: "#eadfff", fg: "#151515", accent: "#b991ff", cls: "movie", idea: ["Make a fake cinema listing.", "Mini reviews carry spiritual questions.", "Poster thumbnails can be wild."] },
+      { n: "30", sec: "Music", type: "department", title: "Songs For The Middle Of Nowhere", deck: "A mixtape page: psalms, hymns, gospel, road songs, and reader-submitted tracks.", bg: "#d8edff", fg: "#151515", accent: "#42d2d6", idea: ["Analog playlist with QR audio optional.", "Music as memory and movement.", "Great recurring department."] },
+      { n: "31", sec: "Books", type: "department", title: "The Shelf For The Road", deck: "Tiny reviews of books for doubt, exile, homecoming, vocation, and prayer.", bg: "#fff8e9", fg: "#151515", accent: "#166f43", idea: ["Newspaper book section grammar.", "Include Scripture reading plan.", "Can support partners later."] },
+      { n: "32", sec: "Food", type: "ad", title: "Daily Bread Bakery", deck: "A full-color fictional bakery spread where the menu becomes a prayer.", bg: "#fff0b4", fg: "#151515", accent: "#ffc845", idea: ["Old prototype DNA, pushed bigger.", "Menu items: Mercy Rolls, Manna Loaf, Enough Cake.", "Quarter-page ad system can live here too."] },
+      { n: "33", sec: "Classifieds", type: "classifieds", title: "Lost, Found, Wanted, Free", deck: "Tiny ads for courage, mercy, rides, couches, apologies, and lost shame.", bg: "#fff069", fg: "#151515", accent: "#79b9f2", idea: ["Best newspaper grammar for playful theology.", "Make readers stop and hunt.", "Some entries should be genuinely funny."] },
+      { n: "34", sec: "Now Hiring", type: "classifieds", title: "Peacemakers Needed Immediately", deck: "A job board for mercy, hospitality, patience, repair, and showing up.", bg: "#d9f2d6", fg: "#151515", accent: "#166f43", idea: ["Now hiring format.", "Requirements: willingness to be interrupted.", "Compensation: fruit of the Spirit."] },
+      { n: "35", sec: "Marketplace", type: "ad", title: "Mercy & Sons Moving Co.", deck: "A fictional business ad for anyone leaving one life and entering another.", bg: "#ffddd7", fg: "#151515", accent: "#ff4f38", idea: ["Story-world advertisement.", "Tagline: we carry what you cannot.", "Feels like a real local ad."] },
+      { n: "36", sec: "House Campaign", type: "ad", title: "Talk To God: Hear Here", deck: "A full-page public-phone-booth campaign inspired by prayer in ordinary places.", bg: "#d8edff", fg: "#151515", accent: "#79b9f2", idea: ["Blue booth in desert, street, or mall.", "Copy: never forget God.", "Could become poster merch."] },
+      { n: "37", sec: "Opinion", type: "department", title: "I Was Not Aware Of It", deck: "Letters and short columns from readers learning to notice God after the fact.", bg: "#ffddd7", fg: "#151515", accent: "#ff4f38", idea: ["Classic opinion page format.", "Multiple voices, not one authorial voice.", "Good place for disagreement without cynicism."] },
+      { n: "38", sec: "Advice", type: "department", title: "Ask Grandma Ruth", deck: "A recurring advice column for faith, family, work, heartbreak, and weird church questions.", bg: "#fff0b4", fg: "#151515", accent: "#ffc845", idea: ["Warm and specific.", "Not cheesy.", "A human-feeling voice can become beloved."] },
+      { n: "39", sec: "Letters", type: "department", title: "Dear Between Sundays", deck: "Reader letters, tiny confessions, prayers, thank-yous, and unfinished questions.", bg: "#fff8e9", fg: "#151515", accent: "#151515", idea: ["Faith-based Facebook paper really shows up here.", "Short post-like entries.", "Can be reader-submitted later."] },
+      { n: "40", sec: "Obituaries", type: "obit", title: "Things That Died So You Could Live", deck: "Fear, shame, self-salvation, old names, and spiritual numbness receive formal notices.", bg: "#171717", fg: "#f5ead7", accent: "#ff4f38", idea: ["Old prototype DNA with sharper writing.", "Dark humor plus resurrection hope.", "A signature department."] },
+      { n: "41", sec: "Weather", type: "department", title: "Mercy Forecast", deck: "A weather page where grace moves through the week like pressure systems.", bg: "#d8edff", fg: "#151515", accent: "#42d2d6", cls: "weather", idea: ["High chance of second chances.", "Storm warning: resentment advisory.", "A fun recurring visual system."] },
+      { n: "42", sec: "Games", type: "games", title: "The Presence Issue Puzzle Page", deck: "Crossword, word ladder, hidden ladder, map maze, and an issue-wide meta clue.", bg: "#d9f2d6", fg: "#151515", accent: "#166f43", idea: ["Every issue has games.", "Paper-and-pencil, no screen needed.", "Meta answer can point to Genesis 28:15."] },
+      { n: "43", sec: "Games", type: "games", title: "Find The Gate Of Heaven", deck: "A full-page map maze through ordinary places with Scripture clues in the margins.", bg: "#fff069", fg: "#151515", accent: "#ff4f38", idea: ["Kids and adults can both play.", "Ladder icons hidden throughout issue.", "Great leave-behind interaction."] },
+      { n: "44", sec: "Kids", type: "games", title: "Color The Dream", deck: "A kids page with a ladder, stars, stone pillow, and one simple prayer.", bg: "#d8edff", fg: "#151515", accent: "#ff8bbd", cls: "kids", idea: ["Coloring-page line art.", "Parent-child prompt.", "Keep it beautiful, not throwaway."] },
+      { n: "45", sec: "Youth", type: "department", title: "Group Chat From Bethel", deck: "A fictional text-message page about faith, anxiety, family pressure, and leaving home.", bg: "#151515", fg: "#f5ead7", accent: "#b991ff", idea: ["Modern voice, high restraint.", "Could be comic/chat hybrid.", "Meets younger readers without sounding like a youth pastor."] },
+      { n: "46", sec: "Prayer Wall", type: "department", title: "The Things We Carried Here", deck: "A public prayer wall, invitation, and room for the reader to write before leaving the paper.", bg: "#fff8e9", fg: "#151515", accent: "#151515", idea: ["Actual writable space.", "Analog participation.", "Pairs with the I found this QR."] },
+      { n: "47", sec: "House Campaign", type: "ad", title: "Holy Ground: No Address Required", deck: "A full-page street-billboard campaign that could also live on posters.", bg: "#ffddd7", fg: "#151515", accent: "#ff4f38", idea: ["Simple, giant, outdoor-ad style.", "Image: blank wall, transit sign, red brick building.", "Last big visual before the back page."] },
+      { n: "48", sec: "Back Cover", type: "department", title: "Surely God Is In This Place", deck: "The final page is a public-facing campaign designed to be seen from across the room.", bg: "#d8edff", fg: "#151515", accent: "#79b9f2", cls: "back", idea: ["Back cover doubles as poster.", "If left on a table, this is the line someone sees.", "No clutter. Just the sentence."] }
+    ];
+
+    const filters = [
+      ["all", "All 48"],
+      ["scripture", "Scripture"],
+      ["spine", "Spine"],
+      ["ad", "Ads"],
+      ["games", "Games"],
+      ["story", "Stories"],
+      ["department", "Departments"],
+      ["classifieds", "Classifieds"]
+    ];
+
+    let active = "all";
+    let selected = pages[0];
+
+    const pageGrid = document.getElementById("pages");
+    const filterBar = document.getElementById("filters");
+    const detail = document.getElementById("detail");
+
+    function belongs(page, filter) {
+      if (filter === "all") return true;
+      return page.type.split(" ").includes(filter);
+    }
+
+    function artClass(page) {
+      const classes = ["art"];
+      if (page.type.includes("scripture") || page.type.includes("reading")) classes.push("reading");
+      if (page.type.includes("games")) classes.push("games");
+      if (page.type.includes("classifieds")) classes.push("classifieds");
+      if (page.sec === "Movies") classes.push("movie");
+      return classes.join(" ");
+    }
+
+    function renderFilters() {
+      filterBar.innerHTML = filters.map(([key, label]) => (
+        `<button class="${active === key ? "active" : ""}" data-filter="${key}">${label}</button>`
+      )).join("");
+      filterBar.querySelectorAll("button").forEach((button) => {
+        button.addEventListener("click", () => {
+          active = button.dataset.filter;
+          render();
+        });
+      });
+    }
+
+    function renderPages() {
+      pageGrid.innerHTML = pages.map((page) => {
+        const isSelected = selected.n === page.n;
+        const dim = belongs(page, active) ? "" : " dim";
+        const spine = page.type.includes("spine") ? " spine" : "";
+        const classes = `page ${page.type.replace(/\s+/g, " ")} ${page.cls || ""}${spine}${dim}${isSelected ? " selected" : ""}`;
+        return `<article class="${classes}" style="--bg:${page.bg};--fg:${page.fg};--accent:${page.accent}" data-page="${page.n}">
+          <div class="meta"><b>${page.n}</b><span>${page.sec}</span><span class="tag">${page.type.split(" ")[0]}</span></div>
+          <div class="${artClass(page)}"></div>
+          <h3>${page.title}</h3>
+          <p>${page.deck}</p>
+        </article>`;
+      }).join("");
+      pageGrid.querySelectorAll(".page").forEach((card) => {
+        card.addEventListener("click", () => {
+          selected = pages.find((page) => page.n === card.dataset.page);
+          render();
+        });
+      });
+    }
+
+    function renderDetail() {
+      detail.innerHTML = `
+        <section>
+          <span class="detail-kicker">Page ${selected.n} / ${selected.sec}</span>
+          <h2>${selected.title}</h2>
+          <p>${selected.deck}</p>
+        </section>
+        <section>
+          <span class="detail-kicker">What it adds</span>
+          <ul>${selected.idea.map((item) => `<li>${item}</li>`).join("")}</ul>
+        </section>
+        <section>
+          <span class="detail-kicker">Issue map</span>
+          <div class="mini-map">
+            ${pages.map((page) => `<span class="${page.type.split(" ")[0]}" title="${page.n} ${page.title}" style="${page.n === selected.n ? "outline:3px solid #ff4f38; outline-offset:1px;" : ""}"></span>`).join("")}
+          </div>
+          <p>Reading plus Spine Scripture gives the 48-page issue about 12-15 percent direct Bible text, with room to expand The Reading to eight pages in a future 48-page master.</p>
+        </section>
+      `;
+    }
+
+    function render() {
+      renderFilters();
+      renderPages();
+      renderDetail();
+    }
+
+    render();
+  </script>
+</body>
+</html>

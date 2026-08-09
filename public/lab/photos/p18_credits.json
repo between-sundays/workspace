@@ -1,0 +1,22 @@
+{
+ "macro_02.jpg": {
+  "slot": "macro",
+  "q": "hand writing pencil",
+  "title": "Writing Drawing",
+  "creator": "Startup Stock Photos",
+  "license": "cc0",
+  "src": "https://stocksnap.io/photo/writing-drawing-Y2P39NGLLO",
+  "w": 5472,
+  "h": 3648
+ },
+ "ashtray_10.jpg": {
+  "slot": "ashtray",
+  "q": "cigarette butts ashtray",
+  "title": "Ashtray filled cigarette butts ashes",
+  "creator": "Markus Spiske",
+  "license": "cc0",
+  "src": "https://www.rawpixel.com/image/680902/dirty-ashtray",
+  "w": 3840,
+  "h": 5760
+ }
+}

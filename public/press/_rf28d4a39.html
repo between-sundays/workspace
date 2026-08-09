@@ -1,0 +1,114 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<title>Between Sundays</title><link rel="stylesheet" href="fonts.css">
+<style>
+*{box-sizing:border-box}html,body{margin:0}
+
+body{display:grid;place-items:center;padding:28px;background:#cfc3b3;
+ font-family:"Newsreader",Georgia,serif;color:#191713}
+.page{position:relative;width:941px;height:1346px;overflow:hidden;background:#F6F2E8;
+ padding:0 40px}
+.sans{font-family:"Bricolage Grotesque","Avenir Next",sans-serif}
+/* nameplate + folio */
+.nameplate{text-align:center;padding:26px 0 10px}
+.nameplate h1{margin:0;font-family:"Fraunces",Georgia,serif;font-weight:900;font-size:64px;
+ letter-spacing:-.015em;line-height:1}
+.dateline{display:flex;justify-content:space-between;border-top:2.5px solid #191713;
+ border-bottom:1px solid #191713;padding:5px 0;margin-top:10px;font-family:"Bricolage Grotesque",sans-serif;
+ font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+.slugband{display:flex;justify-content:space-between;align-items:baseline;
+ border-bottom:3px solid var(--sec,#191713);padding:22px 0 8px;margin-bottom:14px}
+.slug{font-family:"Bricolage Grotesque",sans-serif;font-size:26px;font-weight:800;
+ letter-spacing:.02em;text-transform:uppercase;color:var(--sec,#191713)}
+.slug small{font-family:"Fraunces",serif;font-weight:600;font-size:13px;letter-spacing:.06em;
+ color:#191713;margin-left:12px}
+.slugband span{font-family:"Bricolage Grotesque",sans-serif;font-size:9.5px;font-weight:700;
+ letter-spacing:.16em;text-transform:uppercase;opacity:.6}
+.folio{position:absolute;left:40px;right:40px;bottom:20px;display:flex;justify-content:space-between;
+ border-top:1px solid #191713;padding-top:7px;font-family:"Bricolage Grotesque",sans-serif;
+ font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;opacity:.65}
+/* editorial parts */
+.kicker{font-family:"Bricolage Grotesque",sans-serif;font-size:10.5px;font-weight:800;
+ letter-spacing:.2em;text-transform:uppercase;color:var(--sec,#B8412A)}
+.hl{font-family:"Fraunces",Georgia,serif;font-weight:900;letter-spacing:-.015em;line-height:1.02;margin:6px 0 0}
+.deck{font-size:17px;line-height:1.4;font-style:italic;margin:10px 0 0;color:#333026}
+.byline{font-family:"Bricolage Grotesque",sans-serif;font-size:9.5px;font-weight:700;
+ letter-spacing:.14em;text-transform:uppercase;margin:10px 0 0;opacity:.7}
+.cols2{column-count:2;column-gap:26px;column-rule:1px solid rgba(25,23,19,.25)}
+.cols3{column-count:3;column-gap:22px;column-rule:1px solid rgba(25,23,19,.25)}
+.body p{margin:0 0 9px;font-size:13.5px;line-height:1.42;text-align:justify}
+.body p.first:first-letter{font-family:"Fraunces",serif;font-weight:900;font-size:46px;
+ line-height:.82;float:left;padding:5px 7px 0 0}
+.body .rh{font-weight:700;font-style:normal}
+.jump{font-family:"Bricolage Grotesque",sans-serif;font-size:9.5px;font-weight:800;
+ letter-spacing:.1em;text-transform:uppercase}
+figure{margin:0}
+figcaption{font-family:"Bricolage Grotesque",sans-serif;font-size:9.5px;line-height:1.4;
+ padding-top:6px;display:flex;justify-content:space-between;gap:14px}
+figcaption i{font-style:normal;opacity:.55;white-space:nowrap}
+/* boxes */
+.panel{border:2px solid #191713;padding:0 0 6px}
+.panel h4{margin:0 0 8px;background:#191713;color:#F6F2E8;font-family:"Bricolage Grotesque",sans-serif;
+ font-size:10px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;padding:7px 12px}
+.panel .row{display:flex;justify-content:space-between;gap:12px;padding:5px 12px;
+ border-bottom:1px dotted rgba(25,23,19,.35);font-size:12px}
+.panel .row:last-child{border-bottom:0}
+.panel .row b{font-family:"Bricolage Grotesque",sans-serif;font-size:9px;font-weight:800;
+ letter-spacing:.14em;text-transform:uppercase;opacity:.6;padding-top:2px;white-space:nowrap}
+.panel .row span{text-align:right}
+.godeeper{border-top:3px solid var(--sec,#191713);padding-top:8px}
+.godeeper h5{margin:0 0 6px;font-family:"Bricolage Grotesque",sans-serif;font-size:10px;
+ font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--sec,#191713)}
+.godeeper p{margin:0 0 5px;font-size:12.5px;line-height:1.4}
+.agate{width:100%;border-collapse:collapse;font-family:"Bricolage Grotesque",sans-serif}
+.agate th{font-size:8.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+ text-align:left;border-bottom:2px solid #191713;padding:3px 4px}
+.agate td{font-size:11.5px;padding:5px 4px;border-bottom:1px solid rgba(25,23,19,.2)}
+.agate td:last-child,.agate th:last-child{text-align:right}
+.coupon{border:2px dashed #191713;padding:11px 13px}
+.vs{margin:0 0 13px;font-size:19.5px;line-height:1.52}
+.vs sup{font-family:"Bricolage Grotesque",sans-serif;font-size:10px;font-weight:800;color:#2A3A8C;
+ margin-right:6px}</style>
+<style>
+  @page{size:9.8021in 14.0208in;margin:0}
+  html,body{margin:0!important;padding:0!important;background:#fff!important;
+    display:block!important;place-items:initial!important}
+  .page{position:relative!important;width:941px!important;height:1346px!important;
+    margin:0!important;box-shadow:none!important;overflow:hidden!important}
+</style></head><body><main class="page">
+<div style="--sec:#2A3A8C">
+<div class="slugband"><span class="slug">The Reading<small>Genesis 28 : 10&ndash;15</small></span>
+ <span>No ads &#183; no commentary &#183; part one of two</span></div>
+<div style="display:grid;grid-template-columns:1fr 288px;gap:30px">
+  <div>
+    <div class="kicker">Night one</div>
+    <h2 class="hl" style="font-size:34px">He lay down in that place to sleep.</h2>
+    <p class="vs"><sup>10</sup>Jacob went out from Beersheba, and went toward Haran.</p><p class="vs"><sup>11</sup>He came to a certain place, and stayed there all night, because the sun had set. He took one of the stones of the place, and put it under his head, and lay down in that place to sleep.</p><p class="vs"><sup>12</sup>He dreamed. Behold, a stairway set upon the earth, and its top reached to heaven. Behold, the angels of God ascending and descending on it.</p><p class="vs"><sup>13</sup>Behold, Yahweh stood above it, and said, “I am Yahweh, the God of Abraham your father, and the God of Isaac. The land whereon you lie, to you will I give it, and to your offspring.</p><p class="vs"><sup>14</sup>Your offspring will be as the dust of the earth, and you will spread abroad to the west, and to the east, and to the north, and to the south. In you and in your offspring will all the families of the earth be blessed.</p><p class="vs"><sup>15</sup>Behold, I am with you, and will keep you, wherever you go, and will bring you again into this land. For I will not leave you, until I have done that which I have spoken of to you.”</p>
+    <p class="jump" style="margin-top:14px;color:#2A3A8C">The Reading continues on Page 08 &#8594;</p>
+  </div>
+  <div>
+    <div class="panel">
+      <h4>The passage</h4>
+      <div class="row"><b>Book</b><span>Genesis &mdash; first book of the Bible</span></div>
+      <div class="row"><b>Verses</b><span>Chapter 28, verses 10&ndash;15</span></div>
+      <div class="row"><b>Time to read</b><span>About two minutes</span></div>
+      <div class="row"><b>Where you are</b><span>Night one of a twenty-year trip</span></div>
+      <div class="row"><b>Cast of note</b><span>Jacob, on the run &#183; Yahweh, who speaks first</span></div>
+      <div class="row"><b>Words to watch</b><span>&ldquo;place&rdquo; &mdash; six times. See Page 16.</span></div>
+      <div class="row"><b>Translation</b><span>World English Bible</span></div>
+    </div>
+    <figure style="margin-top:14px">
+      <img src="img/stone-half.jpg" alt="" style="width:100%"/>
+      <figcaption><span>One of the stones of the place.</span><i>Photo: public domain</i></figcaption>
+    </figure>
+    <div class="godeeper" style="margin-top:14px">
+      <h5>Go deeper</h5>
+      <p><b>Genesis 32</b> &mdash; twenty years later, the wrestling match.</p>
+      <p><b>Psalm 121</b> &mdash; a psalm for people on a road.</p>
+      <p><b>John 1:51</b> &mdash; Jesus quotes this exact dream.</p>
+      <p style="margin-top:8px"><i>One question: alone out there, what would you have asked for?</i></p>
+    </div>
+  </div>
+</div>
+<div class="folio"><span>Between Sundays &#183; The Reading</span><span>Issue 001</span><span>Page 07</span></div>
+</div>
+</main></body></html>

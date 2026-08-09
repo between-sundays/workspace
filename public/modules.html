@@ -1,0 +1,85 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Between Sundays — Module System</title>
+<style>
+:root{--bg:#111013;--ink:#f3efe6;--dim:#8d8677;--line:#2c2930;--acc:#eff36a;--hot:#f15139}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:"Avenir Next",system-ui,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:44px 24px 90px}
+h1{margin:0;font-size:30px;font-weight:800;letter-spacing:-.02em}
+h1 em{font-style:normal;color:var(--dim);font-weight:600}
+.sub{color:var(--dim);font-size:15px;margin:10px 0 0}
+a.back{float:right;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+ text-decoration:none;border:1px solid var(--line);padding:7px 11px;border-radius:5px;color:var(--dim)}
+h2{margin:44px 0 14px;font-size:12px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;
+ color:var(--acc);border-bottom:1px solid var(--line);padding-bottom:8px}
+.row{display:flex;gap:26px;align-items:flex-end;flex-wrap:wrap}
+.mod{text-align:center}
+.box{border:2px solid var(--ink);background:repeating-linear-gradient(45deg,#1a181d 0 8px,#161418 8px 16px);
+ position:relative}
+.box b{position:absolute;inset:0;display:grid;place-items:center;font-size:13px;font-weight:800;
+ letter-spacing:.1em;text-transform:uppercase}
+.mod p{margin:9px 0 0;font-size:12px;color:var(--dim);line-height:1.5}
+.mod p b{color:var(--ink);display:block;font-size:13px;letter-spacing:.06em}
+table{width:100%;border-collapse:collapse;margin-top:6px;font-size:14px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{font-size:10.5px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+td.n{font-variant-numeric:tabular-nums;color:var(--acc);font-weight:700}
+.grid4{width:300px;height:429px;border:2px solid var(--ink);display:grid;
+ grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:3px;background:var(--line)}
+.grid4 div{background:#1a181d;display:grid;place-items:center;font-size:11px;color:var(--dim);
+ letter-spacing:.1em;text-transform:uppercase}
+ol{padding-left:20px;line-height:1.65;font-size:15px}
+ol li{margin:9px 0}
+.warn{border-left:4px solid var(--hot);background:rgba(241,81,57,.1);padding:14px 18px;
+ border-radius:0 6px 6px 0;font-size:15px;line-height:1.55;margin-top:16px}
+</style></head><body><div class="wrap">
+<a class="back" href="/compare.html">Page by page →</a>
+<h1>Between Sundays — <em>module system</em></h1>
+<p class="sub">Trim 332 × 475 mm broadsheet · CMYK · 60gsm. Every piece of work is one of four modules.</p>
+
+<h2>The four modules, to scale</h2>
+<div class="row">
+  <div class="mod"><div class="box" style="width:300px;height:429px"><b>Full</b></div>
+    <p><b>FULL PAGE</b>332 × 475 mm<br>941 × 1346 build px<br>3921 × 5610 print px</p></div>
+  <div class="mod"><div class="box" style="width:300px;height:215px"><b>Half — landscape</b></div>
+    <p><b>HALF · LANDSCAPE</b>332 × 237.5 mm<br>941 × 673 build px<br>3921 × 2805 print px</p></div>
+  <div class="mod"><div class="box" style="width:150px;height:429px"><b>Half — portrait</b></div>
+    <p><b>HALF · PORTRAIT</b>166 × 475 mm<br>470 × 1346 build px<br>1961 × 5610 print px</p></div>
+  <div class="mod"><div class="box" style="width:150px;height:215px"><b>Quarter</b></div>
+    <p><b>QUARTER</b>166 × 237.5 mm<br>470 × 673 build px<br>1961 × 2805 print px</p></div>
+</div>
+
+<h2>A full page is 2 × 2 quarters</h2>
+<div class="row">
+  <div class="grid4"><div>quarter</div><div>quarter</div><div>quarter</div><div>quarter</div></div>
+  <div style="flex:1;min-width:300px">
+    <table>
+      <tr><th>Spec</th><th>mm</th><th>build px</th><th>print px @300</th></tr>
+      <tr><td>Gutter between modules</td><td class="n">8</td><td class="n">23</td><td class="n">94</td></tr>
+      <tr><td>Outer margin, full page</td><td class="n">14</td><td class="n">40</td><td class="n">165</td></tr>
+      <tr><td>Bleed (each outside edge)</td><td class="n">3</td><td class="n">9</td><td class="n">35</td></tr>
+      <tr><td>Full page + bleed</td><td class="n">338 × 481</td><td class="n">—</td><td class="n">3992 × 5681</td></tr>
+      <tr><td>Live-matter safety from trim</td><td class="n">10</td><td class="n">28</td><td class="n">118</td></tr>
+    </table>
+  </div>
+</div>
+
+<h2>Rules</h2>
+<ol>
+<li><b>Size before design.</b> Decide full / half / quarter before anything is drawn.</li>
+<li><b>Halves and quarters stand alone.</b> They will sit next to something unrelated,
+so each carries its own folio and makes sense without the rest of the page.</li>
+<li>Full-page work can compose freely, but any <b>self-contained block</b> inside it —
+an ad, a game, a scripture panel — still snaps to a half or quarter footprint.</li>
+<li>Anything running to the edge gets <b>+3 mm bleed</b> on that edge.</li>
+<li>Keep type <b>≥ 10 mm</b> from trim.</li>
+<li>Review renders are 1295 × 1852 px. <b>Press files must be exported at 300 dpi</b>
+(3921 × 5610 for a full page) — never send the review render to print.</li>
+</ol>
+
+<div class="warn"><b>Current gap:</b> all 10 concept pages in the lab are full page.
+Nothing has been built at half or quarter yet. A real Sunday paper is mostly halves and
+quarters — right now the issue reads as 48 full-page posters, which is part of why it
+feels like a portfolio rather than a newspaper.</div>
+</div></body></html>

@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Between Sundays - Page 01 Forest Front</title>
+  <style>
+    * { box-sizing: border-box; letter-spacing: 0; }
+    :root {
+      --ink: #11100d;
+      --paper: #fff8e9;
+      --warm: #f1e3c9;
+      --signal: #e9f16c;
+      --gold: #ffdf83;
+      --brown: #2a1711;
+      --green: #10251a;
+      --red: #f05a3f;
+      --page-w: 941px;
+      --page-h: 1346px;
+    }
+    @page {
+      size: 13.07in 18.69in;
+      margin: 0;
+    }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      background: #cfc3b3;
+      color: var(--paper);
+      font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+    }
+    .page {
+      position: relative;
+      width: var(--page-w);
+      height: var(--page-h);
+      overflow: hidden;
+      background: var(--green);
+      box-shadow: 0 30px 58px rgba(17,16,13,0.28);
+      isolation: isolate;
+    }
+    .photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: contrast(1.08) saturate(0.88) brightness(0.84);
+      z-index: 0;
+    }
+    .shade {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(180deg, rgba(5,9,6,0.92) 0, rgba(5,9,6,0.5) 16%, rgba(5,9,6,0.08) 36%, rgba(5,9,6,0.12) 57%, rgba(5,9,6,0.82) 100%),
+        radial-gradient(circle at 50% 44%, rgba(255,255,255,0.06) 0 18%, rgba(0,0,0,0.55) 80%),
+        linear-gradient(90deg, rgba(0,0,0,0.44), transparent 31%, transparent 68%, rgba(0,0,0,0.38));
+    }
+    .print-texture {
+      position: absolute;
+      inset: 0;
+      z-index: 20;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, transparent 0 49.86%, rgba(255,248,233,0.12) 49.86% 50.14%, transparent 50.14%),
+        radial-gradient(rgba(255,248,233,0.12) 0.55px, transparent 0.7px) 0 0 / 5px 5px;
+      mix-blend-mode: overlay;
+      opacity: 0.72;
+    }
+    .trim {
+      position: absolute;
+      inset: 34px;
+      border: 1.5px solid rgba(255,248,233,0.72);
+      z-index: 18;
+      pointer-events: none;
+    }
+    .masthead {
+      position: absolute;
+      left: 46px;
+      right: 46px;
+      top: 36px;
+      z-index: 4;
+      display: grid;
+      grid-template-columns: 178px 1fr 178px;
+      gap: 18px;
+      align-items: center;
+      min-height: 168px;
+      padding: 0 0 16px;
+      border-bottom: 1.5px solid rgba(255,248,233,0.82);
+    }
+    .brand-img {
+      display: block;
+      width: min(420px, 100%);
+      height: auto;
+      margin: 0 auto;
+    }
+    .micro {
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1.12;
+      text-transform: uppercase;
+    }
+    .masthead .micro:last-child {
+      text-align: right;
+    }
+    .issue-strip {
+      position: absolute;
+      left: 46px;
+      right: 46px;
+      top: 224px;
+      z-index: 4;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 22px;
+      align-items: start;
+      color: var(--signal);
+    }
+    .issue-strip:before,
+    .issue-strip:after {
+      content: "";
+      height: 1px;
+      background: currentColor;
+      opacity: 0.78;
+      margin-top: 16px;
+    }
+    .issue-strip b {
+      position: relative;
+      display: block;
+      padding: 0 10px 7px;
+      background: rgba(5,9,6,0.88);
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.18;
+      text-transform: uppercase;
+    }
+    .route {
+      position: absolute;
+      inset: 246px 94px 382px 94px;
+      z-index: 3;
+      overflow: visible;
+      opacity: 0.94;
+    }
+    .route path {
+      fill: none;
+      stroke: var(--signal);
+      stroke-width: 5.4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 0 5px rgba(233,241,108,0.25));
+    }
+    .route circle {
+      fill: var(--red);
+      stroke: var(--signal);
+      stroke-width: 3;
+    }
+    .map-label {
+      position: absolute;
+      z-index: 5;
+      color: var(--signal);
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    .map-label.start { left: 428px; bottom: 292px; }
+    .map-label.holy-ground {
+      right: 172px;
+      top: 294px;
+      display: grid;
+      gap: 4px;
+    }
+    .map-label.holy-ground strong {
+      display: block;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 23px;
+      font-weight: 900;
+      line-height: 0.9;
+      color: var(--paper);
+    }
+    .map-label.holy-ground span {
+      display: block;
+      font-size: 10px;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--signal);
+    }
+    .checker {
+      position: absolute;
+      right: 224px;
+      top: 264px;
+      z-index: 5;
+      width: 58px;
+      height: 28px;
+      background:
+        linear-gradient(90deg, var(--signal) 0 25%, transparent 25% 50%, var(--signal) 50% 75%, transparent 75%),
+        linear-gradient(90deg, transparent 0 25%, var(--signal) 25% 50%, transparent 50% 75%, var(--signal) 75%);
+      background-size: 100% 50%;
+      background-position: 0 0, 0 100%;
+      background-repeat: no-repeat;
+    }
+    .lead {
+      position: absolute;
+      left: 46px;
+      right: 46px;
+      bottom: 358px;
+      z-index: 6;
+      display: grid;
+      grid-template-columns: 1fr 238px;
+      gap: 30px;
+      align-items: end;
+    }
+    h1 {
+      margin: 0;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 112px;
+      line-height: 0.84;
+      text-transform: uppercase;
+      text-shadow: 0 14px 42px rgba(0,0,0,0.58);
+    }
+    .deck {
+      max-width: 610px;
+      margin: 16px 0 0;
+      color: var(--signal);
+      font-size: 20px;
+      font-weight: 900;
+      line-height: 1.1;
+      text-shadow: 0 3px 16px rgba(0,0,0,0.94);
+    }
+    .reading-card {
+      padding-top: 15px;
+      border-top: 2px solid var(--paper);
+      color: var(--paper);
+    }
+    .reading-card b {
+      display: block;
+      margin-bottom: 9px;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 30px;
+      line-height: 0.9;
+      text-transform: uppercase;
+    }
+    .reading-card p {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.24;
+    }
+    .front-grid {
+      position: absolute;
+      left: 46px;
+      right: 46px;
+      bottom: 92px;
+      z-index: 7;
+      display: grid;
+      grid-template-columns: 1.02fr 1fr 1.2fr;
+      border-top: 1.5px solid rgba(255,248,233,0.86);
+      border-bottom: 1.5px solid rgba(255,248,233,0.86);
+    }
+    .front-grid article {
+      min-height: 138px;
+      padding: 18px 18px 17px;
+      border-right: 1.5px solid rgba(255,248,233,0.86);
+      background: #050906;
+    }
+    .front-grid article:last-child {
+      border-right: 0;
+      background: var(--signal);
+      color: var(--ink);
+    }
+    .front-grid small {
+      display: block;
+      margin-bottom: 9px;
+      font-size: 10px;
+      font-weight: 900;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    .front-grid h2 {
+      margin: 0;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 31px;
+      line-height: 0.9;
+      text-transform: uppercase;
+    }
+    .front-grid p {
+      margin: 9px 0 0;
+      font-size: 12.5px;
+      font-weight: 800;
+      line-height: 1.17;
+    }
+    .footer {
+      position: absolute;
+      left: 46px;
+      right: 46px;
+      bottom: 42px;
+      z-index: 7;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 18px;
+      align-items: center;
+      color: rgba(255,248,233,0.88);
+    }
+    .footer:before,
+    .footer:after {
+      content: "";
+      height: 1px;
+      background: currentColor;
+    }
+    .footer b {
+      font-size: 10px;
+      font-weight: 900;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    @media print {
+      body { display: block; padding: 0; background: white; }
+      .page {
+        width: 13.07in;
+        height: 18.69in;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page" aria-label="Between Sundays issue 001 front page">
+    <img class="photo" src="assets/cover-forest-lost-with-you.png" alt="" />
+    <div class="shade"></div>
+    <div class="trim"></div>
+    <div class="print-texture"></div>
+
+    <header class="masthead">
+      <div class="micro">Issue 001<br />Genesis 28:10-22</div>
+      <img class="brand-img" src="assets/between-sundays-logo-official-white.png" alt="Between Sundays" />
+      <div class="micro">Subscriber edition<br />Made to be shared</div>
+    </header>
+
+    <div class="issue-strip"><b>Tuesday / July 2026 / The God Of The Middle Of Nowhere</b></div>
+
+    <svg class="route" viewBox="0 0 640 860" aria-hidden="true">
+      <path d="M392 22 C345 72 388 123 335 174 C283 225 320 281 263 336 C203 392 239 443 196 495 C153 547 156 588 205 636 C244 674 271 704 300 750 C330 795 357 813 420 836" />
+      <circle cx="300" cy="750" r="10" />
+      <circle cx="392" cy="22" r="10" />
+    </svg>
+    <div class="checker"></div>
+    <div class="map-label holy-ground"><strong>Holy Ground</strong><span>Bethel / Genesis 28</span></div>
+    <div class="map-label start">Start</div>
+
+    <section class="lead">
+      <div>
+        <h1>I Am<br />With You</h1>
+        <p class="deck">Jacob thought he was sleeping in the middle of nowhere. God called it holy ground.</p>
+      </div>
+      <aside class="reading-card">
+        <b>The Reading</b>
+        <p>"Surely the Lord is in this place, and I was not aware of it." Genesis 28:16</p>
+      </aside>
+    </section>
+
+    <section class="front-grid">
+      <article>
+        <small>Cover Story / Page 3</small>
+        <h2>Lost Is Not Alone</h2>
+        <p>God meets people in places they thought they were only passing through.</p>
+      </article>
+      <article>
+        <small>Inside / Pages 7-13</small>
+        <h2>Read The Story First</h2>
+        <p>Genesis 28 is printed before the paper explains it.</p>
+      </article>
+      <article>
+        <small>Center Folio / Pages 23-26</small>
+        <h2>This Part Leaves</h2>
+        <p>A four-page mini paper made to be left for whoever finds it next.</p>
+      </article>
+    </section>
+
+    <footer class="footer"><b>If the middle is missing, good. The paper is doing its job.</b></footer>
+  </main>
+</body>
+</html>

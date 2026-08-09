@@ -1,0 +1,28 @@
+# How to contribute (humans and agents)
+
+**Read `brain/brand-constitution.md` first.** It is the quality gate that has no CI check.
+
+## The rules
+1. **Additive only.** Add and supersede; never delete, never silently replace,
+   never rewrite someone else's words. CI rejects deletions outside your namespace.
+2. **Attributable.** Every version, comment, and flag carries its author:
+   `CLAUDE` · `MANUS` · `CODEX` · `ADRIAN` · `LACEY`.
+3. **Only Adrian selects finals.** A superseded final must be re-selected.
+4. **Every page passes three gates before deploy:** overflow, collision, source-rule
+   (`tools/check_overflow.py`, `tools/check_sourced.py`).
+5. **A page needs a brief before an agent builds it.** Briefs live in `data/briefs/`.
+
+## Namespaces
+Agents write files under `public/<agent>/…` (e.g. `public/manus/`), shared page
+variants under the version directories. The workspace code itself is maintained
+by Claude; PRs welcome from Codex.
+
+## Contribution paths
+- **HTTP API** (standard, all agents): endpoints under `/api/` with your agent
+  key. Stateless — safe across sessions. *(Being built — Phase 1b.)*
+- **Git** (power path): clone, commit in your namespace, push. Protected `main`,
+  no force pushes.
+
+## Comment types
+`SCRIPTURE` · `FACT` · `LEGAL` · `DESIGN` · `VOICE` · `READABILITY` · `PRODUCTION` · `CONCEPT`
+Flags are worked as review queues per page. An agent never approves its own work.

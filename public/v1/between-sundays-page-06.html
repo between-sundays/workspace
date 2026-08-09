@@ -1,0 +1,393 @@
+<!doctype html>
+<!--
+THESIS: Page 6 is the gate into The Reading, not another article or ad. It turns the page into a departures board so the reader knows the next section is Scripture first.
+OWN-WORLD: Black split-flap airport board, white issue typography, signal yellow row markers, one pale paper boarding slip, barcode marks, and a disciplined no-ad reading promise.
+STORY: The reader sees Genesis 28:10-22 as the route about to board. The page previews the sequence without interpreting it.
+FIRST VIEWPORT: A dark departures board fills most of the page with THE READING as the dominant destination; a pale boarding slip at the bottom tells the reader what starts next.
+FORM: Airport departures board fused with newspaper section-opener, a sharp transition from the baggage page into the Scripture pages.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Between Sundays - Page 06 The Reading Gate</title>
+  <style>
+    * { box-sizing: border-box; letter-spacing: 0; }
+    :root {
+      --page-w: 941px;
+      --page-h: 1346px;
+      --black: #070807;
+      --panel: #111310;
+      --panel-2: #1b1e19;
+      --paper: #f6f0dd;
+      --ink: #12100c;
+      --muted: #9c9b8e;
+      --yellow: #ecf15a;
+      --blue: #9fd0f2;
+      --orange: #ff4a1f;
+      --rule: rgba(246, 240, 221, 0.16);
+    }
+    @page {
+      size: 13.07in 18.69in;
+      margin: 0;
+    }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      background: #cfc3b3;
+      color: var(--paper);
+      font-family: "Avenir Next", "Gill Sans", sans-serif;
+    }
+    .page {
+      position: relative;
+      width: var(--page-w);
+      height: var(--page-h);
+      overflow: hidden;
+      background: var(--black);
+      box-shadow: 0 30px 58px rgba(17, 16, 13, 0.26);
+      isolation: isolate;
+    }
+    .page:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(rgba(255,255,255,0.05) 0.55px, transparent 0.9px) 0 0 / 5px 5px,
+        linear-gradient(180deg, rgba(255,255,255,0.06), transparent 35%, rgba(0,0,0,0.35));
+      pointer-events: none;
+    }
+    .topbar {
+      position: absolute;
+      z-index: 4;
+      top: 42px;
+      left: 44px;
+      right: 44px;
+      height: 82px;
+      display: grid;
+      grid-template-columns: 220px 1fr 220px;
+      gap: 18px;
+      align-items: start;
+      border-bottom: 1px solid rgba(246, 240, 221, 0.42);
+    }
+    .topbar img {
+      width: 150px;
+      height: auto;
+      display: block;
+      margin: -7px auto 0;
+    }
+    .meta,
+    .meta-right {
+      font-size: 10px;
+      font-weight: 900;
+      line-height: 1.14;
+      text-transform: uppercase;
+    }
+    .meta span,
+    .meta-right span {
+      display: block;
+      color: var(--muted);
+    }
+    .meta-right { text-align: right; }
+    .board {
+      position: absolute;
+      z-index: 2;
+      top: 154px;
+      left: 44px;
+      right: 44px;
+      height: 884px;
+      display: grid;
+      grid-template-rows: 188px repeat(7, 88px);
+      gap: 10px;
+    }
+    .hero-row,
+    .row {
+      position: relative;
+      display: grid;
+      align-items: center;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.035), transparent 50%, rgba(0,0,0,0.22) 51%),
+        var(--panel);
+      border: 1px solid var(--rule);
+      overflow: hidden;
+    }
+    .hero-row:after,
+    .row:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: 1px;
+      background: rgba(246, 240, 221, 0.11);
+    }
+    .hero-row {
+      grid-template-columns: 106px 1fr 138px;
+      padding: 18px 18px 16px 22px;
+      background:
+        linear-gradient(180deg, rgba(236,241,90,0.08), transparent 48%, rgba(0,0,0,0.22) 51%),
+        var(--panel);
+    }
+    .gate {
+      color: var(--yellow);
+      font-family: "Avenir Next Condensed", "DIN Condensed", sans-serif;
+      font-size: 78px;
+      font-weight: 900;
+      line-height: 0.78;
+      text-transform: uppercase;
+    }
+    .hero-title {
+      min-width: 0;
+    }
+    .hero-title small {
+      display: block;
+      margin-bottom: 12px;
+      color: var(--yellow);
+      font-size: 13px;
+      font-weight: 900;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    .hero-title h1 {
+      margin: 0;
+      color: var(--paper);
+      font-family: "Avenir Next Condensed", "DIN Condensed", sans-serif;
+      font-size: 88px;
+      font-weight: 900;
+      line-height: 0.86;
+      text-transform: uppercase;
+    }
+    .status {
+      justify-self: end;
+      width: 124px;
+      color: var(--black);
+      background: var(--yellow);
+      padding: 12px 10px;
+      font-size: 14px;
+      font-weight: 900;
+      line-height: 0.95;
+      text-align: center;
+      text-transform: uppercase;
+    }
+    .row {
+      grid-template-columns: 95px 1fr 128px 125px;
+      padding: 0 14px 0 18px;
+      column-gap: 18px;
+    }
+    .row:nth-child(even) { background:
+      linear-gradient(180deg, rgba(255,255,255,0.035), transparent 50%, rgba(0,0,0,0.22) 51%),
+      var(--panel-2);
+    }
+    .time {
+      color: var(--yellow);
+      font-family: "Avenir Next Condensed", "DIN Condensed", sans-serif;
+      font-size: 40px;
+      font-weight: 900;
+      line-height: 0.9;
+      text-transform: uppercase;
+    }
+    .destination {
+      min-width: 0;
+      font-family: "Avenir Next Condensed", "DIN Condensed", sans-serif;
+      font-size: 39px;
+      font-weight: 900;
+      line-height: 0.9;
+      text-transform: uppercase;
+    }
+    .reference,
+    .row-status {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1.08;
+      text-transform: uppercase;
+    }
+    .row-status {
+      color: var(--paper);
+      text-align: right;
+    }
+    .row-status strong {
+      color: var(--blue);
+      font-weight: 900;
+    }
+    .side-note {
+      position: absolute;
+      z-index: 5;
+      right: 13px;
+      top: 154px;
+      color: rgba(246, 240, 221, 0.62);
+      font-size: 9px;
+      font-weight: 900;
+      line-height: 1;
+      text-transform: uppercase;
+      writing-mode: vertical-rl;
+    }
+    .boarding-slip {
+      position: absolute;
+      z-index: 6;
+      left: 44px;
+      right: 44px;
+      bottom: 42px;
+      height: 255px;
+      display: grid;
+      grid-template-columns: 1fr 256px;
+      background: var(--paper);
+      color: var(--ink);
+      box-shadow: 0 -18px 36px rgba(0,0,0,0.28);
+    }
+    .slip-main {
+      position: relative;
+      padding: 27px 30px 24px;
+      border-right: 2px dashed rgba(18,16,12,0.34);
+    }
+    .slip-main small {
+      display: block;
+      margin-bottom: 18px;
+      color: var(--orange);
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    .slip-main h2 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 39px;
+      font-weight: 700;
+      line-height: 1.02;
+    }
+    .slip-main p {
+      width: 500px;
+      margin: 16px 0 0;
+      font-size: 13px;
+      font-weight: 900;
+      line-height: 1.22;
+      text-transform: uppercase;
+    }
+    .slip-stub {
+      padding: 25px 22px 22px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 13px;
+    }
+    .stub-label {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 900;
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+    .stub-code {
+      align-self: center;
+      font-family: "Avenir Next Condensed", "DIN Condensed", sans-serif;
+      font-size: 64px;
+      font-weight: 900;
+      line-height: 0.8;
+      text-transform: uppercase;
+    }
+    .barcode {
+      height: 40px;
+      background:
+        linear-gradient(90deg,
+          var(--ink) 0 5px, transparent 5px 9px,
+          var(--ink) 9px 13px, transparent 13px 18px,
+          var(--ink) 18px 28px, transparent 28px 34px,
+          var(--ink) 34px 38px, transparent 38px 44px,
+          var(--ink) 44px 55px, transparent 55px 62px,
+          var(--ink) 62px 66px, transparent 66px 72px,
+          var(--ink) 72px 83px, transparent 83px 89px,
+          var(--ink) 89px 94px, transparent 94px 101px,
+          var(--ink) 101px 112px, transparent 112px 118px);
+    }
+    @media print {
+      body { display: block; padding: 0; background: white; }
+      .page {
+        width: 13.07in;
+        height: 18.69in;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page" aria-label="Between Sundays issue 001 page six The Reading section opener">
+    <header class="topbar">
+      <div class="meta">Issue 001 / Page 06<span>Gate to The Reading</span></div>
+      <img src="assets/between-sundays-logo-official-white.png" alt="Between Sundays" />
+      <div class="meta-right">No ads in next section<span>Genesis 28:10-22</span></div>
+    </header>
+
+    <section class="board" aria-label="Genesis 28 departures board">
+      <div class="hero-row">
+        <div class="gate">07</div>
+        <div class="hero-title">
+          <small>Now boarding / Scripture first</small>
+          <h1>The Reading</h1>
+        </div>
+        <div class="status">Turn<br />the page</div>
+      </div>
+
+      <div class="row">
+        <div class="time">28:10</div>
+        <div class="destination">Jacob Leaves Beersheba</div>
+        <div class="reference">Genesis<br />28:10</div>
+        <div class="row-status"><strong>Status</strong><br />In transit</div>
+      </div>
+      <div class="row">
+        <div class="time">28:11</div>
+        <div class="destination">A Certain Place</div>
+        <div class="reference">Genesis<br />28:11</div>
+        <div class="row-status"><strong>Status</strong><br />Ordinary</div>
+      </div>
+      <div class="row">
+        <div class="time">28:12</div>
+        <div class="destination">A Dream Of A Ladder</div>
+        <div class="reference">Genesis<br />28:12</div>
+        <div class="row-status"><strong>Status</strong><br />Behold</div>
+      </div>
+      <div class="row">
+        <div class="time">28:15</div>
+        <div class="destination">I Am With You</div>
+        <div class="reference">Genesis<br />28:15</div>
+        <div class="row-status"><strong>Status</strong><br />Promise</div>
+      </div>
+      <div class="row">
+        <div class="time">28:16</div>
+        <div class="destination">Surely In This Place</div>
+        <div class="reference">Genesis<br />28:16</div>
+        <div class="row-status"><strong>Status</strong><br />Awake</div>
+      </div>
+      <div class="row">
+        <div class="time">28:17</div>
+        <div class="destination">House Of God</div>
+        <div class="reference">Genesis<br />28:17</div>
+        <div class="row-status"><strong>Status</strong><br />Holy ground</div>
+      </div>
+      <div class="row">
+        <div class="time">28:22</div>
+        <div class="destination">The Stone Becomes A Sign</div>
+        <div class="reference">Genesis<br />28:22</div>
+        <div class="row-status"><strong>Status</strong><br />Remember</div>
+      </div>
+    </section>
+
+    <div class="side-note">Pages 7-13 / Read the story before the notes</div>
+
+    <section class="boarding-slip" aria-label="The Reading boarding slip">
+      <div class="slip-main">
+        <small>Boarding pass / no commentary in this section</small>
+        <h2>Read the story before we tell you what to think about it.</h2>
+        <p>The next pages print Genesis 28:10-22 with space around the words. No ads. No unrelated interruptions. Just the passage.</p>
+      </div>
+      <aside class="slip-stub">
+        <div class="stub-label">Passenger<br />Whoever is reading</div>
+        <div class="stub-code">GEN<br />28</div>
+        <div class="barcode" aria-hidden="true"></div>
+      </aside>
+    </section>
+  </main>
+</body>
+</html>

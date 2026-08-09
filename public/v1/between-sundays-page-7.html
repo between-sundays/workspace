@@ -1,0 +1,308 @@
+<!doctype html>
+<!--
+THESIS: Page 7 begins The Reading with Scripture, not commentary. It refuses a devotional explainer page and gives Genesis 28:10-12 space to be read slowly.
+OWN-WORLD: Pale road-map paper, deep blue route markings, one signal red waypoint, quiet newspaper folio, roomy serif Scripture, and restrained margin notes.
+STORY: The reader leaves the departures-board opener and enters the text itself: Jacob leaves, arrives at a certain place, and dreams.
+FIRST VIEWPORT: A route diagram from Beersheba to Haran sits above a large "A CERTAIN PLACE" waypoint; the Scripture text occupies the quiet lower field.
+FORM: Scripture reading page as a printed route sheet, one of seven pages in The Reading.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Between Sundays - Page 07 The Reading 01</title>
+  <style>
+    * { box-sizing: border-box; letter-spacing: 0; }
+    :root {
+      --page-w: 941px;
+      --page-h: 1346px;
+      --paper: #f8f3e6;
+      --ink: #17100d;
+      --muted: #71695c;
+      --blue: #143653;
+      --pale-blue: #c7ddeb;
+      --yellow: #eff36a;
+      --red: #f15139;
+      --rule: rgba(23, 16, 13, 0.28);
+    }
+    @page {
+      size: 13.07in 18.69in;
+      margin: 0;
+    }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      background: #cfc3b3;
+      color: var(--ink);
+      font-family: "Avenir Next", "Gill Sans", sans-serif;
+    }
+    .page {
+      position: relative;
+      width: var(--page-w);
+      height: var(--page-h);
+      overflow: hidden;
+      background:
+        radial-gradient(rgba(23,16,13,0.11) 0.5px, transparent 0.8px) 0 0 / 6px 6px,
+        linear-gradient(180deg, rgba(255,255,255,0.54), transparent 36%, rgba(20,54,83,0.06)),
+        var(--paper);
+      box-shadow: 0 30px 58px rgba(17, 16, 13, 0.26);
+      isolation: isolate;
+    }
+    .page:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background:
+        linear-gradient(90deg, transparent 0 48.9%, rgba(23,16,13,0.07) 49.2% 50.1%, transparent 50.4%),
+        linear-gradient(180deg, transparent 0 51.2%, rgba(23,16,13,0.08) 51.45%, transparent 51.7%);
+      pointer-events: none;
+      mix-blend-mode: multiply;
+    }
+    .sheet {
+      position: absolute;
+      z-index: 1;
+      inset: 46px 54px 44px;
+      display: grid;
+      grid-template-rows: 76px 330px 1fr 34px;
+      gap: 24px;
+    }
+    .folio {
+      display: grid;
+      grid-template-columns: 180px 1fr 180px;
+      align-items: start;
+      border-bottom: 1.5px solid var(--ink);
+      padding-bottom: 16px;
+    }
+    .folio img {
+      display: block;
+      width: 146px;
+      height: auto;
+      margin: -7px auto 0;
+    }
+    .folio p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 900;
+      line-height: 1.16;
+      text-transform: uppercase;
+    }
+    .folio p:last-child { text-align: right; }
+    .map {
+      position: relative;
+      overflow: hidden;
+      border-bottom: 10px solid var(--blue);
+    }
+    .map svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .land {
+      fill: none;
+      stroke: rgba(20,54,83,0.18);
+      stroke-width: 1.4;
+    }
+    .route {
+      fill: none;
+      stroke: var(--blue);
+      stroke-width: 6;
+      stroke-linecap: round;
+    }
+    .route-dash {
+      fill: none;
+      stroke: rgba(20,54,83,0.5);
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-dasharray: 10 10;
+    }
+    .pin {
+      fill: var(--red);
+      stroke: var(--paper);
+      stroke-width: 5;
+    }
+    .stop {
+      fill: var(--yellow);
+      stroke: var(--blue);
+      stroke-width: 4;
+    }
+    .label {
+      position: absolute;
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+    .beersheba { left: 14px; bottom: 54px; color: var(--blue); }
+    .haran { right: 0; top: 26px; color: var(--blue); text-align: right; }
+    .place-label {
+      position: absolute;
+      left: 244px;
+      top: 103px;
+      width: 412px;
+      color: var(--ink);
+    }
+    .place-label small {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--red);
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    .place-label h1 {
+      margin: 0;
+      font-family: "Avenir Next Condensed", "DIN Condensed", sans-serif;
+      font-size: 86px;
+      font-weight: 900;
+      line-height: 0.84;
+      text-transform: uppercase;
+    }
+    .reading {
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 112px 1fr 136px;
+      column-gap: 28px;
+      align-items: start;
+    }
+    .chapter-mark {
+      position: sticky;
+      top: 0;
+      color: var(--blue);
+      font-family: "Avenir Next Condensed", "DIN Condensed", sans-serif;
+      font-size: 112px;
+      font-weight: 900;
+      line-height: 0.78;
+      text-transform: uppercase;
+    }
+    .scripture {
+      padding-top: 6px;
+    }
+    .scripture h2 {
+      margin: 0 0 25px;
+      color: var(--red);
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    .scripture p {
+      margin: 0 0 24px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 31px;
+      font-weight: 500;
+      line-height: 1.28;
+    }
+    .scripture sup {
+      display: inline-block;
+      min-width: 28px;
+      margin-right: 8px;
+      color: var(--red);
+      font-family: "Avenir Next", "Gill Sans", sans-serif;
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1;
+      vertical-align: super;
+    }
+    .margin-note {
+      min-height: 0;
+      padding-top: 6px;
+      border-top: 2px solid var(--blue);
+    }
+    .margin-note b {
+      display: block;
+      margin-bottom: 10px;
+      font-family: "Avenir Next Condensed", "DIN Condensed", sans-serif;
+      color: var(--blue);
+      font-size: 34px;
+      font-weight: 900;
+      line-height: 0.9;
+      text-transform: uppercase;
+    }
+    .margin-note p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 10.5px;
+      font-weight: 900;
+      line-height: 1.18;
+      text-transform: uppercase;
+    }
+    .footer {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 14px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 9.5px;
+      font-weight: 900;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    .footer:before,
+    .footer:after {
+      content: "";
+      height: 1px;
+      background: var(--rule);
+    }
+    @media print {
+      body { display: block; padding: 0; background: white; }
+      .page {
+        width: 13.07in;
+        height: 18.69in;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page" aria-label="Between Sundays issue 001 page seven The Reading Genesis 28 verses 10 through 12">
+    <section class="sheet">
+      <header class="folio">
+        <p>The Reading / 01 of 07<br />Genesis 28:10-12</p>
+        <img src="assets/between-sundays-logo-official-espresso.png" alt="Between Sundays" />
+        <p>No ads in this section<br />World English Bible</p>
+      </header>
+
+      <section class="map" aria-label="Route from Beersheba toward Haran">
+        <svg viewBox="0 0 833 330" aria-hidden="true">
+          <path class="land" d="M40 252 C108 218 159 247 224 215 C285 185 307 124 374 133 C444 143 480 90 548 88 C646 86 704 68 789 38" />
+          <path class="land" d="M14 202 C86 181 137 188 187 164 C235 142 260 86 322 84 C384 83 419 118 462 94 C522 61 606 50 685 47" />
+          <path class="route-dash" d="M54 260 C145 245 205 210 261 183 C319 155 369 168 419 137 C486 94 565 94 650 70 C706 54 752 42 795 30" />
+          <path class="route" d="M54 260 C145 245 205 210 261 183 C319 155 369 168 419 137 C486 94 565 94 650 70 C706 54 752 42 795 30" />
+          <circle class="pin" cx="54" cy="260" r="15" />
+          <circle class="stop" cx="421" cy="137" r="18" />
+          <circle class="pin" cx="795" cy="30" r="15" />
+        </svg>
+        <div class="label beersheba">Beersheba<br />Departure</div>
+        <div class="label haran">Haran<br />Toward</div>
+        <div class="place-label">
+          <small>Genesis 28:11 / waypoint</small>
+          <h1>A Certain Place</h1>
+        </div>
+      </section>
+
+      <section class="reading" aria-label="Genesis 28 verses 10 through 12">
+        <aside class="chapter-mark">28</aside>
+        <article class="scripture">
+          <h2>Genesis 28:10-12 / World English Bible</h2>
+          <p><sup>10</sup>Jacob went out from Beersheba, and went toward Haran.</p>
+          <p><sup>11</sup>He came to a certain place, and stayed there all night, because the sun had set. He took one of the stones of the place, and put it under his head, and lay down in that place to sleep.</p>
+          <p><sup>12</sup>He dreamed and saw a stairway set up on the earth, and its top reached to heaven. Behold, the angels of God were ascending and descending on it.</p>
+        </article>
+        <aside class="margin-note">
+          <b>Read<br />Slow</b>
+          <p>The next pages continue the passage without ads or unrelated interruptions.</p>
+        </aside>
+      </section>
+
+      <footer class="footer"><span>Continues on Page 08 / Genesis 28:13-15</span></footer>
+    </section>
+  </main>
+</body>
+</html>

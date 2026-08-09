@@ -1,0 +1,603 @@
+<!doctype html>
+<!--
+THESIS: Page 2 is the reader's field guide, not a generic table of contents. It refuses the quiet publisher-note page by making orientation feel like a newspaper object with utility, surprise, and public-place energy.
+OWN-WORLD: Warm ivory newsprint, espresso ink, mint/pale-blue/signal-yellow bands, boxed notices, route marks, dense editorial columns, and one loud house-ad panel.
+STORY: The reader learns what the issue is, how to move through it, where the Scripture lives, and why the center pages are designed to leave.
+FIRST VIEWPORT: A real masthead/folio top, oversized "Start Here" editorial lead on the left, a color-coded 48-page issue map on the right, contents and departments below.
+FORM: Candidate 6 from degraded surface seed 55783272, interpreted as a public notice board plus contents desk for a printed newspaper.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Between Sundays - Page 02 Field Guide</title>
+  <style>
+    * { box-sizing: border-box; letter-spacing: 0; }
+    :root {
+      --ink: #17100d;
+      --espresso: #2a1711;
+      --paper: #fff8e9;
+      --paper-2: #f2e6cf;
+      --mint: #c7dbc2;
+      --blue: #c9def0;
+      --navy: #08283f;
+      --yellow: #e9f16c;
+      --gold: #ffdf83;
+      --red: #f05a3f;
+      --rule: rgba(42,23,17,0.78);
+      --page-w: 941px;
+      --page-h: 1346px;
+    }
+    @page {
+      size: 13.07in 18.69in;
+      margin: 0;
+    }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      background: #cfc3b3;
+      color: var(--ink);
+      font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+    }
+    .page {
+      position: relative;
+      width: var(--page-w);
+      height: var(--page-h);
+      overflow: hidden;
+      background: var(--paper);
+      box-shadow: 0 30px 58px rgba(17,16,13,0.26);
+      isolation: isolate;
+    }
+    .page:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(rgba(42,23,17,0.13) 0.55px, transparent 0.8px) 0 0 / 5px 5px,
+        linear-gradient(90deg, transparent 0 49.92%, rgba(42,23,17,0.08) 49.92% 50.08%, transparent 50.08%),
+        linear-gradient(180deg, rgba(255,255,255,0.55), transparent 38%, rgba(42,23,17,0.05));
+      mix-blend-mode: multiply;
+      opacity: 0.5;
+    }
+    .trim {
+      position: absolute;
+      inset: 34px;
+      z-index: 5;
+      pointer-events: none;
+      border: 1.5px solid var(--rule);
+    }
+    .sheet {
+      position: absolute;
+      inset: 48px 48px 44px;
+      z-index: 1;
+      display: grid;
+      grid-template-rows: 122px 326px 1fr 116px 26px;
+      gap: 18px;
+    }
+    .topbar {
+      display: grid;
+      grid-template-columns: 210px 1fr 210px;
+      align-items: center;
+      padding-bottom: 16px;
+      border-bottom: 4px double var(--espresso);
+    }
+    .logo {
+      display: block;
+      width: 198px;
+      height: auto;
+    }
+    .dateline {
+      display: grid;
+      justify-items: center;
+      gap: 8px;
+      text-align: center;
+    }
+    .dateline strong {
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 31px;
+      line-height: 0.92;
+      text-transform: uppercase;
+    }
+    .dateline span {
+      padding: 5px 12px 4px;
+      background: var(--yellow);
+      color: var(--espresso);
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    .folio {
+      text-align: right;
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: 1.16fr 0.84fr;
+      gap: 18px;
+    }
+    .lead-note {
+      position: relative;
+      min-height: 0;
+      padding: 22px 22px 18px;
+      background: var(--espresso);
+      color: var(--paper);
+      overflow: hidden;
+    }
+    .lead-note:after {
+      content: none;
+    }
+    .kicker {
+      position: relative;
+      z-index: 1;
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 6px 9px 5px;
+      background: var(--yellow);
+      color: var(--espresso);
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    h1 {
+      position: relative;
+      z-index: 1;
+      max-width: 510px;
+      margin: 0;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 56px;
+      line-height: 0.86;
+      text-transform: uppercase;
+    }
+    .lead-copy {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 16px;
+      margin-top: 12px;
+      border-top: 1.5px solid rgba(255,248,233,0.64);
+      padding-top: 12px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 12.2px;
+      font-weight: 700;
+      line-height: 1.34;
+    }
+    .lead-copy p {
+      margin: 0;
+    }
+    .issue-map {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      border: 2px solid var(--espresso);
+      background: var(--paper);
+      min-height: 0;
+    }
+    .issue-map header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: end;
+      padding: 14px 15px 12px;
+      border-bottom: 2px solid var(--espresso);
+      background: var(--mint);
+    }
+    .issue-map h2 {
+      margin: 0;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 36px;
+      line-height: 0.9;
+      text-transform: uppercase;
+    }
+    .issue-map header span {
+      font-size: 10px;
+      font-weight: 900;
+      line-height: 1.05;
+      text-align: right;
+      text-transform: uppercase;
+    }
+    .map-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      grid-auto-rows: 1fr;
+      min-height: 0;
+      border-bottom: 2px solid var(--espresso);
+    }
+    .map-grid div {
+      position: relative;
+      min-height: 22px;
+      border-right: 1px solid rgba(42,23,17,0.48);
+      border-bottom: 1px solid rgba(42,23,17,0.48);
+      padding: 4px 5px;
+      font-size: 9px;
+      font-weight: 900;
+      line-height: 1;
+    }
+    .map-grid div:nth-child(6n) { border-right: 0; }
+    .map-grid div:nth-last-child(-n+6) { border-bottom: 0; }
+    .cover { background: var(--espresso); color: var(--paper); }
+    .story { background: var(--blue); color: var(--navy); }
+    .scripture { background: var(--yellow); color: var(--espresso); }
+    .spine { background: var(--red); color: var(--paper); }
+    .play { background: var(--mint); color: var(--espresso); }
+    .ad { background: var(--gold); color: var(--espresso); }
+    .back { background: var(--navy); color: var(--paper); }
+    .map-key {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--espresso);
+      font-size: 9px;
+      font-weight: 900;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    .map-key span {
+      display: block;
+      padding: 8px 8px 7px;
+      background: var(--paper);
+    }
+    .map-key b {
+      display: inline-block;
+      width: 9px;
+      height: 9px;
+      margin-right: 5px;
+      vertical-align: -1px;
+      border: 1px solid var(--espresso);
+    }
+    .body-grid {
+      display: grid;
+      grid-template-columns: 1.03fr 1fr 0.9fr;
+      gap: 18px;
+      min-height: 0;
+    }
+    .column {
+      min-height: 0;
+      border-top: 2px solid var(--espresso);
+      padding-top: 12px;
+    }
+    .column h3,
+    .ad-panel h3,
+    .games h3 {
+      margin: 0 0 10px;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 34px;
+      line-height: 0.9;
+      text-transform: uppercase;
+    }
+    .contents-list {
+      display: grid;
+      gap: 0;
+      border-top: 1.5px solid var(--espresso);
+    }
+    .contents-list article {
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 11px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(42,23,17,0.58);
+    }
+    .contents-list b {
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 27px;
+      line-height: 0.86;
+      color: var(--red);
+    }
+    .contents-list h4 {
+      margin: 0 0 4px;
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1.02;
+      text-transform: uppercase;
+    }
+    .contents-list p {
+      margin: 0;
+      font-size: 11.5px;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+    .reading-order {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .step {
+      min-height: 102px;
+      padding: 12px;
+      border: 1.5px solid var(--espresso);
+      background: var(--paper-2);
+    }
+    .step:nth-child(2) { background: var(--yellow); }
+    .step:nth-child(3) { background: var(--blue); }
+    .step:nth-child(4) { background: var(--mint); }
+    .step b {
+      display: block;
+      margin-bottom: 7px;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 32px;
+      line-height: 0.8;
+      text-transform: uppercase;
+    }
+    .step p {
+      margin: 0;
+      font-size: 11.2px;
+      font-weight: 800;
+      line-height: 1.18;
+    }
+    .editor-note {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 2px solid var(--espresso);
+      column-count: 2;
+      column-gap: 14px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 12.2px;
+      font-weight: 700;
+      line-height: 1.36;
+    }
+    .editor-note p {
+      margin: 0 0 9px;
+    }
+    .ad-panel {
+      padding: 16px 14px 14px;
+      background: var(--navy);
+      color: var(--paper);
+    }
+    .ad-panel h3 {
+      color: var(--yellow);
+      font-size: 39px;
+      margin-bottom: 12px;
+    }
+    .ad-panel p {
+      margin: 0 0 12px;
+      font-size: 13px;
+      font-weight: 850;
+      line-height: 1.17;
+    }
+    .ad-panel .stamp {
+      display: inline-block;
+      margin-top: 4px;
+      padding: 7px 9px 6px;
+      border: 2px solid var(--yellow);
+      color: var(--yellow);
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1;
+      text-transform: uppercase;
+      transform: rotate(-3deg);
+    }
+        .mini-depts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .mini-depts div {
+      min-height: 83px;
+      padding: 10px;
+      border: 1.5px solid var(--espresso);
+      background: var(--paper);
+    }
+    .mini-depts b {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 10px;
+      font-weight: 900;
+      line-height: 1;
+      text-transform: uppercase;
+      color: var(--red);
+    }
+    .mini-depts p {
+      margin: 0;
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.18;
+    }
+    .games {
+      margin-top: 10px;
+      padding: 14px;
+      background: var(--yellow);
+      border: 2px solid var(--espresso);
+    }
+    .games h3 {
+      font-size: 31px;
+      margin-bottom: 9px;
+    }
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 2px;
+      margin: 0 0 9px;
+    }
+    .games-grid span {
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border: 1.5px solid var(--espresso);
+      background: var(--paper);
+      font-size: 10px;
+      font-weight: 900;
+      line-height: 1;
+    }
+    .games p {
+      margin: 0;
+      font-size: 10.4px;
+      font-weight: 850;
+      line-height: 1.14;
+    }
+    .bottom-strip {
+      display: grid;
+      grid-template-columns: 0.9fr 1fr 1fr;
+      border-top: 3px solid var(--espresso);
+      border-bottom: 3px solid var(--espresso);
+    }
+    .notice {
+      padding: 11px 14px 10px;
+      border-right: 1.5px solid var(--espresso);
+      background: var(--paper-2);
+    }
+    .notice:nth-child(2) { background: var(--mint); }
+    .notice:nth-child(3) {
+      border-right: 0;
+      background: var(--espresso);
+      color: var(--paper);
+    }
+    .notice b {
+      display: block;
+      margin-bottom: 6px;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 23px;
+      line-height: 0.9;
+      text-transform: uppercase;
+    }
+    .notice p {
+      margin: 0;
+      font-size: 10.8px;
+      font-weight: 800;
+      line-height: 1.18;
+    }
+    .footer {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 14px;
+      align-items: center;
+      color: var(--espresso);
+    }
+    .footer:before,
+    .footer:after {
+      content: "";
+      height: 1px;
+      background: var(--espresso);
+    }
+    .footer b {
+      font-size: 10px;
+      font-weight: 900;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    @media print {
+      body { display: block; padding: 0; background: white; }
+      .page {
+        width: 13.07in;
+        height: 18.69in;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page" aria-label="Between Sundays issue 001 page two field guide">
+    <div class="trim"></div>
+    <section class="sheet">
+      <header class="topbar">
+        <img class="logo" src="assets/between-sundays-logo-official-espresso.png" alt="Between Sundays" />
+        <div class="dateline">
+          <strong>Inside Issue 001</strong>
+          <span>I Am With You / Genesis 28:10-22</span>
+        </div>
+        <div class="folio">Page 02<br />The Sunday paper for the places between Sundays<br />Subscriber copy / made to be shared</div>
+      </header>
+
+      <section class="hero">
+        <article class="lead-note">
+          <span class="kicker">Start here</span>
+          <h1>This paper is built to be handled.</h1>
+          <div class="lead-copy">
+            <p>Read it out of order. Fold it. Circle something. Hand one page to somebody else. This issue starts with Jacob stopping where the road gives out for the night.</p>
+            <p>The center pages are removable on purpose. If they are missing when this copy reaches you, the newspaper is already working.</p>
+          </div>
+        </article>
+
+        <aside class="issue-map" aria-label="Issue map">
+          <header>
+            <h2>48-Page Map</h2>
+            <span>Cover to back page<br />What lives where</span>
+          </header>
+          <div class="map-grid">
+            <div class="cover">01</div><div class="story">02</div><div class="story">03</div><div class="story">04</div><div class="story">05</div><div class="ad">06</div>
+            <div class="scripture">07</div><div class="scripture">08</div><div class="scripture">09</div><div class="scripture">10</div><div class="scripture">11</div><div class="scripture">12</div>
+            <div class="scripture">13</div><div class="ad">14</div><div class="play">15</div><div class="story">16</div><div class="story">17</div><div class="story">18</div>
+            <div class="story">19</div><div class="ad">20</div><div class="play">21</div><div class="story">22</div><div class="spine">23</div><div class="spine">24</div>
+            <div class="spine">25</div><div class="spine">26</div><div class="story">27</div><div class="play">28</div><div class="ad">29</div><div class="story">30</div>
+            <div class="story">31</div><div class="story">32</div><div class="ad">33</div><div class="play">34</div><div class="story">35</div><div class="story">36</div>
+            <div class="story">37</div><div class="story">38</div><div class="ad">39</div><div class="story">40</div><div class="play">41</div><div class="story">42</div>
+            <div class="story">43</div><div class="ad">44</div><div class="story">45</div><div class="play">46</div><div class="story">47</div><div class="back">48</div>
+          </div>
+          <div class="map-key">
+            <span><b class="scripture"></b>Reading</span>
+            <span><b class="spine"></b>Center folio</span>
+            <span><b class="play"></b>Play</span>
+          </div>
+        </aside>
+      </section>
+
+      <section class="body-grid">
+        <article class="column">
+          <h3>Contents</h3>
+          <div class="contents-list">
+            <article><b>03</b><div><h4>Lost Is Not Alone</h4><p>The cover story follows Jacob before he understands the place where he stopped.</p></div></article>
+            <article><b>07</b><div><h4>The Reading</h4><p>Genesis 28:10-22 is printed with room to breathe before our notes begin.</p></div></article>
+            <article><b>15</b><div><h4>Ordinary Places Desk</h4><p>A field report on bus stops, counters, stairwells, and other places easy to miss.</p></div></article>
+            <article><b>23</b><div><h4>This Part Leaves</h4><p>The removable four-page mini paper, made to be left where someone might actually find it.</p></div></article>
+            <article><b>31</b><div><h4>Games For The Table</h4><p>A crossword and maze for the train, waiting room, lunch break, or kitchen counter.</p></div></article>
+            <article><b>34</b><div><h4>The Bethel Directory</h4><p>A fictional yellow-pages spread for ordinary help along the road.</p></div></article>
+          </div>
+        </article>
+
+        <article class="column">
+          <h3>Reading Path</h3>
+          <div class="reading-order">
+            <div class="step"><b>01</b><p>Read the story first. Let the passage set the pace before the paper adds notes.</p></div>
+            <div class="step"><b>02</b><p>Look again at the overlooked. Bus stops, couches, exits, sidewalks.</p></div>
+            <div class="step"><b>03</b><p>Remove the center folio only when you are ready to leave it behind.</p></div>
+            <div class="step"><b>04</b><p>Tell us where it found you. A short link waits inside the folio.</p></div>
+          </div>
+          <div class="editor-note">
+            <p><strong>From the editor:</strong> The first issue begins with a person in transit. Jacob is not settled, not impressive, not even especially aware. He is between where he came from and where he is going.</p>
+            <p>We are keeping close to the text: a roadside stop, a dream, a promise, and a sentence worth carrying into the week.</p>
+          </div>
+        </article>
+
+        <aside>
+          <article class="ad-panel">
+            <h3>Month Kit</h3>
+            <p>Reading, fiction, classifieds, games, posters, letters, food, music, and a center folio that can leave the issue.</p>
+            <p>Come back when you need a different door in.</p>
+            <span class="stamp">Use all month / pages 01-48</span>
+          </article>
+          <div class="mini-depts">
+            <div><b>Classified</b><p>Now hiring: people willing to notice what usually gets edited out.</p></div>
+            <div><b>Weather</b><p>Scattered doubt early. Slower reading by afternoon.</p></div>
+          </div>
+          <article class="games">
+            <h3>Play</h3>
+            <div class="games-grid" aria-label="Mini puzzle grid">
+              <span>J</span><span>A</span><span>C</span><span>O</span><span>B</span><span></span>
+              <span></span><span>S</span><span>T</span><span>A</span><span>Y</span><span></span>
+              <span>R</span><span>E</span><span>S</span><span>T</span><span></span><span></span>
+              <span></span><span></span><span>L</span><span>A</span><span>D</span><span>D</span>
+            </div>
+          </article>
+        </aside>
+      </section>
+
+      <section class="bottom-strip">
+        <article class="notice"><b>Public Notice</b><p>If the middle is missing, good. This object is meant to travel farther than the first reader.</p></article>
+        <article class="notice"><b>Genesis 28:15</b><p>"I am with you and will watch over you wherever you go."</p></article>
+        <article class="notice"><b>Found You?</b><p>When this issue turns up on a table, chair, counter, or seat, that is not a distribution error.</p></article>
+      </section>
+
+      <footer class="footer"><b>Between Sundays / Issue 001 / Page 02</b></footer>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<title>Between Sundays</title><link rel="stylesheet" href="fonts.css">
+<style>
+*{box-sizing:border-box}html,body{margin:0}
+@page{size:9.8021in 14.0208in;margin:0}
+body{display:grid;place-items:center;padding:28px;background:#cfc3b3;
+ font-family:"Newsreader",Georgia,serif;color:#191713}
+.page{position:relative;width:941px;height:1346px;overflow:hidden;background:#F6F2E8;
+ padding:0 40px}
+.sans{font-family:"Bricolage Grotesque","Avenir Next",sans-serif}
+/* nameplate + folio */
+.nameplate{text-align:center;padding:26px 0 10px}
+.nameplate h1{margin:0;font-family:"Fraunces",Georgia,serif;font-weight:900;font-size:64px;
+ letter-spacing:-.015em;line-height:1}
+.dateline{display:flex;justify-content:space-between;border-top:2.5px solid #191713;
+ border-bottom:1px solid #191713;padding:5px 0;margin-top:10px;font-family:"Bricolage Grotesque",sans-serif;
+ font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+.slugband{display:flex;justify-content:space-between;align-items:baseline;
+ border-bottom:3px solid var(--sec,#191713);padding:22px 0 8px;margin-bottom:14px}
+.slug{font-family:"Bricolage Grotesque",sans-serif;font-size:26px;font-weight:800;
+ letter-spacing:.02em;text-transform:uppercase;color:var(--sec,#191713)}
+.slug small{font-family:"Fraunces",serif;font-weight:600;font-size:13px;letter-spacing:.06em;
+ color:#191713;margin-left:12px}
+.slugband span{font-family:"Bricolage Grotesque",sans-serif;font-size:9.5px;font-weight:700;
+ letter-spacing:.16em;text-transform:uppercase;opacity:.6}
+.folio{position:absolute;left:40px;right:40px;bottom:20px;display:flex;justify-content:space-between;
+ border-top:1px solid #191713;padding-top:7px;font-family:"Bricolage Grotesque",sans-serif;
+ font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;opacity:.65}
+/* editorial parts */
+.kicker{font-family:"Bricolage Grotesque",sans-serif;font-size:10.5px;font-weight:800;
+ letter-spacing:.2em;text-transform:uppercase;color:var(--sec,#B8412A)}
+.hl{font-family:"Fraunces",Georgia,serif;font-weight:900;letter-spacing:-.015em;line-height:1.02;margin:6px 0 0}
+.deck{font-size:17px;line-height:1.4;font-style:italic;margin:10px 0 0;color:#333026}
+.byline{font-family:"Bricolage Grotesque",sans-serif;font-size:9.5px;font-weight:700;
+ letter-spacing:.14em;text-transform:uppercase;margin:10px 0 0;opacity:.7}
+.cols2{column-count:2;column-gap:26px;column-rule:1px solid rgba(25,23,19,.25)}
+.cols3{column-count:3;column-gap:22px;column-rule:1px solid rgba(25,23,19,.25)}
+.body p{margin:0 0 9px;font-size:13.5px;line-height:1.42;text-align:justify}
+.body p.first:first-letter{font-family:"Fraunces",serif;font-weight:900;font-size:46px;
+ line-height:.82;float:left;padding:5px 7px 0 0}
+.body .rh{font-weight:700;font-style:normal}
+.jump{font-family:"Bricolage Grotesque",sans-serif;font-size:9.5px;font-weight:800;
+ letter-spacing:.1em;text-transform:uppercase}
+figure{margin:0}
+figcaption{font-family:"Bricolage Grotesque",sans-serif;font-size:9.5px;line-height:1.4;
+ padding-top:6px;display:flex;justify-content:space-between;gap:14px}
+figcaption i{font-style:normal;opacity:.55;white-space:nowrap}
+/* boxes */
+.panel{border:2px solid #191713;padding:0 0 6px}
+.panel h4{margin:0 0 8px;background:#191713;color:#F6F2E8;font-family:"Bricolage Grotesque",sans-serif;
+ font-size:10px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;padding:7px 12px}
+.panel .row{display:flex;justify-content:space-between;gap:12px;padding:5px 12px;
+ border-bottom:1px dotted rgba(25,23,19,.35);font-size:12px}
+.panel .row:last-child{border-bottom:0}
+.panel .row b{font-family:"Bricolage Grotesque",sans-serif;font-size:9px;font-weight:800;
+ letter-spacing:.14em;text-transform:uppercase;opacity:.6;padding-top:2px;white-space:nowrap}
+.panel .row span{text-align:right}
+.godeeper{border-top:3px solid var(--sec,#191713);padding-top:8px}
+.godeeper h5{margin:0 0 6px;font-family:"Bricolage Grotesque",sans-serif;font-size:10px;
+ font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--sec,#191713)}
+.godeeper p{margin:0 0 5px;font-size:12.5px;line-height:1.4}
+.agate{width:100%;border-collapse:collapse;font-family:"Bricolage Grotesque",sans-serif}
+.agate th{font-size:8.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+ text-align:left;border-bottom:2px solid #191713;padding:3px 4px}
+.agate td{font-size:11.5px;padding:5px 4px;border-bottom:1px solid rgba(25,23,19,.2)}
+.agate td:last-child,.agate th:last-child{text-align:right}
+.coupon{border:2px dashed #191713;padding:11px 13px}
+.chart{width:100%;border-collapse:collapse;margin-top:12px}
+.chart td{padding:10px 8px;border-bottom:1px solid rgba(25,23,19,.25);font-size:13px;vertical-align:middle}
+.chart td b{font-family:"Fraunces",serif;font-weight:900;font-size:17px}
+.chart td span{font-style:italic;opacity:.75;font-size:12px}
+.chart .pos{font-family:"Fraunces",serif;font-weight:900;font-size:26px;width:44px;color:#24509E}
+.chart td:nth-child(3){font-family:"Bricolage Grotesque",sans-serif;font-size:10px;font-weight:700;
+ letter-spacing:.08em;text-transform:uppercase;opacity:.6;width:80px}
+.chart .mv{width:36px;text-align:center;color:#24509E;font-size:12px}</style></head><body><main class="page"><div class="slugband" style="--sec:#24509E"><span class="slug" style="color:#24509E">Music<small>songs for walking home</small></span><span>the charts</span></div>
+<div style="display:grid;grid-template-columns:1fr 300px;gap:26px">
+ <div>
+  <div class="kicker" style="--sec:#24509E">This week&rsquo;s top eight &#183; unchanged for centuries</div>
+  <h2 class="hl" style="font-size:38px;max-width:20ch">The oldest chart still running.</h2>
+  <p class="deck" style="max-width:52ch">The Psalms are songs. People forget that. Here is the
+  countdown as we would honestly rank it this week at our house.</p>
+  <table class="chart"><tr><td class="pos">1</td><td><b>Psalm 121</b><br/><span>I lift up my eyes to the mountains</span></td><td>18 weeks</td><td class="mv">&#9650;</td></tr><tr><td class="pos">2</td><td><b>Psalm 23</b><br/><span>The LORD is my shepherd</span></td><td>3,000 years</td><td class="mv">&#9644;</td></tr><tr><td class="pos">3</td><td><b>Psalm 139</b><br/><span>Where can I go from your Spirit?</span></td><td>12 weeks</td><td class="mv">&#9650;</td></tr><tr><td class="pos">4</td><td><b>Psalm 46</b><br/><span>Be still, and know</span></td><td>9 weeks</td><td class="mv">&#9650;</td></tr><tr><td class="pos">5</td><td><b>Psalm 42</b><br/><span>As the deer pants for streams</span></td><td>6 weeks</td><td class="mv">&#9660;</td></tr><tr><td class="pos">6</td><td><b>Psalm 30</b><br/><span>Joy comes in the morning</span></td><td>5 weeks</td><td class="mv">&#9650;</td></tr><tr><td class="pos">7</td><td><b>Psalm 137</b><br/><span>By the rivers of Babylon</span></td><td>4 weeks</td><td class="mv">new</td></tr><tr><td class="pos">8</td><td><b>Psalm 150</b><br/><span>Let everything that has breath</span></td><td>2 weeks</td><td class="mv">&#9650;</td></tr></table>
+ </div>
+ <div>
+  <figure><img src="img/walkman-half.jpg" alt="" style="width:100%"/>
+   <figcaption><span>Side A is 150 tracks long.</span><i>Halftone: BS studio</i></figcaption></figure>
+  <div class="panel" style="margin-top:14px"><h4>Liner notes</h4>
+   <div class="row"><span>Every one of these was written to be sung out loud, often while
+   walking. Reading one on the way somewhere is the original use case.</span></div>
+   <div class="row"><span>About half the chart is complaints. They kept those in. We find that
+   very encouraging.</span></div>
+  </div>
+  <div class="godeeper" style="margin-top:14px;--sec:#24509E">
+   <h5>Start with track one</h5>
+   <p>&ldquo;I look up to the mountains &mdash; does my help come from there? My help comes from
+   the LORD, who made heaven and earth!&rdquo; &mdash; Psalm 121:1&ndash;2, NLT</p>
+  </div>
+ </div>
+</div><div class="folio"><span>Between Sundays &#183; Music</span><span>Issue 001</span><span>Page 40</span></div></main></body></html>

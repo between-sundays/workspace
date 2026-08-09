@@ -1,0 +1,545 @@
+<!doctype html>
+<!--
+THESIS: Page 3 opens the cover story as a piece of journalism, not a devotional poster. It refuses a generic article page by making Jacob's "middle of nowhere" feel like a field report.
+OWN-WORLD: Warm ivory newsprint, espresso ink, signal yellow, pale blue, red annotation marks, dense columns, boxed evidence, map fragments, and a full documentary image crop.
+STORY: The reader sees Jacob in transit, unprepared, and surprised by the promise in Genesis 28.
+FIRST VIEWPORT: Small newspaper folio at top, a large forest evidence photo on the left, monumental headline on the right, then article columns and sidebars below.
+FORM: Degraded seed 2865f030, candidate 6 interpreted as investigative case file plus feature opener inside the existing newspaper identity.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Between Sundays - Page 03 Lost Is Not Alone</title>
+  <style>
+    * { box-sizing: border-box; letter-spacing: 0; }
+    :root {
+      --ink: #17100d;
+      --espresso: #2a1711;
+      --paper: #fff8e9;
+      --paper-2: #f2e6cf;
+      --blue: #c9def0;
+      --mint: #c7dbc2;
+      --yellow: #e9f16c;
+      --gold: #ffdf83;
+      --red: #f05a3f;
+      --rule: rgba(42,23,17,0.76);
+      --page-w: 941px;
+      --page-h: 1346px;
+    }
+    @page {
+      size: 13.07in 18.69in;
+      margin: 0;
+    }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      background: #cfc3b3;
+      color: var(--ink);
+      font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+    }
+    .page {
+      position: relative;
+      width: var(--page-w);
+      height: var(--page-h);
+      overflow: hidden;
+      background: var(--paper);
+      box-shadow: 0 30px 58px rgba(17,16,13,0.26);
+      isolation: isolate;
+    }
+    .page:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(rgba(42,23,17,0.12) 0.55px, transparent 0.8px) 0 0 / 5px 5px,
+        linear-gradient(90deg, transparent 0 49.92%, rgba(42,23,17,0.08) 49.92% 50.08%, transparent 50.08%),
+        linear-gradient(180deg, rgba(255,255,255,0.52), transparent 38%, rgba(42,23,17,0.05));
+      mix-blend-mode: multiply;
+      opacity: 0.52;
+    }
+    .trim {
+      position: absolute;
+      inset: 34px;
+      z-index: 5;
+      pointer-events: none;
+      border: 1.5px solid var(--rule);
+    }
+    .sheet {
+      position: absolute;
+      inset: 48px 48px 44px;
+      z-index: 1;
+      display: grid;
+      grid-template-rows: 78px 396px 1fr 28px;
+      gap: 18px;
+    }
+    .folio {
+      display: grid;
+      grid-template-columns: 178px 1fr 178px;
+      align-items: center;
+      padding-bottom: 12px;
+      border-bottom: 4px double var(--espresso);
+    }
+    .logo {
+      width: 154px;
+      height: auto;
+      display: block;
+    }
+    .section-mark {
+      justify-self: center;
+      display: grid;
+      justify-items: center;
+      gap: 5px;
+      text-align: center;
+    }
+    .section-mark strong {
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 25px;
+      line-height: 0.9;
+      text-transform: uppercase;
+    }
+    .section-mark span {
+      display: block;
+      padding: 5px 10px 4px;
+      background: var(--yellow);
+      font-size: 10px;
+      font-weight: 900;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    .page-meta {
+      justify-self: end;
+      text-align: right;
+      font-size: 10px;
+      font-weight: 900;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 18px;
+      min-height: 0;
+    }
+    .photo-card {
+      position: relative;
+      min-height: 0;
+      overflow: hidden;
+      background: var(--espresso);
+      color: var(--paper);
+      border: 2px solid var(--espresso);
+    }
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: 54% 45%;
+      filter: contrast(1.08) saturate(0.88) brightness(0.84);
+    }
+    .photo-card:after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(5,9,6,0.05), rgba(5,9,6,0.76)),
+        radial-gradient(circle at 58% 44%, transparent 0 34%, rgba(0,0,0,0.52) 100%);
+      pointer-events: none;
+    }
+    .caption {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      bottom: 13px;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 10px;
+      align-items: end;
+      font-size: 10px;
+      font-weight: 850;
+      line-height: 1.14;
+      text-transform: uppercase;
+    }
+    .caption b {
+      display: block;
+      padding: 6px 7px 5px;
+      background: var(--yellow);
+      color: var(--espresso);
+      line-height: 1;
+    }
+    .route-line {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .route-line path {
+      fill: none;
+      stroke: var(--yellow);
+      stroke-width: 6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .route-line circle {
+      fill: var(--red);
+      stroke: var(--yellow);
+      stroke-width: 3;
+    }
+    .headline-box {
+      position: relative;
+      min-height: 0;
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      padding: 4px 0 0;
+      border-top: 10px solid var(--espresso);
+      overflow: hidden;
+    }
+    .headline-box .label {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      color: var(--red);
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 103px;
+      line-height: 0.84;
+      text-transform: uppercase;
+    }
+    .dek {
+      max-width: 450px;
+      margin: 16px 0 0;
+      padding-top: 14px;
+      border-top: 2px solid var(--espresso);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .headline-note {
+      align-self: end;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .headline-note div {
+      min-height: 70px;
+      padding: 11px 11px 10px;
+      border: 1.5px solid var(--espresso);
+      background: var(--paper-2);
+    }
+    .headline-note div:nth-child(2) {
+      background: var(--blue);
+    }
+    .headline-note b {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 10px;
+      font-weight: 900;
+      line-height: 1;
+      text-transform: uppercase;
+      color: var(--red);
+    }
+    .headline-note p {
+      margin: 0;
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.14;
+    }
+    .story-grid {
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 1.23fr 0.77fr;
+      gap: 18px;
+    }
+    .article {
+      min-height: 0;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      border-top: 2px solid var(--espresso);
+      padding-top: 12px;
+    }
+    .byline {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 10px;
+      font-weight: 900;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    .byline:before,
+    .byline:after {
+      content: "";
+      height: 1px;
+      background: var(--espresso);
+    }
+    .article-copy {
+      column-count: 3;
+      column-gap: 18px;
+      column-rule: 1px solid rgba(42,23,17,0.32);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 12.6px;
+      font-weight: 650;
+      line-height: 1.34;
+    }
+    .article-copy p {
+      margin: 0 0 9px;
+    }
+    .article-copy p:first-child:first-letter {
+      float: left;
+      margin: 2px 7px 0 0;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 62px;
+      line-height: 0.78;
+      color: var(--red);
+    }
+    .continue {
+      display: inline-block;
+      margin-top: 2px;
+      padding: 5px 7px 4px;
+      background: var(--yellow);
+      font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+      font-size: 9px;
+      font-weight: 900;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    .sidebars {
+      min-height: 0;
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      gap: 12px;
+    }
+    .pull {
+      padding: 12px;
+      background: var(--espresso);
+      color: var(--paper);
+    }
+    .pull b {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--yellow);
+      font-size: 10px;
+      font-weight: 900;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    .pull p {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.08;
+    }
+    .dossier {
+      border: 2px solid var(--espresso);
+      background: var(--blue);
+    }
+    .dossier h2 {
+      margin: 0;
+      padding: 9px 11px 8px;
+      border-bottom: 2px solid var(--espresso);
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 29px;
+      line-height: 0.9;
+      text-transform: uppercase;
+    }
+    .facts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .facts div {
+      min-height: 68px;
+      padding: 9px;
+      border-right: 1.5px solid var(--espresso);
+      border-bottom: 1.5px solid var(--espresso);
+    }
+    .facts div:nth-child(2n) { border-right: 0; }
+    .facts div:nth-last-child(-n+2) { border-bottom: 0; }
+    .facts b {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--red);
+      font-size: 10px;
+      font-weight: 900;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    .facts p {
+      margin: 0;
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.15;
+    }
+    .timeline {
+      border-top: 2px solid var(--espresso);
+      padding-top: 10px;
+    }
+    .timeline h2 {
+      margin: 0 0 9px;
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 30px;
+      line-height: 0.9;
+      text-transform: uppercase;
+    }
+    .timeline ol {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 5px;
+    }
+    .timeline li {
+      display: grid;
+      grid-template-columns: 31px 1fr;
+      gap: 8px;
+      align-items: start;
+      padding-bottom: 5px;
+      border-bottom: 1px solid rgba(42,23,17,0.52);
+      font-size: 10.4px;
+      font-weight: 800;
+      line-height: 1.16;
+    }
+    .timeline li:last-child { border-bottom: 0; }
+    .timeline span {
+      display: grid;
+      place-items: center;
+      width: 27px;
+      height: 27px;
+      background: var(--yellow);
+      border: 1.5px solid var(--espresso);
+      font-family: Impact, "Arial Black", sans-serif;
+      font-size: 15px;
+      line-height: 1;
+    }
+    .footer {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 14px;
+      align-items: center;
+      color: var(--espresso);
+    }
+    .footer:before,
+    .footer:after {
+      content: "";
+      height: 1px;
+      background: var(--espresso);
+    }
+    .footer b {
+      font-size: 10px;
+      font-weight: 900;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    @media print {
+      body { display: block; padding: 0; background: white; }
+      .page {
+        width: 13.07in;
+        height: 18.69in;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page" aria-label="Between Sundays issue 001 page three cover story">
+    <div class="trim"></div>
+    <section class="sheet">
+      <header class="folio">
+        <img class="logo" src="assets/between-sundays-logo-official-espresso.png" alt="Between Sundays" />
+        <div class="section-mark">
+          <strong>Cover Story</strong>
+          <span>I Am With You / Feature Report</span>
+        </div>
+        <div class="page-meta">Page 03<br />Issue 001<br />Genesis 28:10-22</div>
+      </header>
+
+      <section class="hero">
+        <figure class="photo-card">
+          <img src="assets/cover-forest-lost-with-you.png" alt="" />
+          <svg class="route-line" viewBox="0 0 360 396" aria-hidden="true">
+            <path d="M207 7 C180 50 210 81 176 119 C140 159 171 205 119 241 C76 271 105 318 64 371" />
+            <circle cx="207" cy="7" r="10" />
+          </svg>
+          <figcaption class="caption"><b>Field Image</b><span>A path, a night, an unnamed place. The issue begins where certainty runs out.</span></figcaption>
+        </figure>
+
+        <article class="headline-box">
+          <div class="label"><span>Special report</span><span>By Between Sundays Staff</span></div>
+          <div>
+            <h1>Lost Is Not Alone</h1>
+            <p class="dek">Genesis 28 begins with a traveler, a road, and a place easy to miss.</p>
+          </div>
+          <div class="headline-note">
+            <div><b>The scene</b><p>A traveler sleeps outside, using a stone for a pillow.</p></div>
+            <div><b>The line</b><p>Jacob wakes with a sentence he did not expect: surely.</p></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="story-grid">
+        <article class="article">
+          <div class="byline"><span>Report / Ordinary Places Desk</span><span>Continues page 04</span></div>
+          <div class="article-copy">
+            <p>Jacob leaves home with a story already behind him. He is not introduced to us as a polished spiritual hero on a retreat. He is moving because staying has become complicated. The road ahead is uncertain. The home behind him is wounded. Night comes before resolution does.</p>
+            <p>That is where Genesis 28 places the first sentence we are carrying through this issue: "I am with you." It arrives on the road, before Jacob has a settled address or a cleaned-up ending.</p>
+            <p>He stops in a place because the sun has gone down. The text does not describe a famous city or a carefully prepared room. It gives us a location ordinary enough to miss, then slows down long enough for a dream.</p>
+            <p>For readers who know what it is to live between decisions, between apologies, between jobs, between addresses, between Sunday morning certainty and Tuesday afternoon fatigue, that detail is worth noticing.</p>
+            <p>The dream is famous: a ladder or stairway, angels moving between heaven and earth, the Lord standing near, the old promise spoken again in a new place. The image is huge. The setting is not.</p>
+            <p>Jacob wakes up and names what he missed while he was asleep: "Surely the Lord is in this place, and I was not aware of it." The passage gives the reader the discovery before it gives a neat explanation.</p>
+            <p>Between Sundays begins here because the newspaper itself is meant to show up in ordinary places. A table. A seat. A lobby. A bag. A room where someone did not come looking for a sermon and found a story instead.</p>
+            <p>So this first issue stays close to the question in the passage: what places have we been moving through too quickly to notice?</p>
+            <span class="continue">Continued on page 04</span>
+          </div>
+        </article>
+
+        <aside class="sidebars">
+          <blockquote class="pull">
+            <b>Recognition</b>
+            <p>"Surely the Lord is in this place, and I was not aware of it."</p>
+          </blockquote>
+
+          <section class="dossier">
+            <h2>Bethel Dossier</h2>
+            <div class="facts">
+              <div><b>Passage</b><p>Genesis 28:10-22, printed in full in The Reading.</p></div>
+              <div><b>Name Note</b><p>Bethel is traditionally read as house of God.</p></div>
+              <div><b>Object</b><p>A stone becomes a marker, not a souvenir.</p></div>
+              <div><b>Key Line</b><p>"I am with you" becomes the issue's repeated phrase.</p></div>
+            </div>
+          </section>
+
+          <section class="timeline">
+            <h2>What Happens</h2>
+            <ol>
+              <li><span>1</span><p>Jacob leaves Beersheba and travels toward Haran.</p></li>
+              <li><span>2</span><p>Night falls. He stops at an unnamed place.</p></li>
+              <li><span>3</span><p>He dreams of heaven opened over the road.</p></li>
+              <li><span>4</span><p>The promise is spoken while Jacob is still on the road.</p></li>
+              <li><span>5</span><p>Jacob wakes and marks the place.</p></li>
+            </ol>
+          </section>
+        </aside>
+      </section>
+
+      <footer class="footer"><b>Between Sundays / Issue 001 / Page 03</b></footer>
+    </section>
+  </main>
+</body>
+</html>

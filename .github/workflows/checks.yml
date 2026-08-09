@@ -1,0 +1,29 @@
+name: page-gates
+on:
+  push: { branches: [main] }
+  pull_request:
+jobs:
+  source-rule:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: The Source Rule — every page cites at least one verse
+        run: |
+          python3 tools/check_sourced.py public/press public/lab public/labb
+  no-deletions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - name: Additive-only guard
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            RANGE="origin/${{ github.base_ref }}...HEAD"; git fetch origin ${{ github.base_ref }} --depth=50
+          else
+            [ "${{ github.event.before }}" = "0000000000000000000000000000000000000000" ] && exit 0
+            RANGE="${{ github.event.before }}..${{ github.sha }}"
+          fi
+          DEL=$(git diff --diff-filter=D --name-only $RANGE -- 'public/**' 'brain/**' 'data/**' || true)
+          if [ -n "$DEL" ]; then
+            echo "::error::Deletions are not allowed in the workspace:"; echo "$DEL"; exit 1
+          fi

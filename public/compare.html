@@ -1,0 +1,406 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Between Sundays 001 — Score Every Design</title>
+<style>
+:root{--bg:#111013;--ink:#f3efe6;--dim:#8d8677;--line:#2c2930;--acc:#eff36a;--hot:#f15139;
+ --a:#5BC8F5;--l:#C58CF7;--ok:#7ED47E;--warn:#F5A623}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);
+ font-family:"Avenir Next","Gill Sans",system-ui,-apple-system,sans-serif}
+header{position:sticky;top:0;z-index:40;background:rgba(17,16,19,.97);backdrop-filter:blur(10px);
+ border-bottom:1px solid var(--line);padding:14px 22px 0}
+.hrow{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+h1{margin:0;font-size:20px;font-weight:800;letter-spacing:-.02em}
+h1 em{font-style:normal;color:var(--dim);font-weight:600}
+.who{display:flex;border:1px solid var(--line);border-radius:99px;overflow:hidden}
+.who button{background:none;border:0;color:var(--dim);font:800 11px/1 inherit;letter-spacing:.14em;
+ text-transform:uppercase;padding:9px 16px;cursor:pointer}
+.who button.on[data-me=adrian]{background:var(--a);color:#0b1216}
+.who button.on[data-me=lacey]{background:var(--l);color:#150b16}
+.back{margin-left:auto;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+ text-decoration:none;border:1px solid var(--line);padding:7px 11px;border-radius:5px;color:var(--dim)}
+.bar{display:flex;align-items:center;gap:6px;padding:12px 0 0;flex-wrap:wrap}
+.pb{font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;
+ border:1px solid var(--line);background:none;color:var(--dim);padding:6px 11px;border-radius:99px}
+.pb:hover{color:var(--ink);border-color:var(--dim)}
+.pb.sel{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.chip{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;
+ padding:5px 10px;border-radius:99px;border:1px solid var(--line);color:var(--dim)}
+.chip.ok{background:var(--ok);color:#081708;border-color:var(--ok)}
+.chip.warn{background:var(--warn);color:#1a1200;border-color:var(--warn)}
+.chip.n{background:var(--hot);color:#fff;border-color:var(--hot)}
+.chip.half{background:#3a3742;color:var(--ink);border-color:#4a4652}
+.jump{display:flex;gap:5px;overflow-x:auto;padding:11px 0;scrollbar-width:thin}
+.jump a{flex:0 0 auto;font-size:11px;font-weight:800;text-decoration:none;color:var(--dim);
+ border:1px solid var(--line);border-radius:4px;padding:5px 8px;min-width:32px;text-align:center}
+.jump a.d{border-color:var(--ok);color:var(--ok)} .jump a.g{border-color:var(--warn);color:var(--warn)}
+.jump a.x{border-color:var(--hot);color:var(--hot)}
+.jump a:hover{color:var(--bg);background:var(--acc);border-color:var(--acc)}
+.wrap{padding:8px 0 90px}
+section{padding:20px 0 6px;border-bottom:1px solid var(--line)}
+section.done{box-shadow:inset 5px 0 0 var(--ok)}
+section.gap{box-shadow:inset 5px 0 0 var(--warn)}
+section.needs{box-shadow:inset 5px 0 0 var(--hot);background:linear-gradient(90deg,rgba(241,81,57,.08),transparent 38%)}
+section.hide{display:none}
+.shead{display:flex;align-items:center;gap:12px;padding:0 22px 12px;flex-wrap:wrap}
+.pnum{font-size:28px;font-weight:800;letter-spacing:-.02em;line-height:1;min-width:48px}
+.pname{font-size:14.5px;font-weight:600;color:var(--dim)}
+.rowst{display:flex;align-items:center;gap:6px;margin-left:auto;flex-wrap:wrap}
+.rail{display:flex;gap:14px;overflow-x:auto;padding:2px 22px 16px;scroll-snap-type:x proximity;align-items:flex-start}
+.rail::-webkit-scrollbar{height:9px}
+.rail::-webkit-scrollbar-thumb{background:#333039;border-radius:9px}
+.card{position:relative;flex:0 0 auto;width:214px;scroll-snap-align:start;border:0;background:none;
+ padding:0;text-align:left;font:inherit;color:inherit}
+.card .shot{display:block;width:100%;border:0;background:none;padding:0;cursor:zoom-in}
+.card img{width:100%;height:307px;object-fit:cover;object-position:top center;display:block;
+ background:#26232a;border:1px solid var(--line);border-radius:3px}
+.card .shot:hover img{border-color:var(--acc)}
+.card.top{width:296px}
+.card.top img{height:425px;border:4px solid var(--ok)}
+.card.dim{width:158px;opacity:.5}
+.card.dim img{height:227px}
+.card.dim:hover{opacity:1}
+.vbadge{position:absolute;top:8px;left:8px;display:flex;gap:4px;pointer-events:none}
+.vb{font-size:10px;font-weight:800;letter-spacing:.06em;padding:4px 7px;border-radius:3px}
+.vb.a{background:var(--a);color:#0b1216} .vb.l{background:var(--l);color:#150b16}
+.vb.avg{background:var(--ok);color:#081708}
+.tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:7px}
+.tag{font-size:9.5px;font-weight:800;letter-spacing:.1em;padding:3px 6px;border-radius:3px;
+ background:#26232a;color:var(--dim)}
+.tag.newest{background:var(--acc);color:#111013}
+.tag.isnew{background:var(--hot);color:#fff}
+.scale{display:grid;grid-template-columns:repeat(10,1fr);gap:2px;margin-top:7px}
+.scale button{font-size:9.5px;font-weight:800;padding:6px 0;border:1px solid var(--line);
+ background:#1c1a20;color:var(--dim);border-radius:3px;cursor:pointer;line-height:1}
+.scale button:hover{border-color:var(--acc);color:var(--acc)}
+.scale button.mine[data-me=adrian]{background:var(--a);border-color:var(--a);color:#0b1216}
+.scale button.mine[data-me=lacey]{background:var(--l);border-color:var(--l);color:#150b16}
+.scale button.theirs{box-shadow:inset 0 -3px 0 var(--l)}
+.scale button.theirsA{box-shadow:inset 0 -3px 0 var(--a)}
+.slab{font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#5c5750;
+ margin-top:6px;display:flex;justify-content:space-between}
+.notes{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 22px 18px}
+.nb{border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.nb h4{margin:0;font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+ padding:7px 10px;color:#0b1216}
+.nb.a h4{background:var(--a)} .nb.l h4{background:var(--l);color:#150b16}
+.nb textarea{width:100%;min-height:64px;background:#17161a;color:var(--ink);border:0;resize:vertical;
+ padding:10px;font:13px/1.5 inherit}
+.nb textarea:disabled{color:#9b948a;background:#141317}
+.nb textarea::placeholder{color:#5c5750}
+#ov{position:fixed;inset:0;z-index:95;background:rgba(9,8,11,.97);display:none;padding:36px 22px;overflow:auto}
+#ov.on{display:block}
+#ov h3{max-width:860px;margin:0 auto 10px;font-size:14px;letter-spacing:.14em;text-transform:uppercase}
+#ov textarea{width:100%;max-width:860px;height:62vh;margin:0 auto;display:block;background:#1a181d;
+ color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:16px;
+ font:12.5px/1.55 ui-monospace,SFMono-Regular,monospace}
+#ov .row{max-width:860px;margin:12px auto 0;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+#lb{position:fixed;inset:0;z-index:90;background:rgba(9,8,11,.97);display:none;
+ flex-direction:column;align-items:center;justify-content:center;padding:20px}
+#lb.on{display:flex}
+#lb img{max-width:min(96vw,1040px);max-height:74vh;object-fit:contain;border-radius:3px;
+ box-shadow:0 30px 90px rgba(0,0,0,.7)}
+#lbbar{display:flex;align-items:center;gap:12px;margin-top:12px;flex-wrap:wrap;justify-content:center}
+#lbbar b{font-size:14px;font-weight:800}
+#lbbar span{font-size:11.5px;color:var(--dim);font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+#lbbar a{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+ text-decoration:none;border:1px solid var(--line);padding:7px 11px;border-radius:5px;color:var(--dim)}
+#lbscale{display:flex;gap:4px;margin-top:10px}
+#lbscale button{width:42px;padding:9px 0;font-size:12px;font-weight:800;border:1px solid var(--line);
+ background:#1c1a20;color:var(--dim);border-radius:4px;cursor:pointer}
+#lbscale button.mine[data-me=adrian]{background:var(--a);border-color:var(--a);color:#0b1216}
+#lbscale button.mine[data-me=lacey]{background:var(--l);border-color:var(--l);color:#150b16}
+.nav{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.08);
+ border:0;color:var(--ink);font-size:28px;width:50px;height:74px;cursor:pointer;border-radius:6px}
+.nav:hover{background:var(--acc);color:#111013}
+#prev{left:16px}#next{right:16px}
+#close{position:fixed;top:18px;right:20px;background:none;border:0;color:var(--dim);
+ font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;cursor:pointer}
+.hint{text-align:center;color:var(--dim);font-size:11.5px;padding:12px 22px 0;line-height:1.7}
+.hint b{color:var(--ink)}
+@media(max-width:760px){.notes{grid-template-columns:1fr}}
+</style></head><body>
+
+<header>
+ <div class="hrow">
+  <h1>Between Sundays 001 — <em>score every design, 1&ndash;10</em></h1>
+  <span class="chip">Scoring as</span>
+  <div class="who"><button data-me="adrian">Adrian</button><button data-me="lacey">Lacey</button></div>
+  <a class="back" href="/">All versions</a>
+ </div>
+ <div class="bar">
+  <span class="chip ok" id="cDone">0 fully scored</span>
+  <span class="chip half" id="cHalf">0 half</span>
+  <span class="chip warn" id="cGap">0 big gap</span>
+  <span class="chip n" id="cNone">0 needs work</span>
+  <span class="chip" id="cUnd">0 unscored</span>
+  <span class="chip" id="cAvg">&mdash;</span>
+  <button class="pb sel" data-f="all">All</button>
+  <button class="pb" data-f="unscored">Unscored</button>
+  <button class="pb" data-f="half">Half</button>
+  <button class="pb" data-f="gap">Big gap</button>
+  <button class="pb" data-f="needs">Needs work</button>
+  <button class="pb" data-f="weak">Weak (top &lt; 7)</button>
+  <button class="pb" id="bRep">Report</button>
+  <button class="pb" id="bShare">Share my scores</button>
+  <button class="pb" id="bMerge">Paste theirs</button>
+ </div>
+ <nav class="jump" id="jump"></nav>
+</header>
+
+<p class="hint">Pick <b>who you are</b>, then score every design <b>1&ndash;10</b> &mdash; 10 is best.
+Highest average moves to the front and goes large.<br/>
+The bar under a number shows the other person&rsquo;s score &middot; <b>Nothing yet</b> flags a page where none of
+these are good enough &middot; notes under every row.</p>
+
+<div class="wrap" id="wrap"></div>
+
+<div id="ov"><h3 id="ovh"></h3><textarea id="ovt"></textarea>
+ <div class="row"><button class="pb" id="ovOk">Apply</button><button class="pb" id="ovX">Close</button></div></div>
+
+<div id="lb">
+ <button id="close">Close ✕</button>
+ <button class="nav" id="prev">‹</button>
+ <img id="lbimg" alt=""/>
+ <button class="nav" id="next">›</button>
+ <div id="lbscale"></div>
+ <div id="lbbar"><b id="lbt"></b><span id="lbv"></span>
+  <a id="lbl" href="" target="_blank">Open live page ↗</a></div>
+</div>
+
+<script>
+const DATA=[{"n": 1, "name": "Cover", "variants": [{"src": "/manus/BetweenSundays-Issue001-Page01-Review.jpg", "vers": ["MANUS"], "page": ""}, {"src": "/press/BetweenSundays-Issue001-Page01-Review.jpg", "vers": ["PRESS"], "page": "/press/between-sundays-page-01.html"}, {"src": "/v1/BetweenSundays-Issue001-Page01-Review.jpg", "vers": ["V1", "V2"], "page": "/v2/between-sundays-page-01.html"}, {"src": "/v2/BetweenSundays-Issue001-Cover-Review.jpg", "vers": ["V2"], "page": "/v2/between-sundays-page-01.html"}, {"src": "/v1/BetweenSundays-Issue001-Cover-Review.jpg", "vers": ["V1", "V3"], "page": "/v3/between-sundays-page-01.html"}, {"src": "/v4/BetweenSundays-Issue001-Cover-Review.jpg", "vers": ["V4"], "page": "/v4/between-sundays-page-01.html"}, {"src": "/v4/BetweenSundays-Issue001-Page01-Review.jpg", "vers": ["V4"], "page": "/v4/between-sundays-page-01.html"}]}, {"n": 2, "name": "Contents / Field guide", "variants": [{"src": "/manus/BetweenSundays-Issue001-Page02-Review.jpg", "vers": ["MANUS"], "page": ""}, {"src": "/press/BetweenSundays-Issue001-Page02-Review.jpg", "vers": ["PRESS"], "page": "/press/between-sundays-page-02.html"}, {"src": "/v1/BetweenSundays-Issue001-Page02-Review.jpg", "vers": ["V1", "V2", "V3", "V4"], "page": "/v4/between-sundays-page-02.html"}]}, {"n": 3, "name": "Lost Is Not Alone", "variants": [{"src": "/codex/BetweenSundays-Issue001-Page03-Review.png", "vers": ["CODEX"], "page": ""}, {"src": "/lab/BetweenSundays-Issue001-Page03-Review.jpg", "vers": ["NEW"], "page": "/lab/between-sundays-page-03.html"}, {"src": "/manus/BetweenSundays-Issue001-Page03-Review.jpg", "vers": ["MANUS"], "page": ""}, {"src": "/press/BetweenSundays-Issue001-Page03-Review.jpg", "vers": ["PRESS"], "page": "/press/between-sundays-page-03.html"}, {"src": "/v1/BetweenSundays-Issue001-Page03-Review.jpg", "vers": ["V1", "V2", "V3", "V4"], "page": "/v4/between-sundays-page-03.html"}, {"src": "/v5/BetweenSundays-Issue001-Page03-V2.png", "vers": ["V5"], "page": "/v5/between-sundays-page-03-v2.html"}]}, {"n": 4, "name": "The Geography of Nowhere", "variants": [{"src": "/codex/BetweenSundays-Issue001-Page04-Review.png", "vers": ["CODEX"], "page": ""}, {"src": "/lab/BetweenSundays-Issue001-Page04-Review.jpg", "vers": ["NEW"], "page": "/lab/between-sundays-page-04.html"}, {"src": "/manus/BetweenSundays-Issue001-Page04-Review.jpg", "vers": ["MANUS"], "page": ""}, {"src": "/v1/BetweenSundays-Issue001-Page04-Review.jpg", "vers": ["V1", "V2", "V3"], "page": "/v3/between-sundays-page-04.html"}, {"src": "/v4/BetweenSundays-Issue001-Page04-Review.jpg", "vers": ["V4"], "page": "/v4/between-sundays-page-04.html"}, {"src": "/v5/BetweenSundays-Issue001-Page04-V2.png", "vers": ["V5"], "page": "/v5/between-sundays-page-04-v2.html"}]}, {"n": 5, "name": "Wayfarer / Baggage claim", "variants": [{"src": "/lab/BetweenSundays-Issue001-Page05-Review.jpg", "vers": ["NEW"], "page": "/lab/between-sundays-page-05.html"}, {"src": "/manus/BetweenSundays-Issue001-Page05-Review.jpg", "vers": ["MANUS"], "page": ""}, {"src": "/v1/BetweenSundays-Issue001-Page05-Review.jpg", "vers": ["V1", "V2", "V3", "V4"], "page": "/v4/between-sundays-page-05.html"}, {"src": "/v5/BetweenSundays-Issue001-Page05-V2.png", "vers": ["V5"], "page": "/v5/between-sundays-page-05-v2.html"}]}, {"n": 6, "name": "Gate to The Reading", "variants": [{"src": "/lab/BetweenSundays-Issue001-Page06-Review.jpg", "vers": ["NEW"], "page": "/lab/between-sundays-page-06.html"}, {"src": "/manus/BetweenSundays-Issue001-Page06-Review.jpg", "vers": ["MANUS"], "page": ""}, {"src": "/press/BetweenSundays-Issue001-Page06-Review.jpg", "vers": ["PRESS"], "page": "/press/between-sundays-page-06.html"}, {"src": "/v1/BetweenSundays-Issue001-Page06-Review.jpg", "vers": ["V1", "V2"], "page": "/v2/between-sundays-page-06.html"}, {"src": "/v3/BetweenSundays-Issue001-Page06-Review.jpg", "vers": ["V3", "V4"], "page": "/v4/between-sundays-page-06.html"}]}, {"n": 7, "name": "The Reading 01", "variants": [{"src": "/manus/BetweenSundays-Issue001-Page07-Review.jpg", "vers": ["MANUS"], "page": ""}, {"src": "/press/BetweenSundays-Issue001-Page07-Review.jpg", "vers": ["PRESS"], "page": "/press/between-sundays-page-07.html"}, {"src": "/v1/BetweenSundays-Issue001-Page07-Review.jpg", "vers": ["V1"], "page": "/v1/between-sundays-page-07.html"}, {"src": "/v2/BetweenSundays-Issue001-Page07-Review.jpg", "vers": ["V2"], "page": "/v2/between-sundays-page-07.html"}, {"src": "/v3/BetweenSundays-Issue001-Page07-Review.jpg", "vers": ["V3", "V4"], "page": "/v4/between-sundays-page-07.html"}]}, {"n": 8, "name": "The Reading 02", "variants": [{"src": "/manus/BetweenSundays-Issue001-Page08-Review.jpg", "vers": ["MANUS"], "page": ""}, {"src": "/v1/BetweenSundays-Issue001-Page08-Review.jpg", "vers": ["V1"], "page": "/v1/between-sundays-page-08.html"}, {"src": "/v2/BetweenSundays-Issue001-Page08-Review.jpg", "vers": ["V2"], "page": "/v2/between-sundays-page-08.html"}, {"src": "/v3/BetweenSundays-Issue001-Page08-Review.jpg", "vers": ["V3", "V4"], "page": "/v4/between-sundays-page-08.html"}]}, {"n": 9, "name": "The Reading 03", "variants": [{"src": "/manus/BetweenSundays-Issue001-Page09-Review.jpg", "vers": ["MANUS"], "page": ""}, {"src": "/v1/BetweenSundays-Issue001-Page09-Review.jpg", "vers": ["V1"], "page": "/v1/between-sundays-page-09.html"}, {"src": "/v2/BetweenSundays-Issue001-Page09-Review.jpg", "vers": ["V2"], "page": "/v2/between-sundays-page-09.html"}, {"src": "/v3/BetweenSundays-Issue001-Page09-Review.jpg", "vers": ["V3", "V4"], "page": "/v4/between-sundays-page-09.html"}]}, {"n": 10, "name": "The Reading 04", "variants": [{"src": "/manus/BetweenSundays-Issue001-Page10-Review.jpg", "vers": ["MANUS"], "page": ""}, {"src": "/v1/BetweenSundays-Issue001-Page10-Review.jpg", "vers": ["V1"], "page": "/v1/between-sundays-page-10.html"}, {"src": "/v2/BetweenSundays-Issue001-Page10-Review.jpg", "vers": ["V2"], "page": "/v2/between-sundays-page-10.html"}, {"src": "/v3/BetweenSundays-Issue001-Page10-Review.jpg", "vers": ["V3", "V4"], "page": "/v4/between-sundays-page-10.html"}]}, {"n": 11, "name": "The Reading 05", "variants": [{"src": "/manus/BetweenSundays-Issue001-Page11-Review.jpg", "vers": ["MANUS"], "page": ""}, {"src": "/v1/BetweenSundays-Issue001-Page11-Review.jpg", "vers": ["V1"], "page": "/v1/between-sundays-page-11.html"}, {"src": "/v2/BetweenSundays-Issue001-Page11-Review.jpg", "vers": ["V2"], "page": "/v2/between-sundays-page-11.html"}, {"src": "/v3/BetweenSundays-Issue001-Page11-Review.jpg", "vers": ["V3", "V4"], "page": "/v4/between-sundays-page-11.html"}]}, {"n": 12, "name": "The Reading 06", "variants": [{"src": "/manus/BetweenSundays-Issue001-Page12-Review.jpg", "vers": ["MANUS"], "page": ""}, {"src": "/v1/BetweenSundays-Issue001-Page12-Review.jpg", "vers": ["V1"], "page": "/v1/between-sundays-page-12.html"}, {"src": "/v2/BetweenSundays-Issue001-Page12-Review.jpg", "vers": ["V2"], "page": "/v2/between-sundays-page-12.html"}, {"src": "/v3/BetweenSundays-Issue001-Page12-Review.jpg", "vers": ["V3", "V4"], "page": "/v4/between-sundays-page-12.html"}]}, {"n": 13, "name": "The Reading 07", "variants": [{"src": "/manus/BetweenSundays-Issue001-Page13-Review.jpg", "vers": ["MANUS"], "page": ""}, {"src": "/press/BetweenSundays-Issue001-Page13-Review.jpg", "vers": ["PRESS"], "page": "/press/between-sundays-page-13.html"}, {"src": "/v1/BetweenSundays-Issue001-Page13-Review.jpg", "vers": ["V1"], "page": "/v1/between-sundays-page-13.html"}, {"src": "/v2/BetweenSundays-Issue001-Page13-Review.jpg", "vers": ["V2"], "page": "/v2/between-sundays-page-13.html"}, {"src": "/v3/BetweenSundays-Issue001-Page13-Review.jpg", "vers": ["V3", "V4"], "page": "/v4/between-sundays-page-13.html"}]}, {"n": 14, "name": "After the Reading", "variants": [{"src": "/lab/BetweenSundays-Issue001-Page14-Review.jpg", "vers": ["NEW"], "page": "/lab/between-sundays-page-14.html"}, {"src": "/manus/BetweenSundays-Issue001-Page14-Review.jpg", "vers": ["MANUS"], "page": ""}, {"src": "/press/BetweenSundays-Issue001-Page14-Review.jpg", "vers": ["PRESS"], "page": "/press/between-sundays-page-14.html"}, {"src": "/v1/BetweenSundays-Issue001-Page14-Review.jpg", "vers": ["V1", "V2", "V3"], "page": "/v3/between-sundays-page-14.html"}, {"src": "/v4/BetweenSundays-Issue001-Page14-Review.jpg", "vers": ["V4"], "page": "/v4/between-sundays-page-14.html"}]}, {"n": 15, "name": "The Place You Almost Walked Past", "variants": [{"src": "/lab/BetweenSundays-Issue001-Page15-Review.jpg", "vers": ["NEW"], "page": "/lab/between-sundays-page-15.html"}, {"src": "/manus/BetweenSundays-Issue001-Page15-Review.jpg", "vers": ["MANUS"], "page": ""}, {"src": "/v1/BetweenSundays-Issue001-Page15-Review.jpg", "vers": ["V1", "V2", "V3"], "page": "/v3/between-sundays-page-15.html"}, {"src": "/v4/BetweenSundays-Issue001-Page15-Review.jpg", "vers": ["V4"], "page": "/v4/between-sundays-page-15.html"}, {"src": "/v5/BetweenSundays-Issue001-Page15-V2.png", "vers": ["V5"], "page": "/v5/between-sundays-page-15-v2.html"}]}, {"n": 16, "name": "Luz Local / Classifieds", "variants": [{"src": "/lab/BetweenSundays-Issue001-Page16-Review.jpg", "vers": ["NEW"], "page": "/lab/between-sundays-page-16.html"}, {"src": "/manus/BetweenSundays-Issue001-Page16-Review.jpg", "vers": ["MANUS"], "page": ""}, {"src": "/v1/BetweenSundays-Issue001-Page16-Review.jpg", "vers": ["V1", "V2", "V3", "V4"], "page": "/v4/between-sundays-page-16.html"}]}, {"n": 17, "name": "Opinion \u2014 In Defense of Ordinary Places", "variants": [{"src": "/manus/BetweenSundays-Issue001-Page17-Review.jpg", "vers": ["MANUS"], "page": ""}, {"src": "/press/BetweenSundays-Issue001-Page17-Review.jpg", "vers": ["PRESS"], "page": "/press/between-sundays-page-17.html"}, {"src": "/v1/BetweenSundays-Issue001-Page17-Review.jpg", "vers": ["V1", "V2", "V3", "V4"], "page": "/v4/between-sundays-page-17.html"}]}, {"n": 18, "name": "Daily Bread Bakery", "variants": [{"src": "/manus/BetweenSundays-Issue001-Page18-Review.jpg", "vers": ["MANUS"], "page": ""}, {"src": "/v1/BetweenSundays-Issue001-Page18-Review.jpg", "vers": ["V1", "V2", "V3", "V4"], "page": "/v4/between-sundays-page-18.html"}, {"src": "/v5/BetweenSundays-Issue001-Page18-V2.png", "vers": ["V5"], "page": "/v5/between-sundays-page-18-v2.html"}]}, {"n": 19, "name": "Sports \u2014 Away Team Advantage", "variants": [{"src": "/lab/BetweenSundays-Issue001-Page19-Review.jpg", "vers": ["NEW"], "page": "/lab/between-sundays-page-19.html"}, {"src": "/manus/BetweenSundays-Issue001-Page19-Review.jpg", "vers": ["MANUS"], "page": ""}, {"src": "/press/BetweenSundays-Issue001-Page19-Review.jpg", "vers": ["PRESS"], "page": "/press/between-sundays-page-19.html"}, {"src": "/v1/BetweenSundays-Issue001-Page19-Review.jpg", "vers": ["V1", "V2"], "page": "/v2/between-sundays-page-19.html"}, {"src": "/v3/BetweenSundays-Issue001-Page19-Review.jpg", "vers": ["V3"], "page": "/v3/between-sundays-page-19.html"}, {"src": "/v4/BetweenSundays-Issue001-Page19-Review.jpg", "vers": ["V4"], "page": "/v4/between-sundays-page-19.html"}, {"src": "/v5/BetweenSundays-Issue001-Page19-V2.png", "vers": ["V5"], "page": "/v5/between-sundays-page-19-v2.html"}]}, {"n": 20, "name": "Weather \u2014 Forecast for the Middle", "variants": [{"src": "/lab/BetweenSundays-Issue001-Page20-Review.jpg", "vers": ["NEW"], "page": "/lab/between-sundays-page-20.html"}, {"src": "/manus/BetweenSundays-Issue001-Page20-Review.jpg", "vers": ["MANUS"], "page": ""}, {"src": "/v2/BetweenSundays-Issue001-Page20-Review.jpg", "vers": ["V2"], "page": "/v2/between-sundays-page-20.html"}, {"src": "/v1/BetweenSundays-Issue001-Page20-Review.jpg", "vers": ["V1", "V3", "V4"], "page": "/v4/between-sundays-page-20.html"}, {"src": "/v5/BetweenSundays-Issue001-Page20-V2.png", "vers": ["V5"], "page": "/v5/between-sundays-page-20-v2.html"}]}, {"n": 21, "name": "Movies \u2014 Films for the Road", "variants": [{"src": "/lab/BetweenSundays-Issue001-Page21-Review.jpg", "vers": ["NEW"], "page": "/lab/between-sundays-page-21.html"}, {"src": "/manus/BetweenSundays-Issue001-Page21-Review.jpg", "vers": ["MANUS"], "page": ""}, {"src": "/press/BetweenSundays-Issue001-Page21-Review.jpg", "vers": ["PRESS"], "page": "/press/between-sundays-page-21.html"}, {"src": "/v1/BetweenSundays-Issue001-Page21-Review.jpg", "vers": ["V1", "V2", "V3", "V4"], "page": "/v4/between-sundays-page-21.html"}, {"src": "/v5/BetweenSundays-Issue001-Page21-V2.png", "vers": ["V5"], "page": "/v5/between-sundays-page-21-v2.html"}]}, {"n": 22, "name": "Obituaries for Things Not Dead", "variants": [{"src": "/lab/BetweenSundays-Issue001-Page22-Review.jpg", "vers": ["NEW"], "page": "/lab/between-sundays-page-22.html"}, {"src": "/labb/BetweenSundays-Issue001-Page22-Review.jpg", "vers": ["NEW B"], "page": "/labb/between-sundays-page-22.html"}, {"src": "/manus/BetweenSundays-Issue001-Page22-Review.jpg", "vers": ["MANUS"], "page": ""}, {"src": "/press/BetweenSundays-Issue001-Page22-Review.jpg", "vers": ["PRESS"], "page": "/press/between-sundays-page-22.html"}, {"src": "/v1/BetweenSundays-Issue001-Page22-Review.jpg", "vers": ["V1", "V2", "V3"], "page": "/v3/between-sundays-page-22.html"}, {"src": "/v4/BetweenSundays-Issue001-Page22-Review.jpg", "vers": ["V4"], "page": "/v4/between-sundays-page-22.html"}, {"src": "/v5/BetweenSundays-Issue001-Page22-V2.png", "vers": ["V5"], "page": "/v5/between-sundays-page-22-v2.html"}]}, {"n": 23, "name": "The Spine 01", "variants": [{"src": "/manus/BetweenSundays-Issue001-Page23-Review.jpg", "vers": ["MANUS"], "page": ""}, {"src": "/v1/BetweenSundays-Issue001-Page23-Review.jpg", "vers": ["V1"], "page": "/v1/between-sundays-page-23.html"}, {"src": "/v2/BetweenSundays-Issue001-Page23-Review.jpg", "vers": ["V2", "V3", "V4"], "page": "/v4/between-sundays-page-23.html"}, {"src": "/v5/BetweenSundays-Issue001-Page23-V2.png", "vers": ["V5"], "page": "/v5/between-sundays-page-23-v2.html"}]}, {"n": 24, "name": "The Spine 02", "variants": [{"src": "/manus/BetweenSundays-Issue001-Page24-Review.jpg", "vers": ["MANUS"], "page": ""}, {"src": "/v1/BetweenSundays-Issue001-Page24-Review.jpg", "vers": ["V1", "V2"], "page": "/v2/between-sundays-page-24.html"}, {"src": "/v3/BetweenSundays-Issue001-Page24-Review.jpg", "vers": ["V3", "V4"], "page": "/v4/between-sundays-page-24.html"}, {"src": "/v5/BetweenSundays-Issue001-Page24-V2.png", "vers": ["V5"], "page": "/v5/between-sundays-page-24-v2.html"}]}, {"n": 25, "name": "The Spine 03", "variants": [{"src": "/manus/BetweenSundays-Issue001-Page25-Review.jpg", "vers": ["MANUS"], "page": ""}, {"src": "/v1/BetweenSundays-Issue001-Page25-Review.jpg", "vers": ["V1", "V2"], "page": "/v2/between-sundays-page-25.html"}, {"src": "/v3/BetweenSundays-Issue001-Page25-Review.jpg", "vers": ["V3", "V4"], "page": "/v4/between-sundays-page-25.html"}, {"src": "/v5/BetweenSundays-Issue001-Page25-V2.png", "vers": ["V5"], "page": "/v5/between-sundays-page-25-v2.html"}]}, {"n": 26, "name": "The Spine 04", "variants": [{"src": "/v1/BetweenSundays-Issue001-Page26-Review.jpg", "vers": ["V1"], "page": "/v1/between-sundays-page-26.html"}, {"src": "/v2/BetweenSundays-Issue001-Page26-Review.jpg", "vers": ["V2", "V3", "V4"], "page": "/v4/between-sundays-page-26.html"}, {"src": "/v5/BetweenSundays-Issue001-Page26-V2.png", "vers": ["V5"], "page": "/v5/between-sundays-page-26-v2.html"}]}, {"n": 27, "name": "If the Middle Is Missing, Good", "variants": [{"src": "/lab/BetweenSundays-Issue001-Page27-Review.jpg", "vers": ["NEW"], "page": "/lab/between-sundays-page-27.html"}, {"src": "/v1/BetweenSundays-Issue001-Page27-Review.jpg", "vers": ["V1", "V2", "V3", "V4"], "page": "/v4/between-sundays-page-27.html"}]}, {"n": 28, "name": "Letters", "variants": [{"src": "/press/BetweenSundays-Issue001-Page28-Review.jpg", "vers": ["PRESS"], "page": "/press/between-sundays-page-28.html"}, {"src": "/v1/BetweenSundays-Issue001-Page28-Review.jpg", "vers": ["V1", "V2", "V3"], "page": "/v3/between-sundays-page-28.html"}, {"src": "/v4/BetweenSundays-Issue001-Page28-Review.jpg", "vers": ["V4"], "page": "/v4/between-sundays-page-28.html"}]}, {"n": 29, "name": "Fiction \u2014 The Man Who Carried a Chair", "variants": [{"src": "/press/BetweenSundays-Issue001-Page29-Review.jpg", "vers": ["PRESS"], "page": "/press/between-sundays-page-29.html"}, {"src": "/v1/BetweenSundays-Issue001-Page29-Review.jpg", "vers": ["V1", "V2", "V3", "V4"], "page": "/v4/between-sundays-page-29.html"}]}, {"n": 30, "name": "Comics \u2014 Stones in the City", "variants": [{"src": "/lab/BetweenSundays-Issue001-Page30-Review.jpg", "vers": ["NEW"], "page": "/lab/between-sundays-page-30.html"}, {"src": "/labb/BetweenSundays-Issue001-Page30-Review.jpg", "vers": ["NEW B"], "page": "/labb/between-sundays-page-30.html"}, {"src": "/v1/BetweenSundays-Issue001-Page30-Review.jpg", "vers": ["V1", "V2", "V3", "V4"], "page": "/v4/between-sundays-page-30.html"}]}, {"n": 31, "name": "Games \u2014 Crossword", "variants": [{"src": "/lab/BetweenSundays-Issue001-Page31-Review.jpg", "vers": ["NEW"], "page": "/lab/between-sundays-page-31.html"}, {"src": "/v1/BetweenSundays-Issue001-Page31-Review.jpg", "vers": ["V1", "V2", "V3", "V4"], "page": "/v4/between-sundays-page-31.html"}, {"src": "/v5/BetweenSundays-Issue001-Page31-V2.png", "vers": ["V5"], "page": "/v5/between-sundays-page-31-v2.html"}]}, {"n": 32, "name": "Games \u2014 Find the Certain Place", "variants": [{"src": "/lab/BetweenSundays-Issue001-Page32-Review.jpg", "vers": ["NEW"], "page": "/lab/between-sundays-page-32.html"}, {"src": "/v1/BetweenSundays-Issue001-Page32-Review.jpg", "vers": ["V1", "V2", "V3", "V4"], "page": "/v4/between-sundays-page-32.html"}, {"src": "/v5/BetweenSundays-Issue001-Page32-V2.png", "vers": ["V5"], "page": "/v5/between-sundays-page-32-v2.html"}]}, {"n": 33, "name": "Now Hiring, Lost & Found", "variants": [{"src": "/lab/BetweenSundays-Issue001-Page33-Review.jpg", "vers": ["NEW"], "page": "/lab/between-sundays-page-33.html"}, {"src": "/press/BetweenSundays-Issue001-Page33-Review.jpg", "vers": ["PRESS"], "page": "/press/between-sundays-page-33.html"}, {"src": "/v1/BetweenSundays-Issue001-Page33-Review.jpg", "vers": ["V1", "V2", "V3", "V4"], "page": "/v4/between-sundays-page-33.html"}]}, {"n": 34, "name": "The Bethel Directory", "variants": [{"src": "/lab/BetweenSundays-Issue001-Page34-Review.jpg", "vers": ["NEW"], "page": "/lab/between-sundays-page-34.html"}, {"src": "/press/BetweenSundays-Issue001-Page34-Review.jpg", "vers": ["PRESS"], "page": "/press/between-sundays-page-34.html"}, {"src": "/v1/BetweenSundays-Issue001-Page34-Review.jpg", "vers": ["V1", "V2", "V3", "V4"], "page": "/v4/between-sundays-page-34.html"}]}, {"n": 35, "name": "No Dead Zones", "variants": [{"src": "/lab/BetweenSundays-Issue001-Page35-Review.jpg", "vers": ["NEW"], "page": "/lab/between-sundays-page-35.html"}, {"src": "/press/BetweenSundays-Issue001-Page35-Review.jpg", "vers": ["PRESS"], "page": "/press/between-sundays-page-35.html"}, {"src": "/v1/BetweenSundays-Issue001-Page35-Review.jpg", "vers": ["V1", "V2", "V3", "V4"], "page": "/v4/between-sundays-page-35.html"}]}, {"n": 36, "name": "Wherever Coverage", "variants": [{"src": "/press/BetweenSundays-Issue001-Page36-Review.jpg", "vers": ["PRESS"], "page": "/press/between-sundays-page-36.html"}, {"src": "/v1/BetweenSundays-Issue001-Page36-Review.jpg", "vers": ["V1"], "page": "/v1/between-sundays-page-36.html"}, {"src": "/v2/BetweenSundays-Issue001-Page36-Review.jpg", "vers": ["V2"], "page": "/v2/between-sundays-page-36.html"}, {"src": "/v3/BetweenSundays-Issue001-Page36-Review.jpg", "vers": ["V3", "V4"], "page": "/v4/between-sundays-page-36.html"}]}, {"n": 37, "name": "Food \u2014 What Bread Does", "variants": [{"src": "/press/BetweenSundays-Issue001-Page37-Review.jpg", "vers": ["PRESS"], "page": "/press/between-sundays-page-37.html"}, {"src": "/v1/BetweenSundays-Issue001-Page37-Review.jpg", "vers": ["V1", "V2"], "page": "/v2/between-sundays-page-37.html"}, {"src": "/v3/BetweenSundays-Issue001-Page37-Review.jpg", "vers": ["V3", "V4"], "page": "/v4/between-sundays-page-37.html"}, {"src": "/v5/BetweenSundays-Issue001-Page37-V2.png", "vers": ["V5"], "page": "/v5/between-sundays-page-37-v2.html"}]}, {"n": 38, "name": "Home \u2014 A Stone for the Table", "variants": [{"src": "/lab/BetweenSundays-Issue001-Page38-Review.jpg", "vers": ["NEW"], "page": "/lab/between-sundays-page-38.html"}, {"src": "/v1/BetweenSundays-Issue001-Page38-Review.jpg", "vers": ["V1", "V2", "V3"], "page": "/v3/between-sundays-page-38.html"}, {"src": "/v4/BetweenSundays-Issue001-Page38-Review.jpg", "vers": ["V4"], "page": "/v4/between-sundays-page-38.html"}, {"src": "/v5/BetweenSundays-Issue001-Page38-V2.png", "vers": ["V5"], "page": "/v5/between-sundays-page-38-v2.html"}]}, {"n": 39, "name": "Poster \u2014 Surely God Is in This Place", "variants": [{"src": "/lab/BetweenSundays-Issue001-Page39-Review.jpg", "vers": ["NEW"], "page": "/lab/between-sundays-page-39.html"}, {"src": "/v1/BetweenSundays-Issue001-Page39-Review.jpg", "vers": ["V1"], "page": "/v1/between-sundays-page-39.html"}, {"src": "/v2/BetweenSundays-Issue001-Page39-Review.jpg", "vers": ["V2", "V3", "V4"], "page": "/v4/between-sundays-page-39.html"}, {"src": "/v5/BetweenSundays-Issue001-Page39-V2.png", "vers": ["V5"], "page": "/v5/between-sundays-page-39-v2.html"}]}, {"n": 40, "name": "Music \u2014 Songs for Walking Home", "variants": [{"src": "/codex/BetweenSundays-Issue001-Page40-Review.png", "vers": ["CODEX"], "page": ""}, {"src": "/press/BetweenSundays-Issue001-Page40-Review.jpg", "vers": ["PRESS"], "page": "/press/between-sundays-page-40.html"}, {"src": "/v1/BetweenSundays-Issue001-Page40-Review.jpg", "vers": ["V1", "V2"], "page": "/v2/between-sundays-page-40.html"}, {"src": "/v3/BetweenSundays-Issue001-Page40-Review.jpg", "vers": ["V3", "V4"], "page": "/v4/between-sundays-page-40.html"}]}, {"n": 41, "name": "Younger Readers \u2014 Ask One Good Question", "variants": [{"src": "/codex/BetweenSundays-Issue001-Page41-Review.png", "vers": ["CODEX"], "page": ""}, {"src": "/lab/BetweenSundays-Issue001-Page41-Review.jpg", "vers": ["NEW"], "page": "/lab/between-sundays-page-41.html"}, {"src": "/press/BetweenSundays-Issue001-Page41-Review.jpg", "vers": ["PRESS"], "page": "/press/between-sundays-page-41.html"}, {"src": "/v1/BetweenSundays-Issue001-Page41-Review.jpg", "vers": ["V1", "V2", "V3", "V4"], "page": "/v4/between-sundays-page-41.html"}]}, {"n": 42, "name": "Work \u2014 Help Wanted", "variants": [{"src": "/lab/BetweenSundays-Issue001-Page42-Review.jpg", "vers": ["NEW"], "page": "/lab/between-sundays-page-42.html"}, {"src": "/press/BetweenSundays-Issue001-Page42-Review.jpg", "vers": ["PRESS"], "page": "/press/between-sundays-page-42.html"}, {"src": "/v1/BetweenSundays-Issue001-Page42-Review.jpg", "vers": ["V1", "V2", "V3", "V4"], "page": "/v4/between-sundays-page-42.html"}]}, {"n": 43, "name": "Stay With What Is True", "variants": [{"src": "/lab/BetweenSundays-Issue001-Page43-Review.jpg", "vers": ["NEW"], "page": "/lab/between-sundays-page-43.html"}, {"src": "/labb/BetweenSundays-Issue001-Page43-Review.jpg", "vers": ["NEW B"], "page": "/labb/between-sundays-page-43.html"}, {"src": "/v1/BetweenSundays-Issue001-Page43-Review.jpg", "vers": ["V1", "V2"], "page": "/v2/between-sundays-page-43.html"}, {"src": "/v3/BetweenSundays-Issue001-Page43-Review.jpg", "vers": ["V3"], "page": "/v3/between-sundays-page-43.html"}, {"src": "/v4/BetweenSundays-Issue001-Page43-Review.jpg", "vers": ["V4"], "page": "/v4/between-sundays-page-43.html"}, {"src": "/v5/BetweenSundays-Issue001-Page43-V2.png", "vers": ["V5"], "page": "/v5/between-sundays-page-43-v2.html"}]}, {"n": 44, "name": "Photo Essay \u2014 Rooms That Held the Moment", "variants": [{"src": "/press/BetweenSundays-Issue001-Page44-Review.jpg", "vers": ["PRESS"], "page": "/press/between-sundays-page-44.html"}, {"src": "/v2/BetweenSundays-Issue001-Page44-Review.jpg", "vers": ["V2"], "page": "/v2/between-sundays-page-44.html"}, {"src": "/v1/BetweenSundays-Issue001-Page44-Review.jpg", "vers": ["V1", "V3"], "page": "/v3/between-sundays-page-44.html"}, {"src": "/v4/BetweenSundays-Issue001-Page44-Review.jpg", "vers": ["V4"], "page": "/v4/between-sundays-page-44.html"}, {"src": "/v5/BetweenSundays-Issue001-Page44-V2.png", "vers": ["V5"], "page": "/v5/between-sundays-page-44-v2.html"}]}, {"n": 45, "name": "Mark the Place", "variants": [{"src": "/lab/BetweenSundays-Issue001-Page45-Review.jpg", "vers": ["NEW"], "page": "/lab/between-sundays-page-45.html"}, {"src": "/labb/BetweenSundays-Issue001-Page45-Review.jpg", "vers": ["NEW B"], "page": "/labb/between-sundays-page-45.html"}, {"src": "/v1/BetweenSundays-Issue001-Page45-Review.jpg", "vers": ["V1", "V2", "V3", "V4"], "page": "/v4/between-sundays-page-45.html"}]}, {"n": 46, "name": "Where This Paper Went", "variants": [{"src": "/lab/BetweenSundays-Issue001-Page46-Review.jpg", "vers": ["NEW"], "page": "/lab/between-sundays-page-46.html"}, {"src": "/v1/BetweenSundays-Issue001-Page46-Review.jpg", "vers": ["V1", "V2", "V3", "V4"], "page": "/v4/between-sundays-page-46.html"}]}, {"n": 47, "name": "Next Issue \u2014 Table in the Wilderness", "variants": [{"src": "/lab/BetweenSundays-Issue001-Page47-Review.jpg", "vers": ["NEW"], "page": "/lab/between-sundays-page-47.html"}, {"src": "/v1/BetweenSundays-Issue001-Page47-Review.jpg", "vers": ["V1", "V2"], "page": "/v2/between-sundays-page-47.html"}, {"src": "/v3/BetweenSundays-Issue001-Page47-Review.jpg", "vers": ["V3"], "page": "/v3/between-sundays-page-47.html"}, {"src": "/v4/BetweenSundays-Issue001-Page47-Review.jpg", "vers": ["V4"], "page": "/v4/between-sundays-page-47.html"}]}, {"n": 48, "name": "Back Cover", "variants": [{"src": "/press/BetweenSundays-Issue001-Page48-Review.jpg", "vers": ["PRESS"], "page": "/press/between-sundays-page-48.html"}, {"src": "/v1/BetweenSundays-Issue001-Page48-Review.jpg", "vers": ["V1", "V2", "V3"], "page": "/v3/between-sundays-page-48.html"}, {"src": "/v4/BetweenSundays-Issue001-Page48-Review.jpg", "vers": ["V4"], "page": "/v4/between-sundays-page-48.html"}]}], WHO={adrian:'Adrian',lacey:'Lacey'}, KEY='bts001-scores-v3';
+let S={adrian:{sc:{},notes:{},none:{}}, lacey:{sc:{},notes:{},none:{}}};
+try{const r=JSON.parse(localStorage.getItem(KEY)); if(r&&r.adrian) S=r;}catch(e){}
+['adrian','lacey'].forEach(w=>{S[w].sc=S[w].sc||{};S[w].notes=S[w].notes||{};S[w].none=S[w].none||{};});
+let ME=localStorage.getItem(KEY+'-me')||'adrian', FILTER='all';
+const save=()=>localStorage.setItem(KEY,JSON.stringify(S));
+const OTHER=()=>ME==='adrian'?'lacey':'adrian';
+const sc=(w,n,i)=>{const p=S[w].sc[n]; return p?p[i]:undefined;};
+
+function rowInfo(p){
+  const n=p.n, out={rank:[],hasA:false,hasL:false,gap:0,top:null};
+  p.variants.forEach((v,i)=>{
+    const a=sc('adrian',n,i), l=sc('lacey',n,i);
+    if(a!==undefined) out.hasA=true;
+    if(l!==undefined) out.hasL=true;
+    const vals=[a,l].filter(x=>x!==undefined);
+    const avg=vals.length?vals.reduce((s,x)=>s+x,0)/vals.length:null;
+    if(a!==undefined&&l!==undefined) out.gap=Math.max(out.gap,Math.abs(a-l));
+    out.rank.push({i,a,l,avg});
+  });
+  const scored=out.rank.filter(r=>r.avg!==null);
+  if(scored.length){ out.top=scored.slice().sort((x,y)=>y.avg-x.avg)[0]; }
+  out.none = !!(S.adrian.none[n] && S.lacey.none[n]);
+  out.anyNone = !!(S.adrian.none[n] || S.lacey.none[n]);
+  out.state = out.none ? 'needs'
+    : (out.hasA&&out.hasL) ? (out.gap>=3?'gap':'done')
+    : (out.hasA||out.hasL||out.anyNone) ? 'half' : 'unscored';
+  return out;
+}
+function setScore(n,i,v){
+  const b=S[ME].sc; b[n]=b[n]||{};
+  if(b[n][i]===v) delete b[n][i]; else b[n][i]=v;
+  if(!Object.keys(b[n]).length) delete b[n];
+  save(); paint();
+}
+function toggleNone(n){
+  if(S[ME].none[n]) delete S[ME].none[n]; else S[ME].none[n]=1;
+  save(); paint();
+}
+
+const wrap=document.getElementById('wrap'), jump=document.getElementById('jump');
+DATA.forEach(p=>{
+  const s=document.createElement('section'); s.id='p'+p.n;
+  s.innerHTML=`<div class="shead">
+      <span class="pnum">${String(p.n).padStart(2,'0')}</span>
+      <span class="pname">${p.name}</span>
+      <span class="rowst">
+        <span class="chip">${p.variants.length} version${p.variants.length>1?'s':''}</span>
+        <span class="chip" data-st="${p.n}"></span>
+        <button class="pb" data-none="${p.n}">Nothing yet</button>
+      </span></div><div class="rail"></div>
+    <div class="notes">
+      <div class="nb a"><h4>Adrian — notes &amp; ideas</h4>
+        <textarea data-note="adrian" data-n="${p.n}" placeholder="What would make this stronger? New concepts?"></textarea></div>
+      <div class="nb l"><h4>Lacey — notes &amp; ideas</h4>
+        <textarea data-note="lacey" data-n="${p.n}" placeholder="What would make this stronger? New concepts?"></textarea></div>
+    </div>`;
+  const rail=s.querySelector('.rail');
+  p.variants.forEach((v,i)=>{
+    const d=document.createElement('div'); d.className='card'; d.dataset.i=i;
+    const newest=v.vers[v.vers.length-1];
+    d.innerHTML=`<button class="shot"><img loading="lazy" src="${v.src}" alt="Page ${p.n} ${v.vers.join(' ')}">
+        <span class="vbadge"></span></button>
+      <div class="tags">${v.vers.map(x=>`<span class="tag${x==='NEW'?' isnew':(x===newest?' newest':'')}">${x}</span>`).join('')}</div>
+      <div class="scale">${[1,2,3,4,5,6,7,8,9,10].map(k=>
+        `<button data-s="${k}" data-p="${p.n}" data-v="${i}">${k}</button>`).join('')}</div>
+      <div class="slab"><span>weak</span><span>10 = best</span></div>`;
+    d.querySelector('.shot').onclick=()=>openLB(p.n,i);
+    rail.appendChild(d);
+  });
+  wrap.appendChild(s);
+  const a=document.createElement('a'); a.href='#p'+p.n;
+  a.textContent=String(p.n).padStart(2,'0'); a.dataset.j=p.n; jump.appendChild(a);
+});
+
+function paint(){
+  document.querySelectorAll('.who button').forEach(b=>b.classList.toggle('on',b.dataset.me===ME));
+  const c={done:0,half:0,gap:0,needs:0,unscored:0}; let tsum=0,tn=0;
+  DATA.forEach(p=>{
+    const R=rowInfo(p); c[R.state]++;
+    if(R.top){ tsum+=R.top.avg; tn++; }
+    const sec=document.getElementById('p'+p.n), rail=sec.querySelector('.rail');
+    const chip=sec.querySelector('[data-st]'), nb=sec.querySelector('[data-none]');
+    sec.className = R.state==='done'?'done':(R.state==='gap'?'gap':(R.state==='needs'?'needs':''));
+    [...rail.children].forEach(cd=>{
+      const i=+cd.dataset.i, r=R.rank[i];
+      cd.classList.remove('top','dim');
+      cd.style.order = r.avg===null ? 0 : -Math.round(r.avg*10);
+      if(R.top && R.top.i===i && R.top.avg!==null) cd.classList.add('top');
+      else if(R.top) cd.classList.add('dim');
+      const bd=cd.querySelector('.vbadge'); bd.innerHTML='';
+      if(r.a!==undefined) bd.innerHTML+=`<span class="vb a">A ${r.a}</span>`;
+      if(r.l!==undefined) bd.innerHTML+=`<span class="vb l">L ${r.l}</span>`;
+      if(r.a!==undefined&&r.l!==undefined) bd.innerHTML+=`<span class="vb avg">${r.avg.toFixed(1)}</span>`;
+      const mine=sc(ME,p.n,i), theirs=sc(OTHER(),p.n,i);
+      cd.querySelectorAll('.scale button').forEach(b=>{
+        const k=+b.dataset.s;
+        b.classList.toggle('mine',k===mine); b.dataset.me=ME;
+        b.classList.toggle('theirs', k===theirs && OTHER()==='lacey');
+        b.classList.toggle('theirsA', k===theirs && OTHER()==='adrian');
+      });
+    });
+    if(R.state==='needs'){ chip.className='chip n'; chip.textContent='Both: needs work'; }
+    else if(R.top){ const nm=p.variants[R.top.i].vers.join(' ');
+      chip.className = R.state==='gap' ? 'chip warn' : (R.state==='done' ? 'chip ok' : 'chip half');
+      chip.textContent = 'Top: '+nm+' '+R.top.avg.toFixed(1)
+        + (R.state==='gap' ? ' · gap '+R.gap : (R.state==='half' ? ' · one voter' : ''));
+    } else if(R.anyNone){ chip.className='chip half';
+      chip.textContent=(S.adrian.none[p.n]?'Adrian':'Lacey')+': nothing yet';
+    } else { chip.className='chip'; chip.textContent='Not scored'; }
+    nb.classList.toggle('sel', !!S[ME].none[p.n]);
+    nb.textContent = S[ME].none[p.n] ? 'Nothing yet ✓' : 'Nothing yet';
+    const weak = R.top && R.top.avg < 7;
+    const show = FILTER==='all' || FILTER===R.state || (FILTER==='weak' && (weak||R.state==='needs'));
+    sec.classList.toggle('hide', !show);
+    const ja=jump.querySelector(`[data-j="${p.n}"]`);
+    ja.className = R.state==='done'?'d':(R.state==='gap'?'g':(R.state==='needs'?'x':''));
+  });
+  document.querySelectorAll('[data-note]').forEach(t=>{
+    const w=t.dataset.note;
+    if(document.activeElement!==t) t.value=S[w].notes[t.dataset.n]||'';
+    t.disabled = w!==ME;
+  });
+  cDone.textContent=c.done+' fully scored'; cHalf.textContent=c.half+' half';
+  cGap.textContent=c.gap+' big gap'; cNone.textContent=c.needs+' needs work';
+  cUnd.textContent=c.unscored+' unscored';
+  cAvg.textContent = tn ? 'issue avg '+(tsum/tn).toFixed(1) : '—';
+}
+
+document.addEventListener('click',e=>{
+  const w=e.target.closest('.who [data-me]');
+  if(w){ ME=w.dataset.me; localStorage.setItem(KEY+'-me',ME); paint(); return; }
+  const b=e.target.closest('[data-s]');
+  if(b){ setScore(+b.dataset.p,+b.dataset.v,+b.dataset.s); return; }
+  const nn=e.target.closest('[data-none]'); if(nn){ toggleNone(+nn.dataset.none); return; }
+  const f=e.target.closest('[data-f]');
+  if(f){ FILTER=f.dataset.f;
+    document.querySelectorAll('[data-f]').forEach(x=>x.classList.toggle('sel',x===f)); paint(); }
+});
+document.addEventListener('input',e=>{
+  const t=e.target.closest('[data-note]'); if(!t||t.disabled) return;
+  S[t.dataset.note].notes[t.dataset.n]=t.value; save();
+});
+
+/* report / share / merge */
+const ov=document.getElementById('ov'),ovt=document.getElementById('ovt'),ovh=document.getElementById('ovh');
+let mode='rep';
+function showOv(m,title,text,ro){mode=m;ovh.textContent=title;ovt.value=text;ovt.readOnly=!!ro;
+  ov.classList.add('on');ovt.select();}
+document.getElementById('ovX').onclick=()=>ov.classList.remove('on');
+bRep.onclick=()=>{
+  const G={needs:[],gap:[],half:[],done:[],unscored:[]};
+  DATA.forEach(p=>{
+    const R=rowInfo(p); let L='p'+String(p.n).padStart(2,'0')+' — '+p.name;
+    if(R.top) L+='   TOP: '+p.variants[R.top.i].vers.join(' ')+' '+R.top.avg.toFixed(1);
+    R.rank.slice().sort((x,y)=>(y.avg??-1)-(x.avg??-1)).forEach(r=>{
+      if(r.a===undefined&&r.l===undefined) return;
+      L+='\n      '+p.variants[r.i].vers.join(' ').padEnd(10)
+        +' A '+(r.a??'-')+'   L '+(r.l??'-')+'   avg '+(r.avg!==null?r.avg.toFixed(1):'-');
+    });
+    if(S.adrian.none[p.n]) L+='\n      ADRIAN: nothing here is good enough yet';
+    if(S.lacey.none[p.n])  L+='\n      LACEY:  nothing here is good enough yet';
+    if(S.adrian.notes[p.n]) L+='\n      ADRIAN NOTES: '+S.adrian.notes[p.n].replace(/\n/g,' ');
+    if(S.lacey.notes[p.n])  L+='\n      LACEY NOTES:  '+S.lacey.notes[p.n].replace(/\n/g,' ');
+    G[R.state].push(L);
+  });
+  const sec=(t,k)=>'\n\n'+t+' ('+G[k].length+')\n'+(G[k].map(x=>'  '+x).join('\n\n')||'  —');
+  showOv('rep','Report — copy and send to me',
+    'BETWEEN SUNDAYS 001 — SCORES\n'+new Date().toString()+
+    sec('NEEDS WORK — both said nothing yet','needs')+
+    sec('BIG GAP — you disagree by 3 or more','gap')+
+    sec('HALF — only one of you scored','half')+
+    sec('FULLY SCORED','done')+
+    sec('UNSCORED','unscored'),true);
+  try{navigator.clipboard.writeText(ovt.value);}catch(e){}
+};
+bShare.onclick=()=>{
+  const url=location.origin+location.pathname+'#v='+
+    btoa(unescape(encodeURIComponent(JSON.stringify({who:ME,d:S[ME]}))));
+  showOv('share','Send this link to '+WHO[OTHER()],url,true);
+  try{navigator.clipboard.writeText(url);}catch(e){}
+};
+bMerge.onclick=()=>showOv('merge','Paste the link they sent you, then Apply','',false);
+document.getElementById('ovOk').onclick=()=>{
+  if(mode!=='merge'){ov.classList.remove('on');return;}
+  try{const m=ovt.value.match(/#v=([A-Za-z0-9+/=]+)/)||[null,ovt.value.trim()];
+    const o=JSON.parse(decodeURIComponent(escape(atob(m[1]))));
+    if(!o.who||!o.d) throw 0;
+    S[o.who]=o.d; ['sc','notes','none'].forEach(k=>S[o.who][k]=S[o.who][k]||{});
+    save();paint();ov.classList.remove('on');alert(WHO[o.who]+"'s scores and notes merged in.");
+  }catch(e){alert('That did not look like a share link.');}
+};
+(function(){const m=location.hash.match(/#v=(.+)$/); if(!m)return;
+  try{const o=JSON.parse(decodeURIComponent(escape(atob(m[1]))));
+    if(o.who&&o.d&&confirm('Merge in '+WHO[o.who]+"'s scores and notes?")){
+      S[o.who]=o.d;['sc','notes','none'].forEach(k=>S[o.who][k]=S[o.who][k]||{});
+      save();history.replaceState(null,'',location.pathname);}}catch(e){}})();
+
+/* lightbox */
+const lb=document.getElementById('lb'),img=document.getElementById('lbimg'),
+      t=document.getElementById('lbt'),vv=document.getElementById('lbv'),
+      lnk=document.getElementById('lbl'),lbs=document.getElementById('lbscale');
+let cp=0,ci=0;
+lbs.innerHTML=[1,2,3,4,5,6,7,8,9,10].map(k=>`<button data-k="${k}">${k}</button>`).join('');
+lbs.onclick=e=>{const b=e.target.closest('[data-k]'); if(!b)return;
+  setScore(DATA[cp].n,ci,+b.dataset.k); renderLB();};
+function openLB(pn,i){cp=DATA.findIndex(x=>x.n===pn);ci=i;renderLB();lb.classList.add('on');}
+function renderLB(){
+  const p=DATA[cp],v=p.variants[ci];
+  img.src=v.src; t.textContent=`Page ${String(p.n).padStart(2,'0')} — ${p.name}`;
+  const a=sc('adrian',p.n,ci), l=sc('lacey',p.n,ci);
+  vv.textContent=`${v.vers.join(' · ')} · ${ci+1}/${p.variants.length} · A ${a??'-'} · L ${l??'-'}`;
+  const mine=sc(ME,p.n,ci);
+  lbs.querySelectorAll('button').forEach(b=>{
+    b.classList.toggle('mine',+b.dataset.k===mine); b.dataset.me=ME;});
+  if(v.page){lnk.href=v.page;lnk.style.display='';}else{lnk.style.display='none';}
+}
+function step(d){const p=DATA[cp];ci=(ci+d+p.variants.length)%p.variants.length;renderLB();}
+document.getElementById('next').onclick=()=>step(1);
+document.getElementById('prev').onclick=()=>step(-1);
+document.getElementById('close').onclick=()=>lb.classList.remove('on');
+lb.onclick=e=>{if(e.target===lb)lb.classList.remove('on');};
+addEventListener('keydown',e=>{
+  if(!lb.classList.contains('on'))return;
+  if(e.key==='Escape')lb.classList.remove('on');
+  if(e.key==='ArrowRight')step(1);
+  if(e.key==='ArrowLeft')step(-1);
+  if(/^[1-9]$/.test(e.key)){setScore(DATA[cp].n,ci,+e.key);renderLB();}
+  if(e.key==='0'){setScore(DATA[cp].n,ci,10);renderLB();}
+  if(e.key==='n'||e.key==='N'){toggleNone(DATA[cp].n);}
+  if(e.key==='ArrowDown'){cp=(cp+1)%DATA.length;ci=0;renderLB();e.preventDefault();}
+  if(e.key==='ArrowUp'){cp=(cp-1+DATA.length)%DATA.length;ci=0;renderLB();e.preventDefault();}
+});
+paint();
+</script></body></html>
