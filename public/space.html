@@ -1,81 +1,54 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Space — Between Sundays</title>
+<title>Space — Between Sundays HQ</title>
 <link rel="stylesheet" href="/ws.css"/></head><body>
-<div class="wrap"><div id="body"></div></div>
+<div class="wrap"><div id="b"></div></div>
 <script src="/_nav.js"></script>
 <script>
-const KEYST="bts-agent-key";
-const S={
- growth:{title:"Growth",kicker:"The space",
-  sub:"How the paper finds the people who need it.",
-  lede:"Nothing here is decided yet. The room exists so the questions have somewhere to live.",
-  parts:[
-   {h:"Go-to-market",q:["Who gets Issue 001 first, and how does it physically reach them?",
-     "Churches, coffee shops, subscription, hand-to-hand — which one is the wedge?",
-     "What has to be true for someone to pick it up without knowing us?"]},
-   {h:"Platforms",q:["Where does an audience for a print paper actually get built?",
-     "What does the paper look like as a post without becoming a post?"]},
-   {h:"Personas",q:["Who is the reader who never liked reading? (That's the founder — start there.)",
-     "Who buys it for someone else?","Who hands it out in bulk?"]},
-   {h:"Messaging",q:["The one line that explains this to a stranger in six seconds.",
-     "What we say about faith to someone who is suspicious of church."]},
-   {h:"Creators & partners",q:["Who else makes something we'd be proud to sit next to?",
-     "What does a contributor get out of appearing in it?"]}]},
- logistics:{title:"Logistics",kicker:"The space",
-  sub:"What it takes to put paper in a hand.",
-  lede:"The paper is 332 × 475 mm, 48 pages. Everything past that is unanswered.",
-  parts:[
-   {h:"Print",q:["Which printer, which stock, which press — and what's the minimum run?",
-     "Colour throughout, or colour signatures only?","What's the lead time from final PDF to boxes?"]},
-   {h:"Packaging",q:["How does it ship without arriving creased?",
-     "Is there a wrap, a band, an insert? Does the removable Spine survive transit?"]},
-   {h:"Unit costs",q:["Cost per copy at 500 / 2,000 / 10,000.",
-     "Shipping per copy, and per box.","What does a returned or damaged copy cost us?"]},
-   {h:"Margin",q:["Price per copy that a reader wouldn't blink at.",
-     "The break-even run length.","Which costs fall away in Issue 002?"]}]},
- revenue:{title:"Revenue & Projections",kicker:"The space",
-  sub:"What we charge, who pays, what the next year looks like.",
-  lede:"No numbers have been set. When they are, they belong here and nowhere else.",
-  parts:[
-   {h:"Models",q:["Single copy, subscription, bulk/church orders, sponsorship — which combination?",
-     "Does anything digital ever get sold, or is digital purely the front door?"]},
-   {h:"Sponsorship",q:["The paper runs conceptual ads. Would a real sponsor break the voice?",
-     "What would we refuse money for? (Decide before someone offers.)"]},
-   {h:"Projections",q:["Twelve-month issue cadence and the copies behind each one.",
-     "Cash needed before Issue 001 prints.","The number that means this works."]}]},
- products:{title:"Future Products",kicker:"The space",
-  sub:"Everything after the paper.",
-  lede:"A parking lot with a roof. Ideas kept here instead of dying in a chat log — nothing here is committed to.",
-  parts:[
-   {h:"Extensions of the paper",q:["The Spine as its own object.",
-     "Issue archive / boxed set.","A children's or teen edition."]},
-   {h:"Beyond print",q:["What does Between Sundays make that isn't a paper?",
-     "Merch that isn't slogan-on-cotton."]},
-   {h:"Parked ideas",q:["Anything anyone thought of and didn't want to lose."]}]}};
-const id=new URLSearchParams(location.search).get("s")||"growth";
-const s=S[id]||S.growth;
-document.title=s.title+" — Between Sundays";
-mount(id,{kicker:s.kicker,title:s.title,sub:s.sub});
-const el=document.getElementById("body");
-el.innerHTML=`<div class="slug">${s.title}</div><p class="lede">${s.lede}</p>`+
- s.parts.map(p=>`<div class="slug">${p.h}</div>
-   <div class="blank"><div class="t">Open questions</div>
-     <ol class="qs">${p.q.map(q=>`<li>${q}</li>`).join("")}</ol></div>`).join("")+
- `<hr class="rule"/><div id="notes"></div>`;
-// Anything written to this space through the API appears below, newest last.
+const id=new URLSearchParams(location.search).get("s")||"";
+const r=ROOMS.find(x=>x.id===id);
+if(!r){location.href="/";}
+const pil=PILLARS.find(p=>p.id===r.p);
+mount(r.p,{kicker:pil.label,title:r.label,sub:r.purpose});
+document.getElementById("b").innerHTML=`
+ <div class="slug">${pil.label} · ${r.label}</div>
+ <div class="blank"><div class="t">This space has not been designed yet</div>
+  <p>${r.purpose}</p></div>
+ <div class="slug">Questions it should answer</div>
+ <ol class="qs">${r.q.map(q=>`<li>${q}</li>`).join("")}</ol>
+ <div class="slug">The record</div>
+ <table class="tb"><tbody>
+  <tr><th style="width:150px">Likely owner</th><td>${r.owner}</td></tr>
+  <tr><th>Possible inputs</th><td>${r.inputs}</td></tr>
+  <tr><th>Possible outputs</th><td>${r.outputs}</td></tr>
+  <tr><th>Status</th><td>Empty by choice — no invented numbers, no placeholder dashboard.</td></tr>
+ </tbody></table>
+ <div class="slug">Thoughts</div>
+ <div id="notes"></div>
+ <div id="lockslot"></div>
+ <div id="add" style="display:none;margin-top:14px">
+  <textarea id="txt" rows="5" placeholder="Add the first thought. It appears here immediately — no deploy."
+   style="width:100%;max-width:66ch;border:1px solid var(--rule);padding:10px;font:15px/1.55 var(--ser)"></textarea>
+  <div><button id="go" style="border:1px solid var(--ink);background:var(--ink);color:#fff;
+   padding:10px 20px;font-family:var(--san);font-size:11px;font-weight:800;letter-spacing:.12em;
+   text-transform:uppercase;cursor:pointer">Add thought</button></div>
+ </div>`;
+document.getElementById("lockslot").innerHTML=lockbar(); wireLock();
+const SPACEABLE=["growth","logistics","revenue","products"];
 (async()=>{
- const k=(localStorage.getItem(KEYST)||"").trim();
  const n=document.getElementById("notes");
- if(!k){n.innerHTML=`<p style="font-size:13.5px;color:var(--gray)">Notes in this space are private.
-   Open the <a href="/control-room.html">Control Room</a> and enter your key to read them.</p>`;return;}
- try{
-  const r=await fetch("/api/state?path="+encodeURIComponent(`spaces/${id}.md`),{headers:{"x-agent-key":k}});
-  const t=r.ok?(await r.text()).trim():"";
-  n.innerHTML=t?`<div class="slug">Notes</div><div>${t.replace(/</g,"&lt;")
-     .replace(/\n{2,}/g,"</p><p>").replace(/^/,"<p>")+"</p>"}</div>`
-   :`<p style="font-size:13.5px;color:var(--gray)">No notes yet. Any agent can write this space with
-     <code>POST /api/space {space:"${id}", text:"…"}</code> — it appears here without a deploy.</p>`;
- }catch{n.innerHTML="";}
+ if(!getKey()){n.innerHTML='<p style="color:var(--gray)">Locked.</p>';return;}
+ const key=SPACEABLE.includes(id)?id:null;
+ if(!key){n.innerHTML=`<p style="color:var(--gray)">This room doesn't take written notes yet —
+   drop thoughts in the <a href="/inbox.html">Inbox</a> tagged for ${r.label} and they'll be
+   sorted here.</p>`;return;}
+ const t=await state(`spaces/${key}.md`);
+ n.innerHTML=t?`<div>${("<p>"+t.replace(/</g,"&lt;").trim().replace(/\n{2,}/g,"</p><p>")+"</p>")}</div>`
+  :'<p style="color:var(--gray)">Nothing written here yet.</p>';
+ const add=document.getElementById("add"); add.style.display="block";
+ document.getElementById("go").onclick=async()=>{
+  const v=document.getElementById("txt").value.trim();
+  if(v.length<20){alert("Write a little more than that.");return;}
+  await api("space",{space:key,text:(t?t+"\n\n":"")+v}); location.reload();};
 })();
 </script></body></html>

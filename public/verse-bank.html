@@ -1,0 +1,38 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Verse Bank — Between Sundays HQ</title>
+<link rel="stylesheet" href="/ws.css"/></head><body>
+<div class="wrap">
+ <div class="slug">Every verse in the issue</div>
+ <p class="lede">Mined from the built pages themselves, not from a list somebody keeps by hand.
+ Search before you build a page — if a verse is already carrying another page, either lean on
+ that or pick a different door.</p>
+ <input class="srch" id="q" placeholder="Search a book, a reference, or a page number…"/>
+ <p id="count" style="font-size:13px;color:var(--gray)"></p>
+ <table class="tb"><thead><tr><th style="width:190px">Reference</th><th style="width:88px">Uses</th>
+  <th>Pages it appears on</th></tr></thead><tbody id="rows"></tbody></table>
+ <p style="font-size:13px;color:var(--gray);margin-top:18px">Regenerate with
+ <code>python3 tools/emit_verses.py</code> after any page changes. A reference appearing on many
+ pages isn't automatically wrong — Genesis 28 is the issue's spine — but a <em>supporting</em>
+ verse showing up three times usually means one of those pages hasn't found its own door yet.</p>
+</div>
+<script src="/_nav.js"></script>
+<script>
+mount("build",{kicker:"Build",title:"The Verse Bank",
+ sub:"Every scripture printed in Issue 001, and where it lands."});
+let V=[];
+function draw(f){
+ const q=(f||"").toLowerCase().trim();
+ const rows=V.filter(v=>!q||v.ref.toLowerCase().includes(q)||
+   v.pages.some(p=>String(p)===q||("page "+p)===q));
+ document.getElementById("count").textContent=
+  `${rows.length} of ${V.length} references · ${V.filter(v=>v.pages.length>1).length} appear on more than one page`;
+ document.getElementById("rows").innerHTML=rows.map(v=>
+  `<tr><td><strong>${v.ref}</strong></td>
+   <td><span class="pill ${v.pages.length>2?"no":""}">${v.pages.length}×</span></td>
+   <td>${v.pages.map(p=>`<a href="/room.html?p=${p}">${String(p).padStart(2,"0")}</a>`).join(" · ")}</td></tr>`
+ ).join("")||'<tr><td colspan="3" style="color:var(--gray)">Nothing matches.</td></tr>';
+}
+fetch("/data/verses.json").then(r=>r.json()).then(v=>{V=v;draw("");});
+document.getElementById("q").addEventListener("input",e=>draw(e.target.value));
+</script></body></html>

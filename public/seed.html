@@ -1,0 +1,61 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Seed — The Well</title>
+<link rel="stylesheet" href="/ws.css"/></head><body>
+<div class="wrap"><div id="b"></div></div>
+<script src="/_nav.js"></script>
+<script>
+const ID=(new URLSearchParams(location.search).get("id")||"").trim();
+const LENSES=[["STORY","What's the story here?"],["BLUE-SKY","How far could this go?"],
+ ["PARABLE","Modernize it — what's the parable?"],["VISUAL","What do you see?"],
+ ["SCRIPTURE","Where does the Bible say this? (reference required)"],
+ ["DESTINATION","Which issue, page or product could carry it?"],
+ ["QUESTION","What don't we know yet?"]];
+(async()=>{
+ const seeds=(await state("well.jsonl"))||[];
+ const s=seeds.filter(x=>x.id===ID).pop();
+ mount("build",{kicker:"The Well",title:s?s.word:"Seed",
+  sub:s?`Dropped by ${s.by} · ${(s.at||"").slice(0,10)}`:"Not found"});
+ const b=document.getElementById("b");
+ if(!getKey()){b.innerHTML=lockbar();wireLock();return;}
+ if(!s){b.innerHTML='<p style="color:var(--gray)">No seed with that id. <a href="/well.html">Back to the well</a>.</p>';return;}
+ const g=(await state(`well/${ID}.jsonl`))||[];
+ const verses=[...new Set(g.flatMap(x=>x.refs||[]))];
+ b.innerHTML=`
+  <div class="slug">The seed</div>
+  <div style="font-size:44px;font-weight:900;letter-spacing:-.035em;text-transform:uppercase;
+   line-height:1">${s.word}</div>
+  ${s.note?`<p class="lede" style="margin-top:12px">${s.note.replace(/</g,"&lt;")}</p>`:""}
+  <p style="font-size:13px;color:var(--gray)">
+   ${g.length} contribution${g.length===1?"":"s"} ·
+   ${verses.length?`sourced to ${verses.length} verse${verses.length===1?"":"s"}`
+    :'<strong style="color:var(--red)">no verse attached yet</strong>'}</p>
+  ${verses.length?`<div class="refs">${verses.map(v=>`<span class="ref">${v}</span>`).join("")}</div>`:""}
+  <div class="slug">Build on it</div>
+  <div class="drop">
+   <select id="lens" style="width:100%;border:1px solid var(--rule);padding:10px;
+    font:15px var(--ser);margin-bottom:8px">
+    ${LENSES.map(([k,l])=>`<option value="${k}">${l}</option>`).join("")}</select>
+   <textarea id="txt" rows="5" placeholder="Take it somewhere."></textarea>
+   <input id="refs" placeholder="Verses, comma separated — e.g. Genesis 28:16, Psalm 121:1"/>
+   <button id="go" style="border:1px solid var(--ink);background:var(--ink);color:#fff;
+    padding:11px 22px;font-family:var(--san);font-size:11px;font-weight:800;letter-spacing:.13em;
+    text-transform:uppercase;cursor:pointer">Add to the seed</button>
+  </div>
+  <div class="slug">What it's grown into</div>
+  <div id="list"></div>`;
+ document.getElementById("go").onclick=async()=>{
+  const t=document.getElementById("txt").value.trim();
+  if(t.length<10){alert("A little more than that.");return;}
+  await api("grow",{id:ID,lens:document.getElementById("lens").value,text:t,
+   refs:document.getElementById("refs").value.split(",").map(x=>x.trim()).filter(Boolean)});
+  location.reload();};
+ document.getElementById("list").innerHTML=g.length?g.map(x=>
+  `<div class="grow"><span class="lens">${x.lens}</span><span class="by">${x.by} ·
+   ${(x.at||"").slice(0,10)}</span>
+   <p>${x.text.replace(/</g,"&lt;").replace(/\n{2,}/g,"</p><p>")}</p>
+   ${(x.refs||[]).length?`<div class="refs">${x.refs.map(r=>`<span class="ref">${r}</span>`).join("")}</div>`:""}
+   </div>`).join("")
+  :'<p style="color:var(--gray)">Nobody has built on this yet. Be the first.</p>';
+})();
+</script></body></html>

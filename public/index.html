@@ -1,48 +1,74 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Between Sundays — The Workspace</title>
+<title>Between Sundays HQ</title>
 <link rel="stylesheet" href="/ws.css"/></head><body>
 <div class="wrap">
- <div class="slug">The front</div>
- <p class="lede">This is where the paper gets made. Everything Adrian, Lacey, Claude, Manus and
- Codex know about Between Sundays lives here — the beliefs, the issue in production, and the
- parts of the business we haven't figured out yet. Those get a room too, empty, so we can see
- what's missing.</p>
+ <div class="mission">
+  <div class="t">Current mission</div>
+  <h2>Finish Issue 001 and put it on a press.</h2>
+  <p id="mline" style="color:var(--gray)">Counting…</p>
+ </div>
+ <div class="nums" id="nums"></div>
+ <div id="lockslot"></div>
 
- <div class="slug">Spaces</div>
+ <div class="slug">Adrian's decision queue</div>
+ <div id="queue"><p style="color:var(--gray)">Reading…</p></div>
+
+ <div class="slug">Recent activity</div>
+ <ul class="feed" id="feed"></ul>
+ <p style="font-size:13px;margin-top:10px"><a href="/activity.html">The full feed →</a></p>
+
+ <div class="slug">The building</div>
  <div class="cards" id="cards"></div>
-
- <div class="slug">Where Issue 001 stands</div>
- <div id="stat"><p style="color:var(--gray)">Counting pages…</p></div>
 </div>
 <script src="/_nav.js"></script>
 <script>
-mount("index",{kicker:"The internal workspace",title:"Between Sundays",
- sub:"The brain, the issue, and the business — one building."});
-const CARDS=[
- {h:"/brain.html",n:"01",t:"What We Believe",
-  d:"Who we are, why this exists, the Source Rule, and how we're allowed to write. Read before touching a page.",s:"live",sl:"Written"},
- {h:"/control-room.html",n:"02",t:"Issue 001",
-  d:"All 48 slots. Versions, briefs, comments, scores — and the page-by-page comparison.",s:"live",sl:"In production"},
- {h:"/space.html?s=growth",n:"03",t:"Growth",
-  d:"Go-to-market, platforms, personas, messaging, creators. How the paper finds the people who need it.",s:"empty",sl:"Empty"},
- {h:"/space.html?s=logistics",n:"04",t:"Logistics",
-  d:"Print, packaging, unit costs, margin. What it actually takes to put paper in a hand.",s:"empty",sl:"Empty"},
- {h:"/space.html?s=revenue",n:"05",t:"Revenue & Projections",
-  d:"What we charge, who pays, and what the model says the next twelve months look like.",s:"empty",sl:"Empty"},
- {h:"/space.html?s=products",n:"06",t:"Future Products",
-  d:"Everything after the paper. Parked ideas kept somewhere better than a chat log.",s:"empty",sl:"Empty"},
-];
-document.getElementById("cards").innerHTML=CARDS.map(c=>
- `<a class="card" href="${c.h}"><span class="num">${c.n}</span><h3>${c.t}</h3>
-  <p>${c.d}</p><span class="st ${c.s}">${c.sl}</span></a>`).join("");
-fetch("/data/versions.json").then(r=>r.json()).then(v=>{
- const pages=v.length, vars=v.reduce((a,p)=>a+p.variants.length,0);
- const withArt=v.filter(p=>p.variants.length>1).length;
- document.getElementById("stat").innerHTML=
-  `<p><strong>${pages} pages</strong> are laid out, carrying <strong>${vars} versions</strong>
-   between them. ${withArt} pages have more than one candidate waiting on a decision.
-   Scoring and finals live in the <a href="/control-room.html">Control Room</a>; the
-   side-by-side is the <a href="/compare.html">page-by-page comparison</a>.</p>`;
-}).catch(()=>{document.getElementById("stat").innerHTML="<p>Page data unavailable.</p>";});
+mount("index",{kicker:"Between Sundays HQ",title:"Headquarters",
+ sub:"What we're building, what needs attention, what only Adrian can decide."});
+document.getElementById("lockslot").innerHTML=lockbar(); wireLock();
+document.getElementById("cards").innerHTML=PILLARS.map((p,i)=>{
+ const n=ROOMS.filter(r=>r.p===p.id), live=n.filter(r=>r.live).length;
+ return `<a class="card" href="${p.href}"><span class="num">0${i+1}</span><h3>${p.label}</h3>
+  <p>${p.blurb}</p><span class="st ${live?"live":"empty"}">${live} of ${n.length} rooms built</span></a>`;
+}).join("");
+(async()=>{
+ const v=await (await fetch("/data/versions.json")).json();
+ const [finals,feed,cms]=await Promise.all([state("finals.jsonl"),state("feed.jsonl"),
+   Promise.all(v.map(p=>state(`comments/p${String(p.n).padStart(2,"0")}.jsonl`)))]);
+ const finalBy={}; (finals||[]).forEach(f=>finalBy[f.page]=f);
+ const nFinal=Object.keys(finalBy).length;
+ const choices=v.filter(p=>p.variants.length>1&&!finalBy[p.n]);
+ const single=v.filter(p=>p.variants.length===1&&!finalBy[p.n]);
+ const allCms=(cms||[]).flatMap(c=>c||[]);
+ const scrip=allCms.filter(c=>c.type==="SCRIPTURE").length;
+ document.getElementById("mline").textContent=
+  `${v.length} pages laid out · ${v.reduce((a,p)=>a+p.variants.length,0)} versions between them · `+
+  `${nFinal} finalled.`;
+ document.getElementById("nums").innerHTML=[
+  [nFinal+" / "+v.length,"Pages finalled",0],
+  [choices.length,"Waiting on Adrian to choose",choices.length>0],
+  [single.length,"Only one candidate so far",0],
+  [scrip,"Open scripture flags",scrip>0],
+  [(feed||[]).length,"Recorded contributions",0],
+ ].map(([b,s,w])=>`<div class="num1${w?" warn":""}"><b>${b}</b><span>${s}</span></div>`).join("");
+ const q=document.getElementById("queue");
+ if(!getKey()){q.innerHTML='<p style="color:var(--gray)">Unlock above to see the queue.</p>';}
+ else if(!choices.length){q.innerHTML='<p style="color:var(--gray)">Nothing waiting. Every page with a choice has been decided.</p>';}
+ else{q.innerHTML=choices.slice(0,12).map(p=>
+   `<div class="q"><span class="k">Choose</span><span class="b">Page ${String(p.n).padStart(2,"0")}
+    — ${p.name} <span style="color:var(--gray)">(${p.variants.length} candidates)</span></span>
+    <a href="/room.html?p=${p.n}">Open</a></div>`).join("")+
+   (choices.length>12?`<p style="font-size:13px;color:var(--gray);margin-top:10px">
+     and ${choices.length-12} more in the <a href="/control-room.html">Control Room</a>.</p>`:"");}
+ const F=document.getElementById("feed");
+ const items=(feed||[]).slice(-8).reverse();
+ F.innerHTML=items.length?items.map(e=>{
+  const what={comment:`left a ${e.type||""} note on page ${e.page}`,
+   score:`scored page ${e.page} a ${e.score}`,version:`submitted a version of page ${e.page}`,
+   final:`marked page ${e.page} final`,brief:`wrote the brief for page ${e.page}`,
+   space:`wrote in ${e.space}`,inbox:`dropped a ${e.kind} in the inbox`}[e.event]||e.event;
+  return `<li><span class="who">${e.by}</span><span>${what}</span>
+   <span class="when">${(e.at||"").slice(0,10)}</span></li>`;}).join("")
+  :`<li><span style="color:var(--gray)">${getKey()?"Nothing yet.":"Locked."}</span></li>`;
+})();
 </script></body></html>

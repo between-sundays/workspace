@@ -1,0 +1,46 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Decision Log — Between Sundays HQ</title>
+<link rel="stylesheet" href="/ws.css"/></head><body>
+<div class="wrap">
+ <div class="slug">What was decided, and why</div>
+ <p class="lede">So settled questions stay settled. Reopening one is fine — but it takes new
+ evidence, not a new opinion.</p>
+ <table class="tb"><thead><tr><th style="width:104px">Date</th><th>Decision</th>
+  <th style="width:88px">Decided by</th></tr></thead><tbody id="rows"></tbody></table>
+ <div class="slug">Founder decisions still outstanding</div>
+ <div id="lockslot"></div>
+ <div id="pending"></div>
+ <p style="font-size:13px;color:var(--gray);margin-top:18px">Written decisions live in
+ <code>brain/decisions/</code> in the repo — one file per decision, committed, so every one has
+ an author and a date. Page selections are recorded automatically when Adrian marks a final.</p>
+</div>
+<script src="/_nav.js"></script>
+<script>
+mount("operate",{kicker:"Operate",title:"Decision Log",
+ sub:"Decided, dated, attributed — and revisitable only with new evidence."});
+document.getElementById("lockslot").innerHTML=lockbar(); wireLock();
+const D=[
+ ["2026-08-09","The workspace becomes the company's operating system — Build, Operate, Grow, Finance, Company. Blank rooms exist rather than being hidden.","Adrian"],
+ ["2026-08-09","Shared state moves to a private store; agent keys rotate; submitted HTML is sandboxed.","Claude"],
+ ["2026-08-08","Positioning: messengers, not experts. The friend, not the teacher.","Adrian"],
+ ["2026-08-08","The Source Rule: every page carries at least one named Bible verse, printed. Enforced in CI.","Adrian"],
+ ["2026-08-08","Newspaper structure first, creativity layered inside it. No AI-slop look.","Adrian"],
+ ["2026-08-02","Adrian makes the art; the system is the press. No recreating his images.","Adrian"],
+ ["2026-08-01","Get away from dark and gloomy — brightness correction across the issue.","Adrian"],
+];
+document.getElementById("rows").innerHTML=D.map(([d,t,w])=>
+ `<tr><td>${d}</td><td>${t}</td><td>${w}</td></tr>`).join("");
+(async()=>{
+ const p=document.getElementById("pending");
+ if(!getKey()){p.innerHTML='<p style="color:var(--gray)">Locked.</p>';return;}
+ const v=await (await fetch("/data/versions.json")).json();
+ const finals=(await state("finals.jsonl"))||[];
+ const done={}; finals.forEach(f=>done[f.page]=1);
+ const open=v.filter(x=>x.variants.length>1&&!done[x.n]);
+ p.innerHTML=open.length?`<div class="q"><span class="k">Reserved</span>
+   <span class="b"><strong>${open.length} pages</strong> have more than one candidate and no
+   selection. Only Adrian can settle these.</span><a href="/control-room.html">Control Room</a></div>`
+  :'<p style="color:var(--gray)">None outstanding.</p>';
+})();
+</script></body></html>

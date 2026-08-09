@@ -71,3 +71,71 @@ footer{border-top:3px double var(--ink);margin-top:56px;padding:18px 0 60px;
   display:flex;gap:18px;flex-wrap:wrap;justify-content:space-between}
 footer a{text-decoration:none}
 footer a:hover{color:var(--ink)}
+
+/* ---- HQ ---- */
+.mission{border:1px solid var(--ink);border-left:6px solid var(--red);padding:22px 24px;margin:20px 0 6px}
+.mission .t{font-family:var(--san);font-size:10px;font-weight:800;letter-spacing:.24em;
+ text-transform:uppercase;color:var(--red)}
+.mission h2{font-size:clamp(24px,3.6vw,36px);margin:8px 0 4px;letter-spacing:-.025em}
+.mission p{margin:6px 0 0;font-size:15px}
+.nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:1px;
+ background:var(--rule);border:1px solid var(--rule);margin:16px 0}
+.num1{background:#fff;padding:14px 16px}
+.num1 b{display:block;font-size:30px;font-weight:900;letter-spacing:-.03em;line-height:1}
+.num1 span{font-family:var(--san);font-size:9.5px;font-weight:700;letter-spacing:.13em;
+ text-transform:uppercase;color:var(--gray);display:block;margin-top:5px;line-height:1.35}
+.num1.warn b{color:var(--red)}
+.q{border-top:1px solid var(--rule);padding:11px 0;display:flex;gap:12px;align-items:baseline}
+.q:last-child{border-bottom:1px solid var(--rule)}
+.q .k{font-family:var(--san);font-size:9.5px;font-weight:800;letter-spacing:.12em;
+ text-transform:uppercase;color:var(--red);flex:0 0 96px}
+.q .b{flex:1;font-size:15px;color:var(--ink2)}
+.q a{font-family:var(--san);font-size:9.5px;font-weight:800;letter-spacing:.1em;
+ text-transform:uppercase;text-decoration:none;border-bottom:1px solid var(--ink)}
+.feed{list-style:none;padding:0;margin:8px 0 0}
+.feed li{border-top:1px solid var(--rule);padding:9px 0;font-size:14.5px;color:var(--ink2);
+ display:flex;gap:10px}
+.feed li:last-child{border-bottom:1px solid var(--rule)}
+.feed .who{font-family:var(--san);font-size:9.5px;font-weight:800;letter-spacing:.12em;
+ text-transform:uppercase;flex:0 0 62px;color:var(--ink)}
+.feed .when{margin-left:auto;font-family:var(--san);font-size:9.5px;color:var(--gray);white-space:nowrap}
+table.tb{width:100%;border-collapse:collapse;font-size:14px;margin:10px 0}
+table.tb th{font-family:var(--san);font-size:9.5px;font-weight:800;letter-spacing:.13em;
+ text-transform:uppercase;color:var(--gray);text-align:left;border-bottom:1px solid var(--ink);
+ padding:7px 10px 6px}
+table.tb td{border-bottom:1px solid var(--rule);padding:8px 10px;vertical-align:top;color:var(--ink2)}
+table.tb tr:hover td{background:var(--wash)}
+.pill{font-family:var(--san);font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+ border:1px solid var(--rule);padding:2px 6px;color:var(--gray);white-space:nowrap}
+.pill.on{border-color:var(--green);color:var(--green)}
+.pill.no{border-color:var(--red);color:var(--red)}
+.srch{width:100%;max-width:420px;border:1px solid var(--rule);padding:10px 12px;font:15px var(--ser);
+ margin:6px 0 4px}
+
+/* ---- The Well ---- */
+.seeds{display:grid;grid-template-columns:repeat(auto-fill,minmax(196px,1fr));gap:1px;
+ background:var(--rule);border:1px solid var(--rule);margin:14px 0}
+.seed{background:#fff;padding:15px 16px 16px;text-decoration:none;color:inherit;display:block;
+ min-height:112px}
+.seed:hover{background:var(--wash)}
+.seed .w{font-size:20px;font-weight:900;letter-spacing:-.02em;line-height:1.08;
+ text-transform:uppercase}
+.seed .n{font-size:13px;color:var(--gray);line-height:1.42;margin-top:6px}
+.seed .m{font-family:var(--san);font-size:9px;font-weight:800;letter-spacing:.11em;
+ text-transform:uppercase;color:var(--gray);margin-top:9px;display:flex;gap:7px;flex-wrap:wrap}
+.seed .m b{color:var(--ink)}
+.seed.grown{border-left:3px solid var(--green)}
+.seed.raw .w{color:var(--ink)}
+.drop{border:1px solid var(--ink);padding:18px 20px;margin:16px 0}
+.drop input,.drop textarea{width:100%;border:1px solid var(--rule);padding:10px;
+ font:15px/1.5 var(--ser);margin-bottom:8px;background:#fff;color:var(--ink)}
+.drop input#word{font-size:21px;font-weight:800;letter-spacing:-.01em}
+.grow{border-top:1px solid var(--rule);padding:16px 0}
+.grow .lens{font-family:var(--san);font-size:9.5px;font-weight:800;letter-spacing:.15em;
+ text-transform:uppercase;color:var(--red)}
+.grow .by{font-family:var(--san);font-size:9.5px;font-weight:700;letter-spacing:.1em;
+ text-transform:uppercase;color:var(--gray);margin-left:8px}
+.grow p{margin:7px 0 0}
+.refs{margin-top:8px;display:flex;gap:6px;flex-wrap:wrap}
+.ref{font-family:var(--san);font-size:9.5px;font-weight:800;letter-spacing:.06em;
+ border:1px solid var(--green);color:var(--green);padding:2px 7px}

@@ -1,0 +1,23 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Operate — Between Sundays HQ</title>
+<link rel="stylesheet" href="/ws.css"/></head><body>
+<div class="wrap"><div id="b"></div></div>
+<script src="/_nav.js"></script>
+<script>
+const P="operate"; const pil=PILLARS.find(x=>x.id===P);
+mount(P,{kicker:"Between Sundays HQ",title:pil.label,sub:pil.blurb});
+const rooms=ROOMS.filter(r=>r.p===P);
+document.getElementById("b").innerHTML=
+ '<div class="slug">'+pil.label+'</div>'+
+ '<p class="lede">'+pil.blurb+' Rooms that are built are linked. Rooms that are not yet designed '+
+ 'still exist \u2014 they carry the questions they exist to answer, and anyone can add the first thought.</p>'+
+ '<div class="cards">'+rooms.map(function(r,i){
+  var n=String(i+1).padStart(2,"0");
+  return r.live
+   ? '<a class="card" href="'+r.href+'"><span class="num">'+n+'</span><h3>'+r.label+'</h3><p>'+r.d+
+     '</p><span class="st live">Built</span></a>'
+   : '<a class="card" href="/space.html?s='+r.id+'"><span class="num">'+n+'</span><h3>'+r.label+
+     '</h3><p>'+r.purpose+'</p><span class="st empty">Not designed yet</span></a>';
+ }).join("")+'</div>';
+</script></body></html>

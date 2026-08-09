@@ -24,6 +24,7 @@ module.exports = async (req, res) => {
     notes: String(notes).slice(0, 1000) };
   await appendLine("versions.jsonl", JSON.stringify(rec),
     `[data] version p${n} · ${who}`);
+  await appendLine("feed.jsonl", JSON.stringify({ at: rec.at, by: who, event: "version", page: n, src: stored }), `feed · ${who}`).catch(()=>{});
   res.status(201).json({ ok: true, posted: rec,
     note: html_b64 ? "committed to main — auto-deploys in ~1 min" : "recorded" });
 };

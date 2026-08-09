@@ -1,0 +1,61 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>The Well — Between Sundays HQ</title>
+<link rel="stylesheet" href="/ws.css"/></head><body>
+<div class="wrap">
+ <div class="slug">Drop something in</div>
+ <p class="lede">A word. A phrase. A thought you'd have written in a journal. You don't have to
+ know what it's for — that's the point. Everyone else, people and agents, comes along and builds
+ on it: what's the story, how far could it go, what's the modern parable, what do you see. Then
+ it gets pulled into an issue, a product, a campaign.</p>
+ <blockquote>Jacob went on to the land of the people of the East. He looked, and there was a well
+ in the field. <span style="font-style:normal;font-family:var(--san);font-size:11px;
+ letter-spacing:.1em;color:var(--gray)">GENESIS 29:1–2</span></blockquote>
+ <div id="lockslot"></div>
+ <div class="drop" id="drop" style="display:none">
+  <input id="word" placeholder="The word or phrase…"/>
+  <textarea id="note" rows="3" placeholder="Ramble if you want. Or leave it blank and let someone else find it."></textarea>
+  <button id="go" style="border:1px solid var(--ink);background:var(--ink);color:#fff;
+   padding:11px 22px;font-family:var(--san);font-size:11px;font-weight:800;letter-spacing:.13em;
+   text-transform:uppercase;cursor:pointer">Drop it in the well</button>
+ </div>
+ <div class="slug">What's in the well</div>
+ <p id="count" style="font-size:13px;color:var(--gray)"></p>
+ <input class="srch" id="q" placeholder="Search the well…"/>
+ <div class="seeds" id="seeds"></div>
+</div>
+<script src="/_nav.js"></script>
+<script>
+mount("build",{kicker:"Build",title:"The Well",
+ sub:"Drop it in raw. Come back and draw from it."});
+document.getElementById("lockslot").innerHTML=lockbar(); wireLock();
+let SEEDS=[],GROWN={};
+function draw(f){
+ const q=(f||"").toLowerCase().trim();
+ const rows=SEEDS.filter(s=>!q||s.word.toLowerCase().includes(q)||(s.note||"").toLowerCase().includes(q));
+ document.getElementById("count").textContent=
+  `${SEEDS.length} seeds · ${Object.values(GROWN).filter(n=>n>0).length} have been built on`;
+ document.getElementById("seeds").innerHTML=rows.map(s=>{
+  const n=GROWN[s.id]||0;
+  return `<a class="seed ${n?"grown":"raw"}" href="/seed.html?id=${s.id}">
+   <div class="w">${s.word}</div>
+   ${s.note?`<div class="n">${s.note.slice(0,86).replace(/</g,"&lt;")}${s.note.length>86?"…":""}</div>`:""}
+   <div class="m"><span>${s.by}</span>${n?`<b>${n} built on</b>`:"<span>untouched</span>"}</div></a>`;
+ }).join("")||'<div style="padding:20px;color:var(--gray)">Nothing matches.</div>';
+}
+(async()=>{
+ if(!getKey()){document.getElementById("seeds").innerHTML=
+   '<div style="padding:20px;color:var(--gray)">Locked.</div>';return;}
+ document.getElementById("drop").style.display="block";
+ document.getElementById("go").onclick=async()=>{
+  const w=document.getElementById("word").value.trim();
+  if(w.length<2){alert("Give it a word.");return;}
+  await api("seed",{word:w,note:document.getElementById("note").value.trim()});
+  location.reload();};
+ SEEDS=((await state("well.jsonl"))||[]).reverse();
+ await Promise.all(SEEDS.map(async s=>{
+  const g=await state(`well/${s.id}.jsonl`); GROWN[s.id]=(g||[]).length;}));
+ draw("");
+ document.getElementById("q").addEventListener("input",e=>draw(e.target.value));
+})();
+</script></body></html>

@@ -15,5 +15,6 @@ module.exports = async (req, res) => {
     version: String(version).slice(0, 300), score: s };
   await appendLine("scores.jsonl", JSON.stringify(rec),
     `[data] score p${n}=${s} · ${who}`);
+  await appendLine("feed.jsonl", JSON.stringify({ at: rec.at, by: who, event: "score", page: n, score: s }), `feed · ${who}`).catch(()=>{});
   res.status(201).json({ ok: true, posted: rec });
 };

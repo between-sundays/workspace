@@ -1,0 +1,49 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>The Printer Brief — Between Sundays HQ</title>
+<link rel="stylesheet" href="/ws.css"/></head><body>
+<div class="wrap">
+ <div class="slug">What we hand a printer</div>
+ <p class="lede">Two halves: what is <strong>settled and verified</strong> in the build system,
+ and what is <strong>still an open question</strong>. Nothing in the second half has been decided,
+ and nothing there should be quoted to a vendor as if it had been.</p>
+
+ <div class="slug">Settled — verified in the build</div>
+ <table class="tb"><tbody>
+  <tr><th style="width:210px">Product</th><td>Broadsheet newspaper, 48 pages, Issue 001 — <em>I Am With You</em></td></tr>
+  <tr><th>Trim size</th><td>332 × 475 mm portrait</td></tr>
+  <tr><th>Build canvas</th><td>941 × 1346 px at 96 dpi (the CSS page box every builder targets)</td></tr>
+  <tr><th>Review renders</th><td>1295 × 1852 px — screen only, never for print</td></tr>
+  <tr><th>Print target</th><td><strong>3921 × 5610 px = 300 dpi at trim</strong></td></tr>
+  <tr><th>Module system</th><td>Full page · half landscape (941 × 673) · half portrait (470 × 1346) ·
+   quarter (470 × 673). Every element is built to one of these.</td></tr>
+  <tr><th>Colour</th><td>Full colour throughout. Department spot inks are part of the design, not an extra.</td></tr>
+  <tr><th>Special construction</th><td><strong>The Spine</strong> — a removable inner section (pages 23–26).
+   Needs to be liftable by a reader without tearing the rest.</td></tr>
+  <tr><th>Source rule</th><td>Every page carries at least one named Bible verse, printed. Checked in CI.</td></tr>
+ </tbody></table>
+
+ <div class="slug">Open — do not quote these as decisions</div>
+ <div class="blank"><div class="t">Unanswered</div>
+ <ol class="qs">
+  <li><strong>Paper stock and weight.</strong> Not chosen. Newsprint, improved newsprint and
+   uncoated all read very differently for halftones — needs samples in hand, not a spec sheet.</li>
+  <li><strong>Printer.</strong> No vendor selected, no quotes gathered. Who can run 332 × 475 mm?</li>
+  <li><strong>Run length.</strong> Undecided, and it drives everything downstream.</li>
+  <li><strong>Bleed and safe zone.</strong> The build has no bleed allowance yet — the printer's
+   spec decides this, and every page needs re-rendering once it's known.</li>
+  <li><strong>File format.</strong> Presumably press-ready PDF/X, but the printer's requirement governs.</li>
+  <li><strong>Binding / folding.</strong> How the Spine detaches cleanly is a production question.</li>
+ </ol></div>
+
+ <div class="slug">The known blocker</div>
+ <blockquote>Every placed artwork is currently around <strong>80 dpi at trim</strong>. Print needs
+ 3921 × 5610. Until the source art is re-exported at full resolution, there is no printable PDF —
+ no matter how finished the pages look on screen.</blockquote>
+ <p style="font-size:13px;color:var(--gray)">Owner: Adrian (source exports). Tracked in
+ <a href="/space.html?s=risks">Risks &amp; Assumptions</a>.</p>
+</div>
+<script src="/_nav.js"></script>
+<script>mount("operate",{kicker:"Operate",title:"The Printer Brief",
+ sub:"What's settled, what's open, and what's blocking the press."});</script>
+</body></html>

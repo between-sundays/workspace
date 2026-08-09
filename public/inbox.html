@@ -1,0 +1,54 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Inbox — Between Sundays HQ</title>
+<link rel="stylesheet" href="/ws.css"/></head><body>
+<div class="wrap">
+ <div class="slug">The dump zone</div>
+ <p class="lede">Anything can land here in five seconds and get sorted later. A link, an idea,
+ a verse, a name, a worry. The rule is that nothing dies in a chat window.</p>
+ <div id="lockslot"></div>
+ <div id="form" style="display:none">
+  <select id="kind" style="width:210px;border:1px solid var(--rule);padding:9px;font:14px var(--ser)">
+   <option value="idea">Idea</option><option value="link">Link</option>
+   <option value="note">Note</option><option value="story">Story idea</option>
+   <option value="scripture">Verse / prayer</option><option value="product">Product idea</option>
+   <option value="creator">Creator</option><option value="prospect">Prospect</option>
+   <option value="social">Social post</option><option value="question">Research question</option>
+   <option value="risk">Risk</option><option value="screenshot">Screenshot</option>
+  </select>
+  <textarea id="txt" rows="3" placeholder="What is it?"
+   style="width:100%;max-width:66ch;border:1px solid var(--rule);padding:10px;
+   font:15px/1.5 var(--ser);margin-top:8px"></textarea>
+  <input id="url" placeholder="URL (optional)" style="width:100%;max-width:66ch;
+   border:1px solid var(--rule);padding:9px;font:14px var(--ser);margin-bottom:8px"/>
+  <div><button id="go" style="border:1px solid var(--ink);background:var(--ink);color:#fff;
+   padding:10px 20px;font-family:var(--san);font-size:11px;font-weight:800;letter-spacing:.12em;
+   text-transform:uppercase;cursor:pointer">Drop it in</button></div>
+ </div>
+ <div class="slug">Unsorted</div>
+ <table class="tb"><thead><tr><th style="width:96px">Kind</th><th>What</th>
+  <th style="width:78px">Who</th><th style="width:92px">When</th></tr></thead>
+  <tbody id="rows"></tbody></table>
+</div>
+<script src="/_nav.js"></script>
+<script>
+mount("inbox",{kicker:"Between Sundays HQ",title:"Inbox",sub:"Capture now, sort later."});
+document.getElementById("lockslot").innerHTML=lockbar(); wireLock();
+(async()=>{
+ const rows=document.getElementById("rows");
+ if(!getKey()){rows.innerHTML='<tr><td colspan="4" style="color:var(--gray)">Locked.</td></tr>';return;}
+ document.getElementById("form").style.display="block";
+ document.getElementById("go").onclick=async()=>{
+  const t=document.getElementById("txt").value.trim();
+  if(t.length<2){alert("Say something first.");return;}
+  await api("inbox",{kind:document.getElementById("kind").value,text:t,
+   url:document.getElementById("url").value.trim()||null});
+  location.reload();};
+ const items=(await state("inbox.jsonl"))||[];
+ rows.innerHTML=items.length?items.slice().reverse().map(i=>
+  `<tr><td><span class="pill">${i.kind}</span></td>
+   <td>${String(i.text).replace(/</g,"&lt;")}${i.url?` <a href="${i.url}" rel="noopener noreferrer nofollow" target="_blank">link</a>`:""}</td>
+   <td>${i.by}</td><td>${(i.at||"").slice(0,10)}</td></tr>`).join("")
+  :'<tr><td colspan="4" style="color:var(--gray)">Empty. First thing you see today that matters, put it here.</td></tr>';
+})();
+</script></body></html>

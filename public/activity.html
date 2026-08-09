@@ -1,0 +1,35 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Activity — Between Sundays HQ</title>
+<link rel="stylesheet" href="/ws.css"/></head><body>
+<div class="wrap">
+ <div class="slug">Everything that happened</div>
+ <p class="lede">Newest first. This is how you catch up in five minutes instead of asking
+ everybody what they did.</p>
+ <div id="lockslot"></div>
+ <ul class="feed" id="feed"></ul>
+</div>
+<script src="/_nav.js"></script>
+<script>
+mount("activity",{kicker:"Between Sundays HQ",title:"Activity",
+ sub:"Every contribution, attributed, newest first."});
+document.getElementById("lockslot").innerHTML=lockbar(); wireLock();
+(async()=>{
+ const feed=await state("feed.jsonl");
+ const F=document.getElementById("feed");
+ if(feed===null){F.innerHTML="";return;}
+ const items=feed.slice().reverse();
+ F.innerHTML=items.length?items.map(e=>{
+  const what={comment:`left a ${e.type||""} note on page ${e.page}`+(e.body?` — “${e.body}”`:""),
+   score:`scored page ${e.page} a ${e.score}`,
+   version:`submitted a version of page ${e.page}`,
+   final:`marked page ${e.page} FINAL`,
+   brief:`wrote the brief for page ${e.page}`,
+   space:`wrote in ${e.space}`,
+   inbox:`dropped a ${e.kind} in the inbox`+(e.body?` — “${e.body}”`:"")}[e.event]||e.event;
+  const link=e.page?` <a href="/room.html?p=${e.page}" style="font-size:12px">open</a>`:"";
+  return `<li><span class="who">${e.by}</span><span>${what}${link}</span>
+   <span class="when">${(e.at||"").slice(0,16).replace("T"," ")}</span></li>`;}).join("")
+  :'<li><span style="color:var(--gray)">Nothing recorded yet.</span></li>';
+})();
+</script></body></html>

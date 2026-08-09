@@ -1,0 +1,73 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>The Issue Template — Between Sundays HQ</title>
+<link rel="stylesheet" href="/ws.css"/></head><body>
+<div class="wrap">
+ <div class="slug">The cadence machine</div>
+ <p class="lede">Issue 001 was invented page by page. Issue 002 shouldn't be. This is the
+ 48-slot skeleton with each page marked <strong>Fixed</strong> (same every issue),
+ <strong>Rotating</strong> (same shape, new theme), or <strong>Open</strong> (invented fresh).
+ The more fixed and rotating slots we have, the faster an issue ships.</p>
+ <div class="nums" id="nums"></div>
+ <table class="tb"><thead><tr><th style="width:56px">Page</th><th>Slot</th>
+  <th style="width:104px">Kind</th><th>What carries over to Issue 002</th></tr></thead>
+  <tbody id="rows"></tbody></table>
+ <p style="font-size:13px;color:var(--gray);margin-top:16px">Derived from how Issue 001 was
+ actually built. When a page turns out to be reusable, change it here — this table is the plan
+ for 002, not a record of 001.</p>
+</div>
+<script src="/_nav.js"></script>
+<script>
+mount("build",{kicker:"Build",title:"The Issue Template",
+ sub:"Which pages repeat, which rotate, which get invented."});
+const T={
+1:["F","Cover — nameplate, one image, the issue promise"],
+2:["F","Contents and the field guide; translation attributions live here"],
+3:["R","Opening essay — the theme stated plainly"],
+4:["R","A map or route illustrating the theme"],
+5:["R","Wayfarer / baggage — what the reader carries in"],
+6:["F","The gate into The Reading"],
+7:["R","The Reading 01"],8:["R","The Reading 02"],9:["R","The Reading 03"],
+10:["R","The Reading 04"],11:["R","The Reading 05"],12:["R","The Reading 06"],
+13:["R","The Reading 07 and the bridge out"],
+14:["R","Feature after The Reading"],
+15:["O","The place you almost walked past"],
+16:["F","Words &amp; Meaning — plain definitions, 5–7 words"],
+17:["F","Field guide"],18:["R","Modern parallel — the story now"],
+19:["F","Sports desk, read through the theme"],
+20:["F","Weather — forecast for the middle"],
+21:["F","Movies / cast of note"],
+22:["F","Obituaries and coupons"],
+23:["F","The Spine 01 — removable section"],24:["F","The Spine 02"],
+25:["F","The Spine 03"],26:["F","The Spine 04"],
+27:["O","Essay — if the middle is missing"],
+28:["F","Letters"],29:["R","Fiction"],30:["F","Comics"],
+31:["F","Games — crossword"],32:["F","Games — find the certain place"],
+33:["F","But God — back of the book"],
+34:["F","But God — the directory (47 categories, verified)"],
+35:["F","No dead zones / most looked up"],
+36:["F","Classifieds"],37:["R","Food"],38:["R","Home"],
+39:["R","Poster — the issue's line, full page"],
+40:["F","Music — songs for the theme"],
+41:["F","House ads / Supply Co."],42:["F","Work / small ads"],
+43:["F","Write it down — the notebook page"],
+44:["O","Photo essay"],45:["F","Mark the place / games"],
+46:["F","Where this paper went / games"],
+47:["F","Next issue"],48:["F","Back cover"]};
+const K={F:["Fixed","on"],R:["Rotating",""],O:["Open","no"]};
+const NAMES={};
+fetch("/data/versions.json").then(r=>r.json()).then(v=>{
+ v.forEach(p=>NAMES[p.n]=p.name);
+ const c={F:0,R:0,O:0}; Object.values(T).forEach(([k])=>c[k]++);
+ document.getElementById("nums").innerHTML=[
+  [c.F,"Fixed slots — build once, reuse forever"],
+  [c.R,"Rotating slots — same shape, new theme"],
+  [c.O,"Open slots — invented each issue"],
+ ].map(([b,s])=>`<div class="num1"><b>${b}</b><span>${s}</span></div>`).join("");
+ document.getElementById("rows").innerHTML=Object.entries(T).map(([n,[k,d]])=>{
+  const [lab,cls]=K[k];
+  return `<tr><td><a href="/room.html?p=${n}">${String(n).padStart(2,"0")}</a></td>
+   <td>${NAMES[n]||""}</td><td><span class="pill ${cls}">${lab}</span></td><td>${d}</td></tr>`;
+ }).join("");
+});
+</script></body></html>

@@ -16,5 +16,6 @@ module.exports = async (req, res) => {
     body: String(body).slice(0, 4000), re };
   await appendLine(`comments/p${String(n).padStart(2,"0")}.jsonl`,
     JSON.stringify(rec), `[data] comment p${n} · ${type} · ${who}`);
+  await appendLine("feed.jsonl", JSON.stringify({ at: rec.at, by: who, event: "comment", page: n, type, body: String(body).slice(0,140) }), `feed · ${who}`).catch(()=>{});
   res.status(201).json({ ok: true, posted: rec });
 };
