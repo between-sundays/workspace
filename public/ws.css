@@ -174,3 +174,31 @@ table.tb tr:hover td{background:var(--wash)}
 .rx button:hover{border-color:var(--ink);color:var(--ink)}
 .rx button.hot{border-color:var(--green);color:var(--green)}
 .rx .n{color:var(--ink)}
+
+/* ---- personas ---- */
+.pcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin:16px 0}
+.pc{border:1px solid var(--rule);border-top:7px solid var(--ink);text-decoration:none;color:inherit;
+ display:block;padding:18px 20px 20px;background:#fff}
+.pc:hover{background:var(--wash)}
+.pc .code{font-family:var(--san);font-size:9.5px;font-weight:800;letter-spacing:.2em;
+ text-transform:uppercase;color:var(--gray)}
+.pc h3{margin:6px 0 8px;font-size:23px;letter-spacing:-.02em;line-height:1.05}
+.pc p{font-size:13.5px;line-height:1.5;color:var(--gray);margin:0}
+.pc .sig{margin-top:12px;padding-top:11px;border-top:1px solid var(--rule);
+ font-family:var(--san);font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+ color:var(--gray);display:flex;gap:10px;flex-wrap:wrap}
+.pc .sig b{color:var(--ink)}
+.sigs{list-style:none;padding:0;margin:8px 0}
+.sigs li{border-top:1px solid var(--rule);padding:9px 0 9px 26px;position:relative;font-size:15px;
+ color:var(--ink2);line-height:1.5}
+.sigs li:before{content:"→";position:absolute;left:0;color:var(--red);font-weight:700}
+.sigs li:last-child{border-bottom:1px solid var(--rule)}
+.recipe{font:12.5px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--wash);
+ border:1px solid var(--rule);padding:9px 11px;margin:6px 0;overflow-x:auto;white-space:pre-wrap;
+ word-break:break-word}
+.pipe{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--rule);
+ border:1px solid var(--rule);margin:14px 0}
+.pipe div{background:#fff;padding:12px 10px;text-align:center}
+.pipe b{display:block;font-size:24px;font-weight:900;letter-spacing:-.02em}
+.pipe span{font-family:var(--san);font-size:8.5px;font-weight:800;letter-spacing:.1em;
+ text-transform:uppercase;color:var(--gray);display:block;margin-top:4px}

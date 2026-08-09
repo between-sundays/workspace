@@ -17,6 +17,9 @@ const ROUTES = {
   react:         require("./_handlers/react"),
   status:        require("./_handlers/status"),
   constellation: require("./_handlers/constellation"),
+  persona:       require("./_handlers/persona"),
+  prospect:      require("./_handlers/prospect"),
+  outreach:      require("./_handlers/outreach"),
 };
 module.exports = async (req, res) => {
   const action = String((req.query && req.query.action) || "").toLowerCase();

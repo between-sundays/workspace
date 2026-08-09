@@ -1,0 +1,75 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Prospect List — Between Sundays HQ</title>
+<link rel="stylesheet" href="/ws.css"/></head><body>
+<div class="wrap">
+ <div class="slug">One at a time</div>
+ <p class="lede">A staging list, not a CRM — it exports the day a real one lands. Every row records
+ the <strong>public thing they posted</strong> that made them a fit, so we can write a message that
+ proves we actually looked.</p>
+ <div id="lockslot"></div>
+ <div class="pipe" id="pipe"></div>
+ <div id="form" style="display:none;margin:16px 0">
+  <div class="drop">
+   <input id="handle" placeholder="Name or @handle"/>
+   <select id="persona" style="width:100%;border:1px solid var(--rule);padding:10px;
+    font:15px var(--ser);margin-bottom:8px"></select>
+   <input id="url" placeholder="Link to the public post or profile"/>
+   <input id="signal" placeholder="The signal — what they publicly posted that flagged them"/>
+   <input id="next" placeholder="Next action (optional)"/>
+   <button id="go" style="border:1px solid var(--ink);background:var(--ink);color:#fff;
+    padding:11px 22px;font-family:var(--san);font-size:11px;font-weight:800;letter-spacing:.13em;
+    text-transform:uppercase;cursor:pointer">Add to the list</button>
+  </div>
+ </div>
+ <input class="srch" id="q" placeholder="Search the list…"/>
+ <table class="tb"><thead><tr><th>Who</th><th style="width:150px">Group</th>
+  <th>Public signal</th><th style="width:96px">Stage</th><th style="width:78px">By</th></tr></thead>
+  <tbody id="rows"></tbody></table>
+ <p style="font-size:13px;color:var(--gray);margin-top:16px">A <code>passed</code> stage is a
+ permanent no — that person is never re-added.</p>
+</div>
+<script src="/_nav.js"></script>
+<script>
+mount("grow",{kicker:"Grow",title:"Prospect List",
+ sub:"Named people, the signal that found them, and where each stands."});
+document.getElementById("lockslot").innerHTML=lockbar(); wireLock();
+const S=["found","researched","engaged","replied","warm","reader","passed"];
+let ROWS=[],PN={},filter=(new URLSearchParams(location.search).get("persona")||"");
+function draw(){
+ const q=document.getElementById("q").value.toLowerCase().trim();
+ const latest={}; ROWS.forEach(r=>latest[r.handle+"|"+r.persona]=r);
+ let rows=Object.values(latest);
+ if(filter) rows=rows.filter(r=>r.persona===filter);
+ if(q) rows=rows.filter(r=>(r.handle+r.signal+r.note).toLowerCase().includes(q));
+ const c={}; S.forEach(s=>c[s]=rows.filter(r=>r.stage===s).length);
+ document.getElementById("pipe").innerHTML=S.map(s=>
+  `<div><b>${c[s]}</b><span>${s}</span></div>`).join("");
+ document.getElementById("rows").innerHTML=rows.length?rows.reverse().map(r=>
+  `<tr><td>${r.url?`<a href="${r.url}" target="_blank" rel="noopener noreferrer nofollow">${r.handle}</a>`:r.handle}</td>
+   <td>${PN[r.persona]||r.persona}</td><td>${(r.signal||"").replace(/</g,"&lt;")}</td>
+   <td><span class="pill ${r.stage==="reader"?"on":(r.stage==="passed"?"no":"")}">${r.stage}</span></td>
+   <td>${r.by}</td></tr>`).join("")
+  :'<tr><td colspan="5" style="color:var(--gray)">Nobody on the list yet. Start with one real person you already know fits.</td></tr>';
+}
+(async()=>{
+ if(!getKey()){document.getElementById("rows").innerHTML="";return;}
+ const praw=(await state("personas.jsonl"))||[];
+ const P={}; praw.forEach(p=>P[p.id]=p); Object.values(P).forEach(p=>PN[p.id]=p.name);
+ document.getElementById("persona").innerHTML=Object.values(P).map(p=>
+  `<option value="${p.id}">${p.name}</option>`).join("");
+ document.getElementById("form").style.display="block";
+ document.getElementById("go").onclick=async()=>{
+  const h=document.getElementById("handle").value.trim();
+  const s=document.getElementById("signal").value.trim();
+  if(h.length<2){alert("Who is it?");return;}
+  if(s.length<5){alert("Record the public signal — that's the whole point of the row.");return;}
+  await api("prospect",{handle:h,persona:document.getElementById("persona").value,
+   url:document.getElementById("url").value.trim(),signal:s,
+   next:document.getElementById("next").value.trim(),stage:"found"});
+  location.reload();};
+ ROWS=(await state("prospects.jsonl"))||[];
+ draw();
+ document.getElementById("q").addEventListener("input",draw);
+})();
+</script></body></html>

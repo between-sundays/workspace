@@ -1,0 +1,42 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Persona Groups — Between Sundays HQ</title>
+<link rel="stylesheet" href="/ws.css"/></head><body>
+<div class="wrap">
+ <div class="slug">Who we're going after</div>
+ <p class="lede">B2B discipline pointed at a B2C audience. Not "our audience is Christians" — that's
+ not a target, it's a census. These are specific collections of people, each with the
+ <strong>public signals that find them</strong>, the angle that fits their actual situation, and
+ the verse that says why we have something for them. Then we go one by one.</p>
+ <div id="lockslot"></div>
+ <div class="pcards" id="cards"></div>
+ <div class="slug">The rules we work under</div>
+ <p>We record <strong>what someone publicly posted</strong>, never a stored verdict about who they
+ are. No scraping tools against LinkedIn, no bought lists, no message sequences. Every note is
+ something they chose to publish. The full standard is in
+ <a href="https://github.com/between-sundays/workspace/blob/main/brain/prospecting-ethics.md">
+ the prospecting rules</a> — worth reading before anyone sends anything.</p>
+</div>
+<script src="/_nav.js"></script>
+<script>
+mount("grow",{kicker:"Grow",title:"Persona Groups",
+ sub:"Specific people, findable by public signal, approached one at a time."});
+document.getElementById("lockslot").innerHTML=lockbar(); wireLock();
+(async()=>{
+ const c=document.getElementById("cards");
+ if(!getKey()){c.innerHTML="";return;}
+ const raw=(await state("personas.jsonl"))||[];
+ const P={}; raw.forEach(p=>P[p.id]=p);          // last write wins
+ const pros=(await state("prospects.jsonl"))||[];
+ const list=Object.values(P);
+ c.innerHTML=list.length?list.map((p,i)=>{
+  const n=pros.filter(x=>x.persona===p.id).length;
+  return `<a class="pc" href="/persona.html?id=${p.id}" style="border-top-color:${p.ink}">
+   <div class="code">Group ${String(i+1).padStart(2,"0")}</div>
+   <h3>${p.name}</h3><p>${(p.who||"").slice(0,150)}${(p.who||"").length>150?"…":""}</p>
+   <div class="sig"><span><b>${(p.signals||[]).length}</b> signals</span>
+    <span><b>${(p.recipes||[]).length}</b> search recipes</span>
+    <span><b>${n}</b> prospects</span></div></a>`;}).join("")
+  :'<p style="color:var(--gray)">No persona groups yet.</p>';
+})();
+</script></body></html>

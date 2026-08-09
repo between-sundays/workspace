@@ -3,7 +3,7 @@
 // unauthenticated. The page-review lab (renders) stays public and is NOT served here.
 const { auth, cors, bad } = require("../_lib");
 const OWNER = "between-sundays", STATE_REPO = process.env.STATE_REPO || "state";
-const OK = /^(comments\/p[0-4][0-9]\.jsonl|scores\.jsonl|versions\.jsonl|finals\.jsonl|feed\.jsonl|briefs\/p[0-4][0-9]\.md|spaces\/[a-z-]+\.md|inbox\.jsonl|well\.jsonl|well\/[a-z0-9-]+\.jsonl|reactions\.jsonl|statuses\.jsonl|constellations\.jsonl)$/;
+const OK = /^(comments\/p[0-4][0-9]\.jsonl|scores\.jsonl|versions\.jsonl|finals\.jsonl|feed\.jsonl|briefs\/p[0-4][0-9]\.md|spaces\/[a-z-]+\.md|inbox\.jsonl|well\.jsonl|well\/[a-z0-9-]+\.jsonl|reactions\.jsonl|statuses\.jsonl|constellations\.jsonl|personas\.jsonl|prospects\.jsonl|outreach\.jsonl)$/;
 module.exports = async (req, res) => {
   cors(res);
   if (req.method === "OPTIONS") return res.status(204).end();

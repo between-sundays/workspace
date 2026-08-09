@@ -1,0 +1,60 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Persona — Between Sundays HQ</title>
+<link rel="stylesheet" href="/ws.css"/></head><body>
+<div class="wrap"><div id="b"></div></div>
+<script src="/_nav.js"></script>
+<script>
+const ID=(new URLSearchParams(location.search).get("id")||"").trim();
+(async()=>{
+ const raw=(await state("personas.jsonl"))||[];
+ const P={}; raw.forEach(x=>P[x.id]=x);
+ const p=P[ID];
+ mount("grow",{kicker:"Grow · persona group",title:p?p.name:"Persona",
+  sub:p?(p.size||"A collection of people we can find by what they post."):"Not found"});
+ const b=document.getElementById("b");
+ if(!getKey()){b.innerHTML=lockbar();wireLock();return;}
+ if(!p){b.innerHTML='<p style="color:var(--gray)">No such group. <a href="/personas.html">Back</a>.</p>';return;}
+ const pros=((await state("prospects.jsonl"))||[]).filter(x=>x.persona===ID);
+ const out=((await state("outreach.jsonl"))||[]).filter(x=>x.persona===ID);
+ const latest={}; pros.forEach(x=>latest[x.handle]=x);
+ const S=["found","researched","engaged","replied","warm","reader","passed"];
+ const cnt={}; S.forEach(s=>cnt[s]=Object.values(latest).filter(x=>x.stage===s).length);
+ b.innerHTML=`
+  <div class="slug" style="color:${p.ink}">Who they are</div>
+  <p class="lede">${p.who}</p>
+  ${p.size?`<p style="font-size:13px;color:var(--gray)">${p.size}</p>`:""}
+  <div class="slug">The public signals that find them</div>
+  <ul class="sigs">${(p.signals||[]).map(s=>`<li>${s}</li>`).join("")}</ul>
+  <div class="slug">Where they are</div>
+  <ul class="sigs">${(p.where||[]).map(s=>`<li>${s}</li>`).join("")}</ul>
+  <div class="slug">Search recipes — the unscalable part, made repeatable</div>
+  <p style="font-size:13.5px;color:var(--gray)">Run these by hand or hand them to an agent. Read
+   like a person reads; no scraping tools.</p>
+  ${(p.recipes||[]).map(r=>`<div class="recipe">${r.replace(/</g,"&lt;")}</div>`).join("")}
+  <div class="slug">The angle</div>
+  <p>${p.angle}</p>
+  <div class="slug">The first ask</div>
+  <p>${p.ask}</p>
+  <div class="slug">What they'll push back with</div>
+  <p>${p.objection}</p>
+  <div class="slug">Why we have something for them</div>
+  <div class="refs">${(p.refs||[]).map(r=>`<span class="ref">${r}</span>`).join("")}</div>
+  <p style="font-size:13px;color:var(--gray);margin-top:8px">References only — verse text is
+   always fetched, never quoted from memory.</p>
+  <div class="slug">Pipeline</div>
+  <div class="pipe">${S.map(s=>
+    `<div><b>${cnt[s]}</b><span>${s}</span></div>`).join("")}</div>
+  <p style="font-size:13.5px">${Object.keys(latest).length} people in this group ·
+   ${out.length} outreach attempt${out.length===1?"":"s"} recorded ·
+   <a href="/prospects.html?persona=${ID}">open the list</a></p>
+  <div class="slug">What we've actually said</div>
+  <div id="out"></div>`;
+ document.getElementById("out").innerHTML=out.length?out.slice().reverse().map(o=>
+  `<div class="grow"><span class="lens">${o.channel}</span>
+   <span class="by">${o.by} → ${o.handle} · ${(o.at||"").slice(0,10)} · <strong>${o.result}</strong></span>
+   <p>${o.message.replace(/</g,"&lt;")}</p></div>`).join("")
+  :'<p style="color:var(--gray)">Nothing sent yet. The first message written here becomes the '+
+   'control we test everything else against.</p>';
+})();
+</script></body></html>
