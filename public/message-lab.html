@@ -1,0 +1,79 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Message Lab — Between Sundays HQ</title>
+<link rel="stylesheet" href="/ws.css"/></head><body>
+<div class="wrap">
+ <div class="slug">What we said, and what came back</div>
+ <p class="lede">Every message is a hypothesis. Record it before you send it, record what happened
+ after, and record <strong>the words they used in reply</strong> — that's the part that becomes the
+ next headline. This is how the messaging stops being guesswork and starts being a language library
+ built out of real responses.</p>
+ <div id="lockslot"></div>
+ <div id="form" style="display:none">
+  <div class="drop">
+   <select id="persona" style="width:100%;border:1px solid var(--rule);padding:10px;
+    font:15px var(--ser);margin-bottom:8px"></select>
+   <input id="moment" placeholder="The moment — e.g. their child is leaving home"/>
+   <textarea id="hypothesis" rows="2" placeholder="Hypothesis — what we think will resonate, and why"></textarea>
+   <input id="headline" placeholder="Headline / story angle"/>
+   <textarea id="opening" rows="2" placeholder="The actual opening line"></textarea>
+   <input id="offer" placeholder="The offer / first ask"/>
+   <input id="channel" placeholder="Channel"/>
+   <div style="display:flex;gap:8px">
+    <input id="sent" placeholder="Sent" style="width:110px"/>
+    <input id="replies" placeholder="Replies" style="width:110px"/></div>
+   <textarea id="worked" rows="2" placeholder="What worked"></textarea>
+   <textarea id="flat" rows="2" placeholder="What fell flat"></textarea>
+   <input id="theirWords" placeholder="Their words, comma separated — quote them exactly"/>
+   <textarea id="learned" rows="2" placeholder="What we learned / what should change"></textarea>
+   <button id="go" style="border:1px solid var(--ink);background:var(--ink);color:#fff;
+    padding:11px 22px;font-family:var(--san);font-size:11px;font-weight:800;letter-spacing:.13em;
+    text-transform:uppercase;cursor:pointer">Record it</button>
+  </div>
+ </div>
+ <div class="slug">The library</div>
+ <div id="out"></div>
+</div>
+<script src="/_nav.js"></script>
+<script>
+mount("grow",{kicker:"Grow",title:"Message Lab",
+ sub:"Hypotheses in, real language out."});
+document.getElementById("lockslot").innerHTML=lockbar(); wireLock();
+const PRE=(new URLSearchParams(location.search).get("persona")||"");
+(async()=>{
+ const o=document.getElementById("out");
+ if(!getKey()){o.innerHTML="";return;}
+ const praw=(await state("personas.jsonl"))||[];
+ const P={};praw.forEach(p=>P[p.id]=p);
+ document.getElementById("persona").innerHTML=Object.values(P).map(p=>
+  `<option value="${p.id}" ${p.id===PRE?"selected":""}>${p.name}</option>`).join("");
+ document.getElementById("form").style.display="block";
+ document.getElementById("go").onclick=async()=>{
+  const g=id=>document.getElementById(id).value.trim();
+  if(g("hypothesis").length<10){alert("Write the hypothesis — that's the point of the record.");return;}
+  await api("message",{persona:g("persona"),moment:g("moment"),hypothesis:g("hypothesis"),
+   headline:g("headline"),opening:g("opening"),offer:g("offer"),channel:g("channel"),
+   sent:g("sent"),replies:g("replies"),worked:g("worked"),flat:g("flat"),
+   theirWords:g("theirWords").split(",").map(x=>x.trim()).filter(Boolean),learned:g("learned")});
+  location.reload();};
+ let m=(await state("messages.jsonl"))||[];
+ if(PRE) m=m.filter(x=>x.persona===PRE);
+ o.innerHTML=m.length?m.slice().reverse().map(x=>{
+  const rate=x.sent?Math.round(100*x.replies/x.sent):null;
+  return `<div class="grow">
+   <span class="lens">${(P[x.persona]||{}).name||x.persona}</span>
+   <span class="by">${x.by} · ${(x.at||"").slice(0,10)}${x.channel?" · "+x.channel:""}
+    ${rate!==null?` · <strong>${x.replies}/${x.sent} replied (${rate}%)</strong>`:""}</span>
+   ${x.moment?`<p style="font-size:13px;color:var(--gray)">Moment — ${x.moment}</p>`:""}
+   <p><strong>Hypothesis.</strong> ${x.hypothesis.replace(/</g,"&lt;")}</p>
+   ${x.headline?`<p><strong>Headline.</strong> ${x.headline.replace(/</g,"&lt;")}</p>`:""}
+   ${x.opening?`<p style="border-left:3px solid var(--rule);padding-left:12px">“${x.opening.replace(/</g,"&lt;")}”</p>`:""}
+   ${x.offer?`<p><strong>Offer.</strong> ${x.offer.replace(/</g,"&lt;")}</p>`:""}
+   ${x.worked?`<p><strong style="color:var(--green)">Worked.</strong> ${x.worked.replace(/</g,"&lt;")}</p>`:""}
+   ${x.flat?`<p><strong style="color:var(--red)">Fell flat.</strong> ${x.flat.replace(/</g,"&lt;")}</p>`:""}
+   ${(x.theirWords||[]).length?`<div class="words">${x.theirWords.map(w=>
+     `<span class="wd">“${w}”</span>`).join("")}</div>`:""}
+   ${x.learned?`<p><strong>Learned.</strong> ${x.learned.replace(/</g,"&lt;")}</p>`:""}</div>`;}).join("")
+  :'<p style="color:var(--gray)">Nothing recorded yet. The first message you send becomes the control.</p>';
+})();
+</script></body></html>

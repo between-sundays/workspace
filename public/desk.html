@@ -1,12 +1,13 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Prospect List — Between Sundays HQ</title>
+<title>Relationship Desk — Between Sundays HQ</title>
 <link rel="stylesheet" href="/ws.css"/></head><body>
 <div class="wrap">
- <div class="slug">One at a time</div>
- <p class="lede">A staging list, not a CRM — it exports the day a real one lands. Every row records
- the <strong>public thing they posted</strong> that made them a fit, so we can write a message that
- proves we actually looked.</p>
+ <div class="slug">Real people</div>
+ <p class="lede">The people, not the models. Each row is somebody real, with a link to their public
+ profile and the reason they fit a group — quoted from what they actually posted. Someone can sit in
+ <em>worth knowing</em> for months; nobody has to be pushed toward a transaction.
+ A pre-CRM layer, built to export the day a real CRM lands.</p>
  <div id="lockslot"></div>
  <div class="pipe" id="pipe"></div>
  <div id="form" style="display:none;margin:16px 0">
@@ -24,17 +25,18 @@
  </div>
  <input class="srch" id="q" placeholder="Search the list…"/>
  <table class="tb"><thead><tr><th>Who</th><th style="width:150px">Group</th>
-  <th>Public signal</th><th style="width:96px">Stage</th><th style="width:78px">By</th></tr></thead>
+  <th>Why they fit</th><th style="width:96px">Stage</th><th style="width:78px">By</th></tr></thead>
   <tbody id="rows"></tbody></table>
- <p style="font-size:13px;color:var(--gray);margin-top:16px">A <code>passed</code> stage is a
- permanent no — that person is never re-added.</p>
+ <p style="font-size:13px;color:var(--gray);margin-top:16px"><code>do not contact</code> is permanent
+ — that person is never surfaced or re-added. Do not record children's names, schools or ages;
+ "parent of a college student", where they've said it publicly, is enough.</p>
 </div>
 <script src="/_nav.js"></script>
 <script>
-mount("grow",{kicker:"Grow",title:"Prospect List",
- sub:"Named people, the signal that found them, and where each stands."});
+mount("grow",{kicker:"Grow",title:"Relationship Desk",
+ sub:"Real people — links, why they fit, and where each relationship stands."});
 document.getElementById("lockslot").innerHTML=lockbar(); wireLock();
-const S=["found","researched","engaged","replied","warm","reader","passed"];
+const S=["discovered","learning","worth-knowing","engaging","conversation","invited","ongoing"];
 let ROWS=[],PN={},filter=(new URLSearchParams(location.search).get("persona")||"");
 function draw(){
  const q=document.getElementById("q").value.toLowerCase().trim();
@@ -48,7 +50,7 @@ function draw(){
  document.getElementById("rows").innerHTML=rows.length?rows.reverse().map(r=>
   `<tr><td>${r.url?`<a href="${r.url}" target="_blank" rel="noopener noreferrer nofollow">${r.handle}</a>`:r.handle}</td>
    <td>${PN[r.persona]||r.persona}</td><td>${(r.signal||"").replace(/</g,"&lt;")}</td>
-   <td><span class="pill ${r.stage==="reader"?"on":(r.stage==="passed"?"no":"")}">${r.stage}</span></td>
+   <td><span class="pill ${["ongoing","reader","creator","partner"].includes(r.stage)?"on":(r.stage==="do-not-contact"?"no":"")}">${(r.stage||"").replace(/-/g," ")}</span></td>
    <td>${r.by}</td></tr>`).join("")
   :'<tr><td colspan="5" style="color:var(--gray)">Nobody on the list yet. Start with one real person you already know fits.</td></tr>';
 }

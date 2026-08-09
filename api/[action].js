@@ -20,6 +20,8 @@ const ROUTES = {
   persona:       require("./_handlers/persona"),
   prospect:      require("./_handlers/prospect"),
   outreach:      require("./_handlers/outreach"),
+  territory:     require("./_handlers/territory"),
+  message:       require("./_handlers/message"),
 };
 module.exports = async (req, res) => {
   const action = String((req.query && req.query.action) || "").toLowerCase();

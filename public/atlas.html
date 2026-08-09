@@ -1,0 +1,40 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Audience Atlas — Between Sundays HQ</title>
+<link rel="stylesheet" href="/ws.css"/></head><body>
+<div class="wrap">
+ <div class="slug">How we understand people</div>
+ <p class="lede">Territories are the worlds. Persona groups are the recognisable types inside them.
+ Life moments are what might be happening right now. Signals are the public clues that suggest
+ someone's in one. <strong>This is the model layer — no real person lives here.</strong> Actual
+ people are individuals and live in the <a href="/desk.html">Relationship Desk</a>.</p>
+ <p style="font-size:13.5px;color:var(--gray)">Every group stays a <strong>hypothesis</strong> until
+ real conversations support it. Nothing gets quietly promoted to fact because it sounded right.</p>
+ <div id="lockslot"></div>
+ <div id="out"></div>
+</div>
+<script src="/_nav.js"></script>
+<script>
+mount("grow",{kicker:"Grow",title:"Audience Atlas",
+ sub:"Territories, persona groups, life moments, signals."});
+document.getElementById("lockslot").innerHTML=lockbar(); wireLock();
+(async()=>{
+ const o=document.getElementById("out");
+ if(!getKey()){o.innerHTML="";return;}
+ const [traw,praw,pros]=await Promise.all([state("territories.jsonl"),
+   state("personas.jsonl"),state("prospects.jsonl")]);
+ const T={};(traw||[]).forEach(t=>T[t.id]=t);
+ const P={};(praw||[]).forEach(p=>P[p.id]=p);
+ const people=(pros||[]);
+ o.innerHTML=Object.values(T).map(t=>{
+  const groups=Object.values(P).filter(p=>p.territory===t.id);
+  const n=people.filter(x=>groups.some(g=>g.id===x.persona)).length;
+  return `<a class="terr" href="/territory.html?id=${t.id}" style="border-left-color:${t.ink}">
+   <h3>${t.name}</h3><p>${t.blurb}</p>
+   <div class="cnt"><span><b>${groups.length}</b> persona groups</span>
+    <span><b>${(t.moments||[]).length}</b> life moments</span>
+    <span><b>${groups.reduce((a,g)=>a+(g.signals||[]).length,0)}</b> signals</span>
+    <span><b>${n}</b> people</span></div></a>`;}).join("")
+  ||'<p style="color:var(--gray)">No territories yet.</p>';
+})();
+</script></body></html>

@@ -24,6 +24,18 @@ module.exports = async (req, res) => {
     objection: String(b.objection || "").slice(0, 500),
     refs: (b.refs || []).slice(0, 6).map(s => String(s).slice(0, 60)),
     size: String(b.size || "").slice(0, 120),
+    territory: String(b.territory || "").slice(0, 40),
+    moments: (b.moments || []).slice(0, 10).map(s => String(s).slice(0, 200)),
+    theirWords: (b.theirWords || []).slice(0, 14).map(s => String(s).slice(0, 90)),
+    avoidWords: (b.avoidWords || []).slice(0, 14).map(s => String(s).slice(0, 90)),
+    notice: String(b.notice || "").slice(0, 500),
+    distrust: String(b.distrust || "").slice(0, 500),
+    reads: (b.reads || []).slice(0, 12).map(s => String(s).slice(0, 120)),
+    offers: (b.offers || []).slice(0, 10).map(s => String(s).slice(0, 200)),
+    open: (b.open || []).slice(0, 10).map(s => String(s).slice(0, 240)),
+    // Every group stays a HYPOTHESIS until real conversations support it. Never quietly promoted.
+    evidence: ["hypothesis","some-evidence","supported"].includes(b.evidence) ? b.evidence : "hypothesis",
+    evidenceNote: String(b.evidenceNote || "").slice(0, 600),
   };
   await appendLine("personas.jsonl", JSON.stringify(rec), `persona: ${rec.name} · ${who}`);
   await appendLine("feed.jsonl",

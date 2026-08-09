@@ -1,0 +1,39 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Territory — Between Sundays HQ</title>
+<link rel="stylesheet" href="/ws.css"/></head><body>
+<div class="wrap"><div id="b"></div></div>
+<script src="/_nav.js"></script>
+<script>
+const ID=(new URLSearchParams(location.search).get("id")||"").trim();
+(async()=>{
+ const traw=(await state("territories.jsonl"))||[];
+ const T={};traw.forEach(x=>T[x.id]=x); const t=T[ID];
+ mount("grow",{kicker:"Grow · audience territory",title:t?t.name:"Territory",
+  sub:t?t.blurb.slice(0,120):"Not found"});
+ const b=document.getElementById("b");
+ if(!getKey()){b.innerHTML=lockbar();wireLock();return;}
+ if(!t){b.innerHTML='<p style="color:var(--gray)">No such territory. <a href="/atlas.html">Back</a>.</p>';return;}
+ const praw=(await state("personas.jsonl"))||[];
+ const P={};praw.forEach(p=>P[p.id]=p);
+ const groups=Object.values(P).filter(p=>p.territory===ID);
+ b.innerHTML=`
+  <div class="slug" style="color:${t.ink}">The world</div>
+  <p class="lede">${t.blurb}</p>
+  <div class="slug">Life moments — what may be happening right now</div>
+  <ul class="sigs">${(t.moments||[]).map(m=>`<li>${m}</li>`).join("")}</ul>
+  <div class="slug">Persona groups in this territory</div>
+  <div class="pcards">${groups.map(p=>`
+   <a class="pc" href="/persona.html?id=${p.id}" style="border-top-color:${p.ink}">
+    <div class="phead"><div class="port" style="color:${p.ink}">${(p.face||p.name[4]||"·")}</div>
+     <div><div class="code">${p.size||""}</div><h3 style="margin-top:4px">${p.name}</h3></div></div>
+    <p>${(p.who||"").slice(0,140)}…</p>
+    <div class="sig"><span><b>${(p.signals||[]).length}</b> signals</span>
+     <span><b>${(p.recipes||[]).length}</b> recipes</span>
+     <span class="hyp ${p.evidence==="supported"?"sup":""}">${p.evidence||"hypothesis"}</span></div></a>`).join("")
+   ||'<p style="color:var(--gray)">No groups defined in this territory yet.</p>'}</div>
+  <div class="slug">Open questions</div>
+  <div class="blank"><div class="t">Unanswered</div>
+   <ol class="qs">${(t.questions||[]).map(q=>`<li>${q}</li>`).join("")}</ol></div>`;
+})();
+</script></body></html>

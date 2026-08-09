@@ -1,0 +1,55 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>The Signal List — Between Sundays HQ</title>
+<link rel="stylesheet" href="/ws.css"/></head><body>
+<div class="wrap">
+ <div class="slug">The prospecting brief</div>
+ <p class="lede">Every signal across every persona group, on one page. This is the document you hand
+ an agent and say <em>go find me a hundred people who match this</em> — and the document a human
+ reads before opening a single profile.</p>
+ <div class="blank"><div class="t">What a signal is, and isn't</div>
+  <p>A signal is <strong>something a person chose to publish</strong> — a caption, a tagged church,
+  a bio line. It is never a guess, a demographic, or an inference from who someone is related to.
+  There is no faith score here and there never will be. We record the post; we don't grade the person.</p></div>
+ <div id="lockslot"></div>
+ <div id="out"></div>
+ <div class="slug">How to run it</div>
+ <ul>
+  <li><strong>Permitted search and human reading only.</strong> LinkedIn's User Agreement forbids
+   scripts, bots and crawlers against profiles, and forbids automated messaging — so we search and
+   read like a person. No scrapers, ever.</li>
+  <li><strong>One person, one message, a real reason.</strong> No sequences, no volume sends.</li>
+  <li><strong>Anything commercial by email</strong> carries accurate sender details and a working
+   opt-out (CAN-SPAM applies to individual messages, not just blasts).</li>
+  <li><strong>If a creator receives anything of value</strong> — free issues included — the
+   relationship gets disclosed clearly in whatever they post. That's FTC guidance and it's also
+   just the honest version.</li>
+  <li><strong>An opt-out is permanent.</strong> Mark them <code>do not contact</code> and they're
+   never surfaced again.</li>
+ </ul>
+</div>
+<script src="/_nav.js"></script>
+<script>
+mount("grow",{kicker:"Grow",title:"The Signal List",
+ sub:"What a Between Sundays reader looks like, before you open the profile."});
+document.getElementById("lockslot").innerHTML=lockbar(); wireLock();
+(async()=>{
+ const o=document.getElementById("out");
+ if(!getKey()){o.innerHTML="";return;}
+ const praw=(await state("personas.jsonl"))||[];
+ const P={};praw.forEach(p=>P[p.id]=p);
+ const groups=Object.values(P);
+ o.innerHTML=groups.map(p=>`
+  <div class="slug" style="color:${p.ink}">${p.name}</div>
+  <ul class="sigs">${(p.signals||[]).map(s=>`<li>${s}</li>`).join("")}</ul>
+  <p style="font-family:var(--san);font-size:10px;font-weight:800;letter-spacing:.15em;
+   text-transform:uppercase;color:var(--gray);margin-top:14px">Search recipes</p>
+  ${(p.recipes||[]).map(r=>`<div class="recipe">${r.replace(/</g,"&lt;")}</div>`).join("")}
+  <p style="font-family:var(--san);font-size:10px;font-weight:800;letter-spacing:.15em;
+   text-transform:uppercase;color:var(--gray);margin-top:14px">Their words / our banned words</p>
+  <div class="words">${(p.theirWords||[]).map(w=>`<span class="wd">${w}</span>`).join("")}
+   ${(p.avoidWords||[]).map(w=>`<span class="wd no">${w}</span>`).join("")}</div>
+  <p style="font-size:13px"><a href="/persona.html?id=${p.id}">Open the full card →</a></p>`).join("")
+  ||'<p style="color:var(--gray)">No personas defined yet.</p>';
+})();
+</script></body></html>
