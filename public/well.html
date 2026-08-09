@@ -3,59 +3,85 @@
 <title>The Well — Between Sundays HQ</title>
 <link rel="stylesheet" href="/ws.css"/></head><body>
 <div class="wrap">
- <div class="slug">Drop something in</div>
- <p class="lede">A word. A phrase. A thought you'd have written in a journal. You don't have to
- know what it's for — that's the point. Everyone else, people and agents, comes along and builds
- on it: what's the story, how far could it go, what's the modern parable, what do you see. Then
- it gets pulled into an issue, a product, a campaign.</p>
- <blockquote>Jacob went on to the land of the people of the East. He looked, and there was a well
- in the field. <span style="font-style:normal;font-family:var(--san);font-size:11px;
- letter-spacing:.1em;color:var(--gray)">GENESIS 29:1–2</span></blockquote>
+ <div class="slug">Drop it here. Draw from it later.</div>
+ <p class="lede">The shared creative memory. A word, a phrase, a ramble, a photo of a notebook —
+ it goes in raw and nobody has to know what it's for. Then people and agents build around it
+ without ever rewriting what you meant. Later it gets pulled into an issue, a product, a campaign.</p>
+ <blockquote>Jacob looked, and there was a well in the field.
+  <span style="font-style:normal;font-family:var(--san);font-size:11px;letter-spacing:.1em;
+  color:var(--gray)">GENESIS 29:2</span></blockquote>
  <div id="lockslot"></div>
- <div class="drop" id="drop" style="display:none">
-  <input id="word" placeholder="The word or phrase…"/>
-  <textarea id="note" rows="3" placeholder="Ramble if you want. Or leave it blank and let someone else find it."></textarea>
-  <button id="go" style="border:1px solid var(--ink);background:var(--ink);color:#fff;
-   padding:11px 22px;font-family:var(--san);font-size:11px;font-weight:800;letter-spacing:.13em;
-   text-transform:uppercase;cursor:pointer">Drop it in the well</button>
- </div>
- <div class="slug">What's in the well</div>
- <p id="count" style="font-size:13px;color:var(--gray)"></p>
+ <div class="views" id="views"></div>
+ <p id="count" style="font-size:13px;color:var(--gray);margin-top:12px"></p>
  <input class="srch" id="q" placeholder="Search the well…"/>
- <div class="seeds" id="seeds"></div>
+ <div id="out"></div>
 </div>
 <script src="/_nav.js"></script>
 <script>
-mount("build",{kicker:"Build",title:"The Well",
- sub:"Drop it in raw. Come back and draw from it."});
+mount("well",{kicker:"The Well",title:"The Well",sub:"Drop it here. Draw from it later."});
 document.getElementById("lockslot").innerHTML=lockbar(); wireLock();
-let SEEDS=[],GROWN={};
-function draw(f){
- const q=(f||"").toLowerCase().trim();
- const rows=SEEDS.filter(s=>!q||s.word.toLowerCase().includes(q)||(s.note||"").toLowerCase().includes(q));
+const VIEWS=[["drops","Drops"],["developing","Developing"],["story-ready","Story ready"],
+ ["constellations","Constellations"],["ready-to-pull","Ready to pull"],
+ ["sleeping","Sleeping"],["used","Used"]];
+let SEEDS=[],GROWN={},VERSES={},ST={},RX={},CONS=[],view="drops",filter="";
+function statusOf(id){return ST[id]||"raw";}
+function card(s){
+ const n=GROWN[s.id]||0, v=(VERSES[s.id]||[]).length, st=statusOf(s.id);
+ const hot=(RX[s.id]||[]).filter(r=>["something-here","build-this","push-further"].includes(r.reaction)).length;
+ return `<a class="seed ${n?"grown":"raw"}" href="/seed.html?id=${s.id}">
+  <div class="w">${s.word}</div>
+  ${s.note?`<div class="n">${s.note.slice(0,80).replace(/</g,"&lt;")}${s.note.length>80?"…":""}</div>`:""}
+  <div class="m"><span>${s.by}</span>
+   ${n?`<b>${n} built on</b>`:"<span>untouched</span>"}
+   ${v?`<b style="color:var(--green)">${v} verse${v===1?"":"s"}</b>`:""}
+   ${hot?`<b style="color:var(--red)">${hot}★</b>`:""}
+   ${st!=="raw"?`<span>${st}</span>`:""}</div></a>`;
+}
+function draw(){
+ const q=filter.toLowerCase().trim();
+ const out=document.getElementById("out");
+ const match=s=>!q||s.word.toLowerCase().includes(q)||(s.note||"").toLowerCase().includes(q);
+ if(view==="constellations"){
+  document.getElementById("count").textContent=
+   `${CONS.length} constellation${CONS.length===1?"":"s"} — separate drops that turn out to be one story`;
+  out.innerHTML=CONS.length?CONS.map(c=>{
+   const members=c.ids.map(i=>SEEDS.find(s=>s.id===i)).filter(Boolean);
+   return `<div class="slug">${c.name}</div>
+    ${c.note?`<p>${c.note.replace(/</g,"&lt;")}</p>`:""}
+    <p style="font-size:12px;color:var(--gray)">Grouped by ${c.by} · ${(c.at||"").slice(0,10)}</p>
+    <div class="seeds">${members.map(card).join("")}</div>`;}).join("")
+   :'<p style="color:var(--gray)">No constellations yet.</p>';
+  return;}
+ let rows=SEEDS.filter(match);
+ if(view!=="drops") rows=rows.filter(s=>statusOf(s.id)===view);
  document.getElementById("count").textContent=
-  `${SEEDS.length} seeds · ${Object.values(GROWN).filter(n=>n>0).length} have been built on`;
- document.getElementById("seeds").innerHTML=rows.map(s=>{
-  const n=GROWN[s.id]||0;
-  return `<a class="seed ${n?"grown":"raw"}" href="/seed.html?id=${s.id}">
-   <div class="w">${s.word}</div>
-   ${s.note?`<div class="n">${s.note.slice(0,86).replace(/</g,"&lt;")}${s.note.length>86?"…":""}</div>`:""}
-   <div class="m"><span>${s.by}</span>${n?`<b>${n} built on</b>`:"<span>untouched</span>"}</div></a>`;
- }).join("")||'<div style="padding:20px;color:var(--gray)">Nothing matches.</div>';
+  view==="drops"
+   ? `${rows.length} drops · ${Object.values(GROWN).filter(n=>n>0).length} built on · `+
+     `${Object.values(VERSES).filter(v=>v.length).length} traced to scripture`
+   : `${rows.length} in ${view.replace(/-/g," ")}`;
+ out.innerHTML=rows.length?`<div class="seeds">${rows.map(card).join("")}</div>`
+  :`<p style="color:var(--gray);padding:16px 0">Nothing here yet.</p>`;
 }
 (async()=>{
- if(!getKey()){document.getElementById("seeds").innerHTML=
-   '<div style="padding:20px;color:var(--gray)">Locked.</div>';return;}
- document.getElementById("drop").style.display="block";
- document.getElementById("go").onclick=async()=>{
-  const w=document.getElementById("word").value.trim();
-  if(w.length<2){alert("Give it a word.");return;}
-  await api("seed",{word:w,note:document.getElementById("note").value.trim()});
-  location.reload();};
- SEEDS=((await state("well.jsonl"))||[]).reverse();
+ if(!getKey()){document.getElementById("out").innerHTML=
+   '<p style="color:var(--gray)">Locked.</p>';return;}
+ document.getElementById("views").innerHTML=VIEWS.map(([k,l])=>
+  `<button data-v="${k}" class="${k===view?"on":""}">${l}</button>`).join("");
+ document.querySelectorAll(".views button").forEach(b=>b.onclick=()=>{
+  view=b.dataset.v;
+  document.querySelectorAll(".views button").forEach(x=>x.classList.toggle("on",x===b));
+  draw();});
+ const [seeds,st,rx,cons]=await Promise.all([state("well.jsonl"),state("statuses.jsonl"),
+   state("reactions.jsonl"),state("constellations.jsonl")]);
+ SEEDS=(seeds||[]).reverse();
+ (st||[]).forEach(x=>ST[x.id]=x.status);
+ (rx||[]).forEach(x=>(RX[x.id]=RX[x.id]||[]).push(x));
+ CONS=(cons||[]).reverse();
  await Promise.all(SEEDS.map(async s=>{
-  const g=await state(`well/${s.id}.jsonl`); GROWN[s.id]=(g||[]).length;}));
- draw("");
- document.getElementById("q").addEventListener("input",e=>draw(e.target.value));
+  const g=await state(`well/${s.id}.jsonl`)||[];
+  GROWN[s.id]=g.length;
+  VERSES[s.id]=[...new Set(g.flatMap(x=>x.refs||[]))];}));
+ draw();
+ document.getElementById("q").addEventListener("input",e=>{filter=e.target.value;draw();});
 })();
 </script></body></html>

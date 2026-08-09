@@ -11,7 +11,8 @@ const PILLARS=[
  {id:"company", label:"Company", href:"/company.html",
   blurb:"The shared understanding behind every decision."},
 ];
-const EXTRA=[{id:"inbox",label:"Inbox",href:"/inbox.html"},
+const EXTRA=[{id:"well",label:"The Well",href:"/well.html"},
+             {id:"inbox",label:"Inbox",href:"/inbox.html"},
              {id:"activity",label:"Activity",href:"/activity.html"}];
 /* Rooms. live:true = built. Otherwise it renders as an honest blank space. */
 const ROOMS=[
@@ -140,7 +141,8 @@ const ROOMS=[
 ];
 function plate(cur,{kicker,title,sub}={}){
  const d=new Date().toLocaleDateString("en-US",{weekday:"long",year:"numeric",month:"long",day:"numeric"});
- const nav=[{id:"index",label:"HQ",href:"/"},...PILLARS,...EXTRA];
+ const well=EXTRA[0];
+ const nav=[{id:"index",label:"HQ",href:"/"},well,...PILLARS,...EXTRA.slice(1)];
  return `<div class="wrap"><div class="plate">
    <div class="kicker">${kicker||"Between Sundays HQ"}</div>
    <h1>${title||"Between Sundays"}</h1>
@@ -157,7 +159,40 @@ function foot(){return `<div class="wrap"><footer>
    <a href="/how-we-work.html">Contribute</a></span></footer></div>`;}
 function mount(cur,opts){
  document.body.insertAdjacentHTML("afterbegin",plate(cur,opts));
- document.body.insertAdjacentHTML("beforeend",foot());}
+ document.body.insertAdjacentHTML("beforeend",foot());
+ quickDrop();}
+/* Quick Drop — on every page in the workspace. Capture must be easier than organising. */
+function quickDrop(){
+ if(document.getElementById("qd")) return;
+ document.body.insertAdjacentHTML("beforeend",`
+  <button id="qdbtn" title="Drop a thought in The Well">Drop a thought</button>
+  <div id="qd"><div class="box">
+    <div class="hd">Drop it here. Draw from it later.</div>
+    <textarea id="qdtxt" rows="4" placeholder="A word. A phrase. A ramble. No title needed."></textarea>
+    <div class="row"><button id="qdgo">Drop it in</button>
+     <button id="qdx" class="ghost">Cancel</button>
+     <span id="qdmsg"></span></div>
+  </div></div>`);
+ const w=document.getElementById("qd");
+ document.getElementById("qdbtn").onclick=()=>{
+  if(!getKey()){alert("Enter your workspace key on any page first.");return;}
+  w.classList.add("on");document.getElementById("qdtxt").focus();};
+ document.getElementById("qdx").onclick=()=>w.classList.remove("on");
+ w.onclick=e=>{if(e.target===w)w.classList.remove("on");};
+ document.getElementById("qdgo").onclick=async()=>{
+  const t=document.getElementById("qdtxt").value.trim();
+  if(t.length<2){return;}
+  const first=t.split(/[\n.!?]/)[0].trim();
+  const word=first.length<=60?first:first.slice(0,60);
+  const msg=document.getElementById("qdmsg");
+  msg.textContent="dropping…";
+  try{await api("seed",{word,note:t.length>word.length?t:""});
+   msg.textContent="in the well ✓";
+   document.getElementById("qdtxt").value="";
+   setTimeout(()=>{w.classList.remove("on");msg.textContent="";},900);
+  }catch{msg.textContent="";}};
+ document.addEventListener("keydown",e=>{
+  if(e.key==="Escape")w.classList.remove("on");});}
 /* ---- shared key + private state ---- */
 const KEYST="bts-agent-key";
 function getKey(){return (localStorage.getItem(KEYST)||"").trim();}

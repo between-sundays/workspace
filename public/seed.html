@@ -6,56 +6,89 @@
 <script src="/_nav.js"></script>
 <script>
 const ID=(new URLSearchParams(location.search).get("id")||"").trim();
-const LENSES=[["STORY","What's the story here?"],["BLUE-SKY","How far could this go?"],
- ["PARABLE","Modernize it — what's the parable?"],["VISUAL","What do you see?"],
- ["SCRIPTURE","Where does the Bible say this? (reference required)"],
- ["DESTINATION","Which issue, page or product could carry it?"],
- ["QUESTION","What don't we know yet?"]];
+const LENSES=[
+ ["SOMETHING-HERE","What might be here — the tension, the thing that feels true"],
+ ["SCRIPTURE","Scripture trail — where the Bible actually says this (reference required)"],
+ ["STORY","The story — who's living it, what changed, what a reader recognises"],
+ ["PARABLE","The modern parable — the ordinary thing that explains it today"],
+ ["BLUE-SKY","Blue sky — how far could this travel"],
+ ["CREATIVE","Creative direction — headline, format, pull quote, type"],
+ ["VISUAL","Visual instincts — what you see on the page"],
+ ["CONNECTION","Connection — what else in the well is really the same story"],
+ ["DESTINATION","Where it could go — issue, product, campaign, merch"],
+ ["QUESTION","Open question — what we don't know yet"]];
+const RX=[["something-here","There's something here"],["push-further","Push this further"],
+ ["build-this","Build this"],["strong-visual","Strong visual"],["too-obvious","Too obvious"],
+ ["not-us","Doesn't sound like us"],["scripture-needs-work","Scripture needs work"],
+ ["save-for-later","Save for later"]];
+const ST=[["raw","Raw"],["developing","Developing"],["story-ready","Story ready"],
+ ["ready-to-pull","Ready to pull"],["sleeping","Sleeping"],["used","Used"]];
 (async()=>{
  const seeds=(await state("well.jsonl"))||[];
  const s=seeds.filter(x=>x.id===ID).pop();
- mount("build",{kicker:"The Well",title:s?s.word:"Seed",
-  sub:s?`Dropped by ${s.by} · ${(s.at||"").slice(0,10)}`:"Not found"});
+ mount("well",{kicker:"The Well",title:s?s.word:"Seed",
+  sub:s?`Dropped by ${s.by} · ${(s.at||"").slice(0,10)} · preserved exactly as written`:"Not found"});
  const b=document.getElementById("b");
  if(!getKey()){b.innerHTML=lockbar();wireLock();return;}
- if(!s){b.innerHTML='<p style="color:var(--gray)">No seed with that id. <a href="/well.html">Back to the well</a>.</p>';return;}
- const g=(await state(`well/${ID}.jsonl`))||[];
- const verses=[...new Set(g.flatMap(x=>x.refs||[]))];
+ if(!s){b.innerHTML='<p style="color:var(--gray)">No drop with that id. <a href="/well.html">Back to the well</a>.</p>';return;}
+ const [g,rx,st]=await Promise.all([state(`well/${ID}.jsonl`),state("reactions.jsonl"),
+   state("statuses.jsonl")]);
+ const grow=g||[];
+ const mine=(rx||[]).filter(r=>r.id===ID);
+ const status=((st||[]).filter(x=>x.id===ID).pop()||{}).status||"raw";
+ const verses=[...new Set(grow.flatMap(x=>x.refs||[]))];
+ const byLens={}; grow.forEach(x=>(byLens[x.lens]=byLens[x.lens]||[]).push(x));
+ const rxCount={}; mine.forEach(r=>rxCount[r.reaction]=(rxCount[r.reaction]||0)+1);
  b.innerHTML=`
-  <div class="slug">The seed</div>
-  <div style="font-size:44px;font-weight:900;letter-spacing:-.035em;text-transform:uppercase;
-   line-height:1">${s.word}</div>
-  ${s.note?`<p class="lede" style="margin-top:12px">${s.note.replace(/</g,"&lt;")}</p>`:""}
-  <p style="font-size:13px;color:var(--gray)">
-   ${g.length} contribution${g.length===1?"":"s"} ·
-   ${verses.length?`sourced to ${verses.length} verse${verses.length===1?"":"s"}`
-    :'<strong style="color:var(--red)">no verse attached yet</strong>'}</p>
+  <div class="slug">The original drop — never rewritten</div>
+  <div style="font-size:clamp(30px,5.4vw,50px);font-weight:900;letter-spacing:-.035em;
+   text-transform:uppercase;line-height:1">${s.word}</div>
+  ${s.note?`<p class="lede" style="margin-top:12px;white-space:pre-wrap">${s.note.replace(/</g,"&lt;")}</p>`:""}
+  <p style="font-size:13px;color:var(--gray);margin-top:10px">
+   ${grow.length} contribution${grow.length===1?"":"s"} ·
+   ${verses.length?`traced to ${verses.length} verse${verses.length===1?"":"s"}`
+    :'<strong style="color:var(--red)">not yet traced to scripture — it can\'t become a publication candidate until it is</strong>'}
+   · status <strong>${status}</strong></p>
   ${verses.length?`<div class="refs">${verses.map(v=>`<span class="ref">${v}</span>`).join("")}</div>`:""}
+  <div class="rx" id="rx">${RX.map(([k,l])=>
+    `<button data-r="${k}" class="${rxCount[k]?"hot":""}">${l}${rxCount[k]?` <span class="n">${rxCount[k]}</span>`:""}</button>`).join("")}</div>
+  <div style="margin-top:10px"><label style="font-family:var(--san);font-size:10px;font-weight:800;
+   letter-spacing:.14em;text-transform:uppercase;color:var(--gray)">Status </label>
+   <select id="st" style="border:1px solid var(--rule);padding:7px;font:14px var(--ser)">
+    ${ST.map(([k,l])=>`<option value="${k}" ${k===status?"selected":""}>${l}</option>`).join("")}</select></div>
+
   <div class="slug">Build on it</div>
   <div class="drop">
    <select id="lens" style="width:100%;border:1px solid var(--rule);padding:10px;
     font:15px var(--ser);margin-bottom:8px">
     ${LENSES.map(([k,l])=>`<option value="${k}">${l}</option>`).join("")}</select>
-   <textarea id="txt" rows="5" placeholder="Take it somewhere."></textarea>
-   <input id="refs" placeholder="Verses, comma separated — e.g. Genesis 28:16, Psalm 121:1"/>
+   <textarea id="txt" rows="5" placeholder="Take it somewhere. Your name goes on it."></textarea>
+   <input id="refs" placeholder="Verses, comma separated — e.g. Romans 12:6, 1 Peter 4:10"/>
    <button id="go" style="border:1px solid var(--ink);background:var(--ink);color:#fff;
     padding:11px 22px;font-family:var(--san);font-size:11px;font-weight:800;letter-spacing:.13em;
-    text-transform:uppercase;cursor:pointer">Add to the seed</button>
+    text-transform:uppercase;cursor:pointer">Add to the drop</button>
   </div>
-  <div class="slug">What it's grown into</div>
+  <div class="slug">The seed card</div>
   <div id="list"></div>`;
+ document.getElementById("rx").querySelectorAll("button").forEach(btn=>btn.onclick=async()=>{
+  await api("react",{id:ID,reaction:btn.dataset.r});location.reload();});
+ document.getElementById("st").onchange=async e=>{
+  await api("status",{id:ID,status:e.target.value});location.reload();};
  document.getElementById("go").onclick=async()=>{
   const t=document.getElementById("txt").value.trim();
   if(t.length<10){alert("A little more than that.");return;}
   await api("grow",{id:ID,lens:document.getElementById("lens").value,text:t,
    refs:document.getElementById("refs").value.split(",").map(x=>x.trim()).filter(Boolean)});
   location.reload();};
- document.getElementById("list").innerHTML=g.length?g.map(x=>
-  `<div class="grow"><span class="lens">${x.lens}</span><span class="by">${x.by} ·
-   ${(x.at||"").slice(0,10)}</span>
-   <p>${x.text.replace(/</g,"&lt;").replace(/\n{2,}/g,"</p><p>")}</p>
-   ${(x.refs||[]).length?`<div class="refs">${x.refs.map(r=>`<span class="ref">${r}</span>`).join("")}</div>`:""}
-   </div>`).join("")
-  :'<p style="color:var(--gray)">Nobody has built on this yet. Be the first.</p>';
+ const L=document.getElementById("list");
+ L.innerHTML=grow.length?LENSES.filter(([k])=>byLens[k]).map(([k,l])=>
+   `<div class="slug" style="color:var(--ink)">${l}</div>`+
+   byLens[k].map(x=>`<div class="grow"><span class="lens">${x.lens}</span>
+     <span class="by">${x.by} · ${(x.at||"").slice(0,10)}</span>
+     <p>${x.text.replace(/</g,"&lt;").replace(/\n{2,}/g,"</p><p>")}</p>
+     ${(x.refs||[]).length?`<div class="refs">${x.refs.map(r=>`<span class="ref">${r}</span>`).join("")}</div>`:""}
+    </div>`).join("")).join("")
+  :`<p style="color:var(--gray)">Nobody has built on this yet. The card fills in as people and
+    agents add to it — story, scripture, parable, blue sky, visuals. Be the first.</p>`;
 })();
 </script></body></html>
