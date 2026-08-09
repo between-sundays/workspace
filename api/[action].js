@@ -22,6 +22,7 @@ const ROUTES = {
   outreach:      require("./_handlers/outreach"),
   territory:     require("./_handlers/territory"),
   message:       require("./_handlers/message"),
+  assignment:    require("./_handlers/assignment"),
 };
 module.exports = async (req, res) => {
   const action = String((req.query && req.query.action) || "").toLowerCase();

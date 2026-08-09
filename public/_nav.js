@@ -168,7 +168,7 @@ function foot(){return `<div class="wrap"><footer>
 function mount(cur,opts){
  document.body.insertAdjacentHTML("afterbegin",plate(cur,opts));
  document.body.insertAdjacentHTML("beforeend",foot());
- quickDrop();}
+ quickDrop(); addPerson();}
 /* Quick Drop — on every page in the workspace. Capture must be easier than organising. */
 function quickDrop(){
  if(document.getElementById("qd")) return;
@@ -201,6 +201,51 @@ function quickDrop(){
   }catch{msg.textContent="";}};
  document.addEventListener("keydown",e=>{
   if(e.key==="Escape")w.classList.remove("on");});}
+/* Add Person — paste a profile link anywhere in the workspace, pick the groups, done.
+   An agent enriches it afterwards. Every record needs a written reason it fits. */
+function addPerson(){
+ if(document.getElementById("ap")) return;
+ document.body.insertAdjacentHTML("beforeend",`
+  <button id="apbtn" title="Add a person to a group">Add person</button>
+  <div id="ap"><div class="box">
+   <div class="hd">Add a person</div>
+   <input id="apname" placeholder="Name or @handle"/>
+   <input id="apurl" placeholder="Profile URL — paste any social link"/>
+   <div id="apgroups" style="margin:8px 0"></div>
+   <textarea id="apwhy" rows="3" placeholder="Why do they fit? Quote the public post. Required."></textarea>
+   <input id="apev" placeholder="Link(s) to the posts that prove it, comma separated"/>
+   <div class="row"><button id="apgo">Add</button>
+    <button id="apx" class="ghost">Cancel</button><span id="apmsg"></span></div>
+  </div></div>`);
+ const w=document.getElementById("ap");
+ document.getElementById("apbtn").onclick=async()=>{
+  if(!getKey()){alert("Enter your workspace key first.");return;}
+  const praw=(await state("personas.jsonl"))||[];
+  const P={}; praw.forEach(p=>P[p.id]=p);
+  document.getElementById("apgroups").innerHTML=Object.values(P).map(p=>
+   `<label style="display:inline-flex;gap:5px;align-items:center;margin:0 12px 6px 0;
+     font:13px var(--ser)"><input type="checkbox" value="${p.id}" style="width:auto"/>
+     ${p.name}</label>`).join("")||"<em>No groups defined yet.</em>";
+  w.classList.add("on"); document.getElementById("apname").focus();};
+ document.getElementById("apx").onclick=()=>w.classList.remove("on");
+ w.onclick=e=>{if(e.target===w)w.classList.remove("on");};
+ document.getElementById("apgo").onclick=async()=>{
+  const g=id=>document.getElementById(id).value.trim();
+  const groups=[...document.querySelectorAll("#apgroups input:checked")].map(x=>x.value);
+  const msg=document.getElementById("apmsg");
+  if(!g("apname")){msg.textContent="who?";return;}
+  if(!groups.length){msg.textContent="pick a group";return;}
+  if(g("apwhy").length<10){msg.textContent="say why they fit";return;}
+  msg.textContent="adding…";
+  try{
+   await api("prospect",{handle:g("apname"),persona:groups,url:g("apurl"),
+    links:g("apurl")?[g("apurl")]:[],fit:g("apwhy"),signal:g("apwhy"),
+    evidence:g("apev").split(",").map(x=>x.trim()).filter(Boolean),stage:"found"});
+   msg.textContent="added ✓";
+   ["apname","apurl","apwhy","apev"].forEach(i=>document.getElementById(i).value="");
+   setTimeout(()=>{w.classList.remove("on");msg.textContent="";location.reload();},700);
+  }catch{msg.textContent="";}};}
+
 /* ---- shared key + private state ---- */
 const KEYST="bts-agent-key";
 function getKey(){return (localStorage.getItem(KEYST)||"").trim();}

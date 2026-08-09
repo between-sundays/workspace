@@ -88,21 +88,49 @@ const ID=(new URLSearchParams(location.search).get("id")||"").trim();
     padding:11px 22px;font-family:var(--san);font-size:11px;font-weight:800;letter-spacing:.13em;
     text-transform:uppercase;cursor:pointer">Add this person</button>
   </div>
+  <div class="slug">Agent discovery queue</div>
+  <div id="asn"></div>
+  <div class="drop" style="margin-top:12px">
+   <textarea id="brief" rows="3" placeholder="Brief for an agent — e.g. Find 25 publicly identifiable people who fit this group in the Birmingham metro. For each: name, working profile links, why they fit, links to the public posts that prove it, confidence, and next research step."></textarea>
+   <input id="target" placeholder="How many (default 25)" style="width:200px"/>
+   <button id="asngo" style="border:1px solid var(--ink);background:var(--ink);color:#fff;
+    padding:11px 22px;font-family:var(--san);font-size:11px;font-weight:800;letter-spacing:.13em;
+    text-transform:uppercase;cursor:pointer">Post the assignment</button>
+  </div>
   <div class="slug">Open questions</div>
   <div class="blank"><div class="t">What we still don't know</div>
    <ol class="qs">${(p.open||[]).map(q=>`<li>${q}</li>`).join("")}</ol></div>`;
  const L=Object.values(latest);
  document.getElementById("ppl").innerHTML=L.length?
   `<table class="tb"><thead><tr><th style="width:150px">Who</th><th>Why they fit</th>
-   <th style="width:96px">Reach</th><th style="width:118px">Stage</th><th style="width:150px">Next</th>
+   <th style="width:96px">Reach</th><th style="width:88px">Confidence</th><th style="width:118px">Stage</th><th style="width:150px">Next</th>
    </tr></thead><tbody>${L.reverse().map(x=>
    `<tr><td>${x.url?`<a href="${x.url}" target="_blank" rel="noopener noreferrer nofollow">${x.handle}</a>`:x.handle}
-     ${x.role?`<div style="font-size:11.5px;color:var(--gray)">${x.role}</div>`:""}</td>
-    <td>${(x.signal||"").replace(/</g,"&lt;")}</td>
+     ${x.role?`<div style="font-size:11.5px;color:var(--gray)">${x.role}</div>`:""}
+     ${(x.personas||[]).length>1?`<div style="font-size:10.5px;color:var(--gray)">also: ${
+       (x.personas||[]).filter(g=>g!==ID).map(g=>(P[g]||{}).name||g).join(", ")}</div>`:""}
+     <div style="font-size:10.5px;color:var(--gray)">found by ${x.foundBy||x.by} · ${x.verified||(x.at||"").slice(0,10)}</div></td>
+    <td>${(x.fit||x.signal||"").replace(/</g,"&lt;")}
+     ${(x.evidence||[]).length?`<div style="margin-top:5px">${x.evidence.map((e,i)=>
+       `<a href="${e}" target="_blank" rel="noopener noreferrer nofollow" class="pill">evidence ${i+1}</a>`).join(" ")}</div>`:
+       '<div style="margin-top:5px"><span class="pill no">no source link</span></div>'}</td>
     <td>${x.reach||"—"}</td>
+    <td><span class="pill ${x.confidence==="high"?"on":(x.confidence==="low"?"no":"")}">${x.confidence||"low"}</span></td>
     <td><span class="pill ${["ongoing","reader","creator","partner"].includes(x.stage)?"on":(x.stage==="do-not-contact"?"no":"")}">${(x.stage||"").replace(/-/g," ")}</span></td>
     <td style="font-size:12.5px">${x.next||""}</td></tr>`).join("")}</tbody></table>`
   :'<p style="color:var(--gray)">Nobody in this group yet. Add the first real person — or ask an agent to go find them.</p>';
+ const asn=((await state("assignments.jsonl"))||[]).filter(a=>a.persona===ID);
+ document.getElementById("asn").innerHTML=asn.length?asn.slice().reverse().map(a=>
+  `<div class="grow"><span class="lens">${a.status}</span>
+   <span class="by">${a.by} · find ${a.target} · ${(a.at||"").slice(0,10)}</span>
+   <p>${a.brief.replace(/</g,"&lt;")}</p></div>`).join("")
+  :'<p style="color:var(--gray)">No assignment posted. Write one and any agent can pick it up — '+
+   'every candidate they return must carry working links, a written reason, and the public posts that prove it.</p>';
+ document.getElementById("asngo").onclick=async()=>{
+  const t=document.getElementById("brief").value.trim();
+  if(t.length<20){alert("Write the brief.");return;}
+  await api("assignment",{persona:ID,brief:t,target:document.getElementById("target").value.trim()||25});
+  location.reload();};
  document.getElementById("add").onclick=async()=>{
   const h=document.getElementById("handle").value.trim();
   const sg=document.getElementById("signal").value.trim();

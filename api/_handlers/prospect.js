@@ -2,7 +2,7 @@
 // A staging list, NOT a CRM — it exports. Record what was publicly observed and why they fit;
 // do not store inferences about someone's beliefs, health, politics or anything like it.
 const { auth, cors, appendLine, bad } = require("../_lib");
-const STAGE = ["discovered","learning","worth-knowing","engaging","conversation","invited",
+const STAGE = ["found","researching","qualified","priority","engaging","conversation","invited",
                "reader","creator","partner","ongoing","do-not-contact"];
 module.exports = async (req, res) => {
   cors(res);
@@ -12,7 +12,9 @@ module.exports = async (req, res) => {
   if (!who) return bad(res, 401, "unknown or missing x-agent-key");
   const b = req.body || {};
   if (!b.handle) return bad(res, 400, "handle required");
-  if (!b.persona) return bad(res, 400, "persona required");
+  if (!b.persona) return bad(res, 400, "persona required (one group id, or an array of them)");
+  // Every group assignment must be explained and sourced. No unexplained rows, from anyone.
+  if (!b.signal && !b.fit) return bad(res, 400, "say why they fit — quote the public post");
   if (b.stage && !STAGE.includes(b.stage)) return bad(res, 400, "stage must be " + STAGE.join("|"));
   const rec = { at: new Date().toISOString(), by: who,
     handle: String(b.handle).slice(0, 80),
@@ -24,6 +26,14 @@ module.exports = async (req, res) => {
     reach: String(b.reach || "").slice(0, 60),
     owner: String(b.owner || who).slice(0, 20),
     permission: String(b.permission || "none").slice(0, 40),
+    links: (b.links || []).slice(0, 8).map(x => String(x).slice(0, 400)),   // every public profile
+    evidence: (b.evidence || []).slice(0, 8).map(x => String(x).slice(0, 400)), // links to the posts
+    topics: (b.topics || []).slice(0, 10).map(x => String(x).slice(0, 60)),
+    confidence: ["low","medium","high"].includes(b.confidence) ? b.confidence : "low",
+    foundBy: String(b.foundBy || who).slice(0, 20),
+    verified: String(b.verified || new Date().toISOString().slice(0,10)).slice(0, 10),
+    fit: String(b.fit || "").slice(0, 900),          // the written explanation, required by contract
+    approach: String(b.approach || "").slice(0, 600),
     url: String(b.url || "").slice(0, 400),
     signal: String(b.signal || "").slice(0, 500),   // what was publicly posted that made them a fit
     note: String(b.note || "").slice(0, 1200),

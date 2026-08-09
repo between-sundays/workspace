@@ -225,3 +225,22 @@ table.tb tr:hover td{background:var(--wash)}
 .wd.no{border-color:var(--red);color:var(--red);text-decoration:line-through}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:26px}
 @media(max-width:820px){.two{grid-template-columns:1fr}}
+#apbtn{position:fixed;right:20px;bottom:66px;z-index:40;border:1px solid var(--ink);background:#fff;
+ color:var(--ink);padding:11px 18px;font-family:var(--san);font-size:10.5px;font-weight:800;
+ letter-spacing:.13em;text-transform:uppercase;cursor:pointer;box-shadow:0 2px 12px rgba(0,0,0,.12)}
+#apbtn:hover{background:var(--ink);color:#fff}
+#ap{position:fixed;inset:0;z-index:45;background:rgba(255,255,255,.94);display:none;
+ align-items:center;justify-content:center;padding:20px}
+#ap.on{display:flex}
+#ap .box{background:#fff;border:1px solid var(--ink);max-width:640px;width:100%;padding:24px 26px;
+ box-shadow:0 6px 40px rgba(0,0,0,.14);max-height:90vh;overflow:auto}
+#ap .hd{font-size:22px;font-weight:900;letter-spacing:-.02em;margin-bottom:12px}
+#ap input,#ap textarea{width:100%;border:1px solid var(--rule);padding:10px;font:15px/1.5 var(--ser);
+ margin-bottom:8px;background:#fff;color:var(--ink)}
+#ap .row{display:flex;gap:8px;align-items:center}
+#ap button{border:1px solid var(--ink);background:var(--ink);color:#fff;padding:10px 20px;
+ font-family:var(--san);font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+ cursor:pointer}
+#ap button.ghost{background:#fff;color:var(--gray);border-color:var(--rule)}
+#ap #apmsg{font-family:var(--san);font-size:10px;font-weight:800;letter-spacing:.12em;
+ text-transform:uppercase;color:var(--green)}
