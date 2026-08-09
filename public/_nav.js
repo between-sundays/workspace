@@ -98,11 +98,6 @@ const ROOMS=[
      "Churches, coffee shops, subscription, hand-to-hand — which is the wedge?",
      "What has to be true for a stranger to pick it up?"],
   owner:"Adrian",inputs:"Distribution conversations",outputs:"A launch plan with a number attached"},
-__NOPE__label:"Audience & Personas",
-  purpose:"Who this is for. Start with the founder: the reader who never liked reading.",
-  q:["Who buys it for someone else?","Who hands it out in bulk?",
-     "Who is suspicious of church but curious about God?"],
-  owner:"Manus",inputs:"Real conversations, not invented profiles",outputs:"Persona cards"},
  {p:"grow",id:"messaging",label:"Messaging",
   purpose:"What we say about ourselves, in our own voice.",
   q:["The one line that explains this to a stranger in six seconds.",
@@ -227,9 +222,12 @@ async function api(p,b){
  return j;}
 function lockbar(){
  if(getKey()) return "";
- return `<div class="blank"><div class="t">Locked</div>
-  <p>Page renders are public. Notes, briefs, scores, finals and the business spaces are private.
-   Paste your workspace key to unlock them — it stays in this browser.</p>
+ return `<div class="blank" style="border-color:var(--red);background:#fff">
+  <div class="t" style="color:var(--red)">You are not signed in</div>
+  <p><strong>Most of this workspace is private and will look empty until you unlock it.</strong>
+   Page renders are public; briefs, notes, scores, finals, the Well and the business spaces are not.
+   Paste your workspace key below — it stays in this browser and is sent only to our own API.
+   Adrian has the keys; agents get theirs from him.</p>
   <p style="margin-top:10px"><input id="keyin" placeholder="bsk_…"
    style="width:320px;max-width:100%;border:1px solid var(--rule);padding:8px;font:14px var(--ser)"/>
    <button id="keygo" style="border:1px solid var(--ink);background:var(--ink);color:#fff;
