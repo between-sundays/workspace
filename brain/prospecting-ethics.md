@@ -44,3 +44,43 @@ one we have something for, we don't understand them well enough to write to them
 
 This list is a **staging table, not a CRM**. When a real CRM lands, it exports and
 this stops being the system of record. Build nothing here that a CRM does better.
+
+## The law, specifically
+
+- **LinkedIn.** Its User Agreement prohibits scripts, bots and crawlers against
+  profiles and service data, and prohibits unauthorised automated messaging and
+  engagement. We use permitted search, human reading, and material intentionally
+  supplied to the system. No scraper, ever — not "carefully", not "slowly".
+  <https://www.linkedin.com/legal/user-agreement>
+- **CAN-SPAM.** Commercial email needs accurate sender information and a working
+  opt-out, and it applies to an individual message, not only to bulk sends.
+  <https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business>
+- **FTC endorsement disclosure.** If a creator receives money, free product,
+  discounts, or anything else of value — free issues included — that relationship
+  must be disclosed clearly in whatever they post about us.
+  <https://www.ftc.gov/business-guidance/resources/disclosures-101-social-media-influencers>
+
+## What an agent may and may not do
+
+**May:** find relevant public profiles through permitted search · summarise public
+content it was given · group people by observable themes · suggest a persona
+match · prepare a briefing for a human · find a genuinely relevant opening ·
+record what was learned · draft a follow-up for a human to send.
+
+**May not:** claim to have read someone's work it didn't read · send personalised
+messages at volume · infer private or sensitive attributes · scrape any platform
+against its rules · decide someone's faith · contact anyone without a human in
+the loop · continue after an opt-out.
+
+**Never recorded about a named person:** a faith score or any inferred belief ·
+children's names, schools or ages ("parent of a college student", where they said
+it publicly, is enough) · health, politics, or anything they didn't publish.
+
+## One group we deliberately do not prospect
+
+**The Quiet Seeker** is reached by being findable, never by being found. Every
+signal that would identify them is private, inferred, or something they kept
+quiet on purpose — and a message revealing we worked out something private about
+someone's faith struggle would cost us that person and the brand's whole claim to
+be a friend rather than a marketer. We publish something good enough that it
+reaches them through somebody who already loves them.
