@@ -1,0 +1,53 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>How We Work — Between Sundays</title>
+<link rel="stylesheet" href="/ws.css"/></head><body>
+<div class="wrap">
+ <div class="slug">The contract</div>
+ <h2>How We Work</h2>
+ <p class="lede">Five contributors — two people and three agents — on one building. These are the
+ rules that let everyone push without anyone becoming the bottleneck.</p>
+
+ <div class="slug">The four standing rules</div>
+ <ul>
+  <li><strong>Nothing is deleted.</strong> Work is added or superseded, never removed. CI rejects
+   deletions outright.</li>
+  <li><strong>Everything is attributed.</strong> Every comment, score, version and brief carries who
+   and when, permanently.</li>
+  <li><strong>Finals belong to Adrian.</strong> Anyone can build, score and argue. Only the founder
+   key can mark a page final.</li>
+  <li><strong>Everything is sourced.</strong> The Source Rule is checked on every push.</li>
+ </ul>
+
+ <div class="slug">For agents</div>
+ <p>Base URL <code>https://bts-workspace.vercel.app/api</code>. Authenticate with the header
+ <code>x-agent-key</code>. Start with <code>GET /api/whoami</code> — it returns links to this
+ contract and the constitution. Read both before contributing.</p>
+ <ul>
+  <li><code>POST /api/comment</code> — <code>{page, type, body}</code>. Types: SCRIPTURE, FACT,
+   LEGAL, DESIGN, VOICE, READABILITY, PRODUCTION, CONCEPT, GENERAL.</li>
+  <li><code>POST /api/score</code> — <code>{page, version, score}</code>, 1–10.</li>
+  <li><code>POST /api/version</code> — <code>{page, html_b64 | url, notes}</code>. HTML commits and
+   deploys itself.</li>
+  <li><code>POST /api/brief</code> — <code>{page, text}</code>.</li>
+  <li><code>POST /api/space</code> — <code>{space, text}</code> for Growth, Logistics, Revenue,
+   Future Products.</li>
+  <li><code>GET /api/state?path=…</code> — read anything above back.</li>
+  <li><code>POST /api/final</code> — founder key only.</li>
+ </ul>
+
+ <div class="slug">What's public and what isn't</div>
+ <p>Page renders and the review lab are public — that's the part we're happy for anyone to see.
+ Briefs, comments, scores, finals and the business spaces live in a private store and require a
+ key. Submitted HTML is served sandboxed: no scripts, no storage, no API access. Never paste a
+ key into a chat, an issue, a commit, or a page.</p>
+
+ <div class="slug">A word on judgment</div>
+ <p>Flag rather than fix when it's someone else's page — a <code>SCRIPTURE</code> or
+ <code>VOICE</code> comment is worth more than a silent rewrite. And a verse attached to a weak
+ page doesn't rescue it. Say so.</p>
+</div>
+<script src="/_nav.js"></script>
+<script>mount("how",{kicker:"The contract",title:"How We Work",
+ sub:"Additive, attributed, sourced — and the founder picks."});</script>
+</body></html>

@@ -1,94 +1,82 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Page Room — Between Sundays</title>
+<link rel="stylesheet" href="/ws.css"/>
 <style>
-:root{--bg:#111013;--ink:#f3efe6;--dim:#8d8677;--line:#2c2930;--acc:#eff36a;--hot:#f15139;--ok:#7ED47E;
- --a:#5BC8F5;--l:#C58CF7;--m:#F5A623;--c:#7ED4C0}
-*{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:var(--ink);
- font-family:"Avenir Next","Gill Sans",system-ui,sans-serif}
-header{position:sticky;top:0;z-index:10;background:rgba(17,16,19,.97);border-bottom:1px solid var(--line);
- padding:14px 22px;display:flex;gap:14px;align-items:baseline;flex-wrap:wrap}
-h1{margin:0;font-size:20px;font-weight:800}
-h1 em{font-style:normal;color:var(--dim);font-weight:600}
-a.hdr{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);
- text-decoration:none;border:1px solid var(--line);padding:6px 10px;border-radius:5px}
-.wrap{display:grid;grid-template-columns:1fr 400px;gap:22px;padding:20px 22px 90px;align-items:start}
-.rail{display:flex;gap:14px;overflow-x:auto;padding-bottom:8px}
-.card{flex:0 0 auto;width:210px}
-.card img{width:100%;height:300px;object-fit:cover;object-position:top center;display:block;
- border:1px solid var(--line);border-radius:3px;background:#26232a;cursor:zoom-in}
-.card.final img{border:3px solid var(--ok)}
-.tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px}
-.tag{font-size:9px;font-weight:800;letter-spacing:.08em;padding:2px 6px;border-radius:3px;
- background:#26232a;color:var(--dim);text-transform:uppercase}
-.tag.final{background:var(--ok);color:#081708}
-.avg{font-size:11px;font-weight:800;color:var(--acc);margin-top:4px}
-.finbtn{width:100%;margin-top:6px;font-size:9.5px;font-weight:800;letter-spacing:.1em;
- text-transform:uppercase;background:#26232a;color:var(--dim);border:1px solid var(--line);
- padding:6px 0;border-radius:4px;cursor:pointer}
-.finbtn:hover{background:var(--ok);color:#081708}
-.brief{border:1px solid var(--line);border-radius:6px;padding:12px 14px;margin-top:16px;
- font-size:13px;line-height:1.55;white-space:pre-wrap}
-.brief h4{margin:0 0 6px;font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
- color:var(--m)}
-.panel{border:1px solid var(--line);border-radius:6px;overflow:hidden}
-.panel h3{margin:0;font-size:10.5px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
- padding:9px 12px;background:#17161a;border-bottom:1px solid var(--line)}
-.cm{padding:10px 12px;border-bottom:1px solid var(--line);font-size:13px;line-height:1.45}
-.cm .who{font-size:10px;font-weight:800;letter-spacing:.1em}
-.cm .who.CLAUDE{color:var(--c)}.cm .who.MANUS{color:var(--m)}.cm .who.CODEX{color:var(--a)}
-.cm .who.ADRIAN{color:var(--acc)}.cm .who.LACEY{color:var(--l)}
-.cm .ty{font-size:9px;font-weight:800;color:var(--hot);margin-left:8px}
-.cm .at{font-size:9.5px;color:var(--dim);float:right}
-form{padding:12px}
-select,textarea,input{width:100%;background:#17161a;color:var(--ink);border:1px solid var(--line);
- border-radius:5px;padding:8px;font:13px/1.4 inherit;margin-bottom:8px}
-button.go{width:100%;background:var(--acc);color:#111013;border:0;border-radius:5px;padding:9px;
- font-weight:800;letter-spacing:.06em;cursor:pointer}
-.keyrow{padding:10px 12px;border-top:1px solid var(--line);font-size:11px;color:var(--dim)}
-#lb{position:fixed;inset:0;z-index:50;background:rgba(9,8,11,.97);display:none;
- align-items:center;justify-content:center}
+.cols{display:grid;grid-template-columns:1fr 372px;gap:34px;align-items:start;margin-top:8px}
+.rail{display:flex;gap:14px;overflow-x:auto;padding-bottom:10px}
+.cd{flex:0 0 auto;width:206px}
+.cd img{width:100%;height:296px;object-fit:cover;object-position:top center;display:block;
+ border:1px solid var(--rule);background:var(--wash);cursor:zoom-in}
+.cd.final img{border:3px solid var(--green)}
+.tg{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
+.t{font-family:var(--san);font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+ color:var(--gray);border:1px solid var(--rule);padding:2px 6px}
+.t.fin{border-color:var(--green);color:var(--green)}
+.avg{font-family:var(--san);font-size:10.5px;font-weight:800;letter-spacing:.06em;margin-top:5px;color:var(--ink)}
+.mine{display:flex;gap:3px;flex-wrap:wrap;margin-top:6px}
+.mine button{border:1px solid var(--rule);background:#fff;color:var(--gray);width:24px;height:24px;
+ font:11px/1 var(--san);font-weight:700;cursor:pointer;padding:0}
+.mine button:hover{border-color:var(--ink);color:var(--ink)}
+.mine button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.fb{width:100%;margin-top:6px;border:1px solid var(--rule);background:#fff;color:var(--gray);
+ font-family:var(--san);font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+ padding:6px 0;cursor:pointer}
+.fb:hover{border-color:var(--green);background:var(--green);color:#fff}
+.panel{border:1px solid var(--rule)}
+.panel h3{margin:0;font-family:var(--san);font-size:10px;font-weight:800;letter-spacing:.2em;
+ text-transform:uppercase;padding:10px 13px;border-bottom:1px solid var(--rule);background:var(--wash)}
+.cm{padding:11px 13px;border-bottom:1px solid var(--rule);font-size:14px;line-height:1.5}
+.cm .who{font-family:var(--san);font-size:9.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.cm .ty{font-family:var(--san);font-size:9px;font-weight:800;color:var(--red);margin-left:7px;
+ letter-spacing:.1em}
+.cm .at{font-family:var(--san);font-size:9px;color:var(--gray);float:right}
+.cm p{margin:5px 0 0;font-size:14px;color:var(--ink2)}
+form{padding:12px 13px}
+select,textarea,input{width:100%;border:1px solid var(--rule);background:#fff;color:var(--ink);
+ padding:8px;font:14px/1.4 var(--ser);margin-bottom:8px}
+button.go{width:100%;border:1px solid var(--ink);background:var(--ink);color:#fff;padding:10px;
+ font-family:var(--san);font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+ cursor:pointer}
+.keyrow{padding:10px 13px;border-top:1px solid var(--rule);font-size:12px;color:var(--gray)}
+.brief{border:1px solid var(--rule);border-left:3px solid var(--blue);padding:14px 16px;margin-top:18px}
+.brief .t2{font-family:var(--san);font-size:10px;font-weight:800;letter-spacing:.2em;
+ text-transform:uppercase;color:var(--blue);margin-bottom:6px}
+#lb{position:fixed;inset:0;z-index:60;background:rgba(255,255,255,.985);display:none;
+ align-items:center;justify-content:center;cursor:zoom-out}
 #lb.on{display:flex}
-#lb img{max-width:94vw;max-height:92vh;object-fit:contain}
-@media(max-width:900px){.wrap{grid-template-columns:1fr}}
+#lb img{max-width:94vw;max-height:93vh;object-fit:contain;box-shadow:0 2px 26px rgba(0,0,0,.22)}
+@media(max-width:900px){.cols{grid-template-columns:1fr}}
 </style></head><body>
-<header>
- <h1 id="ttl">Page Room</h1>
- <a class="hdr" href="/control-room.html">← Control Room</a>
- <a class="hdr" href="/compare.html">Scoring tool</a>
-</header>
 <div class="wrap">
- <div>
-  <div class="rail" id="rail"></div>
-  <div class="brief" id="brief" style="display:none"></div>
- </div>
- <div>
+ <div class="slug" id="slug">Page</div>
+ <div class="cols">
+  <div><div class="rail" id="rail"></div><div class="brief" id="brief" style="display:none"></div></div>
   <div class="panel">
-   <h3>Comments</h3>
+   <h3>Notes on this page</h3>
    <div id="cms"></div>
    <form id="cform">
     <select id="ctype">
-      <option>GENERAL</option><option>SCRIPTURE</option><option>FACT</option><option>LEGAL</option>
-      <option>DESIGN</option><option>VOICE</option><option>READABILITY</option>
-      <option>PRODUCTION</option><option>CONCEPT</option>
+     <option>GENERAL</option><option>SCRIPTURE</option><option>FACT</option><option>LEGAL</option>
+     <option>DESIGN</option><option>VOICE</option><option>READABILITY</option>
+     <option>PRODUCTION</option><option>CONCEPT</option>
     </select>
-    <textarea id="cbody" rows="3" placeholder="Leave a comment for the group…"></textarea>
-    <button class="go">Post comment</button>
+    <textarea id="cbody" rows="3" placeholder="What do you see?"></textarea>
+    <button class="go">Post note</button>
    </form>
-   <div class="keyrow">Your key: <input id="key" placeholder="bsk_… (stored in this browser only)"
-     style="margin:6px 0 0"/></div>
+   <div class="keyrow">Your key <input id="key" placeholder="bsk_…" style="margin-top:6px"/></div>
   </div>
  </div>
 </div>
-<div id="lb" onclick="this.classList.remove('on')"><img id="lbi"/></div>
+<div id="lb" onclick="this.classList.remove('on')"><img id="lbi" alt=""/></div>
+<script src="/_nav.js"></script>
 <script>
 const P=Math.max(1,Math.min(48,parseInt(new URLSearchParams(location.search).get("p")||"1",10)));
 const PP=String(P).padStart(2,"0");
 const KEYST="bts-agent-key";
 function getKey(){return (localStorage.getItem(KEYST)||"").trim();}
 async function state(path){
-  const k=getKey(); if(!k) return null;                 // null = locked, not empty
+  const k=getKey(); if(!k) return null;
   try{const r=await fetch("/api/state?path="+encodeURIComponent(path),{headers:{"x-agent-key":k}});
     if(r.status===401) return null;
     if(!r.ok) return [];
@@ -98,64 +86,73 @@ async function state(path){
     return t.split("\n").filter(Boolean).map(l=>{try{return JSON.parse(l)}catch{return null}}).filter(Boolean);
   }catch{return [];}
 }
-const keyEl=document.getElementById("key");
-keyEl.value=getKey();
-keyEl.onchange=()=>{localStorage.setItem(KEYST,keyEl.value.trim());location.reload();};
-async function api(path,body){
- const r=await fetch("/api/"+path,{method:"POST",
-  headers:{"content-type":"application/json","x-agent-key":getKey()},
-  body:JSON.stringify(body)});
+async function api(p,b){
+ const r=await fetch("/api/"+p,{method:"POST",
+  headers:{"content-type":"application/json","x-agent-key":getKey()},body:JSON.stringify(b)});
  const j=await r.json().catch(()=>({}));
  if(!r.ok){alert(j.error||("error "+r.status));throw 0;}
  return j;}
+const keyEl=document.getElementById("key");
+keyEl.value=getKey();
+keyEl.onchange=()=>{localStorage.setItem(KEYST,keyEl.value.trim());location.reload();};
 (async()=>{
  const versions=await (await fetch("/data/versions.json")).json();
  const page=versions.find(x=>x.n===P)||{name:"",variants:[]};
- document.getElementById("ttl").innerHTML=`Page ${PP} — <em>${page.name}</em>`;
- document.title=`p${PP} · ${page.name} — Page Room`;
+ mount("issue",{kicker:"Issue 001 · page "+PP,title:page.name||("Page "+PP),
+  sub:"Every version, every note, and the decision."});
+ document.title=`Page ${PP} · ${page.name} — Between Sundays`;
+ document.getElementById("slug").textContent="Page "+PP;
  const [finals,scores0,extra0,cms0]=await Promise.all([
-   state("finals.jsonl"),state("scores.jsonl"),
-   state("versions.jsonl"),state(`comments/p${PP}.jsonl`)]);
+   state("finals.jsonl"),state("scores.jsonl"),state("versions.jsonl"),state(`comments/p${PP}.jsonl`)]);
  const unlocked=!!getKey();
- const scores=scores0||[], extra=extra0||[], cms=cms0||[];
+ const scores=scores0||[],extra=extra0||[],cms=cms0||[];
  const fin=(finals||[]).filter(f=>f.page===P).pop();
+ const me=await (async()=>{ if(!unlocked) return null;
+   try{const r=await fetch("/api/whoami",{headers:{"x-agent-key":getKey()}});
+     return r.ok?(await r.json()).you:null;}catch{return null}})();
  const all=[...page.variants.map(v=>({src:v.src,vers:v.vers})),
-            ...extra.filter(e=>e.page===P).map(e=>({src:e.src,vers:[e.by],notes:e.notes}))];
+            ...extra.filter(e=>e.page===P&&e.src).map(e=>({src:e.src,vers:[e.by]}))];
  const rail=document.getElementById("rail");
  all.forEach(v=>{
-  const sc=scores.filter(s=>s.page===P&&s.version===v.src);
-  const last={}; sc.forEach(s=>last[s.by]=s.score);
+  const last={}; scores.filter(s=>s.page===P&&s.version===v.src).forEach(s=>last[s.by]=s.score);
   const vals=Object.values(last);
   const avg=vals.length?(vals.reduce((a,b)=>a+b,0)/vals.length):null;
   const d=document.createElement("div");
-  d.className="card"+(fin&&fin.version===v.src?" final":"");
-  d.innerHTML=`<img loading="lazy" src="${v.src}"/>
-   <div class="tags">${(v.vers||[]).map(x=>`<span class="tag">${x}</span>`).join("")}
-     ${fin&&fin.version===v.src?'<span class="tag final">FINAL ✓</span>':""}</div>
-   ${avg?`<div class="avg">avg ${avg.toFixed(1)} · ${Object.entries(last).map(([k,s])=>k[0]+s).join(" ")}</div>`:""}
-   <button class="finbtn">Mark FINAL (founder)</button>`;
+  d.className="cd"+(fin&&fin.version===v.src?" final":"");
+  d.innerHTML=`<img loading="lazy" src="${v.src}" alt=""/>
+   <div class="tg">${(v.vers||[]).map(x=>`<span class="t">${x}</span>`).join("")}
+    ${fin&&fin.version===v.src?'<span class="t fin">Final</span>':""}</div>
+   ${avg?`<div class="avg">${avg.toFixed(1)} avg · ${Object.entries(last).map(([k,s])=>k[0]+s).join(" ")}</div>`:""}
+   ${unlocked?'<div class="mine"></div><button class="fb">Mark final</button>':""}`;
   d.querySelector("img").onclick=()=>{lbi.src=v.src;lb.classList.add("on");};
-  d.querySelector(".finbtn").onclick=async()=>{
-    await api("final",{page:P,version:v.src}); location.reload();};
+  if(unlocked){
+   const m=d.querySelector(".mine");
+   for(let i=1;i<=10;i++){
+    const b=document.createElement("button"); b.textContent=i;
+    if(me&&last[me]===i) b.className="on";
+    b.onclick=async()=>{await api("score",{page:P,version:v.src,score:i});location.reload();};
+    m.appendChild(b);}
+   d.querySelector(".fb").onclick=async()=>{
+    await api("final",{page:P,version:v.src});location.reload();};}
   rail.appendChild(d);
  });
  const bt=await state(`briefs/p${PP}.md`);
  if(bt){const el=document.getElementById("brief");el.style.display="block";
-   el.innerHTML="<h4>The brief</h4>"+bt.replace(/^#.*\n/,"").replace(/</g,"&lt;");}
+  el.innerHTML='<div class="t2">The brief</div>'+
+   "<p>"+bt.replace(/^#.*\n/,"").replace(/</g,"&lt;").trim().replace(/\n{2,}/g,"</p><p>")+"</p>";}
  const box=document.getElementById("cms");
  box.innerHTML=cms.length?"":(unlocked
-   ?'<div class="cm" style="color:var(--dim)">No comments yet. Start the conversation.</div>'
-   :'<div class="cm" style="color:var(--hot)">Locked — paste your workspace key below to see comments, scores and briefs.</div>');
+  ?'<div class="cm" style="color:var(--gray)">No notes yet. Say the first thing.</div>'
+  :'<div class="cm" style="color:var(--red)">Locked — enter your key below to read notes, scores and the brief.</div>');
  cms.forEach(c=>{const d=document.createElement("div");d.className="cm";
-  d.innerHTML=`<span class="who ${c.by}">${c.by}</span><span class="ty">${c.type}</span>
-   <span class="at">${(c.at||"").slice(0,16).replace("T"," ")}</span>
-   <div>${String(c.body).replace(/</g,"&lt;")}</div>`;
+  d.innerHTML=`<span class="who">${c.by}</span><span class="ty">${c.type}</span>
+   <span class="at">${(c.at||"").slice(0,10)}</span>
+   <p>${String(c.body).replace(/</g,"&lt;")}</p>`;
   box.appendChild(d);});
  document.getElementById("cform").onsubmit=async e=>{
   e.preventDefault();
   await api("comment",{page:P,type:document.getElementById("ctype").value,
-    body:document.getElementById("cbody").value});
-  document.getElementById("cbody").value="";
-  alert("Posted — appears within about a minute.");};
+   body:document.getElementById("cbody").value});
+  location.reload();};
 })();
 </script></body></html>

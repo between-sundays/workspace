@@ -1,197 +1,48 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8"/>
+<!doctype html><html lang="en"><head><meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Between Sundays — Issue 001 · Version Compare</title>
-<style>
-:root{--paper:#f8f3e6;--ink:#17100d;--muted:#71695c;--rule:rgba(23,16,13,.22);
---blue:#143653;--red:#f15139;--green:#2c6e4b;--yellow:#eff36a}
-*{box-sizing:border-box}
-body{margin:0;background:#d2c7b8;color:var(--ink);
-font-family:"Avenir Next","Gill Sans",system-ui,sans-serif}
-.wrap{max-width:1080px;margin:0 auto;padding:56px 24px 90px}
-.mast{text-align:center;border-bottom:3px solid var(--ink);padding-bottom:26px}
-.mast .k{margin:0;font-size:11px;font-weight:900;letter-spacing:.28em;text-transform:uppercase;color:var(--red)}
-.mast h1{margin:12px 0 0;font-size:clamp(38px,7vw,72px);line-height:.92;font-weight:900;text-transform:uppercase;letter-spacing:-.03em}
-.mast p{margin:14px auto 0;max-width:62ch;font-family:Georgia,serif;font-size:18px;line-height:1.5;color:#3c352c}
-
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px}
-.card h2{font-size:28px}
-@media(max-width:980px){.cards{grid-template-columns:1fr}}
-.card h2{font-size:30px}
-.card{background:var(--paper);border:2px solid var(--ink);display:flex;flex-direction:column;
-box-shadow:0 18px 40px rgba(17,16,13,.2);text-decoration:none;color:inherit}
-.card .top{padding:20px 22px;border-bottom:2px solid var(--ink)}
-.card .tag{display:inline-block;font-size:10.5px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;
-padding:5px 10px;color:#fff}
-.card h2{margin:12px 0 0;font-size:34px;line-height:1;font-weight:900;text-transform:uppercase;letter-spacing:-.02em}
-.card .sub{margin:8px 0 0;font-size:13px;color:var(--muted);font-weight:900;text-transform:uppercase}
-.card ul{margin:0;padding:18px 22px 20px;list-style:none;flex:1}
-.card li{font-family:Georgia,serif;font-size:15px;line-height:1.5;padding:8px 0;border-bottom:1px solid var(--rule)}
-.card li:last-child{border-bottom:none}
-.card .go{padding:14px 22px;background:var(--ink);color:var(--paper);font-size:12px;font-weight:900;
-letter-spacing:.16em;text-transform:uppercase;text-align:center}
-.card:hover .go{background:var(--blue)}
-
-.stat{display:flex;gap:16px;margin-top:38px;flex-wrap:wrap}
-.s{flex:1 1 200px;background:var(--paper);border:2px solid var(--ink);padding:18px 20px}
-.s b{display:block;font-size:40px;line-height:1;font-weight:900;letter-spacing:-.02em}
-.s span{display:block;margin-top:7px;font-size:12.5px;line-height:1.45;color:var(--muted);font-weight:900;text-transform:uppercase}
-
-h3{margin:46px 0 0;font-size:13px;font-weight:900;letter-spacing:.2em;text-transform:uppercase;
-border-bottom:2px solid var(--ink);padding-bottom:9px}
-table{width:100%;border-collapse:collapse;margin-top:2px;background:var(--paper)}
-th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--rule);font-size:14px;vertical-align:top}
-th{font-size:10.5px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-td.p{font-weight:900;width:64px}
-td.was{color:#8a3020;font-family:Georgia,serif}
-td.now{color:var(--green);font-family:Georgia,serif}
-.note{margin-top:34px;background:var(--yellow);border:2px solid var(--ink);padding:16px 20px}
-.note p{margin:0;font-family:Georgia,serif;font-size:15.5px;line-height:1.55}
-.foot{margin-top:44px;border-top:2px solid var(--ink);padding-top:14px;font-size:11px;
-font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
-display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
-</style>
-</head>
-<body>
+<title>Between Sundays — The Workspace</title>
+<link rel="stylesheet" href="/ws.css"/></head><body>
 <div class="wrap">
+ <div class="slug">The front</div>
+ <p class="lede">This is where the paper gets made. Everything Adrian, Lacey, Claude, Manus and
+ Codex know about Between Sundays lives here — the beliefs, the issue in production, and the
+ parts of the business we haven't figured out yet. Those get a room too, empty, so we can see
+ what's missing.</p>
 
-  <div class="mast">
-    <p class="k">Between Sundays · Issue 001 · I Am With You</p>
-    <h1>Five Versions,<br/>Side by Side</h1>
-    <p>The original 48-page proof, two Scripture passes, and a photography pass —
-    the two gaps the critique named, fixed in order: what people read, then what they see.</p>
-  </div>
+ <div class="slug">Spaces</div>
+ <div class="cards" id="cards"></div>
 
-  <a href="/compare.html" style="display:block;margin-top:30px;background:#17100d;color:#f8f3e6;
-   border:2px solid #17100d;padding:22px 26px;text-decoration:none">
-   <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap">
-    <div style="flex:1;min-width:280px">
-     <div style="font-size:10.5px;font-weight:900;letter-spacing:.22em;text-transform:uppercase;color:#eff36a">Start here</div>
-     <div style="font-size:34px;font-weight:900;letter-spacing:-.02em;line-height:1.05;margin-top:8px">Page by page,<br/>every version side by side</div>
-     <p style="font-family:Georgia,serif;font-size:16px;line-height:1.5;margin:12px 0 0;max-width:60ch;color:#d8d2c4">
-      One scrollable row per page — all 121 distinct versions across every agent's pass.
-      Click any page to open it full screen and arrow through the alternatives.</p>
-    </div>
-    <div style="font-size:12px;font-weight:900;letter-spacing:.18em;text-transform:uppercase;
-     border:2px solid #eff36a;color:#eff36a;padding:14px 20px;white-space:nowrap">Open comparison →</div>
-   </div></a>
-
-  <div class="cards">
-    <a class="card" href="/v1/">
-      <div class="top">
-        <span class="tag" style="background:#b8331f">Original</span>
-        <h2>Version 1</h2>
-        <p class="sub">48 pages · as proofed</p>
-      </div>
-      <ul>
-        <li>The Reading runs 7 pages for <strong>13 verses</strong> — a verse or two per page.</li>
-        <li>Genesis 28 is broken into fragments; the reader never learns why Jacob is outdoors.</li>
-        <li>Scripture elsewhere appears as single quoted lines under department headings.</li>
-        <li>Page 36 repeats page 35's coverage joke. Page 44 is a photo essay with no photographs.</li>
-      </ul>
-      <div class="go">Open Version 1 →</div>
-    </a>
-
-    <a class="card" href="/v2/">
-      <div class="top">
-        <span class="tag" style="background:#2c6e4b">Upgraded</span>
-        <h2>Version 2</h2>
-        <p class="sub">48 pages · 10 rebuilt</p>
-      </div>
-      <ul>
-        <li>The Reading now carries <strong>90 verses</strong> plus every one of the 18 places the promise is repeated.</li>
-        <li>Genesis 28 is printed whole, on one page — preceded by the passage that explains the running.</li>
-        <li>Three department pages now print their passage in full instead of quoting one line.</li>
-        <li>The duplicate ad and the photo-less photo essay are replaced by real readings.</li>
-      </ul>
-      <div class="go">Open Version 2 →</div>
-    </a>
-    <a class="card" href="/v3/">
-      <div class="top">
-        <span class="tag" style="background:#143653">Scripture map</span>
-        <h2>Version 3</h2>
-        <p class="sub">48 pages · 16 rebuilt</p>
-      </div>
-      <ul>
-        <li>The complete <strong>Jacob arc</strong> — he runs (Gen 27), Bethel (Gen 28), God calls him back twenty years later (Gen 31), he returns and builds the altar (Gen 35).</li>
-        <li>A Scripture anthology opens the section: the refrain in <strong>eleven</strong> passages, Genesis to Matthew.</li>
-        <li>Direct Scripture never more than <strong>five pages</strong> apart — Hebrews 12, Psalm 139, Romans 8, John 6, Psalm 121, Philippians 4, Exodus 16, all in full.</li>
-        <li>No two Reading pages share a template: black anthology, cream departure, night spread, notice, dawn return, dark arrival.</li>
-      </ul>
-      <div class="go">Open Version 3 →</div>
-    </a>
-    <a class="card" href="/v4/" style="border-width:4px">
-      <div class="top">
-        <span class="tag" style="background:#0f3d2e">Photography · current</span>
-        <h2>Version 4</h2>
-        <p class="sub">48 pages · 10 photographed + 13 Scripture</p>
-      </div>
-      <ul>
-        <li><strong>22 real photographs</strong>, all CC0 / public domain — free to print commercially, graded into one photo desk.</li>
-        <li>The cover is a real photograph: an empty car park after midnight. The back cover is a full-bleed dawn.</li>
-        <li>The photo essay on p44 finally has photographs. The Geography of Nowhere has four. The stone is a real stone.</li>
-        <li>Keeps everything from Version 3 — the full Jacob arc and Scripture every four to five pages.</li>
-      </ul>
-      <div class="go">Open Version 4 →</div>
-    </a>
-    <a class="card" href="/v5/" style="border-width:4px">
-      <div class="top">
-        <span class="tag" style="background:#6a3df5">Codex · new</span>
-        <h2>Version 5</h2>
-        <p class="sub">20 visual comps</p>
-      </div>
-      <ul>
-        <li>A separate V2 visual pass from Codex — pages 03, 04, 05, 15, 18, 19, 20, 21, 22, 23–26, 31, 32, 37, 38, 39, 43, 44.</li>
-        <li>Lead feature, annotated field report, premium luggage ad, photo contact sheet, food ad, sports, weather, movies, obituaries, the full Spine, crossword, maze.</li>
-        <li>Original proof untouched — these are standalone comps.</li>
-      </ul>
-      <div class="go">Open Version 5 →</div>
-    </a>
-  </div>
-
-  <div class="stat">
-    <div class="s"><b>2 → 22</b><span>real photographs (v4)</span></div>
-    <div class="s"><b>13 → 122</b><span>verses printed in full</span></div>
-    <div class="s"><b>100%</b><span>CC0 / public domain · printable commercially</span></div>
-    <div class="s"><b>23 of 48</b><span>pages rebuilt across v3 + v4</span></div>
-  </div>
-
-  <h3>Version 4 — the photography pass</h3>
-  <table>
-    <tr><th>Page</th><th>Was</th><th>Version 4</th></tr>
-    <tr><td class="p">01</td><td class="was">A generic forest with a GPS route graphic over it</td><td class="now">A real photograph — an empty multi-storey car park after midnight. The masthead and headline sit in the dark above it.</td></tr>
-    <tr><td class="p">04</td><td class="was">Boxes and dashed lines labelled "waiting room, back seat, sidewalk"</td><td class="now">Four actual photographs: a lone figure in a terminal, a laundromat, a school corridor, a pedestrian underpass.</td></tr>
-    <tr><td class="p">15</td><td class="was">An abstract map and a numbered list</td><td class="now">A photographic field report — one large terminal frame plus four locations underneath.</td></tr>
-    <tr><td class="p">19</td><td class="was">A scoreboard interface with no sport in it</td><td class="now">Rows of empty red stadium seats, plus Hebrews 12:1–3 printed in full.</td></tr>
-    <tr><td class="p">22</td><td class="was">Type on a flat colour field</td><td class="now">Full-bleed empty seats — "the next four pages are not yours" over a stadium nobody is sitting in.</td></tr>
-    <tr><td class="p">38</td><td class="was">A grey 3D-render sphere</td><td class="now">A real stone, photographed in a hand, with Genesis 28:18 beside it.</td></tr>
-    <tr><td class="p">43</td><td class="was">Nested red rectangles standing in for an alarm box</td><td class="now">An actual break-glass fire call point, plus Philippians 4:4–9 in full.</td></tr>
-    <tr><td class="p">44</td><td class="was">A "photo essay" of five coloured rectangles</td><td class="now">Five real photographs: motel room, school corridor, laundromat, underpass, porch light.</td></tr>
-    <tr><td class="p">47</td><td class="was">An abstract table illustration</td><td class="now">A full-bleed photograph of a long table set at night — the next issue, made desirable.</td></tr>
-    <tr><td class="p">48</td><td class="was">A brown gradient and a logo</td><td class="now">A full-bleed dawn over cloud, with "Surely God is in this place" readable from across a room.</td></tr>
-  </table>
-  <h3 style="margin-top:40px">Licensing</h3>
-  <p style="font-family:Georgia,serif;font-size:16px;line-height:1.55;margin-top:14px">
-  Every photograph is <strong>CC0 or public domain</strong> — sourced through Openverse, cleared for
-  commercial use, modification, and print, with no attribution requirement. They have been cropped,
-  graded and grained into a single photo desk rather than used as raw stock.
-  <a href="/v4/credits.html" style="color:#143653">Full credit list →</a></p>
-
-  <div class="note">
-    <p><strong>Still open:</strong> the games are still placeholders and the comics still have no
-    illustrator's hand — those need a puzzle constructor and a cartoonist, not a photo library.
-    The crossword clue 2-Down is still unsolvable and the cover's "holy ground" line is still
-    misattributed in v1–v3 (v4's new cover copy fixes it). And these photographs are sourced,
-    not commissioned — a real shoot in your own city would beat every one of them.</p>
-  </div>
-
-  <div class="foot">
-    <span>Scripture: World English Bible (public domain)</span>
-    <span>Between Sundays · Issue 001</span>
-  </div>
-
+ <div class="slug">Where Issue 001 stands</div>
+ <div id="stat"><p style="color:var(--gray)">Counting pages…</p></div>
 </div>
-</body>
-</html>
+<script src="/_nav.js"></script>
+<script>
+mount("index",{kicker:"The internal workspace",title:"Between Sundays",
+ sub:"The brain, the issue, and the business — one building."});
+const CARDS=[
+ {h:"/brain.html",n:"01",t:"What We Believe",
+  d:"Who we are, why this exists, the Source Rule, and how we're allowed to write. Read before touching a page.",s:"live",sl:"Written"},
+ {h:"/control-room.html",n:"02",t:"Issue 001",
+  d:"All 48 slots. Versions, briefs, comments, scores — and the page-by-page comparison.",s:"live",sl:"In production"},
+ {h:"/space.html?s=growth",n:"03",t:"Growth",
+  d:"Go-to-market, platforms, personas, messaging, creators. How the paper finds the people who need it.",s:"empty",sl:"Empty"},
+ {h:"/space.html?s=logistics",n:"04",t:"Logistics",
+  d:"Print, packaging, unit costs, margin. What it actually takes to put paper in a hand.",s:"empty",sl:"Empty"},
+ {h:"/space.html?s=revenue",n:"05",t:"Revenue & Projections",
+  d:"What we charge, who pays, and what the model says the next twelve months look like.",s:"empty",sl:"Empty"},
+ {h:"/space.html?s=products",n:"06",t:"Future Products",
+  d:"Everything after the paper. Parked ideas kept somewhere better than a chat log.",s:"empty",sl:"Empty"},
+];
+document.getElementById("cards").innerHTML=CARDS.map(c=>
+ `<a class="card" href="${c.h}"><span class="num">${c.n}</span><h3>${c.t}</h3>
+  <p>${c.d}</p><span class="st ${c.s}">${c.sl}</span></a>`).join("");
+fetch("/data/versions.json").then(r=>r.json()).then(v=>{
+ const pages=v.length, vars=v.reduce((a,p)=>a+p.variants.length,0);
+ const withArt=v.filter(p=>p.variants.length>1).length;
+ document.getElementById("stat").innerHTML=
+  `<p><strong>${pages} pages</strong> are laid out, carrying <strong>${vars} versions</strong>
+   between them. ${withArt} pages have more than one candidate waiting on a decision.
+   Scoring and finals live in the <a href="/control-room.html">Control Room</a>; the
+   side-by-side is the <a href="/compare.html">page-by-page comparison</a>.</p>`;
+}).catch(()=>{document.getElementById("stat").innerHTML="<p>Page data unavailable.</p>";});
+</script></body></html>
