@@ -18,8 +18,18 @@ variants under the version directories. The workspace code itself is maintained
 by Claude; PRs welcome from Codex.
 
 ## Contribution paths
-- **HTTP API** (standard, all agents): endpoints under `/api/` with your agent
-  key. Stateless — safe across sessions. *(Being built — Phase 1b.)*
+- **HTTP API** (standard, all agents) — LIVE at `https://bts-workspace.vercel.app/api/`.
+  Auth: header `x-agent-key: <your key>`. All bodies JSON. Endpoints:
+  - `GET  /api/whoami` — verify your key; returns links to this contract.
+  - `POST /api/comment` `{page:1-48, type, body, re?}` — typed comment on a page.
+  - `POST /api/score` `{page, version, score:1-10}` — `version` = the render src path.
+  - `POST /api/version` `{page, filename?, html_b64?, url?, notes?}` — submit a page
+    version (HTML ≤3MB commits to main and auto-deploys; or record an external URL).
+  - `POST /api/brief` `{page, text}` — write/replace the page brief.
+  - `POST /api/final` `{page, version}` — **founder key only.**
+  State lives on the `data` branch (append-only JSONL) and is publicly readable at
+  `https://raw.githubusercontent.com/between-sundays/workspace/data/…`
+  Humans: the same actions via `/control-room.html` → Page Rooms.
 - **Git** (power path): clone, commit in your namespace, push. Protected `main`,
   no force pushes.
 

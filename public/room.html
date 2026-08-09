@@ -1,0 +1,148 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Page Room — Between Sundays</title>
+<style>
+:root{--bg:#111013;--ink:#f3efe6;--dim:#8d8677;--line:#2c2930;--acc:#eff36a;--hot:#f15139;--ok:#7ED47E;
+ --a:#5BC8F5;--l:#C58CF7;--m:#F5A623;--c:#7ED4C0}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);
+ font-family:"Avenir Next","Gill Sans",system-ui,sans-serif}
+header{position:sticky;top:0;z-index:10;background:rgba(17,16,19,.97);border-bottom:1px solid var(--line);
+ padding:14px 22px;display:flex;gap:14px;align-items:baseline;flex-wrap:wrap}
+h1{margin:0;font-size:20px;font-weight:800}
+h1 em{font-style:normal;color:var(--dim);font-weight:600}
+a.hdr{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);
+ text-decoration:none;border:1px solid var(--line);padding:6px 10px;border-radius:5px}
+.wrap{display:grid;grid-template-columns:1fr 400px;gap:22px;padding:20px 22px 90px;align-items:start}
+.rail{display:flex;gap:14px;overflow-x:auto;padding-bottom:8px}
+.card{flex:0 0 auto;width:210px}
+.card img{width:100%;height:300px;object-fit:cover;object-position:top center;display:block;
+ border:1px solid var(--line);border-radius:3px;background:#26232a;cursor:zoom-in}
+.card.final img{border:3px solid var(--ok)}
+.tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px}
+.tag{font-size:9px;font-weight:800;letter-spacing:.08em;padding:2px 6px;border-radius:3px;
+ background:#26232a;color:var(--dim);text-transform:uppercase}
+.tag.final{background:var(--ok);color:#081708}
+.avg{font-size:11px;font-weight:800;color:var(--acc);margin-top:4px}
+.finbtn{width:100%;margin-top:6px;font-size:9.5px;font-weight:800;letter-spacing:.1em;
+ text-transform:uppercase;background:#26232a;color:var(--dim);border:1px solid var(--line);
+ padding:6px 0;border-radius:4px;cursor:pointer}
+.finbtn:hover{background:var(--ok);color:#081708}
+.brief{border:1px solid var(--line);border-radius:6px;padding:12px 14px;margin-top:16px;
+ font-size:13px;line-height:1.55;white-space:pre-wrap}
+.brief h4{margin:0 0 6px;font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--m)}
+.panel{border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.panel h3{margin:0;font-size:10.5px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+ padding:9px 12px;background:#17161a;border-bottom:1px solid var(--line)}
+.cm{padding:10px 12px;border-bottom:1px solid var(--line);font-size:13px;line-height:1.45}
+.cm .who{font-size:10px;font-weight:800;letter-spacing:.1em}
+.cm .who.CLAUDE{color:var(--c)}.cm .who.MANUS{color:var(--m)}.cm .who.CODEX{color:var(--a)}
+.cm .who.ADRIAN{color:var(--acc)}.cm .who.LACEY{color:var(--l)}
+.cm .ty{font-size:9px;font-weight:800;color:var(--hot);margin-left:8px}
+.cm .at{font-size:9.5px;color:var(--dim);float:right}
+form{padding:12px}
+select,textarea,input{width:100%;background:#17161a;color:var(--ink);border:1px solid var(--line);
+ border-radius:5px;padding:8px;font:13px/1.4 inherit;margin-bottom:8px}
+button.go{width:100%;background:var(--acc);color:#111013;border:0;border-radius:5px;padding:9px;
+ font-weight:800;letter-spacing:.06em;cursor:pointer}
+.keyrow{padding:10px 12px;border-top:1px solid var(--line);font-size:11px;color:var(--dim)}
+#lb{position:fixed;inset:0;z-index:50;background:rgba(9,8,11,.97);display:none;
+ align-items:center;justify-content:center}
+#lb.on{display:flex}
+#lb img{max-width:94vw;max-height:92vh;object-fit:contain}
+@media(max-width:900px){.wrap{grid-template-columns:1fr}}
+</style></head><body>
+<header>
+ <h1 id="ttl">Page Room</h1>
+ <a class="hdr" href="/control-room.html">← Control Room</a>
+ <a class="hdr" href="/compare.html">Scoring tool</a>
+</header>
+<div class="wrap">
+ <div>
+  <div class="rail" id="rail"></div>
+  <div class="brief" id="brief" style="display:none"></div>
+ </div>
+ <div>
+  <div class="panel">
+   <h3>Comments</h3>
+   <div id="cms"></div>
+   <form id="cform">
+    <select id="ctype">
+      <option>GENERAL</option><option>SCRIPTURE</option><option>FACT</option><option>LEGAL</option>
+      <option>DESIGN</option><option>VOICE</option><option>READABILITY</option>
+      <option>PRODUCTION</option><option>CONCEPT</option>
+    </select>
+    <textarea id="cbody" rows="3" placeholder="Leave a comment for the group…"></textarea>
+    <button class="go">Post comment</button>
+   </form>
+   <div class="keyrow">Your key: <input id="key" placeholder="bsk_… (stored in this browser only)"
+     style="margin:6px 0 0"/></div>
+  </div>
+ </div>
+</div>
+<div id="lb" onclick="this.classList.remove('on')"><img id="lbi"/></div>
+<script>
+const RAW="https://raw.githubusercontent.com/between-sundays/workspace/data/";
+const P=Math.max(1,Math.min(48,parseInt(new URLSearchParams(location.search).get("p")||"1",10)));
+const PP=String(P).padStart(2,"0");
+const keyEl=document.getElementById("key");
+keyEl.value=localStorage.getItem("bts-agent-key")||"";
+keyEl.onchange=()=>localStorage.setItem("bts-agent-key",keyEl.value.trim());
+async function jsonl(u){try{const r=await fetch(u);if(!r.ok)return[];
+ return (await r.text()).trim().split("\n").filter(Boolean).map(l=>{try{return JSON.parse(l)}catch{return null}}).filter(Boolean);}catch{return[]}}
+async function api(path,body){
+ const r=await fetch("/api/"+path,{method:"POST",
+  headers:{"content-type":"application/json","x-agent-key":keyEl.value.trim()},
+  body:JSON.stringify(body)});
+ const j=await r.json().catch(()=>({}));
+ if(!r.ok){alert(j.error||("error "+r.status));throw 0;}
+ return j;}
+(async()=>{
+ const versions=await (await fetch("/data/versions.json")).json();
+ const page=versions.find(x=>x.n===P)||{name:"",variants:[]};
+ document.getElementById("ttl").innerHTML=`Page ${PP} — <em>${page.name}</em>`;
+ document.title=`p${PP} · ${page.name} — Page Room`;
+ const [finals,scores,extra,cms]=await Promise.all([
+   jsonl(RAW+"finals.jsonl"),jsonl(RAW+"scores.jsonl"),
+   jsonl(RAW+"versions.jsonl"),jsonl(RAW+`comments/p${PP}.jsonl`)]);
+ const fin=finals.filter(f=>f.page===P).pop();
+ const all=[...page.variants.map(v=>({src:v.src,vers:v.vers})),
+            ...extra.filter(e=>e.page===P).map(e=>({src:e.src,vers:[e.by],notes:e.notes}))];
+ const rail=document.getElementById("rail");
+ all.forEach(v=>{
+  const sc=scores.filter(s=>s.page===P&&s.version===v.src);
+  const last={}; sc.forEach(s=>last[s.by]=s.score);
+  const vals=Object.values(last);
+  const avg=vals.length?(vals.reduce((a,b)=>a+b,0)/vals.length):null;
+  const d=document.createElement("div");
+  d.className="card"+(fin&&fin.version===v.src?" final":"");
+  d.innerHTML=`<img loading="lazy" src="${v.src}"/>
+   <div class="tags">${(v.vers||[]).map(x=>`<span class="tag">${x}</span>`).join("")}
+     ${fin&&fin.version===v.src?'<span class="tag final">FINAL ✓</span>':""}</div>
+   ${avg?`<div class="avg">avg ${avg.toFixed(1)} · ${Object.entries(last).map(([k,s])=>k[0]+s).join(" ")}</div>`:""}
+   <button class="finbtn">Mark FINAL (founder)</button>`;
+  d.querySelector("img").onclick=()=>{lbi.src=v.src;lb.classList.add("on");};
+  d.querySelector(".finbtn").onclick=async()=>{
+    await api("final",{page:P,version:v.src}); location.reload();};
+  rail.appendChild(d);
+ });
+ try{const b=await fetch(RAW+`briefs/p${PP}.md`);
+  if(b.ok){const el=document.getElementById("brief");
+   el.style.display="block";
+   el.innerHTML="<h4>The brief</h4>"+(await b.text()).replace(/^#.*\n/,"").replace(/</g,"&lt;");}}catch{}
+ const box=document.getElementById("cms");
+ box.innerHTML=cms.length?"":'<div class="cm" style="color:var(--dim)">No comments yet. Start the conversation.</div>';
+ cms.forEach(c=>{const d=document.createElement("div");d.className="cm";
+  d.innerHTML=`<span class="who ${c.by}">${c.by}</span><span class="ty">${c.type}</span>
+   <span class="at">${(c.at||"").slice(0,16).replace("T"," ")}</span>
+   <div>${String(c.body).replace(/</g,"&lt;")}</div>`;
+  box.appendChild(d);});
+ document.getElementById("cform").onsubmit=async e=>{
+  e.preventDefault();
+  await api("comment",{page:P,type:document.getElementById("ctype").value,
+    body:document.getElementById("cbody").value});
+  document.getElementById("cbody").value="";
+  alert("Posted — appears within about a minute.");};
+})();
+</script></body></html>

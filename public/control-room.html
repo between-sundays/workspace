@@ -1,0 +1,90 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Between Sundays — Issue Control Room</title>
+<style>
+:root{--bg:#111013;--ink:#f3efe6;--dim:#8d8677;--line:#2c2930;--acc:#eff36a;--hot:#f15139;--ok:#7ED47E}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);
+ font-family:"Avenir Next","Gill Sans",system-ui,sans-serif}
+header{position:sticky;top:0;z-index:10;background:rgba(17,16,19,.97);border-bottom:1px solid var(--line);
+ padding:16px 22px;display:flex;gap:16px;align-items:baseline;flex-wrap:wrap}
+h1{margin:0;font-size:22px;font-weight:800;letter-spacing:-.02em}
+h1 em{font-style:normal;color:var(--dim);font-weight:600}
+.chip{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+ padding:5px 10px;border-radius:99px;border:1px solid var(--line);color:var(--dim)}
+.chip.ok{background:var(--ok);color:#081708;border-color:var(--ok)}
+a.hdr{margin-left:auto;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+ color:var(--dim);text-decoration:none;border:1px solid var(--line);padding:6px 10px;border-radius:5px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:14px;padding:20px 22px 80px}
+.slot{border:1px solid var(--line);border-radius:6px;overflow:hidden;background:#17161a;
+ text-decoration:none;color:inherit;display:block}
+.slot:hover{border-color:var(--acc)}
+.slot img{width:100%;height:150px;object-fit:cover;object-position:top center;display:block;background:#26232a}
+.slot .in{padding:9px 11px 11px}
+.slot .n{font-size:17px;font-weight:800}
+.slot .nm{font-size:11px;color:var(--dim);line-height:1.3;min-height:28px;margin-top:2px}
+.badges{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
+.b{font-size:9px;font-weight:800;letter-spacing:.08em;padding:2px 7px;border-radius:3px;
+ background:#26232a;color:var(--dim);text-transform:uppercase}
+.b.final{background:var(--ok);color:#081708}
+.b.brief{background:#3a3742;color:var(--ink)}
+.b.vc{background:#26232a;color:var(--acc)}
+.slot.final{border-color:var(--ok)}
+.legend{padding:0 22px;color:var(--dim);font-size:12px;line-height:1.6}
+</style></head><body>
+<header>
+ <h1>Issue Control Room — <em>Issue 001 · 48 pages</em></h1>
+ <span class="chip" id="cFinal">0 final</span>
+ <span class="chip" id="cBrief">0 briefed</span>
+ <span class="chip" id="cVer">0 versions</span>
+ <a class="hdr" href="/compare.html">Scoring tool</a>
+ <a class="hdr" href="https://github.com/between-sundays/workspace">Repo</a>
+</header>
+<p class="legend">Every slot is a page. Click through to its Page Room for versions, comments,
+scores and the founder selection. Finals are green. Data updates within about a minute of any
+agent contribution.</p>
+<div class="grid" id="grid"></div>
+<script>
+const RAW="https://raw.githubusercontent.com/between-sundays/workspace/data/";
+async function jsonl(u){try{const r=await fetch(u);if(!r.ok)return[];
+ return (await r.text()).trim().split("\n").filter(Boolean).map(l=>{try{return JSON.parse(l)}catch{return null}}).filter(Boolean);
+}catch{return[]}}
+(async()=>{
+ const versions=await (await fetch("/data/versions.json")).json();
+ const [finals,extra]=await Promise.all([jsonl(RAW+"finals.jsonl"),jsonl(RAW+"versions.jsonl")]);
+ const finalBy={}; finals.forEach(f=>finalBy[f.page]=f);
+ const commentCounts={};
+ await Promise.all(versions.map(async p=>{
+   const c=await jsonl(RAW+`comments/p${String(p.n).padStart(2,"0")}.jsonl`);
+   commentCounts[p.n]=c.length;}));
+ const briefs={};
+ await Promise.all(versions.map(async p=>{
+   try{const r=await fetch(RAW+`briefs/p${String(p.n).padStart(2,"0")}.md`,{method:"HEAD"});
+   briefs[p.n]=r.ok;}catch{briefs[p.n]=false}}));
+ let nf=0,nb=0,nv=0;
+ const g=document.getElementById("grid");
+ versions.forEach(p=>{
+   const extraN=extra.filter(e=>e.page===p.n).length;
+   const total=p.variants.length+extraN; nv+=total;
+   const fin=finalBy[p.n]; if(fin)nf++;
+   if(briefs[p.n])nb++;
+   const a=document.createElement("a");
+   a.className="slot"+(fin?" final":""); a.href=`/room.html?p=${p.n}`;
+   const hero=fin?fin.version:(p.variants[0]||{}).src;
+   a.innerHTML=`<img loading="lazy" src="${hero||""}" alt=""/>
+    <div class="in"><span class="n">${String(p.n).padStart(2,"0")}</span>
+    <div class="nm">${p.name}</div>
+    <div class="badges">
+      ${fin?'<span class="b final">FINAL ✓</span>':""}
+      ${briefs[p.n]?'<span class="b brief">brief</span>':'<span class="b">no brief</span>'}
+      <span class="b vc">${total} vers</span>
+      <span class="b">${commentCounts[p.n]||0} 💬</span>
+    </div></div>`;
+   g.appendChild(a);
+ });
+ document.getElementById("cFinal").textContent=nf+" final";
+ document.getElementById("cFinal").className="chip"+(nf?" ok":"");
+ document.getElementById("cBrief").textContent=nb+" briefed";
+ document.getElementById("cVer").textContent=nv+" versions";
+})();
+</script></body></html>
