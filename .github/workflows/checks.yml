@@ -3,6 +3,13 @@ on:
   push: { branches: [main] }
   pull_request:
 jobs:
+  js-parses:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Every JS file and inline page script must parse
+        run: python3 tools/check_js.py
+
   source-rule:
     runs-on: ubuntu-latest
     steps:
