@@ -31,6 +31,9 @@
 one sets the grid, type and rhythm that the rest of the paper inherits. No variants — one spread,
 repeated passes.</p>
 <div id="out"></div>
+<div class="rowhead"><h2>The other seven anchors</h2>
+ <span class="pill">built against the approved grid</span></div>
+<div class="cards" id="anchors"></div>
 <div class="rowhead"><h2>Where to next</h2></div>
 <div class="cards">
  <a class="card" href="/control-room.html"><span class="num">01</span><h3>The Newspaper</h3>
@@ -88,6 +91,13 @@ fetch("/data/anchor.json").then(r=>r.json()).then(a=>{
      : "<strong>Recorded: "+b.textContent+".</strong> Say what should change and it gets another pass.";
    toast("Verdict recorded");
   }catch(e){}});
+ document.getElementById("anchors").innerHTML=(a.anchors||[]).filter(x=>x.n!==7&&x.n!==8)
+  .map(x=>`<a class="card" href="${x.src}" target="_blank" style="padding:0;overflow:hidden">
+   <img src="${x.src}" alt="" style="width:100%;display:block;border-bottom:1px solid var(--line)"/>
+   <div style="padding:14px 16px 16px"><span class="num">Page ${String(x.n).padStart(2,"0")}</span>
+    <h3 style="font-size:17px;margin:5px 0 4px">${x.name}</h3>
+    <p style="font-size:12.5px">Answering ${x.ref}</p>
+    <span class="st ${x.role==="loud"?"live":""}">${x.role}</span></div></a>`).join("");
  document.querySelectorAll(".pair img").forEach(im=>im.onclick=()=>{
   document.getElementById("lbi").src=im.src;document.getElementById("lb").classList.add("on");});
  document.getElementById("lb").onclick=e=>e.currentTarget.classList.remove("on");
