@@ -23,6 +23,7 @@ const ROUTES = {
   territory:     require("./_handlers/territory"),
   message:       require("./_handlers/message"),
   assignment:    require("./_handlers/assignment"),
+  page:          require("./_handlers/page"),
 };
 module.exports = async (req, res) => {
   const action = String((req.query && req.query.action) || "").toLowerCase();
