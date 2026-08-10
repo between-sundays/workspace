@@ -7,8 +7,8 @@ const OK = /^(comments\/p[0-4][0-9]\.jsonl|scores\.jsonl|versions\.jsonl|finals\
 module.exports = async (req, res) => {
   cors(res);
   if (req.method === "OPTIONS") return res.status(204).end();
-  const who = auth(req);
-  if (!who) return bad(res, 401, "unknown or missing x-agent-key");
+  // Public read by decision (2026-08-09). Writing still requires a key; nothing here
+  // is confidential yet, and the login gate was making the workspace look broken.
   const path = String((req.query && req.query.path) || "");
   if (!OK.test(path)) return bad(res, 400, "path not allowed");
   const r = await fetch(

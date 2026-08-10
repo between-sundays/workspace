@@ -11,15 +11,33 @@ const ICONS={
  activity:'<path d="M3 12h4l3 8 4-16 3 8h4"/>',
  book:'<path d="M4 4h11a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3z"/><path d="M18 20a2 2 0 0 0 2-2V6"/>'};
 const RAIL=[
- {id:"index",   href:"/",              icon:"hq",       label:"HQ"},
- {id:"well",    href:"/well.html",     icon:"well",     label:"The Well"},
- {id:"build",   href:"/build.html",    icon:"build",    label:"Build \u2014 the paper"},
- {id:"grow",    href:"/grow.html",     icon:"grow",     label:"Grow \u2014 audience"},
- {id:"operate", href:"/operate.html",  icon:"operate",  label:"Operate"},
- {id:"finance", href:"/finance.html",  icon:"finance",  label:"Finance"},
- {id:"company", href:"/company.html",  icon:"company",  label:"Company"},
- {id:"inbox",   href:"/inbox.html",    icon:"inbox",    label:"Inbox"},
- {id:"activity",href:"/activity.html", icon:"activity", label:"Activity"}];
+ {id:"index", href:"/", icon:"hq", label:"HQ"},
+ {id:"well",  href:"/well.html", icon:"well", label:"The Well", note:"Ideas, raw"},
+ {id:"build", href:"/build.html", icon:"build", label:"Build", children:[
+   {id:"issue",   href:"/control-room.html", label:"The Newspaper"},
+   {id:"library", href:"/library.html",      label:"Reference Library"},
+   {id:"verses",  href:"/verse-bank.html",   label:"Verse Bank"},
+   {id:"template",href:"/issue-template.html",label:"Issue Template"},
+   {id:"assets",  href:"/space.html?s=assets", label:"Design System & Assets"},
+   {id:"merch",   href:"/space.html?s=merch",  label:"Merch"},
+   {id:"products",href:"/space.html?s=products",label:"Future Products"}]},
+ {id:"grow", href:"/grow.html", icon:"grow", label:"Grow", children:[
+   {id:"atlas",  href:"/atlas.html",  label:"Audience Atlas"},
+   {id:"desk",   href:"/desk.html",   label:"Relationship Desk"},
+   {id:"signals",href:"/signals.html",label:"The Signal List"},
+   {id:"lab",    href:"/message-lab.html", label:"Message Lab"}]},
+ {id:"operate", href:"/operate.html", icon:"operate", label:"Operate", children:[
+   {id:"printer",  href:"/printer-brief.html", label:"Printer Brief"},
+   {id:"decisions",href:"/decisions.html",     label:"Decision Log"},
+   {id:"logistics",href:"/space.html?s=logistics", label:"Logistics"},
+   {id:"vendors",  href:"/space.html?s=vendors",   label:"Partners & Vendors"},
+   {id:"risks",    href:"/space.html?s=risks",     label:"Risks"}]},
+ {id:"finance", href:"/finance.html", icon:"finance", label:"Finance"},
+ {id:"company", href:"/company.html", icon:"company", label:"Company", children:[
+   {id:"believe",href:"/brain.html",      label:"What We Believe"},
+   {id:"how",    href:"/how-we-work.html",label:"How We Work"}]},
+ {id:"inbox",   href:"/inbox.html",   icon:"inbox",    label:"Inbox"},
+ {id:"activity",href:"/activity.html",icon:"activity", label:"Activity"}];
 const PILLARS=[
  {id:"build",   label:"Build",   href:"/build.html",   blurb:"Everything used to make what we publish."},
  {id:"operate", label:"Operate", href:"/operate.html", blurb:"Everything needed to run the company reliably."},
@@ -53,7 +71,7 @@ const ROOMS=[
      "Does the Spine work as its own object?",
      "Is there a children's or teen edition?"],
   owner:"Unassigned",inputs:"Parked ideas from anyone",outputs:"Candidates for a real brief"},
- {p:"build",id:"assets",label:"Design System & Assets",
+ {p:"build",id:"assets",label:"Design System &amp; Assets",
   purpose:"The press chassis, the module sizes, the halftone pipeline, and where the artwork lives.",
   q:["What is the canonical module set and where is it documented?",
      "Where do Adrian's source exports live, and at what resolution?",
@@ -168,11 +186,19 @@ function mount(cur,opts){
  while(document.body.firstChild) kept.appendChild(document.body.firstChild);
  const me=localStorage.getItem("bts-who");
  document.body.innerHTML=`<div class="app">
-  <aside class="rail"><div class="logo">BS</div>
-   ${RAIL.map(r=>`<a href="${r.href}" class="${r.id===cur?"on":""}">${svg(r.icon)}
-     <span class="tip">${r.label}</span></a>`).join("")}
+  <aside class="rail" id="rail"><div class="top"><div class="logo">S</div>
+    <div class="wordmark"><span>Between</span><em>Sundays</em></div>
+    <button class="pin" id="railpin" title="Keep the menu open">&#9776;</button></div>
+   <nav>${RAIL.map(r=>{
+    const kids=(r.children||[]).map(c=>
+      `<a class="kid" href="${c.href}">${c.label}</a>`).join("");
+    return `<div class="grp ${r.id===cur?"on":""}">
+      <a class="lnk" href="${r.href}">${svg(r.icon)}<span class="lbl">${r.label}</span>
+       ${kids?'<span class="car">&rsaquo;</span>':""}</a>
+      ${kids?`<div class="kids">${kids}</div>`:""}</div>`;}).join("")}</nav>
    <div class="sp"></div>
-   <a href="/how-we-work.html">${svg("book")}<span class="tip">How we work</span></a></aside>
+   <div class="grp"><a class="lnk" href="/how-we-work.html">${svg("book")}
+     <span class="lbl">How we work</span></a></div></aside>
   <div class="main">
    <header class="top">
     <div class="hi">Welcome to <span class="brand">Between Sundays</span> <b>HQ</b></div>
@@ -195,6 +221,11 @@ function mount(cur,opts){
  if(gs) gs.addEventListener("keydown",e=>{
   if(e.key==="Enter"&&e.target.value.trim())
    location.href="/search.html?q="+encodeURIComponent(e.target.value.trim());});
+ const rail=document.getElementById("rail");
+ if(localStorage.getItem("bts-rail")==="open") rail.classList.add("open");
+ document.getElementById("railpin").onclick=()=>{
+  rail.classList.toggle("open");
+  localStorage.setItem("bts-rail",rail.classList.contains("open")?"open":"closed");};
  quickDrop(); addPerson();
  if(getKey()&&!localStorage.getItem("bts-who")){
   fetch("/api/whoami",{headers:{"x-agent-key":getKey()}}).then(r=>r.json()).then(j=>{
@@ -283,9 +314,9 @@ function addPerson(){
 const KEYST="bts-agent-key";
 function getKey(){return (localStorage.getItem(KEYST)||"").trim();}
 async function state(path){
- const k=getKey(); if(!k) return null;
- try{const r=await fetch("/api/state?path="+encodeURIComponent(path),{headers:{"x-agent-key":k}});
-  if(r.status===401) return null;
+ const k=getKey();
+ try{const r=await fetch("/api/state?path="+encodeURIComponent(path),
+   k?{headers:{"x-agent-key":k}}:{});
   if(!r.ok) return [];
   const t=(await r.text()).trim();
   if(!t) return path.endsWith(".md")?"":[];
@@ -300,12 +331,10 @@ async function api(p,b){
  return j;}
 function lockbar(){
  if(getKey()) return "";
- return `<div class="blank" style="border-color:var(--red);background:#fff">
-  <div class="t" style="color:var(--red)">You are not signed in</div>
-  <p><strong>Most of this workspace is private and will look empty until you unlock it.</strong>
-   Page renders are public; briefs, notes, scores, finals, the Well and the business spaces are not.
-   Paste your workspace key below — it stays in this browser and is sent only to our own API.
-   Adrian has the keys; agents get theirs from him.</p>
+ return `<div class="blank">
+  <div class="t">Reading as a guest</div>
+  <p>Everything here is readable without signing in. Add your key to <strong>contribute</strong> —
+   drop ideas, leave notes, add people, mark finals.</p>
   <p style="margin-top:10px"><input id="keyin" placeholder="bsk_…"
    style="width:320px;max-width:100%;border:1px solid var(--rule);padding:8px;font:14px var(--ser)"/>
    <button id="keygo" style="border:1px solid var(--ink);background:var(--ink);color:#fff;

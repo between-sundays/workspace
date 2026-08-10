@@ -1,59 +1,682 @@
 [
-{"f":"db0ac0f36a66a4b782b0223471021ccf.jpg","t":"Le Cafetier — cover (draft)","k":"cover",
- "lesson":"Cream stock, high-contrast Didone nameplate, tiny red section labels. Four teasers across the top with page numbers, four across the bottom, one big illustrated dossier in the middle. Everything sits on hairline rules.",
- "steal":["Teaser strips top AND bottom, each with a red section label and a page number","Line-drawing + watercolour wash instead of photography","Red used only for labels and folios, never for decoration"]},
-{"f":"da3252892dc1a9966a31b4a24e66d7e6.jpg","t":"Le Cafetier — cover (final)","k":"cover",
- "lesson":"Same page, finished. The illustration now bleeds edge to edge behind the headline and the paper's own front page appears inside the drawing. The masthead breathes more.",
- "steal":["Full-bleed illustration with the headline sitting INSIDE it, top-left","The paper drawn into its own illustration — a wink the reader finds later","Kicker (DOSSIER) in red above a two-size headline"]},
-{"f":"ece4756d4530465af2755fa776db2b28.jpg","t":"Arkitektnytt — issue family","k":"system",
- "lesson":"A modern newspaper that is unmistakably a newspaper. Sans nameplate, one spot colour per issue, flat duotone illustration, tiny type, enormous white space.",
- "steal":["ONE spot colour per issue, changed issue to issue — our department inks could work this way","Three teasers in a row under the nameplate, each with an icon","Modern without being cold — the illustrations carry all the warmth"]},
-{"f":"676285db6fc3f78f8312490fcd7e9bae.jpg","t":"Troika — inside spread","k":"spread",
- "lesson":"THE closest reference for The Reading. Left page: contents list with coloured section labels, then a drop-cap essay in narrow columns. Right page: a section-coloured headline, a duotone illustration, five dense columns.",
- "steal":["Coloured section word in the folio line, top outer corner","Contents as a coloured list — section name, sentence, page number","Duotone illustration in the section ink — cheap, striking, never AI-looking","Byline in caps between two rules under the headline"]},
-{"f":"fd68c2962cb4554b2f0a1e5ad545e213.jpg","t":"Redbook — Calm your life","k":"feature",
- "lesson":"One idea, one illustration, one enormous headline set INSIDE the picture. The body doesn't start until halfway down the page.",
- "steal":["Headline placed inside the illustration, not above it","A single deck of 2-3 lines, centred, doing the work of a whole intro","Two columns of justified serif with a drop cap — restful, not dense"]},
-{"f":"aff1f90a110f234ef47d5101ce9e7157.jpg","t":"Journal — template cover","k":"cover",
- "lesson":"Coloured teaser cards under the nameplate. Useful as a caution: the colour blocks are decoration, not information, and it reads as a template.",
- "steal":["The three-card teaser rhythm is good","AVOID: colour applied as a background block behind text with no reason. This is the look we are trying not to have."]},
-{"f":"0e171679fc143970789589d5155ec06a.jpg","t":"Die Zeit — front page","k":"cover",
- "lesson":"A single huge illustration owns two thirds of the page, then the story starts in a white box floated on top of it. Right rail of small teasers runs the full height.",
- "steal":["Article body in a white panel floating ON the illustration","A narrow right rail of three teasers, each with a bold hed and four lines","Confidence to give most of the front page to one image"]},
-{"f":"54e7fecaccd2a40f7ea3002106eb3113.jpg","t":"Barcelona indie — poster spread","k":"spread",
- "lesson":"Left page is a full poster. Right page is dense text plus a vertical rail of small classified ads. Loud facing quiet — the spread logic we should use everywhere.",
- "steal":["ONE loud page facing ONE dense page. Never two loud, never two quiet.","Section slug with a fraction — 'culturas. 1/2' — tells you where you are in the section","A rail of small boxed ads down the outer edge"]},
-{"f":"2f3e505edb42d9ed85c54d74ecb31473.jpg","t":"The Snack Break — brand paper","k":"cover",
- "lesson":"A brand newspaper that stays funny without becoming a joke. Heavy condensed caps headlines, double rules, playful bylines, real product photography.",
- "steal":["Condensed caps headline stack — huge impact in very little width","Double rule under the nameplate with a strapline on each side","Joke bylines that never break the format"]},
-{"f":"b1803e4f52380e8c713b8b9535d2f214.jpg","t":"NYT Sunday Review","k":"feature",
- "lesson":"The single best reference here for what BTS should feel like. A flat coral field, one illustration, two stacked headlines with drop caps, a narrow opinion rail, and a question set quietly into the artwork.",
- "steal":["FLAT COLOUR FIELD as the page background, illustration drawn over it","Two stories sharing one image, each with its own drop cap","A question set in a lighter tint inside the illustration — a rest stop for the eye","Left rail: label, BY line, italic bio, 'Continued on Page 6'"]},
-{"f":"c8628a04bca259c163d6d6914fd114d8.jpg","t":"Boston Globe — Books","k":"listing",
- "lesson":"How to make a LIST beautiful. An illustrated scene, a giant numeral locked into it, then genuinely dense listings underneath in five columns.",
- "steal":["A giant numeral inside the illustration as the entry point","Pill-shaped category labels (FICTION) breaking the listing into sections","Dense is fine when the top of the page gave the eye somewhere to rest"]},
-{"f":"0a40cc870154a6d0c3e15875a7e7f834.jpg","t":"Süddeutsche Zeitung — Gesellschaft","k":"spread",
- "lesson":"Illustration as a band across the top AND a band across the bottom, with a column of text between them. The headline sits in the middle of the page, not the top.",
- "steal":["Two illustration bands sandwiching the text — completely different rhythm to a single hero image","Headline dropped into the MIDDLE of the page","Nameplate word cropped by the illustration — confident, modern"]},
-{"f":"eba208231c1e5f3290f847d31428d042.jpg","t":"Chosun Weekly Biz — infographic","k":"explainer",
- "lesson":"A cut-out object laid diagonally across the page, breaking the column grid, with text wrapping around it. The diagonal is what makes it feel alive.",
- "steal":["A diagonal object that breaks the grid — the grid is stronger for being broken once","Small locator map inset bottom-left","Text wrapping tight to an irregular silhouette"]},
-{"f":"327040cc0b2fc5105440821842376e58.jpg","t":"Packers Preview — sports front","k":"sports",
- "lesson":"Cut-out player on a flat team-colour field, huge stacked caps headline in the negative space. A stats rail down the right.",
- "steal":["Cut-out figure on a flat colour field, headline stacked in the empty half","A vertical stats/facts rail — our sports page can use this exactly","Team colours as the whole palette of the page"]},
-{"f":"ece34814e7f83ce3814f592351b184f9.jpg","t":"Untagged","k":"untagged","lesson":"","steal":[]},
-{"f":"cdde1f567ea8d3fde28b257aced0f9af.jpg","t":"Untagged","k":"untagged","lesson":"","steal":[]},
-{"f":"375eb887d5e6918aa9c1fa3f9f102ef0-1.jpg","t":"Untagged","k":"untagged","lesson":"","steal":[]},
-{"f":"09efd5f4e80642b12dc0808f9337c4ed.jpg","t":"Untagged","k":"untagged","lesson":"","steal":[]},
-{"f":"4fb4f00da281816f6b80e7846a1b0aaf-1.jpg","t":"Untagged","k":"untagged","lesson":"","steal":[]},
-{"f":"3575e24fdfb02100d149e89054e316a2.jpg","t":"Untagged","k":"untagged","lesson":"","steal":[]},
-{"f":"2a4c33143233bfafc3a004095e4f36d1.jpg","t":"Untagged","k":"untagged","lesson":"","steal":[]},
-{"f":"0419231d742eef55bd4ce9a9c5755fdd.jpg","t":"Untagged","k":"untagged","lesson":"","steal":[]},
-{"f":"a470050aac489d89ebe5f343ff25c00d.jpg","t":"Untagged","k":"untagged","lesson":"","steal":[]},
-{"f":"fa0818b97e5cf331e1d274a8e8f35bd3.jpg","t":"Untagged","k":"untagged","lesson":"","steal":[]},
-{"f":"1bfe255dd506c59defb9ecf95569ab6e.jpg","t":"Untagged","k":"untagged","lesson":"","steal":[]},
-{"f":"0dc9f5057a9a4524025d9047cee8cd36.jpg","t":"Untagged","k":"untagged","lesson":"","steal":[]},
-{"f":"a1fd2e7d732b8bbc2b03d91c02f9c9c9.jpg","t":"Untagged","k":"untagged","lesson":"","steal":[]},
-{"f":"d6707ec0025c957a2c1145b6be25fd01.jpg","t":"Untagged","k":"untagged","lesson":"","steal":[]},
-{"f":"46047ce7640d7bcf3159d0c99ebd5e75-1.jpg","t":"Untagged","k":"untagged","lesson":"","steal":[]}
+{
+"f": "db0ac0f36a66a4b782b0223471021ccf.jpg",
+"t": "Le Cafetier \u2014 cover (draft)",
+"k": "cover",
+"lesson": "Cream stock, high-contrast Didone nameplate, tiny red section labels. Four teasers across the top with page numbers, four across the bottom, one big illustrated dossier in the middle. Everything sits on hairline rules.",
+"steal": [
+"Teaser strips top AND bottom, each with a red section label and a page number",
+"Line-drawing + watercolour wash instead of photography",
+"Red used only for labels and folios, never for decoration"
+]
+},
+{
+"f": "da3252892dc1a9966a31b4a24e66d7e6.jpg",
+"t": "Le Cafetier \u2014 cover (final)",
+"k": "cover",
+"lesson": "Same page, finished. The illustration now bleeds edge to edge behind the headline and the paper's own front page appears inside the drawing. The masthead breathes more.",
+"steal": [
+"Full-bleed illustration with the headline sitting INSIDE it, top-left",
+"The paper drawn into its own illustration \u2014 a wink the reader finds later",
+"Kicker (DOSSIER) in red above a two-size headline"
+]
+},
+{
+"f": "ece4756d4530465af2755fa776db2b28.jpg",
+"t": "Arkitektnytt \u2014 issue family",
+"k": "system",
+"lesson": "A modern newspaper that is unmistakably a newspaper. Sans nameplate, one spot colour per issue, flat duotone illustration, tiny type, enormous white space.",
+"steal": [
+"ONE spot colour per issue, changed issue to issue \u2014 our department inks could work this way",
+"Three teasers in a row under the nameplate, each with an icon",
+"Modern without being cold \u2014 the illustrations carry all the warmth"
+]
+},
+{
+"f": "676285db6fc3f78f8312490fcd7e9bae.jpg",
+"t": "Troika \u2014 inside spread",
+"k": "spread",
+"lesson": "THE closest reference for The Reading. Left page: contents list with coloured section labels, then a drop-cap essay in narrow columns. Right page: a section-coloured headline, a duotone illustration, five dense columns.",
+"steal": [
+"Coloured section word in the folio line, top outer corner",
+"Contents as a coloured list \u2014 section name, sentence, page number",
+"Duotone illustration in the section ink \u2014 cheap, striking, never AI-looking",
+"Byline in caps between two rules under the headline"
+]
+},
+{
+"f": "fd68c2962cb4554b2f0a1e5ad545e213.jpg",
+"t": "Redbook \u2014 Calm your life",
+"k": "feature",
+"lesson": "One idea, one illustration, one enormous headline set INSIDE the picture. The body doesn't start until halfway down the page.",
+"steal": [
+"Headline placed inside the illustration, not above it",
+"A single deck of 2-3 lines, centred, doing the work of a whole intro",
+"Two columns of justified serif with a drop cap \u2014 restful, not dense"
+]
+},
+{
+"f": "aff1f90a110f234ef47d5101ce9e7157.jpg",
+"t": "Journal \u2014 template cover",
+"k": "cover",
+"lesson": "Coloured teaser cards under the nameplate. Useful as a caution: the colour blocks are decoration, not information, and it reads as a template.",
+"steal": [
+"The three-card teaser rhythm is good",
+"AVOID: colour applied as a background block behind text with no reason. This is the look we are trying not to have."
+]
+},
+{
+"f": "0e171679fc143970789589d5155ec06a.jpg",
+"t": "Die Zeit \u2014 front page",
+"k": "cover",
+"lesson": "A single huge illustration owns two thirds of the page, then the story starts in a white box floated on top of it. Right rail of small teasers runs the full height.",
+"steal": [
+"Article body in a white panel floating ON the illustration",
+"A narrow right rail of three teasers, each with a bold hed and four lines",
+"Confidence to give most of the front page to one image"
+]
+},
+{
+"f": "54e7fecaccd2a40f7ea3002106eb3113.jpg",
+"t": "Barcelona indie \u2014 poster spread",
+"k": "spread",
+"lesson": "Left page is a full poster. Right page is dense text plus a vertical rail of small classified ads. Loud facing quiet \u2014 the spread logic we should use everywhere.",
+"steal": [
+"ONE loud page facing ONE dense page. Never two loud, never two quiet.",
+"Section slug with a fraction \u2014 'culturas. 1/2' \u2014 tells you where you are in the section",
+"A rail of small boxed ads down the outer edge"
+]
+},
+{
+"f": "2f3e505edb42d9ed85c54d74ecb31473.jpg",
+"t": "The Snack Break \u2014 brand paper",
+"k": "cover",
+"lesson": "A brand newspaper that stays funny without becoming a joke. Heavy condensed caps headlines, double rules, playful bylines, real product photography.",
+"steal": [
+"Condensed caps headline stack \u2014 huge impact in very little width",
+"Double rule under the nameplate with a strapline on each side",
+"Joke bylines that never break the format"
+]
+},
+{
+"f": "b1803e4f52380e8c713b8b9535d2f214.jpg",
+"t": "NYT Sunday Review",
+"k": "feature",
+"lesson": "The single best reference here for what BTS should feel like. A flat coral field, one illustration, two stacked headlines with drop caps, a narrow opinion rail, and a question set quietly into the artwork.",
+"steal": [
+"FLAT COLOUR FIELD as the page background, illustration drawn over it",
+"Two stories sharing one image, each with its own drop cap",
+"A question set in a lighter tint inside the illustration \u2014 a rest stop for the eye",
+"Left rail: label, BY line, italic bio, 'Continued on Page 6'"
+]
+},
+{
+"f": "c8628a04bca259c163d6d6914fd114d8.jpg",
+"t": "Boston Globe \u2014 Books",
+"k": "listing",
+"lesson": "How to make a LIST beautiful. An illustrated scene, a giant numeral locked into it, then genuinely dense listings underneath in five columns.",
+"steal": [
+"A giant numeral inside the illustration as the entry point",
+"Pill-shaped category labels (FICTION) breaking the listing into sections",
+"Dense is fine when the top of the page gave the eye somewhere to rest"
+]
+},
+{
+"f": "0a40cc870154a6d0c3e15875a7e7f834.jpg",
+"t": "S\u00fcddeutsche Zeitung \u2014 Gesellschaft",
+"k": "spread",
+"lesson": "Illustration as a band across the top AND a band across the bottom, with a column of text between them. The headline sits in the middle of the page, not the top.",
+"steal": [
+"Two illustration bands sandwiching the text \u2014 completely different rhythm to a single hero image",
+"Headline dropped into the MIDDLE of the page",
+"Nameplate word cropped by the illustration \u2014 confident, modern"
+]
+},
+{
+"f": "eba208231c1e5f3290f847d31428d042.jpg",
+"t": "Chosun Weekly Biz \u2014 infographic",
+"k": "explainer",
+"lesson": "A cut-out object laid diagonally across the page, breaking the column grid, with text wrapping around it. The diagonal is what makes it feel alive.",
+"steal": [
+"A diagonal object that breaks the grid \u2014 the grid is stronger for being broken once",
+"Small locator map inset bottom-left",
+"Text wrapping tight to an irregular silhouette"
+]
+},
+{
+"f": "327040cc0b2fc5105440821842376e58.jpg",
+"t": "Packers Preview \u2014 sports front",
+"k": "sports",
+"lesson": "Cut-out player on a flat team-colour field, huge stacked caps headline in the negative space. A stats rail down the right.",
+"steal": [
+"Cut-out figure on a flat colour field, headline stacked in the empty half",
+"A vertical stats/facts rail \u2014 our sports page can use this exactly",
+"Team colours as the whole palette of the page"
+]
+},
+{
+"f": "ece34814e7f83ce3814f592351b184f9.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "cdde1f567ea8d3fde28b257aced0f9af.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "375eb887d5e6918aa9c1fa3f9f102ef0-1.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "09efd5f4e80642b12dc0808f9337c4ed.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "4fb4f00da281816f6b80e7846a1b0aaf-1.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "3575e24fdfb02100d149e89054e316a2.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "2a4c33143233bfafc3a004095e4f36d1.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "0419231d742eef55bd4ce9a9c5755fdd.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "a470050aac489d89ebe5f343ff25c00d.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "fa0818b97e5cf331e1d274a8e8f35bd3.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "1bfe255dd506c59defb9ecf95569ab6e.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "0dc9f5057a9a4524025d9047cee8cd36.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "a1fd2e7d732b8bbc2b03d91c02f9c9c9.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "d6707ec0025c957a2c1145b6be25fd01.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "46047ce7640d7bcf3159d0c99ebd5e75-1.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "0b2b982f580ac5a237edf929b03b74c8.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "119dcb5f8cf19eb73e2a909820e5adba.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "12a8db50241e5e70039afe48ac6368aa.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "150bf5f8ad768e39d1533a5259bc0200.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "1a9c309e6aabfc45f5aacd61e9889f89.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "1bdfdc6ea43197190c9e4ad980573e84.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "1cf8f13ceef7720f68aaa3e52fc28b97.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "1f73bacce0fc69d3bf0875f16f546a76.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "25e71b735bd261d7ead202d0ed3f7c3f.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "31b5de402d505132d37cd852f78c140a.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "375eb887d5e6918aa9c1fa3f9f102ef0.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "3a33c9ee763286fd06f764c8f1e98563.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "3d52b95555a88b1a85ea6f70918cb7fb.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "3f6b57f874a220c15bb296e01b7fbe69.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "43d645bb1460db38ff54cbb7106efc70.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "46047ce7640d7bcf3159d0c99ebd5e75.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "46e733f3dfd2f3e563f47736683e2006.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "47e71f9ef8656ad2395ae5e62fc18d1b.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "4bd833ba044094f1c1e866e346c20bbc.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "4fb4f00da281816f6b80e7846a1b0aaf.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "57d72fa4a03cd1bed45cbb9d2c18a00d.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "625fd83e86f49c53806d4810f43a0d16.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "630ba7bae2f199f9f842f6d9e85ce2c7.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "64a8dac9c2ea778e46b8f525a0455c63.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "6b23ea99f401d7335b9a8ee473285e25.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "6ed48740deda4b450cc90d8ddb4ed78d-1.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "6ed48740deda4b450cc90d8ddb4ed78d.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "71e6f276057c8c288500b4e51880979a.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "72c3a59d075187618e8af55ba51ce7a1.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "7bf45d9cae72b35a4dc16b0ee880f4b7.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "7c149e92660eb5052d153c63f32c4206.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "7f34d39978b870dc04c4687f75c3bd54.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "84675c397d4591745936da58450c2187.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "84b4a6329499b9b3cd3aa30bacb05dfa.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "8672e62892dca2ba088e5b6216db675c.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "880849f876debfb6dae09b9fbe03667c.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "90be7481734254886cd1f27cbf98a625.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "9353378ea51ccd8bdc57d9245a9d3132.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "960be2d0e29caff964ecc1f52ee53a95.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "9af6190b1f265e6c5d4c2c1d245dd7a1.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "9d8fc33c6d6d7e831e2b35b37e44762a.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "9f87acfe365e6c8459f146eca38a5ec2.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "a01bb2dd7bfb3b2e2f8d28539bd6e2ce.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "a3db33f7aebf5a7f7205ae5d982ccbb0.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "a7c8c21f302daec86a0b034f585f83d0.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "ac7ad2552ef1519c0825dfe8423be117.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "ad2a4fde1e2cf7e832e3350883147deb.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "b374356e6dce61366e094b3e591e24b8.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "ba7c2a32e4dbf6e7e124c5d7ab4f9078.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "c266ce93c90fda45de9290ac994eac26.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "c2b5555532d95992ef057a1f9dfdcb37.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "c61d83513e2d80461bd15a388336a58a.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "c9d95025bc19a18dcc56e3595ff899db.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "dad8558972ee3301e69ae1d767ef6106.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "dd89c82e8672eb21fb4e3356ab4b409c.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "dfe6469c65fbdd31c5d0c3beeba9bfd4.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "eb7e575766b208342bba6280c3ed642f.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "f4f2252d280c4693552b0ea2865f1130.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "f6ef1c3162942b450f069cd8e39f37a5.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+},
+{
+"f": "f7584bd1950e396a90b43c1c19212693.jpg",
+"t": "Untagged",
+"k": "untagged",
+"lesson": "",
+"steal": []
+}
 ]
