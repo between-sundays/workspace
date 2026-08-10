@@ -27,6 +27,18 @@
 one sets the grid, type and rhythm that the rest of the paper inherits. No variants — one spread,
 repeated passes.</p>
 <div id="out"></div>
+<div class="rowhead"><h2>Where to next</h2></div>
+<div class="cards">
+ <a class="card" href="/control-room.html"><span class="num">01</span><h3>The Newspaper</h3>
+  <p>All 48 slots and where each one stands. Every page is currently not-ready by design.</p>
+  <span class="st empty">The flatplan</span></a>
+ <a class="card" href="/library.html"><span class="num">02</span><h3>Reference Library</h3>
+  <p>The 89 newspapers this spread was designed against, and what to take from each.</p>
+  <span class="st live">89 references</span></a>
+ <a class="card" href="/well.html"><span class="num">03</span><h3>The Well</h3>
+  <p>Drop a thought about this spread, or anything else, and let the team build on it.</p>
+  <span class="st live">29 drops</span></a>
+</div>
 <div id="lb"><img id="lbi" alt=""/></div>
 <script src="/_nav.js"></script>
 <script>
@@ -59,10 +71,19 @@ fetch("/data/anchor.json").then(r=>r.json()).then(a=>{
    <div id="said" style="margin-top:12px;color:var(--mute);font-size:13.5px"></div>
   </div>`;
  document.querySelectorAll(".verd button").forEach(b=>b.onclick=async()=>{
-  if(!getKey()){alert("Add your workspace key to record a verdict — any page, bottom of the Control Room.");return;}
-  await api("comment",{page:7,type:"DESIGN",
-    body:"Anchor 1 verdict: "+b.dataset.v.toUpperCase()+" (The Reading spread, pages 07–08)"});
-  document.getElementById("said").textContent="Recorded: "+b.textContent;});
+  try{
+   await api("comment",{page:7,type:"DESIGN",
+     body:"Anchor 1 verdict: "+b.dataset.v.toUpperCase()+" (The Reading spread, pages 07–08)"});
+   await api("page",{page:7,status:b.dataset.v==="approved"?"direction-chosen":"exploring",
+     note:"Anchor 1 verdict: "+b.dataset.v}).catch(()=>{});
+   document.querySelectorAll(".verd button").forEach(x=>x.classList.remove("go2"));
+   b.classList.add("go2");
+   document.getElementById("said").innerHTML=
+    b.dataset.v==="approved"
+     ? "<strong>Recorded — direction approved.</strong> The other seven anchors can start against this grid."
+     : "<strong>Recorded: "+b.textContent+".</strong> Say what should change and it gets another pass.";
+   toast("Verdict recorded");
+  }catch(e){}});
  document.querySelectorAll(".pair img").forEach(im=>im.onclick=()=>{
   document.getElementById("lbi").src=im.src;document.getElementById("lb").classList.add("on");});
  document.getElementById("lb").onclick=e=>e.currentTarget.classList.remove("on");

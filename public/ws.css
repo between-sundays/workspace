@@ -211,3 +211,26 @@ footer a{font-weight:650}
  color:var(--railtxt);white-space:nowrap}
 .rail .kid:hover{background:#41291e;color:var(--cream)}
 .rail .sp{flex:1 1 auto;min-height:8px}
+
+/* ---- toast + sign-in ---- */
+#toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(14px);
+ background:var(--brown);color:var(--cream);padding:12px 20px;border-radius:999px;font-size:14px;
+ font-weight:650;opacity:0;pointer-events:none;transition:.18s;z-index:90;
+ box-shadow:0 8px 26px rgba(0,0,0,.22)}
+#toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+#toast.bad{background:#8a3a1c}
+#signin{position:fixed;inset:0;z-index:88;background:rgba(44,26,18,.42);display:none;
+ align-items:center;justify-content:center;padding:20px}
+#signin.on{display:flex}
+#signin .box{background:#fff;border-radius:var(--r);padding:26px 28px;max-width:440px;width:100%;
+ box-shadow:0 14px 46px rgba(44,26,18,.28)}
+#signin .hd{font-family:var(--ser);font-size:24px;font-weight:700;margin-bottom:8px}
+#signin p{font-size:14px;color:var(--mute);margin-bottom:14px}
+#signin input{font-size:15px}
+#signin .row{display:flex;gap:8px}
+#signin button{border:0;background:var(--navy);color:#fff;border-radius:999px;padding:11px 22px;
+ font-size:13.5px;font-weight:750;cursor:pointer}
+#signin button.ghost{background:#fff;color:var(--mute);border:1px solid var(--line)}
+.top .me{border:0;background:none;display:flex;align-items:center;gap:9px;cursor:pointer;
+ padding:4px 6px;border-radius:999px;text-align:left}
+.top .me:hover{background:#f6f1e9}

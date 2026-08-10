@@ -209,9 +209,9 @@ function mount(cur,opts){
     <div class="grow"></div>
     <div class="search"><input id="gsearch" placeholder="Search the workspace\u2026"/>
      <button aria-label="Search">&#8594;</button></div>
-    <div class="me"><div class="av" id="avme">${me?me.slice(0,2):"\u2014"}</div>
-     <div class="who" id="whome">${me||"Not signed in"}<span>${me?"signed in":"paste your key"}</span></div>
-    </div></header>
+    <button class="me" id="mebtn"><div class="av" id="avme">${me?me.slice(0,2):"+"}</div>
+     <div class="who" id="whome">${me||"Sign in"}<span>${me?"signed in":"to contribute"}</span></div>
+    </button></header>
    <div class="page">
     <h1 class="title">${o.title||"Headquarters"}</h1>
     ${o.sub?`<p class="lede" style="margin-top:-8px">${o.sub}</p>`:""}
@@ -230,6 +230,10 @@ function mount(cur,opts){
  document.getElementById("railpin").onclick=()=>{
   rail.classList.toggle("open");
   localStorage.setItem("bts-rail",rail.classList.contains("open")?"open":"closed");};
+ document.getElementById("mebtn").onclick=()=>{
+  if(getKey()){ if(confirm("Sign out of this browser?")){localStorage.removeItem(KEYST);
+    localStorage.removeItem("bts-who");location.reload();} }
+  else signIn();};
  quickDrop(); addPerson();
  if(getKey()&&!localStorage.getItem("bts-who")){
   fetch("/api/whoami",{headers:{"x-agent-key":getKey()}}).then(r=>r.json()).then(j=>{
@@ -251,7 +255,7 @@ function quickDrop(){
   </div></div>`);
  const w=document.getElementById("qd");
  document.getElementById("qdbtn").onclick=()=>{
-  if(!getKey()){alert("Enter your workspace key on any page first.");return;}
+  if(!getKey()){signIn("Add your key to drop ideas into the Well.");return;}
   w.classList.add("on");document.getElementById("qdtxt").focus();};
  document.getElementById("qdx").onclick=()=>w.classList.remove("on");
  w.onclick=e=>{if(e.target===w)w.classList.remove("on");};
@@ -287,7 +291,7 @@ function addPerson(){
   </div></div>`);
  const w=document.getElementById("ap");
  document.getElementById("apbtn").onclick=async()=>{
-  if(!getKey()){alert("Enter your workspace key first.");return;}
+  if(!getKey()){signIn("Add your key to add people.");return;}
   const praw=(await state("personas.jsonl"))||[];
   const P={}; praw.forEach(p=>P[p.id]=p);
   document.getElementById("apgroups").innerHTML=Object.values(P).map(p=>
@@ -314,6 +318,38 @@ function addPerson(){
    setTimeout(()=>{w.classList.remove("on");msg.textContent="";location.reload();},700);
   }catch{msg.textContent="";}};}
 
+/* ---- feedback that cannot be suppressed by the browser ---- */
+function toast(msg,kind){
+ let t=document.getElementById("toast");
+ if(!t){t=document.createElement("div");t.id="toast";document.body.appendChild(t);}
+ t.textContent=msg; t.className="on"+(kind?" "+kind:"");
+ clearTimeout(window.__tt); window.__tt=setTimeout(()=>t.className="",3200);
+}
+/* One place to sign in, reachable from anywhere. No popups. */
+function signIn(msg){
+ let w=document.getElementById("signin");
+ if(!w){
+  document.body.insertAdjacentHTML("beforeend",`
+   <div id="signin"><div class="box">
+    <div class="hd">Sign in to contribute</div>
+    <p id="simsg">Reading is open to everyone. Add your key to leave verdicts, notes and ideas.</p>
+    <input id="sikey" placeholder="bsk_…" autocomplete="off"/>
+    <div class="row"><button id="sigo">Sign in</button>
+     <button id="six" class="ghost">Not now</button></div>
+   </div></div>`);
+  w=document.getElementById("signin");
+  document.getElementById("six").onclick=()=>w.classList.remove("on");
+  w.onclick=e=>{if(e.target===w)w.classList.remove("on");};
+  document.getElementById("sigo").onclick=()=>{
+   const v=document.getElementById("sikey").value.trim();
+   if(!v){toast("Paste your key first");return;}
+   localStorage.setItem(KEYST,v); localStorage.removeItem("bts-who"); location.reload();};
+  document.getElementById("sikey").addEventListener("keydown",e=>{
+   if(e.key==="Enter")document.getElementById("sigo").click();});
+ }
+ if(msg) document.getElementById("simsg").textContent=msg;
+ w.classList.add("on"); setTimeout(()=>document.getElementById("sikey").focus(),40);
+}
 /* ---- shared key + private state ---- */
 const KEYST="bts-agent-key";
 function getKey(){return (localStorage.getItem(KEYST)||"").trim();}
@@ -328,10 +364,12 @@ async function state(path){
   return t.split("\n").filter(Boolean).map(l=>{try{return JSON.parse(l)}catch{return null}}).filter(Boolean);
  }catch{return [];}}
 async function api(p,b){
+ if(!getKey()){signIn("You need a key to do that. Reading stays open to everyone.");throw 0;}
  const r=await fetch("/api/"+p,{method:"POST",
   headers:{"content-type":"application/json","x-agent-key":getKey()},body:JSON.stringify(b)});
  const j=await r.json().catch(()=>({}));
- if(!r.ok){alert(j.error||("error "+r.status));throw 0;}
+ if(!r.ok){ if(r.status===401){signIn("That key was not recognised.");}
+  else toast(j.error||("error "+r.status),"bad"); throw 0;}
  return j;}
 function lockbar(){
  if(getKey()) return "";
