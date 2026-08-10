@@ -35,6 +35,8 @@ const ROOMS=[
   d:"Every version of every page, side by side."},
  {p:"build",id:"well",label:"The Well",href:"/well.html",live:1,
   d:"The drop space. Raw words and thoughts, built on by everyone, pulled into future work."},
+ {p:"build",id:"library",label:"Reference Library",href:"/library.html",live:1,
+  d:"Every newspaper we design against, and exactly what to take from each one."},
  {p:"build",id:"verses",label:"Verse Bank",href:"/verse-bank.html",live:1,
   d:"Every scripture printed in the issue, and where it lands."},
  {p:"build",id:"template",label:"The Issue Template",href:"/issue-template.html",live:1,
