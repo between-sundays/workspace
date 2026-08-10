@@ -12,7 +12,7 @@ Image.MAX_IMAGE_PIXELS = None
 W, H = 941, 1346
 PW, PH = W / 96, H / 96
 CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-BASE = os.path.dirname(os.path.abspath(__file__))
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 WORKERS = 6
 
 def strip_globals(css):
