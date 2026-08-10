@@ -14,6 +14,7 @@ const RAIL=[
  {id:"index", href:"/", icon:"hq", label:"HQ"},
  {id:"well",  href:"/well.html", icon:"well", label:"The Well", note:"Ideas, raw"},
  {id:"build", href:"/build.html", icon:"build", label:"Build", children:[
+   {id:"spread",  href:"/spread.html",       label:"Anchor spreads"},
    {id:"issue",   href:"/control-room.html", label:"The Newspaper"},
    {id:"library", href:"/library.html",      label:"Reference Library"},
    {id:"verses",  href:"/verse-bank.html",   label:"Verse Bank"},
@@ -53,6 +54,8 @@ const ROOMS=[
   d:"Every version of every page, side by side."},
  {p:"build",id:"well",label:"The Well",href:"/well.html",live:1,
   d:"The drop space. Raw words and thoughts, built on by everyone, pulled into future work."},
+ {p:"build",id:"spread",label:"Anchor spreads",href:"/spread.html",live:1,
+  d:"The spreads that set the standard. Anchor 1 is The Reading, pages 07-08."},
  {p:"build",id:"library",label:"Reference Library",href:"/library.html",live:1,
   d:"Every newspaper we design against, and exactly what to take from each one."},
  {p:"build",id:"verses",label:"Verse Bank",href:"/verse-bank.html",live:1,
@@ -186,15 +189,16 @@ function mount(cur,opts){
  while(document.body.firstChild) kept.appendChild(document.body.firstChild);
  const me=localStorage.getItem("bts-who");
  document.body.innerHTML=`<div class="app">
-  <aside class="rail" id="rail"><div class="top"><div class="logo">S</div>
+  <aside class="rail" id="rail">
+   <div class="head"><div class="logo">S</div>
     <div class="wordmark"><span>Between</span><em>Sundays</em></div>
     <button class="pin" id="railpin" title="Keep the menu open">&#9776;</button></div>
    <nav>${RAIL.map(r=>{
     const kids=(r.children||[]).map(c=>
       `<a class="kid" href="${c.href}">${c.label}</a>`).join("");
-    return `<div class="grp ${r.id===cur?"on":""}">
+    return `<div class="grp${r.id===cur?" on":""}${kids?" has":""}">
       <a class="lnk" href="${r.href}">${svg(r.icon)}<span class="lbl">${r.label}</span>
-       ${kids?'<span class="car">&rsaquo;</span>':""}</a>
+       ${kids?'<span class="car">&#8250;</span>':""}</a>
       ${kids?`<div class="kids">${kids}</div>`:""}</div>`;}).join("")}</nav>
    <div class="sp"></div>
    <div class="grp"><a class="lnk" href="/how-we-work.html">${svg("book")}

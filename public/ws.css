@@ -186,35 +186,44 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent)}
 footer{color:var(--mute);font-size:12.5px;padding:20px 2px 10px;display:flex;gap:16px;flex-wrap:wrap}
 footer a{font-weight:650}
 
-/* ---- expandable rail ---- */
-.rail{width:68px;flex:0 0 68px;transition:width .16s ease;overflow:hidden;align-items:stretch;
- padding:14px 10px}
-.rail:hover,.rail.open{width:236px;flex:0 0 236px}
-.rail .top{display:flex;align-items:center;gap:10px;padding:0 4px 14px;position:relative}
+/* ---- rail: 68px of icons, expands to 240px ---- */
+.rail{width:68px;flex:0 0 68px;transition:width .16s ease;padding:14px 10px;align-items:stretch;
+ overflow:visible;position:sticky;top:14px;height:calc(100vh - 28px);display:flex;
+ flex-direction:column;background:var(--rail);border-radius:var(--r)}
+.rail:hover,.rail.open{width:240px;flex:0 0 240px}
+.rail .head{display:flex;align-items:center;gap:10px;height:44px;padding:0 4px;margin-bottom:12px;
+ position:relative;flex:0 0 auto}
+.rail .logo{width:38px;height:38px;border-radius:11px;background:var(--butter);color:var(--brown);
+ display:flex;align-items:center;justify-content:center;font-family:var(--ser);font-style:italic;
+ font-weight:700;font-size:19px;flex:0 0 38px}
 .rail .wordmark{opacity:0;transition:opacity .12s;white-space:nowrap;line-height:1;
- font-family:var(--ser);color:var(--cream)}
-.rail .wordmark span{display:block;font-size:11.5px;letter-spacing:.02em}
-.rail .wordmark em{display:block;font-size:21px;font-style:italic;margin-top:-2px}
+ font-family:var(--ser);color:var(--cream);overflow:hidden}
+.rail .wordmark span{display:block;font-size:11px;letter-spacing:.03em}
+.rail .wordmark em{display:block;font-size:20px;font-style:italic;margin-top:-1px}
 .rail:hover .wordmark,.rail.open .wordmark{opacity:1}
-.rail .pin{position:absolute;right:2px;top:6px;background:none;border:0;color:var(--railtxt);
- font-size:15px;cursor:pointer;opacity:0;transition:opacity .12s}
+.rail .pin{position:absolute;right:0;top:4px;background:none;border:0;color:var(--railtxt);
+ font-size:15px;cursor:pointer;opacity:0;transition:opacity .12s;padding:4px 6px}
 .rail:hover .pin,.rail.open .pin{opacity:1}
-.rail nav{display:flex;flex-direction:column;gap:2px;overflow-y:auto;overflow-x:hidden}
+.rail nav{display:flex;flex-direction:column;gap:2px;flex:1 1 auto;overflow-y:auto;overflow-x:visible}
 .rail nav::-webkit-scrollbar{width:0}
-.rail .grp{border-radius:12px}
-.rail .lnk{display:flex;align-items:center;gap:12px;height:42px;padding:0 10px;border-radius:12px;
- color:var(--railtxt);white-space:nowrap;width:100%}
+.rail .grp{position:relative;flex:0 0 auto}
+.rail .lnk{display:flex;align-items:center;gap:14px;height:42px;padding:0 11px;border-radius:12px;
+ color:var(--railtxt);white-space:nowrap}
 .rail .lnk svg{width:19px;height:19px;flex:0 0 19px;stroke-width:1.9}
-.rail .lbl{opacity:0;transition:opacity .12s;font-size:14px;font-weight:650}
+.rail .lbl{opacity:0;transition:opacity .12s;font-size:14px;font-weight:650;overflow:hidden}
 .rail:hover .lbl,.rail.open .lbl{opacity:1}
-.rail .car{margin-left:auto;opacity:0;transition:.12s;font-size:17px}
-.rail:hover .car,.rail.open .car{opacity:.5}
+.rail .car{margin-left:auto;opacity:0;font-size:17px;transition:opacity .12s}
+.rail:hover .car,.rail.open .car{opacity:.45}
 .rail .lnk:hover{background:#41291e;color:var(--cream)}
 .rail .grp.on>.lnk{background:var(--butter);color:var(--brown)}
-.rail .kids{display:none;padding:2px 0 6px 42px}
-.rail:hover .grp:hover .kids,.rail.open .grp:hover .kids,
-.rail.open .grp.on .kids,.rail:hover .grp.on .kids{display:block}
-.rail .kid{display:block;padding:7px 10px;border-radius:9px;font-size:13px;font-weight:600;
+/* children: inline when the rail is open, flyout when it is collapsed */
+.rail .kids{display:none;padding:3px 0 7px 44px}
+.rail:hover .grp.on>.kids,.rail.open .grp.on>.kids,
+.rail:hover .grp:hover>.kids,.rail.open .grp:hover>.kids{display:block}
+.rail:not(:hover):not(.open) .grp>.kids{position:absolute;left:60px;top:0;background:var(--rail);
+ border-radius:12px;padding:8px;min-width:196px;box-shadow:0 8px 26px rgba(0,0,0,.28);z-index:50}
+.rail:not(:hover):not(.open) .grp:hover>.kids{display:block}
+.rail .kid{display:block;padding:8px 11px;border-radius:9px;font-size:13.5px;font-weight:600;
  color:var(--railtxt);white-space:nowrap}
 .rail .kid:hover{background:#41291e;color:var(--cream)}
-.rail .sp{flex:1;min-height:10px}
+.rail .sp{flex:1 1 auto;min-height:8px}
