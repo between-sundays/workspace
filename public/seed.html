@@ -29,7 +29,6 @@ const ST=[["raw","Raw"],["developing","Developing"],["story-ready","Story ready"
  mount("well",{title:s?s.word:"Seed",
   sub:s?`Dropped by ${s.by} · ${(s.at||"").slice(0,10)} · preserved exactly as written`:"Not found"});
  const b=document.getElementById("b");
- if(!getKey()){b.innerHTML=lockbar();wireLock();return;}
  if(!s){b.innerHTML='<p style="color:var(--gray)">No drop with that id. <a href="/well.html">Back to the well</a>.</p>';return;}
  const [g,rx,st]=await Promise.all([state(`well/${ID}.jsonl`),state("reactions.jsonl"),
    state("statuses.jsonl")]);

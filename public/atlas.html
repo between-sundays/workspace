@@ -10,16 +10,15 @@
  people are individuals and live in the <a href="/desk.html">Relationship Desk</a>.</p>
  <p style="font-size:13.5px;color:var(--gray)">Every group stays a <strong>hypothesis</strong> until
  real conversations support it. Nothing gets quietly promoted to fact because it sounded right.</p>
- <div id="lockslot"></div>
+ 
  <div id="out"></div>
 </div>
 <script src="/_nav.js"></script>
 <script>
 mount("grow",{title:"Audience Atlas", sub:"Territories, persona groups, life moments, signals."});
-document.getElementById("lockslot").innerHTML=lockbar(); wireLock();
+
 (async()=>{
  const o=document.getElementById("out");
- if(!getKey()){o.innerHTML="";return;}
  const [traw,praw,pros]=await Promise.all([state("territories.jsonl"),
    state("personas.jsonl"),state("prospects.jsonl")]);
  const T={};(traw||[]).forEach(t=>T[t.id]=t);

@@ -11,7 +11,7 @@
   <p>A signal is <strong>something a person chose to publish</strong> — a caption, a tagged church,
   a bio line. It is never a guess, a demographic, or an inference from who someone is related to.
   There is no faith score here and there never will be. We record the post; we don't grade the person.</p></div>
- <div id="lockslot"></div>
+ 
  <div id="out"></div>
  <div class="slug">How to run it</div>
  <ul>
@@ -31,10 +31,9 @@
 <script src="/_nav.js"></script>
 <script>
 mount("grow",{title:"The Signal List", sub:"What a Between Sundays reader looks like, before you open the profile."});
-document.getElementById("lockslot").innerHTML=lockbar(); wireLock();
+
 (async()=>{
  const o=document.getElementById("out");
- if(!getKey()){o.innerHTML="";return;}
  const praw=(await state("personas.jsonl"))||[];
  const P={};praw.forEach(p=>P[p.id]=p);
  const groups=Object.values(P);

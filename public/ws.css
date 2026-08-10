@@ -12,6 +12,10 @@
   --yellow:var(--butter); --purple:var(--sage); --blue:var(--sky); --green:var(--sage);
   --dark:#12233b;
   --r:20px; --r2:14px;
+  /* Aliases kept on purpose: pages written against the earlier palettes still
+     reference these. Dropping a variable name is a silent, invisible breakage. */
+  --wash:#f6f2ea; --gray:var(--mute); --rule:var(--line); --paper:var(--surface);
+  --red:#a8432a; --green2:#4e8a5f;
   --san:-apple-system,"Segoe UI",Inter,system-ui,"Helvetica Neue",Arial,sans-serif;
   --ser:"Playfair Display","Didot","Bodoni 72",Georgia,serif;
 }

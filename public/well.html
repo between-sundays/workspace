@@ -3,14 +3,13 @@
 <title>The Well — Between Sundays HQ</title>
 <link rel="stylesheet" href="/ws.css"/></head><body>
 <div>
- <div class="slug">Drop it here. Draw from it later.</div>
- <p class="lede">The shared creative memory. A word, a phrase, a ramble, a photo of a notebook —
+  <p class="lede">The shared creative memory. A word, a phrase, a ramble, a photo of a notebook —
  it goes in raw and nobody has to know what it's for. Then people and agents build around it
  without ever rewriting what you meant. Later it gets pulled into an issue, a product, a campaign.</p>
  <blockquote>Jacob looked, and there was a well in the field.
   <span style="font-style:normal;font-family:var(--san);font-size:11px;letter-spacing:.1em;
   color:var(--gray)">GENESIS 29:2</span></blockquote>
- <div id="lockslot"></div>
+ 
  <div class="views" id="views"></div>
  <p id="count" style="font-size:13px;color:var(--gray);margin-top:12px"></p>
  <input class="srch" id="q" placeholder="Search the well…"/>
@@ -19,7 +18,7 @@
 <script src="/_nav.js"></script>
 <script>
 mount("well",{title:"The Well", sub:"Drop it here. Draw from it later."});
-document.getElementById("lockslot").innerHTML=lockbar(); wireLock();
+
 const VIEWS=[["drops","Drops"],["developing","Developing"],["story-ready","Story ready"],
  ["constellations","Constellations"],["ready-to-pull","Ready to pull"],
  ["sleeping","Sleeping"],["used","Used"]];
@@ -63,8 +62,6 @@ function draw(){
   :`<p style="color:var(--gray);padding:16px 0">Nothing here yet.</p>`;
 }
 (async()=>{
- if(!getKey()){document.getElementById("out").innerHTML=
-   '<p style="color:var(--gray)">Locked.</p>';return;}
  document.getElementById("views").innerHTML=VIEWS.map(([k,l])=>
   `<button data-v="${k}" class="${k===view?"on":""}">${l}</button>`).join("");
  document.querySelectorAll(".views button").forEach(b=>b.onclick=()=>{

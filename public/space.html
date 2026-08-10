@@ -6,9 +6,11 @@
 <script src="/_nav.js"></script>
 <script>
 const id=new URLSearchParams(location.search).get("s")||"";
-const r=ROOMS.find(x=>x.id===id);
-if(!r){location.href="/";}
-const pil=PILLARS.find(p=>p.id===r.p);
+let r=ROOMS.find(x=>x.id===id);
+if(!r){r={id:id,p:"build",label:"Not a room yet",
+ purpose:"There is no room with that name. It may have been renamed \u2014 the rail has the current list.",
+ q:["Which room were you looking for?"],owner:"\u2014",inputs:"\u2014",outputs:"\u2014"};}
+const pil=PILLARS.find(p=>p.id===r.p)||PILLARS[0];
 mount(r.p,{title:r.label,sub:r.purpose});
 document.getElementById("b").innerHTML=`
  <div class="slug">${pil.label} · ${r.label}</div>
@@ -25,7 +27,7 @@ document.getElementById("b").innerHTML=`
  </tbody></table>
  <div class="slug">Thoughts</div>
  <div id="notes"></div>
- <div id="lockslot"></div>
+ 
  <div id="add" style="display:none;margin-top:14px">
   <textarea id="txt" rows="5" placeholder="Add the first thought. It appears here immediately — no deploy."
    style="width:100%;max-width:66ch;border:1px solid var(--rule);padding:10px;font:15px/1.55 var(--ser)"></textarea>
@@ -33,11 +35,10 @@ document.getElementById("b").innerHTML=`
    padding:10px 20px;font-family:var(--san);font-size:11px;font-weight:800;letter-spacing:.12em;
    text-transform:uppercase;cursor:pointer">Add thought</button></div>
  </div>`;
-document.getElementById("lockslot").innerHTML=lockbar(); wireLock();
+
 const SPACEABLE=["growth","logistics","revenue","products"];
 (async()=>{
  const n=document.getElementById("notes");
- if(!getKey()){n.innerHTML='<p style="color:var(--gray)">Locked.</p>';return;}
  const key=SPACEABLE.includes(id)?id:null;
  if(!key){n.innerHTML=`<p style="color:var(--gray)">This room doesn't take written notes yet —
    drop thoughts in the <a href="/inbox.html">Inbox</a> tagged for ${r.label} and they'll be

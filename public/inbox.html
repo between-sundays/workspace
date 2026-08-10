@@ -6,7 +6,7 @@
  <div class="slug">The dump zone</div>
  <p class="lede">Anything can land here in five seconds and get sorted later. A link, an idea,
  a verse, a name, a worry. The rule is that nothing dies in a chat window.</p>
- <div id="lockslot"></div>
+ 
  <div id="form" style="display:none">
   <select id="kind" style="width:210px;border:1px solid var(--rule);padding:9px;font:14px var(--ser)">
    <option value="idea">Idea</option><option value="link">Link</option>
@@ -33,10 +33,9 @@
 <script src="/_nav.js"></script>
 <script>
 mount("inbox",{title:"Inbox", sub:"Capture now, sort later."});
-document.getElementById("lockslot").innerHTML=lockbar(); wireLock();
+
 (async()=>{
  const rows=document.getElementById("rows");
- if(!getKey()){rows.innerHTML='<tr><td colspan="4" style="color:var(--gray)">Locked.</td></tr>';return;}
  document.getElementById("form").style.display="block";
  document.getElementById("go").onclick=async()=>{
   const t=document.getElementById("txt").value.trim();

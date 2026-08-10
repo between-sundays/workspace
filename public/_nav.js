@@ -20,9 +20,7 @@ const RAIL=[
    {id:"library", href:"/library.html",      label:"Reference Library"},
    {id:"verses",  href:"/verse-bank.html",   label:"Verse Bank"},
    {id:"template",href:"/issue-template.html",label:"Issue Template"},
-   {id:"assets",  href:"/space.html?s=assets", label:"Design System & Assets"},
-   {id:"merch",   href:"/space.html?s=merch",  label:"Merch"},
-   {id:"products",href:"/space.html?s=products",label:"Future Products"}]},
+   {id:"assets",  href:"/space.html?s=assets", label:"Design System & Assets"}]},
  {id:"grow", href:"/grow.html", icon:"grow", label:"Grow", children:[
    {id:"atlas",  href:"/atlas.html",  label:"Audience Atlas"},
    {id:"desk",   href:"/desk.html",   label:"Relationship Desk"},
@@ -31,10 +29,7 @@ const RAIL=[
  {id:"operate", href:"/operate.html", icon:"operate", label:"Operate", children:[
    {id:"printer",  href:"/printer-brief.html", label:"Printer Brief"},
    {id:"decisions",href:"/decisions.html",     label:"Decision Log"},
-   {id:"logistics",href:"/space.html?s=logistics", label:"Logistics"},
-   {id:"vendors",  href:"/space.html?s=vendors",   label:"Partners & Vendors"},
-   {id:"risks",    href:"/space.html?s=risks",     label:"Risks"}]},
- {id:"finance", href:"/finance.html", icon:"finance", label:"Finance"},
+   {id:"risks",    href:"/space.html?s=risks",     label:"Risks & blockers"}]},
  {id:"company", href:"/company.html", icon:"company", label:"Company", children:[
    {id:"believe",href:"/brain.html",      label:"What We Believe"},
    {id:"how",    href:"/how-we-work.html",label:"How We Work"}]},
@@ -217,9 +212,9 @@ function mount(cur,opts){
     <h1 class="title">${o.title||"Headquarters"}</h1>
     ${o.sub?`<p class="lede" style="margin-top:-8px">${o.sub}</p>`:""}
     <div id="__content"></div>
-    <footer><span>Between Sundays \u2014 internal. Nothing is deleted, only added and superseded.</span>
-     <a href="https://github.com/between-sundays/workspace">Repo</a>
-     <a href="/how-we-work.html">How we work</a></footer>
+    <footer><span>Good news. Printed.</span>
+     <a href="/how-we-work.html">How we work</a>
+     <a href="/queue.html">What needs you</a></footer>
    </div></div></div>`;
  document.getElementById("__content").appendChild(kept);
  const gs=document.getElementById("gsearch");
@@ -232,6 +227,12 @@ function mount(cur,opts){
   rail.classList.toggle("open");
   localStorage.setItem("bts-rail",rail.classList.contains("open")?"open":"closed");};
  document.getElementById("mebtn").onclick=()=>signIn();
+ const c=document.getElementById("__content");
+ if(c && !c.textContent.trim()) c.insertAdjacentHTML("afterbegin",
+  '<div id="__loading" class="blank"><div class="t">Loading</div><p>Fetching the latest from the team\u2026</p></div>');
+ setTimeout(()=>{const l=document.getElementById("__loading");
+  if(l && c && c.textContent.replace(l.textContent,"").trim().length>40) l.remove();},900);
+ setTimeout(()=>{const l=document.getElementById("__loading"); if(l) l.remove();},6000);
  quickDrop(); addPerson();
  if(getKey()&&!localStorage.getItem("bts-who")){
   fetch("/api/whoami",{headers:{"x-agent-key":getKey()}}).then(r=>r.json()).then(j=>{
@@ -274,6 +275,8 @@ function quickDrop(){
    An agent enriches it afterwards. Every record needs a written reason it fits. */
 function addPerson(){
  if(document.getElementById("ap")) return;
+ // Only where real people live — it was noise on the Verse Bank and the flatplan.
+ if(!/\/(desk|atlas|persona|territory|signals|message-lab)\.html/.test(location.pathname)) return;
  document.body.insertAdjacentHTML("beforeend",`
   <button id="apbtn" title="Add a person to a group">Add person</button>
   <div id="ap"><div class="box">

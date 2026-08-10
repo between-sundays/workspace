@@ -64,7 +64,6 @@ button.go{width:100%;border:1px solid var(--ink);background:var(--ink);color:#ff
     <textarea id="cbody" rows="3" placeholder="What do you see?"></textarea>
     <button class="go">Post note</button>
    </form>
-   <div class="keyrow">Your key <input id="key" placeholder="bsk_…" style="margin-top:6px"/></div>
   </div>
  </div>
 </div>
@@ -73,9 +72,6 @@ button.go{width:100%;border:1px solid var(--ink);background:var(--ink);color:#ff
 <script>
 const P=Math.max(1,Math.min(48,parseInt(new URLSearchParams(location.search).get("p")||"1",10)));
 const PP=String(P).padStart(2,"0");
-const keyEl=document.getElementById("key");
-keyEl.value=getKey();
-keyEl.onchange=()=>{localStorage.setItem("bts-agent-key",keyEl.value.trim());location.reload();};
 (async()=>{
  const versions=await (await fetch("/data/versions.json")).json();
  const page=versions.find(x=>x.n===P)||{name:"",variants:[]};
@@ -84,7 +80,7 @@ keyEl.onchange=()=>{localStorage.setItem("bts-agent-key",keyEl.value.trim());loc
  document.getElementById("slug").textContent="Page "+PP;
  const [finals,scores0,extra0,cms0]=await Promise.all([
    state("finals.jsonl"),state("scores.jsonl"),state("versions.jsonl"),state(`comments/p${PP}.jsonl`)]);
- const unlocked=!!getKey();
+ const unlocked=true;
  const scores=scores0||[],extra=extra0||[],cms=cms0||[];
  const fin=(finals||[]).filter(f=>f.page===P).pop();
  const me=await (async()=>{ if(!unlocked) return null;

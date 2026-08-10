@@ -11,7 +11,6 @@ const ID=(new URLSearchParams(location.search).get("id")||"").trim();
  const P={};raw.forEach(x=>P[x.id]=x); const p=P[ID];
  mount("grow",{title:p?p.name:"Persona", sub:p?(p.size||""):"Not found"});
  const b=document.getElementById("b");
- if(!getKey()){b.innerHTML=lockbar();wireLock();return;}
  if(!p){b.innerHTML='<p style="color:var(--gray)">No such group. <a href="/atlas.html">Back to the Atlas</a>.</p>';return;}
  const [pros,out,msgs]=await Promise.all([state("prospects.jsonl"),state("outreach.jsonl"),
    state("messages.jsonl")]);

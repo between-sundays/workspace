@@ -13,6 +13,10 @@
  font-size:13px;font-weight:700;cursor:pointer;color:var(--ink2)}
 .verd button:hover{border-color:var(--ink)}
 .verd button.go2{background:var(--navy);color:#fff;border-color:var(--navy)}
+.verd button[data-v="restart"]{border-color:#c0836f;color:#8a3a1c}
+.verd button[data-v="restart"]:hover{background:#8a3a1c;color:#fff;border-color:#8a3a1c}
+.verd button[data-v="approved"]{background:#2f6b45;border-color:#2f6b45;color:#fff}
+.verd button[data-v="approved"]:hover{background:#255637;border-color:#255637}
 .gate{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-top:14px}
 .g{background:#faf7f2;border-radius:12px;padding:11px 13px;font-size:12.5px;font-weight:650}
 .g i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px;font-style:normal}
@@ -66,7 +70,7 @@ fetch("/data/anchor.json").then(r=>r.json()).then(a=>{
    <div class="verd">
     <button data-v="restart">Restart</button>
     <button data-v="promising">Promising direction</button>
-    <button data-v="approved" class="go2">Direction approved</button>
+    <button data-v="approved">Direction approved</button>
    </div>
    <div id="said" style="margin-top:12px;color:var(--mute);font-size:13.5px"></div>
   </div>`;

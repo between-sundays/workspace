@@ -1,0 +1,56 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Search — Between Sundays HQ</title>
+<link rel="stylesheet" href="/ws.css"/>
+<style>
+.res{background:var(--surface);border-radius:var(--r2);padding:14px 17px;margin-bottom:9px;display:block}
+.res:hover{background:#faf7f2}
+.res b{font-size:15.5px;font-weight:750;display:block}
+.res span{font-size:13px;color:var(--mute)}
+.res .k{font-size:11px;font-weight:750;color:var(--navy);text-transform:uppercase;letter-spacing:.05em}
+</style></head><body>
+<input class="srch" id="q" placeholder="Search pages, verses, references, ideas, people…" style="max-width:560px"/>
+<p id="n" style="color:var(--mute);font-size:13.5px"></p>
+<div id="out"></div>
+<script src="/_nav.js"></script>
+<script>
+mount("index",{title:"Search",sub:"Everything in the workspace, in one box."});
+const IDX=[];
+function add(k,label,sub,href){IDX.push({k,label,sub:sub||"",href});}
+function draw(){
+ const q=document.getElementById("q").value.trim().toLowerCase();
+ const o=document.getElementById("out");
+ if(!q){document.getElementById("n").textContent=IDX.length+" things indexed";o.innerHTML="";return;}
+ const hits=IDX.filter(x=>(x.label+" "+x.sub+" "+x.k).toLowerCase().includes(q)).slice(0,60);
+ document.getElementById("n").textContent=hits.length?`${hits.length} result${hits.length===1?"":"s"} for “${q}”`
+  :`Nothing matches “${q}”.`;
+ o.innerHTML=hits.map(x=>`<a class="res" href="${x.href}"><span class="k">${x.k}</span>
+  <b>${x.label}</b><span>${x.sub}</span></a>`).join("")
+  ||`<div class="blank"><div class="t">No matches</div><p>Try a page number, a book of the Bible,
+     a persona, or a word from the Well.</p></div>`;
+}
+(async()=>{
+ RAIL.forEach(r=>{add("Room",r.label,"",r.href);(r.children||[]).forEach(c=>add("Room",c.label,"",c.href));});
+ ROOMS.forEach(r=>add("Room",r.label,r.d||r.purpose||"",r.live?r.href:("/space.html?s="+r.id)));
+ try{const v=await (await fetch("/data/versions.json")).json();
+  v.forEach(p=>add("Page","Page "+String(p.n).padStart(2,"0")+" — "+p.name,
+   p.variants.length+" versions","/room.html?p="+p.n));}catch{}
+ try{const vs=await (await fetch("/data/verses.json")).json();
+  vs.forEach(x=>add("Verse",x.ref,"on page"+(x.pages.length>1?"s ":" ")+x.pages.join(", "),
+   "/room.html?p="+x.pages[0]));}catch{}
+ try{const rf=await (await fetch("/data/refs.json")).json();
+  rf.forEach(x=>{if(x.k!=="untagged")add("Reference",x.t,x.lesson.slice(0,110),"/library.html");});}catch{}
+ try{const w=await state("well.jsonl");
+  (w||[]).forEach(x=>add("Idea",x.word,x.note?x.note.slice(0,110):"","/seed.html?id="+x.id));}catch{}
+ try{const pe=await state("personas.jsonl"); const seen={};
+  (pe||[]).forEach(x=>seen[x.id]=x);
+  Object.values(seen).forEach(x=>add("Persona",x.name,x.size||"","/persona.html?id="+x.id));}catch{}
+ try{const pr=await state("prospects.jsonl"); const seen={};
+  (pr||[]).forEach(x=>seen[x.handle]=x);
+  Object.values(seen).forEach(x=>add("Person",x.handle,x.fit||x.signal||"","/desk.html"));}catch{}
+ const pre=new URLSearchParams(location.search).get("q")||"";
+ document.getElementById("q").value=pre; draw();
+ document.getElementById("q").addEventListener("input",draw);
+ document.getElementById("q").focus();
+})();
+</script></body></html>

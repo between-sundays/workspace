@@ -8,7 +8,7 @@
  after, and record <strong>the words they used in reply</strong> — that's the part that becomes the
  next headline. This is how the messaging stops being guesswork and starts being a language library
  built out of real responses.</p>
- <div id="lockslot"></div>
+ 
  <div id="form" style="display:none">
   <div class="drop">
    <select id="persona" style="width:100%;border:1px solid var(--rule);padding:10px;
@@ -37,11 +37,10 @@
 <script src="/_nav.js"></script>
 <script>
 mount("grow",{title:"Message Lab", sub:"Hypotheses in, real language out."});
-document.getElementById("lockslot").innerHTML=lockbar(); wireLock();
+
 const PRE=(new URLSearchParams(location.search).get("persona")||"");
 (async()=>{
  const o=document.getElementById("out");
- if(!getKey()){o.innerHTML="";return;}
  const praw=(await state("personas.jsonl"))||[];
  const P={};praw.forEach(p=>P[p.id]=p);
  document.getElementById("persona").innerHTML=Object.values(P).map(p=>

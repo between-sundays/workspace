@@ -8,7 +8,7 @@
  profile and the reason they fit a group — quoted from what they actually posted. Someone can sit in
  <em>worth knowing</em> for months; nobody has to be pushed toward a transaction.
  A pre-CRM layer, built to export the day a real CRM lands.</p>
- <div id="lockslot"></div>
+ 
  <div class="pipe" id="pipe"></div>
  <div id="form" style="display:none;margin:16px 0">
   <div class="drop">
@@ -34,7 +34,7 @@
 <script src="/_nav.js"></script>
 <script>
 mount("grow",{title:"Relationship Desk", sub:"Real people — links, why they fit, and where each relationship stands."});
-document.getElementById("lockslot").innerHTML=lockbar(); wireLock();
+
 const S=["discovered","learning","worth-knowing","engaging","conversation","invited","ongoing"];
 let ROWS=[],PN={},filter=(new URLSearchParams(location.search).get("persona")||"");
 function draw(){
@@ -54,7 +54,6 @@ function draw(){
   :'<tr><td colspan="5" style="color:var(--gray)">Nobody on the list yet. Start with one real person you already know fits.</td></tr>';
 }
 (async()=>{
- if(!getKey()){document.getElementById("rows").innerHTML="";return;}
  const praw=(await state("personas.jsonl"))||[];
  const P={}; praw.forEach(p=>P[p.id]=p); Object.values(P).forEach(p=>PN[p.id]=p.name);
  document.getElementById("persona").innerHTML=Object.values(P).map(p=>

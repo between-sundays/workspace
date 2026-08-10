@@ -2,7 +2,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Between Sundays HQ</title>
 <link rel="stylesheet" href="/ws.css"/></head><body>
-<div id="lockslot"></div>
+
 
 <div class="rowhead"><h2>In motion</h2>
  <span class="chips" style="margin-left:auto">
@@ -34,7 +34,7 @@
 <script src="/_nav.js"></script>
 <script>
 mount("index",{title:"Headquarters"});
-document.getElementById("lockslot").innerHTML=lockbar(); wireLock();
+
 document.getElementById("cards").innerHTML=PILLARS.map((p,i)=>{
  const n=ROOMS.filter(r=>r.p===p.id), live=n.filter(r=>r.live).length;
  return `<a class="card" href="${p.href}"><span class="num">0${i+1}</span><h3>${p.label}</h3>
@@ -74,8 +74,7 @@ document.getElementById("cards").innerHTML=PILLARS.map((p,i)=>{
    <div class="sub">${nGroups} persona groups · ${nPeople} people on the desk</div>
    <div class="foot"><button class="go">Open the atlas</button></div></a>`;
  const q=document.getElementById("queue");
- q.innerHTML=!getKey()
-  ?'<tr><td colspan="3" style="color:var(--mute)">Sign in above to see the queue.</td></tr>'
+ q.innerHTML=false ? '<tr><td colspan="3" style="color:var(--mute)">Sign in above to see the queue.</td></tr>'
   :(choices.length?choices.slice(0,7).map(p=>
     `<tr><td><a href="/room.html?p=${p.n}"><span class="lname">${p.name}</span>
       <div class="lsub">Page ${String(p.n).padStart(2,"0")}</div></a></td>
@@ -100,6 +99,6 @@ document.getElementById("cards").innerHTML=PILLARS.map((p,i)=>{
    border-bottom:1px solid rgba(255,255,255,.09);font-size:13.5px">
    <b style="font-size:11px;letter-spacing:.04em;opacity:.75;min-width:52px">${e.by}</b>
    <span style="opacity:.9">${what}</span></div>`;}).join("")
-  :`<p style="opacity:.65">${getKey()?"Nothing yet.":"Sign in to see the team's activity."}</p>`;
+  :`<p style="opacity:.65">${true ? "Nothing yet.":"Sign in to see the team's activity."}</p>`;
 })();
 </script></body></html>
