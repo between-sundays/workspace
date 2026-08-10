@@ -6,6 +6,8 @@ module.exports = async (req, res) => {
   if (req.method !== "POST") return bad(res, 405, "POST only");
   const who = auth(req);
   if (!who) return bad(res, 401, "unknown or missing x-agent-key");
+  // In open mode the default identity is ADRIAN by design. With a key, only the
+  // founder key passes. Turning OPEN_MODE off restores the hard guard.
   if (who !== "ADRIAN") return bad(res, 403, "select_final belongs to Adrian alone");
   const { page, version } = req.body || {};
   const n = parseInt(page, 10);

@@ -26,6 +26,23 @@ for f in sorted(glob.glob(f"{BASE}/public/*.html")):
             break
 for f, e in html_bad:
     print(f"FAIL {f} (inline script): {e}")
-if bad or html_bad:
+# A page's inline script runs in the SAME global scope as _nav.js. Redeclaring
+# anything _nav.js already declares throws before a single line executes and the
+# page renders empty — which is exactly how the Control Room shipped blank.
+nav = open(f"{BASE}/public/_nav.js", errors="ignore").read()
+navnames = set(re.findall(r"^(?:const|let|var|function)\s+([A-Za-z_$][\w$]*)", nav, re.M))
+clash = []
+for f in sorted(glob.glob(f"{BASE}/public/*.html")):
+    src = open(f, errors="ignore").read()
+    if "_nav.js" not in src:
+        continue
+    for m in re.finditer(r"<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)</script>", src):
+        names = set(re.findall(r"^(?:const|let|function)\s+([A-Za-z_$][\w$]*)", m.group(1), re.M))
+        hit = sorted(names & navnames)
+        if hit:
+            clash.append((os.path.relpath(f, BASE), hit))
+for f, names in clash:
+    print(f"FAIL {f}: redeclares {', '.join(names)} — already defined in _nav.js")
+if bad or html_bad or clash:
     sys.exit(1)
-print("all inline page scripts parse")
+print("all inline page scripts parse, and none collide with _nav.js")

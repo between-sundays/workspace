@@ -73,28 +73,9 @@ button.go{width:100%;border:1px solid var(--ink);background:var(--ink);color:#ff
 <script>
 const P=Math.max(1,Math.min(48,parseInt(new URLSearchParams(location.search).get("p")||"1",10)));
 const PP=String(P).padStart(2,"0");
-const KEYST="bts-agent-key";
-function getKey(){return (localStorage.getItem(KEYST)||"").trim();}
-async function state(path){
-  const k=getKey(); if(!k) return null;
-  try{const r=await fetch("/api/state?path="+encodeURIComponent(path),{headers:{"x-agent-key":k}});
-    if(r.status===401) return null;
-    if(!r.ok) return [];
-    const t=(await r.text()).trim();
-    if(!t) return path.endsWith(".md")?"":[];
-    if(path.endsWith(".md")) return t;
-    return t.split("\n").filter(Boolean).map(l=>{try{return JSON.parse(l)}catch{return null}}).filter(Boolean);
-  }catch{return [];}
-}
-async function api(p,b){
- const r=await fetch("/api/"+p,{method:"POST",
-  headers:{"content-type":"application/json","x-agent-key":getKey()},body:JSON.stringify(b)});
- const j=await r.json().catch(()=>({}));
- if(!r.ok){alert(j.error||("error "+r.status));throw 0;}
- return j;}
 const keyEl=document.getElementById("key");
 keyEl.value=getKey();
-keyEl.onchange=()=>{localStorage.setItem(KEYST,keyEl.value.trim());location.reload();};
+keyEl.onchange=()=>{localStorage.setItem("bts-agent-key",keyEl.value.trim());location.reload();};
 (async()=>{
  const versions=await (await fetch("/data/versions.json")).json();
  const page=versions.find(x=>x.n===P)||{name:"",variants:[]};

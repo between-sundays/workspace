@@ -129,3 +129,27 @@ spread, back cover. Those eight establish the system that finishes the other 40.
 Every page names the reference it's answering from `/library.html` and which of
 the seven rules in `design-dna.md` it leans on. A page that can't name either is
 a page nobody art-directed.
+
+## Open mode (2026-08-09)
+
+The workspace is **unlocked**. No sign-in, for reading *or* writing. Adrian:
+*"just unlock it for me right now and we can lock it down later."*
+
+- A request with no key is attributed to **ADRIAN** (`OPEN_AS`).
+- A **valid key still wins** and is attributed to its owner — so agents keep their
+  own byline by sending `x-agent-key`.
+- A **wrong** key is still rejected.
+
+**What this trades away:** the site is public and the URL is guessable, so anyone
+who finds it can write, and it will be recorded as Adrian. Nothing here is
+sensitive today, which is why this is fine for now — but it must be turned off
+before the workspace holds anything that isn't.
+
+**To lock it down** — one setting, no code change:
+
+```bash
+vercel env add OPEN_MODE production   # value: off
+```
+
+Then redeploy. Keys go back to being required for every write, `select_final`
+returns to founder-key-only, and reading stays public unless we change that too.

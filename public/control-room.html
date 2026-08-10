@@ -57,19 +57,6 @@
 <script src="/_nav.js"></script>
 <script>
 mount("issue",{title:"The Control Room", sub:"Forty-eight pages, and where each one stands."});
-const KEYST="bts-agent-key";
-function getKey(){return (localStorage.getItem(KEYST)||"").trim();}
-async function state(path){
-  const k=getKey(); if(!k) return null;
-  try{const r=await fetch("/api/state?path="+encodeURIComponent(path),{headers:{"x-agent-key":k}});
-    if(r.status===401) return null;
-    if(!r.ok) return [];
-    const t=(await r.text()).trim();
-    if(!t) return path.endsWith(".md")?"":[];
-    if(path.endsWith(".md")) return t;
-    return t.split("\n").filter(Boolean).map(l=>{try{return JSON.parse(l)}catch{return null}}).filter(Boolean);
-  }catch{return [];}
-}
 (async()=>{
  const lk=document.getElementById("lock");
  if(!getKey()) lk.style.display="block";

@@ -187,7 +187,7 @@ function mount(cur,opts){
  const o=opts||{};
  const kept=document.createDocumentFragment();
  while(document.body.firstChild) kept.appendChild(document.body.firstChild);
- const me=localStorage.getItem("bts-who");
+ const me=localStorage.getItem("bts-who")||"ADRIAN";
  document.body.innerHTML=`<div class="app">
   <aside class="rail" id="rail">
    <div class="head"><div class="logo">S</div>
@@ -210,7 +210,7 @@ function mount(cur,opts){
     <div class="search"><input id="gsearch" placeholder="Search the workspace\u2026"/>
      <button aria-label="Search">&#8594;</button></div>
     <button class="me" id="mebtn"><div class="av" id="avme">${me?me.slice(0,2):"+"}</div>
-     <div class="who" id="whome">${me||"Sign in"}<span>${me?"signed in":"to contribute"}</span></div>
+     <div class="who" id="whome">${me}<span>unlocked \u00b7 open mode</span></div>
     </button></header>
    <div class="page">
     <h1 class="title">${o.title||"Headquarters"}</h1>
@@ -230,10 +230,7 @@ function mount(cur,opts){
  document.getElementById("railpin").onclick=()=>{
   rail.classList.toggle("open");
   localStorage.setItem("bts-rail",rail.classList.contains("open")?"open":"closed");};
- document.getElementById("mebtn").onclick=()=>{
-  if(getKey()){ if(confirm("Sign out of this browser?")){localStorage.removeItem(KEYST);
-    localStorage.removeItem("bts-who");location.reload();} }
-  else signIn();};
+ document.getElementById("mebtn").onclick=()=>signIn();
  quickDrop(); addPerson();
  if(getKey()&&!localStorage.getItem("bts-who")){
   fetch("/api/whoami",{headers:{"x-agent-key":getKey()}}).then(r=>r.json()).then(j=>{
@@ -255,7 +252,6 @@ function quickDrop(){
   </div></div>`);
  const w=document.getElementById("qd");
  document.getElementById("qdbtn").onclick=()=>{
-  if(!getKey()){signIn("Add your key to drop ideas into the Well.");return;}
   w.classList.add("on");document.getElementById("qdtxt").focus();};
  document.getElementById("qdx").onclick=()=>w.classList.remove("on");
  w.onclick=e=>{if(e.target===w)w.classList.remove("on");};
@@ -291,7 +287,6 @@ function addPerson(){
   </div></div>`);
  const w=document.getElementById("ap");
  document.getElementById("apbtn").onclick=async()=>{
-  if(!getKey()){signIn("Add your key to add people.");return;}
   const praw=(await state("personas.jsonl"))||[];
   const P={}; praw.forEach(p=>P[p.id]=p);
   document.getElementById("apgroups").innerHTML=Object.values(P).map(p=>
@@ -332,7 +327,8 @@ function signIn(msg){
   document.body.insertAdjacentHTML("beforeend",`
    <div id="signin"><div class="box">
     <div class="hd">Sign in to contribute</div>
-    <p id="simsg">Reading is open to everyone. Add your key to leave verdicts, notes and ideas.</p>
+    <p id="simsg">The workspace is <strong>unlocked</strong> — you do not need this. Everything you
+     write is attributed to Adrian. Add a key only if you want your own name on your contributions.</p>
     <input id="sikey" placeholder="bsk_…" autocomplete="off"/>
     <div class="row"><button id="sigo">Sign in</button>
      <button id="six" class="ghost">Not now</button></div>
@@ -364,7 +360,6 @@ async function state(path){
   return t.split("\n").filter(Boolean).map(l=>{try{return JSON.parse(l)}catch{return null}}).filter(Boolean);
  }catch{return [];}}
 async function api(p,b){
- if(!getKey()){signIn("You need a key to do that. Reading stays open to everyone.");throw 0;}
  const r=await fetch("/api/"+p,{method:"POST",
   headers:{"content-type":"application/json","x-agent-key":getKey()},body:JSON.stringify(b)});
  const j=await r.json().catch(()=>({}));
@@ -372,7 +367,7 @@ async function api(p,b){
   else toast(j.error||("error "+r.status),"bad"); throw 0;}
  return j;}
 function lockbar(){
- if(getKey()) return "";
+ return "";
  return `<div class="blank">
   <div class="t">Reading as a guest</div>
   <p>Everything here is readable without signing in. Add your key to <strong>contribute</strong> —

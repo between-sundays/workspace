@@ -8,11 +8,19 @@ const GH = "https://api.github.com";
 function agents() {
   try { return JSON.parse(process.env.AGENT_KEYS || "{}"); } catch { return {}; }
 }
+// OPEN MODE — Adrian, 2026-08-09: "just unlock it for me right now, we can lock it
+// down later." With OPEN_MODE on, a request with no key is treated as OPEN_AS
+// (default ADRIAN) so the workspace needs no sign-in at all. A real key still wins
+// and is still attributed to its owner. Turn this off by setting OPEN_MODE=off in
+// Vercel and redeploying — nothing else changes.
+function openMode() { return (process.env.OPEN_MODE || "on").toLowerCase() !== "off"; }
 function auth(req) {
   const h = req.headers["x-agent-key"] ||
     (req.headers.authorization || "").replace(/^Bearer\s+/i, "");
   const who = agents()[h];
-  return who || null;
+  if (who) return who;
+  if (h) return null;                       // a wrong key is still a wrong key
+  return openMode() ? (process.env.OPEN_AS || "ADRIAN") : null;
 }
 function cors(res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -77,4 +85,4 @@ async function putFile(path, content, message, branch, repo) {
     throw new Error(`github put ${put.status}: ${await put.text()}`);
 }
 function bad(res, code, msg) { res.status(code).json({ ok: false, error: msg }); }
-module.exports = { auth, cors, appendLine, putFile, bad };
+module.exports = { auth, cors, appendLine, putFile, bad, openMode };
