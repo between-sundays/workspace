@@ -71,3 +71,61 @@ with a summary.
 
 **House style for the workspace:** true white, black ink, grays between. Colour
 only where content earns it. Newspaper structure. No dark dashboards.
+
+## Issue 001 — the reset (2026-08-09)
+
+All 48 pages are marked **not-ready**. Approved by Adrian: *"I don't think we
+have any pages that are good enough for the 1st issue yet."*
+
+Every existing version is preserved and reachable — nothing was deleted — but
+**nothing is a finalist**. `compare.html` is now the Reference Archive, not the
+working tool. The 1–10 scoring is retired: an 8.3 doesn't tell anyone what to do
+next.
+
+### The pipeline
+
+`not-ready → brief-in-progress → brief-ready → exploring → direction-chosen →
+build → team-review → issue-ready → locked`
+
+Only Adrian can set **issue-ready** or **locked**, and locked comes last — after
+a print proof. A page can look right alone and still fail beside its facing page.
+
+### Verdicts, not scores
+
+**Restart · Promising direction · Direction approved · Issue-ready.**
+Every review answers four things: what's genuinely working (**keep**), what stops
+it being ready (**change**), which standard it's missing (**why**), and what
+should happen next (**next move**).
+
+### The issue-ready gates
+
+Red / amber / green, never percentages:
+
+1. **Purpose** — it has a clear reason to exist
+2. **Story** — it gives the reader something, not just something attractive
+3. **Scripture** — rooted in at least one contextually valid passage
+4. **Clarity** — a fifth-grade reader follows the main idea
+5. **Newspaper DNA** — real hierarchy, structure and density (see `design-dna.md`)
+6. **Originality** — doesn't read as generic or generated
+7. **Rhythm** — works with the pages around it
+8. **Production** — text, bleed, resolution and trim are correct
+
+Gates 3 and 8 are already automated (`check_sourced.py`, `check_overflow.py`) and
+report themselves. Humans judge 1, 2, 4, 5, 6 and 7 — don't spend a person on
+what CI already does.
+
+### The build order
+
+**One anchor first, then seven, then the rest.** Serial until the language
+exists; parallel after. The first anchor is **The Reading spread, pages 7–8** —
+seven pages inherit its grid, type and rhythm, and if the reading experience
+fails the paper fails regardless of the cover.
+
+Then: cover, contents, visual explainer, activity page, directory, photo-led
+spread, back cover. Those eight establish the system that finishes the other 40.
+
+### Design against a named reference
+
+Every page names the reference it's answering from `/library.html` and which of
+the seven rules in `design-dna.md` it leans on. A page that can't name either is
+a page nobody art-directed.
