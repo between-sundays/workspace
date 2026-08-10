@@ -43,13 +43,6 @@
   <span class="stat" id="cVer">0 versions</span>
   <span class="tools"><a href="/compare.html">Page-by-page comparison</a></span>
  </div>
- <div class="lock" id="lock" style="display:none">
-  <div class="t2">Locked</div>
-  <p style="margin:6px 0 12px;font-size:14.5px;color:var(--gray);max-width:64ch">
-   Page renders are public. Briefs, comments, scores and finals are private — paste your workspace
-   key to unlock them. It's stored in this browser only, never sent anywhere but our own API.</p>
-  <input id="keyin" placeholder="bsk_…"/><button id="keygo">Unlock</button>
- </div>
  <div class="flat" id="grid"></div>
  <p style="font-size:13px;color:var(--gray)">Every slot is a page. Open one for its versions,
  brief, comments, scores, and the founder's selection.</p>
@@ -58,14 +51,7 @@
 <script>
 mount("issue",{title:"The Control Room", sub:"Forty-eight pages, and where each one stands."});
 (async()=>{
- const lk=document.getElementById("lock");
- if(!getKey()) lk.style.display="block";
- document.getElementById("keygo").onclick=()=>{
-   const v=document.getElementById("keyin").value.trim();
-   if(v){localStorage.setItem(KEYST,v);location.reload();}};
- document.getElementById("keyin").addEventListener("keydown",e=>{
-   if(e.key==="Enter")document.getElementById("keygo").click();});
- const unlocked=!!getKey();
+ const unlocked=true;
  const versions=await (await fetch("/data/versions.json")).json();
  const [finals,extra]=await Promise.all([state("finals.jsonl"),state("versions.jsonl")]);
  const finalBy={}; (finals||[]).forEach(f=>finalBy[f.page]=f);
@@ -95,7 +81,7 @@ mount("issue",{title:"The Control Room", sub:"Forty-eight pages, and where each 
  });
  const F=document.getElementById("cFinal");
  F.textContent=nf+" final"; if(nf)F.className="stat ok";
- document.getElementById("cBrief").textContent=unlocked?(nb+" briefed"):"briefs locked";
+ document.getElementById("cBrief").textContent=nb+" briefed";
  document.getElementById("cVer").textContent=nv+" versions";
 })();
 </script></body></html>
