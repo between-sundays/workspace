@@ -12,7 +12,8 @@ const ICONS={
  book:'<path d="M4 4h11a3 3 0 0 1 3 3v13H7a3 3 0 0 1-3-3z"/><path d="M18 20a2 2 0 0 0 2-2V6"/>'};
 const RAIL=[
  {id:"index", href:"/", icon:"hq", label:"HQ"},
- {id:"well",  href:"/well.html", icon:"well", label:"The Well", note:"Ideas, raw"},
+ {id:"queue", href:"/queue.html", icon:"activity", label:"Decisions"},
+ {id:"well",  href:"/well.html", icon:"well", label:"The Well"},
  {id:"build", href:"/build.html", icon:"build", label:"Build", children:[
    {id:"spread",  href:"/spread.html",       label:"Anchor spreads"},
    {id:"issue",   href:"/control-room.html", label:"The Newspaper"},

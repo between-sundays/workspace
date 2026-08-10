@@ -1,0 +1,84 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Decision Queue — Between Sundays HQ</title>
+<link rel="stylesheet" href="/ws.css"/>
+<style>
+.dq{background:var(--surface);border-radius:var(--r);padding:22px 24px;margin:12px 0;
+ border-left:6px solid var(--navy)}
+.dq.now{border-left-color:var(--accent)}
+.dq.blocked{border-left-color:#cfc6b8;opacity:.9}
+.dq h3{font-family:var(--ser);font-size:23px;font-weight:700;margin:0 0 6px;letter-spacing:-.015em}
+.dq .q{font-size:15px;color:var(--ink2);margin:0 0 10px;max-width:74ch}
+.dq .need{font-size:13.5px;color:var(--mute)}
+.dq .need b{color:var(--ink)}
+.dq .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;align-items:center}
+.dq .acts a{background:var(--navy);color:#fff;border-radius:999px;padding:10px 20px;
+ font-size:13.5px;font-weight:750}
+.dq .acts a.ghost{background:#fff;color:var(--ink2);border:1px solid var(--line)}
+.tagline{font-size:11.5px;font-weight:750;letter-spacing:.04em;text-transform:uppercase;
+ color:var(--mute);margin-bottom:8px}
+.tagline.hot{color:var(--accent)}
+</style></head><body>
+<p class="lede">Not everything that is unfinished is a decision. This page shows only what
+<strong>you can actually settle right now</strong> — and, underneath, what is waiting and on what.
+If this page is empty, the ball is not in your court.</p>
+<div id="out"><p style="color:var(--mute)">Working out what is decidable…</p></div>
+<script src="/_nav.js"></script>
+<script>
+mount("index",{title:"Decision Queue",sub:"Only the choices that are yours, and only the ones that are ready."});
+(async()=>{
+ const v=await (await fetch("/data/versions.json")).json();
+ const [status,finals,briefs]=await Promise.all([
+  state("pagestatus.jsonl"),state("finals.jsonl"),
+  Promise.all(v.map(p=>state(`briefs/p${String(p.n).padStart(2,"0")}.md`)))]);
+ const st={}; (status||[]).forEach(x=>st[x.page]=x.status);
+ const fin={}; (finals||[]).forEach(f=>fin[f.page]=f);
+ const hasBrief={}; v.forEach((p,i)=>hasBrief[p.n]=!!(briefs[i]&&briefs[i].length));
+ const anchorDecided=["direction-chosen","build","team-review","issue-ready","locked"]
+   .includes(st[7]||"not-ready");
+ const nBriefs=Object.values(hasBrief).filter(Boolean).length;
+ const NOW=[], BLOCKED=[];
+ if(!anchorDecided) NOW.push({
+  t:"Anchor 1 — approve the direction, or send it back",
+  q:"The Reading spread, pages 07–08. Everything else in the paper is waiting behind this one call: "+
+    "seven pages inherit this grid and type directly, and the other seven anchors are built against it.",
+  need:"You need: five minutes with the spread. <b>Nothing else is blocked on anything but this.</b>",
+  acts:[["See the spread","/spread.html"],["The seven rules it was built on","/library.html"]]});
+ else {
+  NOW.push({t:"Anchor 1 is settled — choose the next anchor to build",
+   q:"The Reading spread has a direction. The remaining seven anchors can now be built against it: "+
+     "cover, contents, visual explainer, activity page, directory, photo-led spread, back cover.",
+   need:"You need: to say which comes next, or say 'all seven' and they run in parallel.",
+   acts:[["The Issue Template","/issue-template.html"],["Anchor spreads","/spread.html"]]});
+  if(nBriefs<8) BLOCKED.push({t:"Briefs for the remaining pages",
+   q:"Only "+nBriefs+" of 48 pages have a brief. Without one, an agent is guessing and you have "+
+     "nothing concrete to judge a version against.",
+   need:"Waiting on: the anchors, so briefs are written against a proven standard rather than a hope.",
+   acts:[["Read the drafts","/build.html"]]});
+ }
+ BLOCKED.push({t:"Page-by-page finals",
+  q:"All 48 pages are <b>not-ready</b> by your own call — no version is a finalist, and the 194 "+
+    "existing versions are reference, not candidates.",
+  need:"Waiting on: the anchors. Picking finals from the old versions is the exact thing the reset undid.",
+  acts:[["The flatplan","/control-room.html"],["Reference archive","/compare.html"]]});
+ BLOCKED.push({t:"The print quote",
+  q:"PrintNewspaper.com is chosen but nothing is priced, and their spec decides bleed, safe zone and "+
+    "file format — every page re-renders once that lands.",
+  need:"Waiting on: an email to them. <b>This one is not blocked by the paper</b> and could go today.",
+  acts:[["The printer brief","/printer-brief.html"]]});
+ BLOCKED.push({t:"Print-resolution artwork",
+  q:"Every placed artwork is roughly 80 dpi at trim. Print needs 3921 × 5610.",
+  need:"Waiting on: re-exports from you. No review flow moves this one.",
+  acts:[["Risks","/space.html?s=risks"]]});
+ document.getElementById("out").innerHTML=
+  `<div class="rowhead"><h2>${NOW.length} decision${NOW.length===1?"":"s"} you can make right now</h2></div>`+
+  NOW.map(d=>`<div class="dq now"><div class="tagline hot">Yours · ready</div>
+    <h3>${d.t}</h3><p class="q">${d.q}</p><div class="need">${d.need}</div>
+    <div class="acts">${d.acts.map(([l,h],i)=>
+      `<a href="${h}" class="${i?"ghost":""}">${l}</a>`).join("")}</div></div>`).join("")+
+  `<div class="rowhead"><h2>Waiting — and on what</h2></div>`+
+  BLOCKED.map(d=>`<div class="dq blocked"><div class="tagline">Not yours yet</div>
+    <h3>${d.t}</h3><p class="q">${d.q}</p><div class="need">${d.need}</div>
+    <div class="acts">${d.acts.map(([l,h])=>`<a href="${h}" class="ghost">${l}</a>`).join("")}</div></div>`).join("");
+})();
+</script></body></html>
