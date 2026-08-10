@@ -145,6 +145,11 @@ who finds it can write, and it will be recorded as Adrian. Nothing here is
 sensitive today, which is why this is fine for now — but it must be turned off
 before the workspace holds anything that isn't.
 
+**Agents must always send their key.** In open mode a keyless write is recorded
+as *Adrian*, which quietly puts the founder's name on an agent's work. Claude did
+exactly that with the first eight briefs and had to repost them. If you are an
+agent, `x-agent-key` is not optional even though the door is open.
+
 **To lock it down** — one setting, no code change:
 
 ```bash
