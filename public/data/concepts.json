@@ -1,0 +1,349 @@
+[
+{
+"id": "stairway-cutup",
+"t": "The stairway, cut from the passage itself",
+"ref": "\u201cA House in Memory\u201d \u2014 cut-up word strips arranged into the shape of a house",
+"mech": "Words cut from a book and physically arranged into the outline of the thing the book is about. Form and content are the same object.",
+"ours": "Every word of Genesis 28 cut into paper strips and laid as a staircase rising off the bottom-left corner \u2014 each step a phrase, treads shortening as they climb, some strips upside down. Real scissors, real shadows, photographed flat. The text becomes the ladder.",
+"v": [
+"Genesis 28:12"
+],
+"where": "Cover candidate, or the poster page",
+"rank": 1
+},
+{
+"id": "i-am-with-you",
+"t": "I AM ___ WITH YOU",
+"ref": "Nike, \u201cJUST ___ IT\u201d \u2014 two enormous words holding the corners, the whole story crammed inside at body size",
+"mech": "You read the shout, then discover the whisper. The display type is the container, not the message.",
+"ours": "Those four words at poster scale. Inside the letters, at 9pt, every place in scripture God says it \u2014 to Jacob at Bethel, Moses at the bush, Joshua, Gideon hiding in a winepress, Jeremiah who says he is too young, the disciples at the very end of Matthew. Dozens of instances filling the negative space.",
+"v": [
+"Genesis 28:15",
+"Exodus 3:12",
+"Joshua 1:9",
+"Judges 6:16",
+"Jeremiah 1:8",
+"Matthew 28:20"
+],
+"where": "Page 39 \u2014 the poster",
+"rank": 2
+},
+{
+"id": "the-stone-radial",
+"t": "The stone, and everything it was called",
+"ref": "\u201cOne man's trash / another's treasure\u201d \u2014 hundreds of handwritten opinions radiating from one photographed object",
+"mech": "The noise around the object is the argument. Nothing is stated; the density states it.",
+"ours": "An ordinary rock photographed dead centre. Radiating outward in handwriting, everything it was called: worthless \u00b7 in the way \u00b7 just a rock \u00b7 not worth carrying \u00b7 a pillow \u00b7 a pillar \u00b7 Bethel \u00b7 the house of God. Dismissive nearest the stone; true at the edges.",
+"v": [
+"Genesis 28:11",
+"Genesis 28:18",
+"Psalm 118:22"
+],
+"where": "Full page",
+"rank": 3
+},
+{
+"id": "grieving",
+"t": "What to say when somebody is grieving",
+"ref": "\u201cAlternatives to How are you?\u201d \u2014 a hand-lettered grid replacing one useless question with thirty-five usable ones",
+"mech": "Immediately practical. You could use it in the next hour.",
+"ours": "A grid of things that actually help \u2014 and, the part nobody prints, a shaded row of what not to say. \u201cEverything happens for a reason\u201d is not in the Bible. Job's friends got it wrong for thirty chapters and the book records every word so we would know. The closest thing to right is the seven days they said nothing.",
+"v": [
+"Job 2:13",
+"Romans 12:15"
+],
+"where": "Spread with the letters page",
+"rank": 4
+},
+{
+"id": "questions",
+"t": "The questions Jesus asked",
+"ref": "\u201c12 most beautiful questions ever asked\u201d \u2014 a plain numbered list, no design at all",
+"mech": "The typography is nothing. The selection is everything. People screenshot it because every line lands.",
+"ours": "He asks about 300 questions and answers almost none of them. Set them plainly, numbered, with references and no commentary. The absence of answers is the design.",
+"v": [
+"Mark 10:51",
+"John 5:6",
+"Matthew 16:15",
+"Matthew 8:26",
+"Luke 8:25",
+"John 21:17"
+],
+"where": "Page 16, or facing something loud",
+"rank": 5
+},
+{
+"id": "crazy-ones",
+"t": "To the ones who were not chosen",
+"ref": "Apple, \u201cTo the crazy ones\u201d \u2014 a full page of centred, stepped prose, no image",
+"mech": "Accumulation. A company spent a full page saying something that was not about its product.",
+"ours": "A full page listing the people God picked, each one disqualified on paper. The youngest son out in the field. The murderer. The prostitute. The tax collector. The one who denied him three times. Stepped and ragged, ending on the turn: these are the ones he picked on purpose.",
+"v": [
+"1 Corinthians 1:27"
+],
+"where": "Page 03 or 27, no facing image",
+"rank": 6
+},
+{
+"id": "what-bible-calls-you",
+"t": "What the Bible calls you",
+"ref": "\u201c300 Positive Words of Encouragement\u201d \u2014 hundreds of single words in tiny columns",
+"mech": "You do not read it, you scan until one hits you. Density does the work.",
+"ours": "Every name scripture gives a person, in columns, each with its reference set tiny: chosen \u00b7 kept \u00b7 named \u00b7 found \u00b7 carried \u00b7 known \u00b7 called \u00b7 redeemed \u00b7 adopted \u00b7 not forgotten \u00b7 engraved on his palms. Hundreds. Somewhere in that wall is the one you needed today.",
+"v": [
+"Isaiah 49:16",
+"Isaiah 43:1",
+"Ephesians 1:5",
+"1 Peter 2:9"
+],
+"where": "Full page",
+"rank": 7
+},
+{
+"id": "squiggle",
+"t": "The line from Beersheba",
+"ref": "The design-thinking squiggle \u2014 one continuous line, a knot that gradually becomes straight",
+"mech": "No words needed. Everyone recognises their own life in it.",
+"ours": "The same line, labelled at four points: Beersheba at the tangled start \u00b7 the stone in the middle of the knot \u00b7 Bethel where it begins to straighten \u00b7 twenty years along the straight part. Caption: most of this drawing is the part nobody writes down.",
+"v": [
+"Genesis 28:10"
+],
+"where": "Page 27",
+"rank": 8
+},
+{
+"id": "marked-up",
+"t": "The marked-up page",
+"ref": "The Porch Light Theory \u00b7 the highlighted letter \u00b7 the piano page \u2014 handwriting with highlighter, circling and blackout over it",
+"mech": "Handwriting makes it feel like it was meant for you. The highlighter shows you someone else's emphasis. The object underneath grounds it.",
+"ours": "Someone's real handwriting \u2014 doubting, stressed \u2014 with six places where a single word is crossed out or circled and an arrow runs to the correction, verse written out in the margin in red. \u201cI'll come back when I've got it together\u201d \u2192 circled. \u201cI'm too far gone\u201d \u2192 cross out too far, margin note: he RAN. A plain rock, cut out on white, sits below it.",
+"v": [
+"Matthew 11:28",
+"Luke 15:20",
+"Romans 5:8",
+"Mark 9:24",
+"Genesis 28:15",
+"Ephesians 2:8",
+"Ephesians 2:9"
+],
+"where": "Page 05",
+"rank": 9
+},
+{
+"id": "we-see",
+"t": "What else was in the room",
+"ref": "Microsoft \u201cWe see\u201d \u00b7 the fence photograph \u00b7 the kitchen illustration \u2014 a real photo with hand-drawn line art continuing out of it",
+"mech": "The drawing shows what is not visible in the frame. Photograph and drawing argue with each other.",
+"ours": "Photograph an ordinary place \u2014 a stairwell, a kitchen at 11:40pm, a car park. Draw over it in one continuous white line what the text says is also present: the ramp, the traffic going both directions. Caption: the photograph is real. So is the other thing.",
+"v": [
+"Genesis 28:12",
+"2 Kings 6:17"
+],
+"where": "Page 44 \u2014 the photo essay",
+"rank": 10
+},
+{
+"id": "redaction-form",
+"t": "The half of the conversation you can hear",
+"ref": "Cleveland Institute of Art, \u201cPlease fill in the blanks\u201d \u2014 highlighted redaction used as a form",
+"mech": "The answers are redacted and the questions sit underneath. You read the shape of a conversation you cannot hear.",
+"ours": "Prayers with the human half printed and God's half redacted to blocks \u2014 then, at the bottom, one block left unredacted. The argument: you are not owed the whole transcript, and one line is enough to go on.",
+"v": [
+"Genesis 28:15",
+"Job 38:4"
+],
+"where": "Full page",
+"rank": 11
+},
+{
+"id": "three-word",
+"t": "Three words",
+"ref": "\u201cThree-word quotes\u201d \u2014 a list where the constraint is the format",
+"mech": "Short enough that every entry is memorable. The format is the argument.",
+"ours": "The shortest verses in the Bible, set enormous, one per line, references tiny. The page argues that it does not take many words.",
+"v": [
+"John 11:35",
+"1 John 4:8",
+"1 Thessalonians 5:17"
+],
+"where": "Page 16 or an inside cover",
+"rank": 12
+},
+{
+"id": "bingo",
+"t": "The week you actually had",
+"ref": "Weekly Bingo for tiny achievements \u00b7 January's Inner Work \u2014 a hand-drawn grid you circle",
+"mech": "Things too small to count as achievements, which is exactly why ticking them feels good. It becomes yours the moment you mark it.",
+"ours": "Twenty-five squares of ordinary faithfulness nobody claps for: told the truth when a lie was easier \u00b7 let someone go first \u00b7 said sorry first \u00b7 didn't say the thing \u00b7 read one verse \u00b7 sat with somebody who was sad \u00b7 asked for help. Free square in the middle: you woke up.",
+"v": [
+"Zechariah 4:10"
+],
+"where": "Page 45, the games block",
+"rank": 13
+},
+{
+"id": "how-to-pray",
+"t": "How to pray when you don't know what to say",
+"ref": "\u201cHow to journal when you don't know what to say\u201d \u2014 a bulleted list that removes the excuse",
+"mech": "Every bullet lowers the bar rather than raising it.",
+"ours": "Same structure, same generosity, every line sourced. Start with a complaint \u2014 Psalm 13 does. Say you don't believe and ask for help with that. Use somebody else's words; the Psalms are borrowed prayers. Say nothing \u2014 Romans 8:26 says the Spirit does it for you. Be angry out loud; Job never apologises for it.",
+"v": [
+"Romans 8:26",
+"Mark 9:24",
+"Psalm 13:2"
+],
+"where": "Pairs with page 43",
+"rank": 14
+},
+{
+"id": "in-my-control",
+"t": "What you are actually carrying",
+"ref": "\u201cIn my control / out of my control\u201d \u2014 one hand-drawn irregular loop",
+"mech": "Inside the loop, what is yours. Outside, everything else. The wobble in the line makes it human.",
+"ours": "Inside: today \u00b7 your next sentence \u00b7 who you tell \u00b7 whether you go back. Outside: the outcome \u00b7 other people \u00b7 the twenty years \u00b7 whether it makes sense yet.",
+"v": [
+"Matthew 6:27",
+"Matthew 6:34"
+],
+"where": "Near the weather page",
+"rank": 15
+},
+{
+"id": "generator",
+"t": "Where to start",
+"ref": "Joy Break Generator \u2014 three columns you combine",
+"mech": "Pick one from A, one from B, one from C. A generator, not a list \u2014 it makes the reader do something.",
+"ours": "Column A: a place you already are (a car \u00b7 a kitchen at night \u00b7 a waiting room). Column B: one verse. Column C: one minute of what (read it out loud \u00b7 say it back angry \u00b7 write it on your hand). Any combination is a legitimate start. That is the theology of the page.",
+"v": [
+"Deuteronomy 30:14"
+],
+"where": "Facing the notebook page",
+"rank": 16
+},
+{
+"id": "manifesto",
+"t": "The Between Sundays manifesto",
+"ref": "The Fixer's Manifesto \u00b7 Incomplete Manifesto for Growth \u00b7 Nike's 10 principles \u00b7 Dieter Rams",
+"mech": "Numbered declaratives, no hedging, set as a wall of type. Reads like something pinned above a workbench.",
+"ours": "Twelve numbered lines, each a verse in plain speech with the reference set small. 1. NOTHING IS DISQUALIFYING. 2. YOU DO NOT HAVE TO FIX YOURSELF FIRST. 3. SMALL IS NOT NOTHING. 4. DOUBT IS ALLOWED IN THE ROOM.",
+"v": [
+"Romans 8:38",
+"Romans 8:39",
+"Romans 5:8",
+"Zechariah 4:10",
+"Mark 9:24"
+],
+"where": "Back of the book, or inside front",
+"rank": 17
+},
+{
+"id": "in-the-dark",
+"t": "What people said in the dark",
+"ref": "\u201cBanksy said / Matisse said\u201d \u2014 a hand-lettered grid, one person per cell",
+"mech": "Democratic. No quote is bigger than another.",
+"ours": "Each cell one line from someone at their lowest, with the reference. Job said the day I was born should be erased. David said how long must I wrestle with my thoughts. Elijah said I have had enough, take my life. Jeremiah said I am mocked all day long. Jesus said my God, why have you abandoned me. Nothing resolved on the page.",
+"v": [
+"Job 3:3",
+"Psalm 13:2",
+"1 Kings 19:4",
+"Jeremiah 20:7",
+"Matthew 27:46"
+],
+"where": "Facing something hopeful. Deliberately.",
+"rank": 18
+},
+{
+"id": "be-a-stone",
+"t": "Be a stone",
+"ref": "\u201cBe a Lifeboat\u201d \u2014 one hand-drawn object with labels radiating to every function it serves",
+"mech": "Warm, homemade, generous. Turns an object into a job description.",
+"ours": "One drawn rock with lines out to everything it was: somewhere to put your head \u00b7 proof you were there \u00b7 a marker \u00b7 the thing that got poured on \u00b7 the start of a house.",
+"v": [
+"Genesis 28:11",
+"Genesis 28:18",
+"1 Peter 2:5"
+],
+"where": "Back of the book",
+"rank": 19
+},
+{
+"id": "faith-equals",
+"t": "Faith = ?",
+"ref": "\u201cNote to self: FANTASY = a goal without a deadline\u201d \u2014 stacked equations, each adding one highlighted term",
+"mech": "You watch a thing become another thing by accumulation.",
+"ours": "BELIEF = agreeing it is true. FAITH = belief + acting like it. TRUST = faith + time. HOPE = trust + a promise you did not make yourself. Each term in a different highlighter, each with its reference.",
+"v": [
+"James 2:17",
+"Hebrews 11:1",
+"Romans 5:3",
+"Romans 5:4"
+],
+"where": "The field guide, page 17",
+"rank": 20
+},
+{
+"id": "notes-strangers",
+"t": "Take one, leave one, give one away",
+"ref": "\u201cNotes to Strangers\u201d \u2014 a wall of envelopes you take one from",
+"mech": "Physical, anonymous, one-to-one. It works because you did not earn it and nobody watched you take it.",
+"ours": "Twelve small perforated notes down a page, each one line and a reference, blank on the back. The paper becomes something that leaves the paper.",
+"v": [
+"Matthew 10:8"
+],
+"where": "Near the Spine, so it tears out cleanly",
+"rank": 21
+},
+{
+"id": "perspective",
+"t": "The same night, three ways",
+"ref": "\u201cPerspective Matters\u201d \u2014 three drawings of one object from different angles, all labelled the same word",
+"mech": "The whole argument is made without a sentence.",
+"ours": "The identical scene drawn three times: what Jacob saw (a field, a rock, the dark) \u00b7 what the people of Luz saw (nothing; an ordinary Tuesday) \u00b7 what was actually there (the ramp, the traffic, all night). All three labelled BETHEL.",
+"v": [
+"Genesis 28:16",
+"Genesis 28:17"
+],
+"where": "Page 15",
+"rank": 22
+},
+{
+"id": "rules-reading",
+"t": "Rules for reading the Bible without getting it wrong",
+"ref": "The \u201crazors\u201d series \u2014 Occam's, Hanlon's, Hofstadter's: one bold rule, one plain example, one small drawing",
+"mech": "Consistent template, endlessly repeatable, genuinely useful.",
+"ours": "Six of them, same template. Read the sentence before it. If it is a promise, check who it was said to. The Bible reports things it does not approve of. A verse is not a fortune cookie. If it makes you feel superior, re-read it. When in doubt, read it out loud to somebody. This is the one framework format that earns its place, because it protects the reader from us.",
+"v": [
+"Joshua 1:8"
+],
+"where": "Page 02 or the field guide",
+"rank": 23
+},
+{
+"id": "monthly-log",
+"t": "The month, in your handwriting",
+"ref": "The monthly log page \u2014 INSPIRED BY / WATCHING / READING / GRATEFUL FOR, ruled and hand-filled",
+"mech": "A form you complete by hand. It becomes a record the moment you write on it.",
+"ours": "Reading \u00b7 Carrying \u00b7 Grateful for \u00b7 Praying the same thing about \u00b7 Nobody knows that I \u00b7 Coming back to. Rules to write on. The last line pre-filled: still here.",
+"v": [
+"Lamentations 3:22",
+"Lamentations 3:23"
+],
+"where": "With the Spine, tear-out",
+"rank": 24
+},
+{
+"id": "blackout",
+"t": "The blackout ad",
+"ref": "Blackout poetry \u2014 a page destroyed until a new sentence surfaces",
+"mech": "It only works if the words are genuinely there in that order. Otherwise it is white text on bars.",
+"ours": "Verified, not faked. I searched eleven books. Three lines are extractable with a tight span: \u201cnothing can separate us from the love of God\u201d (Romans 8:38\u201339, 65 words) \u00b7 \u201cyou are not alone / I am with you\u201d (John 16:29\u201333, 73 words \u2014 this is the issue title) \u00b7 \u201ccome to me and I will give you rest\u201d (Matthew 11:28, 18 words). Your line \u2014 falling in love with Jesus is the best thing I've ever done \u2014 is NOT extractable: the only hit spans 5,382 words across John 11\u201317. It can still be the ad; it just cannot claim the Bible as its source text.",
+"v": [
+"Romans 8:38",
+"Romans 8:39",
+"John 16:33",
+"Matthew 11:28"
+],
+"where": "Full-page ad",
+"rank": 25
+}
+]

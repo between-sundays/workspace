@@ -1,0 +1,62 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Page Concepts — Between Sundays HQ</title>
+<link rel="stylesheet" href="/ws.css"/>
+<style>
+.cx{background:var(--surface);border-radius:var(--r);overflow:hidden;margin-bottom:18px;
+ display:grid;grid-template-columns:340px 1fr}
+.cx .vis{background:#f4efe6;display:flex;align-items:center;justify-content:center;padding:16px;
+ min-height:300px;position:relative}
+.cx .vis img{width:100%;border-radius:10px;display:block}
+.cx .vis .empty{text-align:center;color:var(--mute);font-size:12.5px;line-height:1.5;
+ border:1px dashed #cbbfae;border-radius:12px;padding:26px 18px;width:100%}
+.cx .vis .tagno{position:absolute;left:16px;top:16px;background:var(--brown);color:var(--cream);
+ font-size:11px;font-weight:800;border-radius:99px;padding:4px 11px}
+.cx .body{padding:22px 26px 24px}
+.cx h3{font-family:var(--ser);font-size:26px;font-weight:700;letter-spacing:-.018em;margin:0 0 4px}
+.cx .refline{font-size:12.5px;color:var(--mute);font-weight:650;margin-bottom:14px}
+.lbl{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);
+ margin:14px 0 5px}
+.cx p{font-size:14.6px;line-height:1.58;margin:0;max-width:none}
+.vs{background:#f7f3ec;border-left:4px solid var(--sage);border-radius:0 10px 10px 0;
+ padding:13px 16px;margin-top:8px}
+.vs .r{font-size:11px;font-weight:800;letter-spacing:.08em;color:var(--navy);margin-bottom:3px}
+.vs .t{font-family:var(--ser);font-size:15.5px;line-height:1.5;color:var(--ink)}
+.vs+.vs{margin-top:8px}
+.where{margin-top:14px;font-size:12.5px;color:var(--mute);font-weight:650}
+@media(max-width:900px){.cx{grid-template-columns:1fr}}
+</style></head><body>
+<p class="lede">Every reference, the mechanic that makes it work, our original version, and
+<strong>every verse written out in full</strong> — nothing here is a citation you have to go look up.
+Ordered by how strongly I'd argue for it.</p>
+<div class="blank" id="dropnote"></div>
+<div id="out"></div>
+<script src="/_nav.js"></script>
+<script>
+mount("build",{title:"Page Concepts",sub:"The reference, the idea, and the verse — together."});
+Promise.all([fetch("/data/concepts.json").then(r=>r.json()),
+             fetch("/data/verses-full.json").then(r=>r.json())]).then(([C,V])=>{
+ const have=[];
+ document.getElementById("out").innerHTML=C.map((c,i)=>`
+  <div class="cx">
+   <div class="vis"><span class="tagno">${String(i+1).padStart(2,"0")}</span>
+    <img src="/refs/concepts/${c.id}.jpg" alt="" onerror="
+      this.style.display='none';this.insertAdjacentHTML('afterend',
+      '<div class=&quot;empty&quot;>Reference image<br/><strong>${c.id}.jpg</strong><br/><br/>drop it in<br/>public/refs/concepts/</div>');"/>
+   </div>
+   <div class="body">
+    <h3>${c.t}</h3>
+    <div class="refline">Answering — ${c.ref}</div>
+    <div class="lbl">The mechanic</div><p>${c.mech}</p>
+    <div class="lbl">Our version</div><p>${c.ours}</p>
+    <div class="lbl">The scripture, in full</div>
+    ${c.v.map(r=>`<div class="vs"><div class="r">${r} · NLT</div>
+      <div class="t">${V[r]||"—"}</div></div>`).join("")}
+    <div class="where">Where it goes — ${c.where}</div>
+   </div></div>`).join("");
+ document.getElementById("dropnote").innerHTML=
+  `<div class="t">Reference images</div><p>Each card looks for
+   <code>public/refs/concepts/&lt;id&gt;.jpg</code>. Drop the matching image in and it appears —
+   the ids are shown on each empty slot.</p>`;
+});
+</script></body></html>
