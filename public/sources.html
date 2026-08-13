@@ -1,0 +1,79 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Source Systems — Between Sundays HQ</title>
+<link rel="stylesheet" href="/ws.css"/>
+<style>
+.sys{background:var(--surface);border-radius:var(--r);padding:22px 24px;margin-bottom:14px;
+ border-left:6px solid var(--navy)}
+.sys h3{font-family:var(--ser);font-size:24px;font-weight:700;margin:0 0 6px;letter-spacing:-.015em}
+.sys .n{font-size:12px;font-weight:750;color:var(--mute)}
+.sys .fmt{font-size:14px;color:var(--ink2);margin-top:8px}
+.sys .fmt b{color:var(--ink)}
+.dat{display:grid;grid-template-columns:repeat(auto-fill,minmax(196px,1fr));gap:8px;margin-top:14px}
+.dat div{background:#faf7f2;border-radius:10px;padding:9px 12px;font-size:12.6px;line-height:1.35}
+.dat b{display:block;font-size:13.4px}
+.num{display:inline-block;background:var(--butter);border-radius:8px;padding:3px 9px;font-weight:800;
+ font-size:13px;margin-right:6px}
+</style></head><body>
+<p class="lede">Every page in this paper has to come back to the Bible — that is the rule that means we
+cannot be wrong. This page is the other half of that rule: <strong>the Bible is not just where we check
+our work, it is where the ideas come from.</strong> Each system below is a bottomless supply of pages.</p>
+<div id="out"></div>
+<script src="/_nav.js"></script>
+<script>
+mount("build",{title:"Source Systems",sub:"Where pages come from. Start at the text, not at a layout."});
+const SYS=[
+ {t:"The miracles",n:"About 50 recorded, many in three gospels at once",
+  fmt:"<b>Page formats it gives you:</b> a full index like a sports results table · a single miracle taken apart like an accident report · the ones nobody preaches · a map of where each happened · the three that Jesus told people to keep quiet about.",
+  data:[["Water into wine","John 2:1–11"],["Feeding 5,000","In all four gospels"],
+   ["Man born blind","John 9:1–41"],["Raising Lazarus","John 11:1–44"],
+   ["153 fish","John 21:4–11 — the number is specified"],["Coin in a fish's mouth","Matthew 17:24–27"],
+   ["Woman, 18 years disabled","Luke 13:10–13"],["Ten lepers, one returns","Luke 17:11–19"]]},
+ {t:"The numbers",n:"Fifteen that carry meaning across the whole text",
+  fmt:"<b>Page formats:</b> a numerals page like a football league table · one number per page as a poster · a games page built on 7 · the 40s of the Bible laid out as a timeline · why 153 fish and not 'a lot'.",
+  data:[["1","Unity — Deuteronomy 6:4"],["3","Completeness — Luke 24:7"],["4","The earth — Ezekiel 1:10"],
+   ["6","Humanity, unfinished — Genesis 1:31"],["7","Covenant, rest — Genesis 2:2–3"],
+   ["8","New beginnings — Mark 16:9"],["12","Authority — Matthew 10"],["40","Testing — Matthew 4:2"],
+   ["70","Exile — Jeremiah 29:10"]]},
+ {t:"The questions Jesus asked",n:"Roughly 300 of them; he answers very few",
+  fmt:"<b>Page formats:</b> a whole page of nothing but questions · an exam paper with no answer key · the question he asks most often · what he asks people who are already healed.",
+  data:[["Who do you say I am?","Matthew 16:15"],["What do you want me to do for you?","Mark 10:51"],
+   ["Do you want to get well?","John 5:6"],["Why are you afraid?","Matthew 8:26"],
+   ["Where is your faith?","Luke 8:25"]]},
+ {t:"Places, and what they are now",n:"Every location is a real place with coordinates",
+  fmt:"<b>Page formats:</b> a travel section · a weather report for Bethel · distances as a table · what the site looks like today · the towns nobody has heard of.",
+  data:[["Bethel","Genesis 28:19 — was called Luz"],["Beersheba → Haran","≈800 km on foot"],
+   ["Nain","Luke 7:11 — a widow's only son"],["Bethesda","John 5:2 — five covered porches"]]},
+ {t:"Things the Bible measures exactly",n:"Cubits, days, coins, fish, jars",
+  fmt:"<b>Page formats:</b> an infographic page · a page of exact numbers with nothing else · a receipts page · scale drawings at true size across a spread.",
+  data:[["153 fish","John 21:11"],["Six stone jars, 20–30 gallons each","John 2:6"],
+   ["Twelve baskets left over","Matthew 14:20"],["Thirty pieces of silver","Matthew 26:15"],
+   ["Two small coins","Mark 12:42"]]},
+ {t:"Names and what they mean",n:"Almost every name is a sentence in Hebrew",
+  fmt:"<b>Page formats:</b> a baby-names page · a change-of-name notices column like a legal gazette · the people God renames and when.",
+  data:[["Jacob","He grasps the heel — Genesis 25:26"],["Israel","He struggles with God — Genesis 32:28"],
+   ["Bethel","House of God — Genesis 28:19"],["Peter","Rock — Matthew 16:18"]]},
+ {t:"The unglamorous jobs",n:"Shepherds, tentmakers, tax collectors, fishermen",
+  fmt:"<b>Page formats:</b> a jobs board · a trades directory · a careers page · who was working when they were called.",
+  data:[["Shepherd","Amos 7:14 — 'I'm not a professional prophet'"],["Tentmaker","Acts 18:3"],
+   ["Tax collector","Matthew 9:9"],["Fishermen","Matthew 4:18"]]},
+ {t:"What people say in the dark",n:"The Psalms are largely complaints",
+  fmt:"<b>Page formats:</b> a letters page written by the psalmists · a search-history page · a 3am column · an agony aunt where every reply is a psalm.",
+  data:[["How long, LORD?","Psalm 13:1"],["Why have you forgotten me?","Psalm 42:9"],
+   ["My tears in your bottle","Psalm 56:8"],["Darkness is my closest friend","Psalm 88:18"]]},
+];
+document.getElementById("out").innerHTML=
+ `<div class="rowhead"><h2>${SYS.length} systems, each one bottomless</h2></div>`+
+ SYS.map(s=>`<div class="sys"><h3>${s.t}</h3><div class="n">${s.n}</div>
+  <div class="fmt">${s.fmt}</div>
+  <div class="dat">${s.data.map(([a,b])=>`<div><b>${a}</b>${b}</div>`).join("")}</div></div>`).join("")+
+ `<div class="blank"><div class="t">How to use this</div>
+  <p>Pick a system, pick one item, and ask what page format makes a stranger curious about it. The
+  format comes second. If an idea cannot name the passage it came from, it is not an idea yet.</p></div>
+  <div class="slug">Sources</div>
+  <p style="font-size:13.5px"><a href="https://www.aboutbibleprophecy.com/miracles.htm" target="_blank"
+   rel="noopener noreferrer">The miracles of Jesus, indexed</a> ·
+   <a href="https://gracefiber.com/blogs/symbols/biblical-numbers" target="_blank"
+   rel="noopener noreferrer">Biblical numbers and what they carry</a>. Both are starting points —
+   every reference gets fetched and checked in context before it goes on a page.</p>`;
+</script></body></html>
