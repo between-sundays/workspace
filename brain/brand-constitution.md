@@ -32,7 +32,11 @@ context-fit is reviewed by humans and agents (`SCRIPTURE` flags), never auto-pas
 - **Primary translations: MSG and NLT** (easy to read); WEB for bulk/public-domain
   needs. Always *fetch* verse text — never quote from memory. Attribution notices
   live on page 02.
-- **Modern, never vintage-for-vintage's-sake. No depictions of Bible characters.**
+- **Modern, never vintage-for-vintage's-sake.**
+- **We NEVER draw or depict any person from the Bible.** Not Jacob, not Jesus,
+  not the disciples, not angels as figures. Choosing a face means choosing skin,
+  features and era — that argument is not ours to start. We show places, objects,
+  hands, crowds from behind, empty rooms, the aftermath. See `print-craft.md`.
 - **Print-first.** Coupons, tear-outs, folios, halftones — never web furniture.
 - **Newspaper structure first, creativity layered inside it.**
 - No fabricated testimony, statistics, or bylines. Real people only.
