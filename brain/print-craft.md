@@ -72,3 +72,14 @@ The workspace (bts-workspace.vercel.app) is software: screens, hover states,
 a design system. **The paper is not software.** It is ink on newsprint at
 332 × 475 mm, read at arm's length, in a hand, once. Nothing about how the
 workspace looks should influence how the paper looks, and until now it has.
+
+
+## Variance is part of craft, not separate from it
+
+One style system across 48 pages reads as flat even when each page is competent.
+See `style-variance.md` and `public/data/style-register.json` — 24 systems, each
+bundling typeface, palette, ink count and process. No page may share a system
+with its neighbour or the page it faces. Enforced by `tools/check_variance.py`.
+
+Its first run over Issue 001's draft: **48 pages, 0 distinct systems declared.**
+That number is the flatness, measured.

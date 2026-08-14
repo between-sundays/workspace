@@ -28,6 +28,7 @@ def strip(items,top):
 
 HTML=f"""<!doctype html><html><head><meta charset="utf-8"/>
 <meta name="bible-source" content="Genesis 28:16 (NLT)"/>
+<meta name="style-system" content="didone-newsprint"/>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;0,900;1,700;1,900&family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Inter:wght@600;700;800&display=swap');
 *{{box-sizing:border-box;margin:0;padding:0}}

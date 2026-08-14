@@ -1,0 +1,338 @@
+[
+{
+"id": "didone-newsprint",
+"n": "Didone on newsprint",
+"type": "Playfair Display + Newsreader + Inter caps",
+"pal": [
+"#241a12",
+"#a8321e",
+"#f7f2e7"
+],
+"inks": 2,
+"proc": "halftone, 2-ink, misregistered",
+"feel": "Le Cafetier \u2014 cream, elegant, red only for labels",
+"src": "Archives.design \u00b7 Fonts In Use"
+},
+{
+"id": "riso-fluoro",
+"n": "Riso fluoro",
+"type": "Grotesque bold + typewriter",
+"pal": [
+"#ff4d3d",
+"#1b3a8f",
+"#e8e4d8"
+],
+"inks": 2,
+"proc": "riso, heavy grain, deliberate off-register",
+"feel": "Reportage des Matchs \u2014 urgent, cheap, handmade",
+"src": "Posters I'd Steal"
+},
+{
+"id": "letterpress-wood",
+"n": "Wood type letterpress",
+"type": "Condensed slab + Egyptian",
+"pal": [
+"#1c1c1c",
+"#c8482a",
+"#efe6d2"
+],
+"inks": 2,
+"proc": "impression, ink starvation, worn edges",
+"feel": "Gig poster, carnival, total conviction",
+"src": "Archives.design"
+},
+{
+"id": "supermarket",
+"n": "Supermarket circular",
+"type": "Ultra-bold gothic + price numerals",
+"pal": [
+"#f3d417",
+"#e0331c",
+"#111111",
+"#ffffff"
+],
+"inks": 4,
+"proc": "flat process colour, cheap newsprint",
+"feel": "Jewel Foods, Apple Cabin \u2014 starbursts and shouting",
+"src": "The Supermarket Gallery"
+},
+{
+"id": "swiss-quiet",
+"n": "Swiss quiet",
+"type": "Neue Haas / Inter, tight, one weight",
+"pal": [
+"#111111",
+"#f2f2f0",
+"#d8322f"
+],
+"inks": 2,
+"proc": "clean litho, no texture",
+"feel": "Rams \u2014 restraint as the statement",
+"src": "Not Always Helvetica"
+},
+{
+"id": "handletter-brush",
+"n": "Brush hand-lettered",
+"type": "100% hand-drawn, no typeface",
+"pal": [
+"#0d0d0d",
+"#f5f1e6"
+],
+"inks": 1,
+"proc": "brush on paper, scanned",
+"feel": "THIS IS YOUR ASSIGNMENT \u2014 uneven is the emotion",
+"src": "Adrian's hand"
+},
+{
+"id": "dear-data",
+"n": "Hand-drawn data",
+"type": "Handwriting + tiny legend caps",
+"pal": [
+"#2b3a67",
+"#e4572e",
+"#f6f2ea",
+"#7d9b76"
+],
+"inks": 3,
+"proc": "pen and watercolour on card",
+"feel": "Dear Data \u2014 rigorous, personal, no software",
+"src": "Dear Data"
+},
+{
+"id": "pudding-essay",
+"n": "Data essay",
+"type": "Serif text + mono labels",
+"pal": [
+"#101820",
+"#f7c948",
+"#2a9d8f",
+"#faf7f2"
+],
+"inks": 3,
+"proc": "clean, screen-accurate colour",
+"feel": "The Pudding \u2014 the dataset invents the layout",
+"src": "The Pudding \u00b7 Information is Beautiful"
+},
+{
+"id": "comic-oneink",
+"n": "One-ink comic",
+"type": "Hand-lettered caps in panel",
+"pal": [
+"#1d3fa8",
+"#f4f1e8"
+],
+"inks": 1,
+"proc": "pen and screen tone",
+"feel": "Grant Snider \u2014 noticing, not joking",
+"src": "Adrian's hand"
+},
+{
+"id": "mailorder",
+"n": "Mail-order back page",
+"type": "Mixed cuts, every ad a different face",
+"pal": [
+"#1a1a1a",
+"#d9d2c0"
+],
+"inks": 1,
+"proc": "cheap letterpress, uneven baselines",
+"feel": "Comic classifieds jungle \u2014 forty voices",
+"src": "Classic advertising"
+},
+{
+"id": "riviera",
+"n": "Riviera leisure",
+"type": "Geometric sans + script",
+"pal": [
+"#0f6e8c",
+"#f2b544",
+"#e8604c",
+"#fdf6e7"
+],
+"inks": 4,
+"proc": "screenprint flats",
+"feel": "Mid-century travel \u2014 optimism as a palette",
+"src": "The Riviera"
+},
+{
+"id": "blackout",
+"n": "Cut and redacted",
+"type": "Whatever the source page used",
+"pal": [
+"#000000",
+"#f2d79b"
+],
+"inks": 1,
+"proc": "physical cutting, photographed",
+"feel": "Light through the holes where words were removed",
+"src": "Too Good To Read"
+},
+{
+"id": "found-paper",
+"n": "Found paper collage",
+"type": "Whatever was printed on the scrap",
+"pal": [
+"mixed"
+],
+"inks": 0,
+"proc": "photographed objects, real shadows",
+"feel": "Guest checks, receipts, tape, painted card",
+"src": "PNG collectibles"
+},
+{
+"id": "specimen",
+"n": "Trade catalogue",
+"type": "Grotesque caps + numbered SKUs",
+"pal": [
+"#2b2b2b",
+"#c9b892",
+"#f4efe2"
+],
+"inks": 2,
+"proc": "flat trade printing",
+"feel": "Musgrave pencils \u2014 deadpan documentation",
+"src": "Archives.design"
+},
+{
+"id": "crossword",
+"n": "Puzzle page",
+"type": "Slab caps + clue serif",
+"pal": [
+"#111111",
+"#ffffff",
+"#e03c2d"
+],
+"inks": 2,
+"proc": "newsprint line work only",
+"feel": "Katy Puzzles \u2014 grids, answers upside down",
+"src": "Crossword"
+},
+{
+"id": "neon",
+"n": "Neon sign",
+"type": "Script as light",
+"pal": [
+"#0a0a12",
+"#ff5da2",
+"#43e8d8"
+],
+"inks": 3,
+"proc": "photographed light, glow bleed",
+"feel": "Type as a made object",
+"src": "Spelled Out In Neon"
+},
+{
+"id": "weave",
+"n": "Woven pattern",
+"type": "Small caps only",
+"pal": [
+"#7a3b2e",
+"#d9a441",
+"#3c5148",
+"#eee6d5"
+],
+"inks": 4,
+"proc": "repeat pattern, textile grain",
+"feel": "Structure as background, never a gradient",
+"src": "Weaving patterns"
+},
+{
+"id": "darkroom",
+"n": "Darkroom photo",
+"type": "Caption serif, tiny",
+"pal": [
+"#12100e",
+"#e8e3d8"
+],
+"inks": 1,
+"proc": "coarse duotone halftone",
+"feel": "Ordinary places, no people",
+"src": "Carried By The Camera"
+},
+{
+"id": "shop-vernacular",
+"n": "Shop vernacular",
+"type": "Hand-painted signage, mismatched",
+"pal": [
+"#e02b20",
+"#f5c518",
+"#1b6b3a",
+"#fdfaf0"
+],
+"inks": 4,
+"proc": "paint on board, photographed",
+"feel": "Asian store shelf \u2014 colour without a system",
+"src": "Asian store"
+},
+{
+"id": "instrument",
+"n": "Instrument panel",
+"type": "Mono + engraved numerals",
+"pal": [
+"#1e1e1e",
+"#c0c0b8",
+"#e6b422"
+],
+"inks": 3,
+"proc": "engraved line, fine rules",
+"feel": "Dials and readouts \u2014 mechanical authority",
+"src": "Camera interface"
+},
+{
+"id": "olympic",
+"n": "Identity system",
+"type": "One family, many weights",
+"pal": [
+"#0b5fa5",
+"#e8443a",
+"#f2c14e",
+"#f7f5f0"
+],
+"inks": 4,
+"proc": "flat, systematic",
+"feel": "Same system, wildly different artefacts",
+"src": "The Olympics Had A Look"
+},
+{
+"id": "yearbook",
+"n": "Yearbook",
+"type": "Script headline + caption sans",
+"pal": [
+"#20303f",
+"#c9a227",
+"#efe9dd"
+],
+"inks": 2,
+"proc": "duotone school photography",
+"feel": "Superlatives and affection",
+"src": "The Studio Never Left"
+},
+{
+"id": "ledger",
+"n": "Ledger & form",
+"type": "Typewriter + ruled lines",
+"pal": [
+"#2a2622",
+"#8a2f24",
+"#f0ece0"
+],
+"inks": 2,
+"proc": "carbon impression, rubber stamp",
+"feel": "Receipts, forms, stamps \u2014 bureaucratic warmth",
+"src": "Classic advertising"
+},
+{
+"id": "nightfield",
+"n": "Night field",
+"type": "Display serif reversed out",
+"pal": [
+"#0f0c0a",
+"#c9a892",
+"#f7f2e7"
+],
+"inks": 2,
+"proc": "deep solid with screened gradient",
+"feel": "Dark page, one line, room to breathe",
+"src": "It Rained The Whole Film"
+}
+]
