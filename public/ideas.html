@@ -1,0 +1,96 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>The Idea Book — Between Sundays HQ</title>
+<link rel="stylesheet" href="/ws.css"/>
+<style>
+.top2{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.top2 .nav{display:flex;gap:6px;align-items:center;margin-left:auto}
+.top2 button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 16px;
+ font-size:14px;font-weight:750;cursor:pointer}
+.top2 button:hover{border-color:var(--ink)}
+.view{background:var(--surface);border-radius:var(--r);display:grid;grid-template-columns:420px 1fr;
+ overflow:hidden;min-height:520px}
+.view .vis{background:#efe9df;display:flex;align-items:center;justify-content:center;padding:18px}
+.view .vis img{max-width:100%;max-height:640px;border-radius:8px;box-shadow:0 4px 18px rgba(40,25,15,.15)}
+.view .body{padding:26px 30px 28px}
+.kk{font-size:12px;font-weight:800;letter-spacing:.06em;color:var(--mute)}
+.view h2{font-family:var(--ser);font-size:30px;font-weight:700;letter-spacing:-.02em;margin:4px 0 2px}
+.tier{display:inline-block;font-size:11px;font-weight:800;border-radius:99px;padding:4px 12px;margin:8px 0}
+.tier.BUILD{background:var(--sage);color:#1d3a22}.tier.MAYBE{background:var(--butter);color:#5d4a12}
+.tier.SKIP{background:#eee5d8;color:var(--mute)}.tier.TODO{background:#eee;color:#999}
+.lbl{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);
+ margin:15px 0 4px}
+.view p{font-size:14.8px;line-height:1.6;margin:0;max-width:none}
+.vs{background:#f7f3ec;border-left:4px solid var(--sage);border-radius:0 10px 10px 0;
+ padding:12px 16px;margin-top:8px}
+.vs .r{font-size:11px;font-weight:800;letter-spacing:.06em;color:var(--navy)}
+.vs .t{font-family:var(--ser);font-size:15.5px;line-height:1.5;margin-top:3px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px;margin-top:18px}
+.grid2 .th{position:relative;border-radius:8px;overflow:hidden;cursor:pointer;background:#eee;
+ aspect-ratio:3/4;border:2px solid transparent}
+.grid2 .th img{width:100%;height:100%;object-fit:cover}
+.grid2 .th.on{border-color:var(--accent)}
+.grid2 .th .n{position:absolute;left:4px;bottom:3px;background:rgba(30,18,10,.75);color:#fff;
+ font-size:10px;font-weight:800;border-radius:6px;padding:1px 6px}
+.grid2 .th.done .n{background:var(--navy)}
+.grid2 .th.skip{opacity:.45}
+@media(max-width:900px){.view{grid-template-columns:1fr}}
+</style></head><body>
+<div class="top2">
+ <span class="chips" id="filters"></span>
+ <span class="nav">
+  <button id="prev">←</button>
+  <span id="pos" style="font-size:13px;font-weight:750;color:var(--mute);min-width:130px;text-align:center"></span>
+  <button id="next">→</button></span>
+</div>
+<div class="view" id="view"></div>
+<div class="grid2" id="grid"></div>
+<script src="/_nav.js"></script>
+<script>
+mount("build",{title:"The Idea Book",sub:"Every reference, the mechanic, our Bible-rooted version, and the verse in full — with an honest verdict on each."});
+let ALL=[],V={},cur=0,filt="ALL";
+const TIERS=[["ALL","Everything"],["BUILD","Build these"],["MAYBE","Maybe"],["SKIP","Skipped"],["TODO","Not yet studied"]];
+function list(){return filt==="ALL"?ALL:ALL.filter(x=>x.tier===filt);}
+function show(i){
+ const L=list(); if(!L.length)return;
+ cur=(i+L.length)%L.length; const c=L[cur];
+ document.getElementById("pos").textContent=`${cur+1} of ${L.length} · ref ${c.n}`;
+ document.getElementById("view").innerHTML=`
+  <div class="vis"><img src="/refs/${c.f}" alt=""/></div>
+  <div class="body">
+   <span class="kk">CURATED PIECE ${String(c.n).padStart(3,"0")} OF ${ALL.length}</span>
+   <h2>${c.t}</h2>
+   <span class="tier ${c.tier}">${c.tier==="TODO"?"NOT YET STUDIED":c.tier}</span>
+   ${c.tier==="TODO"?'<p style="color:var(--mute)">In the queue — the write-up lands here as the pass continues.</p>':`
+   ${c.what?`<div class="lbl">The reference</div><p>${c.what}</p>`:""}
+   ${c.mech&&c.mech!=="—"?`<div class="lbl">Why it works</div><p>${c.mech}</p>`:""}
+   ${c.ours?`<div class="lbl">Our original version</div><p>${c.ours}</p>`:""}
+   ${(c.v||[]).length?`<div class="lbl">The scripture, written out</div>`+
+     c.v.map(r=>`<div class="vs"><div class="r">${r} · NLT</div><div class="t">${V[r]||"—"}</div></div>`).join(""):""}
+   ${c.where&&c.where!=="—"?`<div class="lbl">Where it goes</div><p>${c.where}</p>`:""}
+   ${c.skipwhy?`<div class="lbl">Why skipped</div><p>${c.skipwhy}</p>`:""}`}
+  </div>`;
+ document.querySelectorAll(".grid2 .th").forEach(t=>
+  t.classList.toggle("on",+t.dataset.n===c.n));
+ const on=document.querySelector(".grid2 .th.on");
+ if(on) on.scrollIntoView({block:"nearest"});
+}
+function drawGrid(){
+ document.getElementById("grid").innerHTML=list().map((c,i)=>
+  `<div class="th ${c.tier!=="TODO"?"done":""} ${c.tier==="SKIP"?"skip":""}" data-i="${i}" data-n="${c.n}">
+   <img loading="lazy" src="/refs/${c.f}"/><span class="n">${c.n}</span></div>`).join("");
+ document.querySelectorAll(".grid2 .th").forEach(t=>t.onclick=()=>show(+t.dataset.i));
+}
+document.getElementById("filters").innerHTML=TIERS.map(([k,l])=>
+ `<button class="chip ${k==="ALL"?"on":""}" data-f="${k}">${l}</button>`).join("");
+document.querySelectorAll("#filters .chip").forEach(b=>b.onclick=()=>{
+ filt=b.dataset.f;document.querySelectorAll("#filters .chip").forEach(x=>x.classList.toggle("on",x===b));
+ cur=0;drawGrid();show(0);});
+document.getElementById("prev").onclick=()=>show(cur-1);
+document.getElementById("next").onclick=()=>show(cur+1);
+document.addEventListener("keydown",e=>{
+ if(e.key==="ArrowLeft")show(cur-1); if(e.key==="ArrowRight")show(cur+1);});
+Promise.all([fetch("/data/concept-ledger.json").then(r=>r.json()),
+             fetch("/data/verses-full.json").then(r=>r.json())]).then(([a,v])=>{
+ ALL=a;V=v;drawGrid();show(0);});
+</script></body></html>
