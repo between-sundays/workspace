@@ -1600,5 +1600,215 @@
 "where": "\u2014",
 "tier": "SKIP",
 "skipwhy": "Self-as-source voice; constitution says the source is the text"
+},
+"d216fd4a3ce538aaa7741031e95cefa7.jpg": {
+"t": "(internal) strategy cheat sheet",
+"what": "'Strategy Frameworks Cheat Sheet' \u2014 SWOT/TOWS/SOAR/PESTEL/VRIO tiles",
+"mech": "Acronym tiles.",
+"ours": "Workspace only.",
+"v": [],
+"where": "Workspace",
+"tier": "SKIP",
+"skipwhy": "Strategy content; the paper is not a consultancy"
+},
+"d9f3dd219d973229515068da6fd77a8f.jpg": {
+"t": "(contrast) the self-worth page",
+"what": "A highlighted book page \u2014 'you are in charge of your worth\u2026 make yourself happy on your own terms'",
+"mech": "Multi-colour highlighting over affirmation prose.",
+"ours": "Keep ONLY as the contrast page for our marked-up concept: same highlighter treatment, opposite theology. Ours corrects in the margin \u2014 'in charge of your worth' gets an arrow to Luke 12:6-7: you were priced by someone else, and the price was high. The visual pair (their page vs our page) could itself be a spread one day.",
+"v": [
+"Luke 12:6",
+"Luke 12:7"
+],
+"where": "Contrast reference for p05",
+"tier": "SKIP",
+"skipwhy": "Voice is self-sourced; kept as the corrective's foil"
+},
+"dad8558972ee3301e69ae1d767ef6106.jpg": {
+"t": "The puzzle-corner page",
+"what": "'Katy Puzzles' \u2014 a 1950s comic puzzle page: scrambles, word ladders, upside-down answers, three stacked panels",
+"mech": "Puzzle DENSITY with personality \u2014 multiple small games sharing one page, answers printed upside down beside each.",
+"ours": "Upgrade our games block from one-game-per-page to a true PUZZLE CORNER: scrambled names (LEBTHE = where he slept), 'cross out the letters of LUZ and find what remains', spell 8 words that start and end with the letters of AMEN, draw the stairway without lifting your pencil. Answers upside down, refs beside each puzzle. Genesis 28 as a whole puddle of small games.",
+"v": [
+"Genesis 28:19",
+"Proverbs 25:2"
+],
+"where": "Pages 31-32 upgrade",
+"tier": "BUILD"
+},
+"dcf57b951911b6aeb1fa9df4c0bf3eda.jpg": {
+"t": "Slice it up",
+"what": "'SLICE IT UP' \u2014 watermelon \u2192 slice \u2192 wedge as dream \u2192 project \u2192 task",
+"mech": "One object shrinking through three labels.",
+"ours": "Ours flips the direction: WEDGE \u2192 SLICE \u2192 WHOLE. 'One verse \u2192 one chapter \u2192 the whole Book. Start with the wedge.' Same drawing, opposite motion \u2014 the mustard-seed logic (Matt 13:31-32, the smallest seed becomes the biggest garden plant). Quarter-page filler with real charm.",
+"v": [
+"Matthew 13:31",
+"Matthew 13:32"
+],
+"where": "Quarter page \u2014 games/filler family",
+"tier": "MAYBE"
+},
+"dd4063e2c92d7f552dc5478d45c6b12b.jpg": {
+"t": "The controller (sibling)",
+"what": "'Things We Can Control' \u2014 game-controller version of the control diagram",
+"mech": "Same one-object control taxonomy as the remote.",
+"ours": "Family already covered (remote + loop). The controller variant confirms the format; pick the REMOTE for print (more universal object).",
+"v": [],
+"where": "\u2014",
+"tier": "SKIP",
+"skipwhy": "Third sibling of the control-diagram family"
+},
+"dd89c82e8672eb21fb4e3356ab4b409c.jpg": {
+"t": "The catalogue entry page",
+"what": "'Hey Tweens, Watch This!' \u2014 Crooklyn: a film-guide spread with genre pills, FLAG FOR icons, trivia, keywords, a ticket, one number",
+"mech": "A reference book with a design system per entry: consistent slots (genre, flags, trivia, keywords) make every entry both fun and useful.",
+"ours": "'THE 66' \u2014 a books-of-the-Bible guide in exactly this format, one spread per book eventually (or 4-up per page): GENRE pills (poetry \u00b7 law \u00b7 letter \u00b7 apocalypse) \u00b7 FLAG FOR icons (war, weeping, plagues, romance \u2014 SONG OF SOLOMON: flag for romance, yes really) \u00b7 TRIVIA (Esther never says God's name) \u00b7 KEYWORDS \u00b7 LENGTH (Obadiah: 21 verses, one sitting) \u00b7 a big number. The Bible catalogued like the culture it is. Longest-running series format we could own.",
+"v": [
+"2 Timothy 3:16",
+"Psalm 119:160"
+],
+"where": "Series \u2014 start with 4 books on one page in 001/002",
+"tier": "BUILD"
+},
+"def5d5f89caa0203bbfae4e36420bd0c.jpg": {
+"t": "Anchoring bias \u2192 the razor series",
+"what": "'Anchoring Bias' \u2014 the razors template again: rule, candy-jar example, two car drawings",
+"mech": "Third confirmation of the razor template.",
+"ours": "Feeds the concepted 'Rules for reading' series with its best rule yet: THE ANCHOR RULE \u2014 'the first sermon you ever heard about a verse is not necessarily what the verse says. Re-read it like it's new.' (The $30K car reads differently next to a crossed-out $60K \u2014 and 'grace' reads differently next to what you were first told about it.)",
+"v": [
+"Acts 17:11"
+],
+"where": "Rules series",
+"tier": "MAYBE"
+},
+"dfe6469c65fbdd31c5d0c3beeba9bfd4.jpg": {
+"t": "The FLASH sale page",
+"what": "1950s comic-back jewelry page \u2014 FLASH! ALL PRICES SLASHED! watches, rings, wall phones, coupon, SEND NO MONEY",
+"mech": "Crossed-out prices everywhere; the entire page is a markdown event. 'Send no money' again.",
+"ours": "'EVERYTHING MUST GO' \u2014 the markdown page for what the gospel discounts to zero: GUILT (was: everything \u00b7 now: 0 \u2014 Romans 8:1 'no condemnation') \u00b7 THE RECORD (was: itemised \u00b7 now: erased \u2014 Col 2:14, 'he canceled the record of the charges') \u00b7 THE DEBT (paid \u2014 Matt 6:12). Every strikethrough is a doctrine. Coupon corner: our postbox card, again. Completes the ad-parody family; run across issues, one per issue.",
+"v": [
+"Romans 8:1",
+"Colossians 2:14"
+],
+"where": "Ad-parody rotation",
+"tier": "MAYBE"
+},
+"e32c069184ec7cc70a9df42b115c7fab.jpg": {
+"t": "The month page (handwritten original)",
+"what": "A real bullet-journal month spread \u2014 INSPIRED BY / WATCHING / READING / GRATEFUL FOR in thick hand lettering",
+"mech": "A real person's real month; the mess is the proof.",
+"ours": "Original of the concepted 'month in your handwriting' Spine page. One steal: the CATEGORY WORDS drawn huge and the answers squeezed in \u2014 ours prints the huge words (READING \u00b7 CARRYING \u00b7 PRAYING ABOUT \u00b7 GRATEFUL FOR \u00b7 STILL HERE) and leaves the squeeze to the reader.",
+"v": [
+"Lamentations 3:22",
+"Lamentations 3:23"
+],
+"where": "Spine log (control)",
+"tier": "SKIP",
+"skipwhy": "Original of concepted page; lettering treatment absorbed"
+},
+"e85f77a3dd2fb842a3b74834078b07d6.jpg": {
+"t": "Hofstadter \u2192 the twenty-years rule",
+"what": "'Hofstadter's Law' \u2014 things take longer than you think, three stacked bars",
+"mech": "Three bars: predicted, adjusted, actual.",
+"ours": "Into the Rules/field-guide family as THE TWENTY-YEARS RULE: bar 1, how long Jacob thought he'd be gone ('a few days' \u2014 Gen 27:44) \u00b7 bar 2, what Rebekah planned \u00b7 bar 3, actual: twenty years. 'God's timelines run long. The promise held the whole way.' A razor page where the punchline is scripture's own math.",
+"v": [
+"Genesis 27:44",
+"Genesis 31:38",
+"2 Peter 3:8"
+],
+"where": "Field guide series",
+"tier": "BUILD"
+},
+"ea45313c7d1ffb221b3a6a004982ff20.jpg": {
+"t": "The die-cut window envelope (original)",
+"what": "Cleveland Institute of Art \u2014 'Please fill in the blanks': die-cut windows revealing fragments, questions beneath each hole",
+"mech": "The physical object: holes in the envelope let the booklet inside answer. Form IS interaction.",
+"ours": "Original of the concepted redaction-form page \u2014 and it upgrades it to PRODUCTION: if PrintNewspaper can die-cut (ask in the quote email), the Spine cover could carry real windows \u2014 holes where words show through from the page beneath, and Genesis 28:15 completes only when the section is intact. 'You are not owed the whole transcript' as an object.",
+"v": [
+"Genesis 28:15",
+"Job 38:4"
+],
+"where": "Spine cover / printer question",
+"tier": "BUILD"
+},
+"ea83050a387c36933eea72436a9eab5f.jpg": {
+"t": "The 300-word wall (original)",
+"what": "'300 Positive Words of Encouragement' \u2014 the alphabetical word wall on a mountain photo",
+"mech": "Density scan: you read until one hits.",
+"ours": "Original of concepted 'What the Bible calls you'. Confirmed; ours keeps the alphabetical columns but every word carries a tiny ref \u2014 and unlike this one, ours can prove every entry.",
+"v": [
+"Isaiah 43:1",
+"1 Peter 2:9"
+],
+"where": "Full page (control)",
+"tier": "SKIP",
+"skipwhy": "Original of the concepted word wall"
+},
+"6ed48740deda4b450cc90d8ddb4ed78d.jpg": {
+"t": "(duplicate) classifieds jungle",
+"what": "Duplicate of the comic-classifieds page",
+"mech": "\u2014",
+"ours": "See the p36 jungle rebuild.",
+"v": [],
+"where": "\u2014",
+"tier": "SKIP",
+"skipwhy": "Duplicate file"
+},
+"72c3a59d075187618e8af55ba51ce7a1.jpg": {
+"t": "The people-watching journal",
+"what": "Nina Cosford's sketchbook \u2014 PEOPLE-WATCHING: a dated, placed, drawn-and-written account of strangers observed with affection",
+"mech": "Observation as devotion: drawing strangers kindly makes a city feel like company.",
+"ours": "'PEOPLE-WATCHING AT CHURCH' (or the bus stop) \u2014 a drawn-journal page of strangers observed with Jesus's kind of eye: the man who arrives late every week and leaves early \u00b7 the kid drawing on the bulletin \u00b7 the woman who mouths every word. Caption at the foot: 'When he saw the crowds, he had compassion on them' \u2014 Matthew 9:36. Teaching people to SEE a room the way he did, via a sketchbook page.",
+"v": [
+"Matthew 9:36"
+],
+"where": "Full page \u2014 profile/observation family",
+"tier": "BUILD"
+},
+"ba7c2a32e4dbf6e7e124c5d7ab4f9078.jpg": {
+"t": "The one-ink oddities spread",
+"what": "A riso orange spread of vintage oddball ads \u2014 Herman the Wonder Dog, dancing waters, 'wanna see your movie in Sweden?'",
+"mech": "One ink unifies total chaos; every ad is sincere and strange at once.",
+"ours": "Print treatment proof for the classifieds jungle (p36) \u2014 run it ONE INK on newsprint and the chaos coheres. Also one steal: the mid-page manifesto ad ('we are different than the majors because\u2026') \u2014 ours: a small box mid-jungle, 'WE ARE DIFFERENT FROM OTHER PAPERS BECAUSE: nothing in here is trying to sell you anything. \u2014 the management.'",
+"v": [
+"Isaiah 55:1"
+],
+"where": "p36 production treatment",
+"tier": "MAYBE"
+},
+"eb7e575766b208342bba6280c3ed642f.jpg": {
+"t": "The kids broadsheet",
+"what": "Epoch Times 'For Kids Only' \u2014 a real children's newspaper page: poem, stamps, animal-migration feature by a 13-year-old, maze, crossword, math puzzles",
+"mech": "A full paper's worth of forms shrunk onto one page, pitched young without condescending. A kid BYLINE.",
+"ours": "'FOR KIDS ONLY' \u2014 one page of Issue 001 pitched at eight-year-olds, same rigor: the Jacob story in 100 words \u00b7 a migration feature (how far did Jacob walk? how far does an arctic tern fly?) \u00b7 the maze (Beersheba\u2192Bethel) \u00b7 a crossword sized for them. AND the byline move: one section written BY a kid. Deut 6:7 says these words are for the children; give them a page, not a mention.",
+"v": [
+"Deuteronomy 6:7",
+"Matthew 19:14"
+],
+"where": "New page \u2014 strongest single addition for families",
+"tier": "BUILD"
+},
+"f4f2252d280c4693552b0ea2865f1130.jpg": {
+"t": "The service-listing ride page",
+"what": "A magazine fitness/travel listing page \u2014 illustrated cyclists, race listings with POST-RACE MEAL and WHERE YOU'RE STAYING notes",
+"mech": "Listings with human sub-fields: every entry gets the practical AND the delightful.",
+"ours": "Format note for the directory family: give each But-God entry an extra human sub-field the way this page adds POST-RACE MEAL \u2014 ours adds 'READ IT WHEN:' under each verse (READ IT WHEN: the bill arrives \u00b7 2am \u00b7 the diagnosis). Absorbed into p34-35.",
+"v": [
+"Psalm 34:17"
+],
+"where": "p34-35 upgrade note",
+"tier": "SKIP",
+"skipwhy": "Absorbed as a sub-field pattern for the directory"
+},
+"f6ef1c3162942b450f069cd8e39f37a5.jpg": {
+"t": "The brand-times newspaper",
+"what": "SwiitchTimes \u2014 a beauty brand's own blackletter newspaper driving voter registration, with incentives and a Capitec partner page",
+"mech": "A brand paper doing civic work: the newspaper form lends seriousness to a campaign, sponsor handled openly.",
+"ours": "Evidence for two things we've parked: (1) the church one-sheet edition (A Central BH already proved it) and (2) HOW A SPONSOR PAGE COULD WORK if BTS ever takes one \u2014 named openly, 'a special thanks', clearly fenced off the editorial. Files under Finance/sponsorship as the visual precedent for the covenant question.",
+"v": [
+"Romans 13:7"
+],
+"where": "Finance \u2014 sponsorship precedent",
+"tier": "MAYBE"
 }
 }
