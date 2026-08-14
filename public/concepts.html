@@ -39,8 +39,8 @@ Promise.all([fetch("/data/concepts.json").then(r=>r.json()),
  const have=[];
  document.getElementById("out").innerHTML=C.map((c,i)=>`
   <div class="cx">
-   <div class="vis"><span class="tagno">${String(i+1).padStart(2,"0")}</span>
-    <img src="/refs/concepts/${c.id}.jpg" alt="" onerror="
+   <div class="vis"><span class="tagno">${String(i+1).padStart(2,"0")}${c.n?" · ref "+c.n:""}</span>
+    <img src="/refs/${c.img||('concepts/'+c.id+'.jpg')}" alt="" onerror="
       this.style.display='none';this.insertAdjacentHTML('afterend',
       '<div class=&quot;empty&quot;>Reference image<br/><strong>${c.id}.jpg</strong><br/><br/>drop it in<br/>public/refs/concepts/</div>');"/>
    </div>

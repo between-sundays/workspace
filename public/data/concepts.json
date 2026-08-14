@@ -9,7 +9,9 @@
 "Genesis 28:12"
 ],
 "where": "Cover candidate, or the poster page",
-"rank": 1
+"rank": 1,
+"img": "0129208b7a788cf8ef7897a2656495e9.jpg",
+"n": 90
 },
 {
 "id": "i-am-with-you",
@@ -179,7 +181,9 @@
 "Zechariah 4:10"
 ],
 "where": "Page 45, the games block",
-"rank": 13
+"rank": 13,
+"img": "10c8b432a4df733f3df36d7369dd645e.jpg",
+"n": 101
 },
 {
 "id": "how-to-pray",
@@ -345,5 +349,81 @@
 ],
 "where": "Full-page ad",
 "rank": 25
+},
+{
+"id": "man-of-words",
+"n": 91,
+"img": "0321d6f53d422918ff5cadc5f429ec5d.jpg",
+"t": "A person made entirely of text",
+"ref": "#91 \u2014 a portrait collaged from strips of a biography, the figure cut out of the words that describe him",
+"mech": "The person and the account of the person are the same material. You cannot look at the man without reading about him.",
+"ours": "A human silhouette assembled from strips of Psalm 139 \u2014 every strip a phrase about being known, seen, formed, counted. The figure is cut out of the text and stands on a plain road. Nothing drawn; everything cut.",
+"v": [
+"Psalm 139:13",
+"Psalm 139:16"
+],
+"where": "A full page, or a Spine cover",
+"rank": 26
+},
+{
+"id": "twenty-sentences",
+"n": 94,
+"img": "07e996f902f308b7128abdab4e897948.jpg",
+"t": "20 sentences people think are in the Bible",
+"ref": "#94 \u2014 \u201c20 Sentences In 60 Seconds That Will Change Your Life\u201d, highlighter over printed lines",
+"mech": "A numbered list with a promise of speed, marked up in yellow so it reads like somebody already studied it for you.",
+"ours": "Twenty sentences, fifteen genuinely in the Bible and five that absolutely are not \u2014 \u201cGod helps those who help themselves\u201d, \u201cGod won't give you more than you can handle\u201d, \u201cmoney is the root of all evil\u201d. The five fakes highlighted in a different colour and corrected in the margin. This page makes us trustworthy by admitting what gets misquoted, including by us.",
+"v": [
+"Proverbs 30:6",
+"2 Timothy 3:16"
+],
+"where": "Page 02 or the field guide",
+"rank": 27
+},
+{
+"id": "same-stone",
+"n": 97,
+"img": "095e2cc0819b961a5f3f369a4c391ab1.jpg",
+"t": "The same stone, twice",
+"ref": "#97 \u2014 fixed vs growth mindset drawn as the identical four puzzle pieces, once locked shut and once open",
+"mech": "One object drawn twice, with only one property changed. The whole argument is in the difference, and no sentence is needed.",
+"ours": "The identical rock drawn twice, same size, same shading. Labelled A PILLOW and A PILLAR. Nothing about the stone changed between the two drawings \u2014 only the night in between, and what he did with it in the morning.",
+"v": [
+"Genesis 28:11",
+"Genesis 28:18"
+],
+"where": "Page 15 or the field guide",
+"rank": 28
+},
+{
+"id": "postbox",
+"n": 102,
+"img": "116cb1d50872c221a38d887d951d7c12.jpg",
+"t": "Take one, leave one",
+"ref": "#102 \u2014 a postbox on a wall beside a rack of tear-off cards: leave your impression behind, drop the card in",
+"mech": "Two actions, not one. You take something AND you give something back, anonymously, and the wall keeps both.",
+"ours": "Stronger than the tear-off page on its own. A perforated strip of notes to take, and directly beside it a card to fill in and post back \u2014 the address printed on it. What comes back becomes page 28 of the next issue. The paper stops being a broadcast.",
+"v": [
+"Matthew 10:8"
+],
+"where": "Its own page, near the Spine",
+"rank": 29
+},
+{
+"id": "creative-manifesto",
+"n": 103,
+"img": "1759d89e82d01827b72a26f9e617efd7.jpg",
+"t": "The wavy-border manifesto",
+"ref": "#103 \u2014 The Creative Manifesto: hand-lettered centred lines inside a thick wobbling blue border",
+"mech": "The wobble is the whole personality. A straight frame would make it corporate; the hand-drawn one makes it a gift.",
+"ours": "Same treatment for the twelve-line Between Sundays manifesto \u2014 hand-lettered, centred, inside a wobbling border in one of our inks. Every line is a verse in plain speech with its reference set tiny underneath. It is designed to be torn out and stuck on a wall.",
+"v": [
+"Romans 8:38",
+"Romans 5:8",
+"Zechariah 4:10",
+"Mark 9:24"
+],
+"where": "Back of the book, tear-out",
+"rank": 30
 }
 ]
