@@ -1810,5 +1810,142 @@
 ],
 "where": "Finance \u2014 sponsorship precedent",
 "tier": "MAYBE"
+},
+"f7584bd1950e396a90b43c1c19212693.jpg": {
+"t": "The brand-as-circular (Baggu proof)",
+"what": "BAGGU's catalogue as a vintage grocery circular, next to the real 1970s circular it copies",
+"mech": "Side-by-side proof that a modern brand can wear the circular form completely and it WORKS in print.",
+"ours": "Production proof for our FREE STORE / Supply Co family \u2014 the reference showing the exact halftone, ink-on-newsprint execution our ad pages need. When PrintNewspaper quotes, this page is what we show them for the ad-parody sections.",
+"v": [
+"Isaiah 55:1"
+],
+"where": "Production reference for p41/p36",
+"tier": "MAYBE"
+},
+"05bdbc5b9d86ae334ff82bd995f62d17.jpg": {
+"t": "Emotions are messengers (original)",
+"what": "'Emotions are Messengers' \u2014 the reaction/need table",
+"mech": "Three-column reframe: feeling \u2192 reflex \u2192 what it actually asks for.",
+"ours": "Original of the concepted three-column page \u2014 ours adds the fourth column that changes everything: WHERE TO TAKE IT. Sadness \u2192 healing \u2192 Psalm 147:3 ('he heals the brokenhearted and bandages their wounds'). Fear \u2192 safety \u2192 Psalm 91. Shame \u2192 acceptance \u2192 Romans 8:1. The table stops at 'need'; the paper continues to 'supplied'.",
+"v": [
+"Psalm 147:3",
+"Romans 8:1"
+],
+"where": "Weather family (control)",
+"tier": "BUILD"
+},
+"05be209202ba637a87ff73fc60f647a5.jpg": {
+"t": "(rejected) study-hacks listicle",
+"what": "'You Will Never Get Tired When Studying' \u2014 productivity pin",
+"mech": "Highlighted hack list.",
+"ours": "Skip \u2014 self-optimisation genre, and its promise ('never get tired') is false in a way our paper refuses to be. Matthew 11:28 assumes you WILL get tired.",
+"v": [],
+"where": "\u2014",
+"tier": "SKIP",
+"skipwhy": "Hack-listicle voice + a false promise"
+},
+"08502823cc7c550b30910b7cde15d67e.jpg": {
+"t": "(internal) 9 stages of change",
+"what": "'9 Stages of Transformational Change' \u2014 the grief/growth U-curve",
+"mech": "Org-change U-curve.",
+"ours": "Workspace: useful map for how readers may move from resistance to advocacy about faith itself \u2014 informs the persona work in Grow. Never printed.",
+"v": [],
+"where": "Workspace / Grow",
+"tier": "SKIP",
+"skipwhy": "Consulting diagram; internal insight only"
+},
+"08ca6171608425ef6b5bc9e858d048d1.jpg": {
+"t": "'We see' (original ad)",
+"what": "Microsoft 'We see an old rivalry renewed' \u2014 the chess-by-laptop room with the white-line imagined friend",
+"mech": "The drawn overlay shows the relationship the technology carries; the real room stays real.",
+"ours": "Control for 'What else was in the room' (p44) \u2014 and it sharpens the theology: in the ad, the drawing is a MEMORY/possibility. In ours, the drawing is what is ACTUALLY THERE per the text (the ramp, the traffic, 2 Kings 6:17's army). The caption writes itself: 'the drawing is not imaginary.'",
+"v": [
+"Genesis 28:12",
+"2 Kings 6:17"
+],
+"where": "Page 44 (control, confirmed)",
+"tier": "BUILD"
+},
+"0d0b3836271a1c288d6f01a83935a049.jpg": {
+"t": "'To the crazy ones' (original)",
+"what": "Apple's Think Different newspaper page \u2014 stepped centred prose, tiny portraits",
+"mech": "Accumulating tribute prose; the portraits punctuate, never dominate.",
+"ours": "Original of the concepted 'To the ones who were not chosen' (1 Cor 1:27). Now with the portrait move confirmed: tiny halftone cameos beside the lines \u2014 the shepherd boy, the fisherman, the tax man, the girl from Nazareth. Faces the size of postage stamps, exactly like Apple used Einstein.",
+"v": [
+"1 Corinthians 1:27"
+],
+"where": "Page 03/27 (control)",
+"tier": "BUILD"
+},
+"0ead292e42edaa79e2c28494273b633b.jpg": {
+"t": "(rejected) storytelling mind map",
+"what": "'Storytelling' hand-lettered hub-and-spoke",
+"mech": "Word cloud with doodles.",
+"ours": "A diagram about storytelling is not storytelling. Skip.",
+"v": [],
+"where": "\u2014",
+"tier": "SKIP",
+"skipwhy": "Meta-diagram; tells instead of shows"
+},
+"10c35327d4b08a5835b4e77dd1d37f8e.jpg": {
+"t": "The taped-reminder photo series",
+"what": "'Solo como recordatorio' \u2014 9 photos of ordinary places, each with a handwritten reminder taped over it",
+"mech": "The same label format over changing scenes: 'just as a reminder\u2026' \u2014 the tape makes it feel left FOR you, found not broadcast.",
+"ours": "'LEFT FOR YOU' \u2014 a page of 9 photographs of ordinary places, each with a real taped handwritten note photographed in place: on a bus shelter 'just as a reminder: he has not left you \u2014 Deut 31:6' \u00b7 on a kitchen cupboard 'mercies restock in the morning \u2014 Lam 3:23' \u00b7 on a mirror 'you are not the verdict \u2014 Rom 8:1'. AND the real-world version: we actually print tape-able notes (the tear-out page) so readers make photo 10 themselves.",
+"v": [
+"Deuteronomy 31:6",
+"Lamentations 3:23",
+"Romans 8:1"
+],
+"where": "Full page + ties to the tear-out \u2014 strong",
+"tier": "BUILD"
+},
+"1b036755379fd735b286c867e6145393.jpg": {
+"t": "12 beautiful questions (original)",
+"what": "'12 most beautiful questions ever asked' \u2014 the plain numbered list",
+"mech": "Selection over typography.",
+"ours": "Original of the concepted 'Questions Jesus asked'. Confirmed; no change.",
+"v": [
+"Matthew 16:15",
+"Mark 10:51"
+],
+"where": "p16 (control)",
+"tier": "SKIP",
+"skipwhy": "Original of concepted questions page"
+},
+"1e43e3a35bda20426dd950e394b0cc27.jpg": {
+"t": "How to journal (original)",
+"what": "'How to Journal When You Don't Know What to Say' \u2014 the bar-lowering bullet list",
+"mech": "Every bullet lowers the bar.",
+"ours": "Original of the concepted 'How to pray when you don't know what to say'. One extra steal: the opening move 'start by writing I don't know what to say\u2026 and keep going' becomes our first line verbatim \u2014 'Start by praying: I don't know how to do this. That is a prayer. It counts.' (Rom 8:26 promises exactly this case.)",
+"v": [
+"Romans 8:26"
+],
+"where": "p43 pair (control)",
+"tier": "SKIP",
+"skipwhy": "Original of concepted prayer list; opener absorbed"
+},
+"2522ea691092ed46eb3b85b3e3d3aa81.jpg": {
+"t": "Morning Light \u2014 the radiance comic",
+"what": "Grant Snider's 'MORNING LIGHT' \u2014 12 panels: the light doesn't care what it paints; even oil tanks are radiant",
+"mech": "A grid poem: one idea walked through ordinary objects until the last panel earns the word 'radiant'.",
+"ours": "'THE SAME LIGHT' \u2014 our 12-panel grid poem: the light of Genesis 1 does not check what it lands on \u2014 the church AND the laundromat, the altar AND the oil tank, your best morning AND the parking garage. Last panel: 'The light shines in the darkness, and the darkness can never extinguish it' (John 1:5). This is the page that owns our whole ordinary-places theology in comic form \u2014 Adrian draws it.",
+"v": [
+"Genesis 1:3",
+"John 1:5",
+"Psalm 19:1"
+],
+"where": "Full page \u2014 comics slot upgrade, TOP-TIER",
+"tier": "BUILD"
+},
+"2794519f11ffa082a222c09b7643c468.jpg": {
+"t": "(internal) brand-story pitch",
+"what": "'Your brand looks good, but it doesn't tell your story' \u2014 designer's sales carousel",
+"mech": "Diagnosis-pitch format.",
+"ours": "Workspace: a fair warning label for our own pages \u2014 'design without the story is decoration' is literally our DNA rule 3. Not a paper page.",
+"v": [],
+"where": "Workspace",
+"tier": "SKIP",
+"skipwhy": "Marketing pitch; internal echo of an existing rule"
 }
 }
