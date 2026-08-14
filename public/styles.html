@@ -1,0 +1,62 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Style Systems — Between Sundays HQ</title>
+<link rel="stylesheet" href="/ws.css"/>
+<style>
+.sys{background:var(--surface);border-radius:var(--r);padding:0;overflow:hidden;margin-bottom:12px;
+ display:grid;grid-template-columns:172px 1fr}
+.sw{display:flex;flex-direction:column}
+.sw i{flex:1;font-style:normal;min-height:26px}
+.sy{padding:18px 22px 20px}
+.sy h3{font-family:var(--ser);font-size:22px;font-weight:700;margin:0 0 3px;letter-spacing:-.015em}
+.sy .meta{font-size:12.5px;color:var(--mute);font-weight:650}
+.sy .feel{font-size:14.5px;line-height:1.55;margin-top:9px;color:var(--ink2)}
+.sy .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:11px}
+.src{background:var(--surface);border-radius:var(--r2);padding:14px 17px;margin-bottom:8px;display:block}
+.src:hover{background:#faf7f2}
+.src b{font-size:15px;font-weight:750;display:block}
+.src span{font-size:13.2px;color:var(--mute);line-height:1.5}
+.src .g{font-size:11px;font-weight:750;color:var(--navy);text-transform:uppercase;letter-spacing:.05em}
+</style></head><body>
+<p class="lede"><strong>No page may share a style system with the page before it, or the page it
+faces.</strong> At least three of five must change between neighbours — typeface pairing, palette,
+ink count, press process, layout logic. What stays constant is the furniture: the folio, the rule,
+the trim, the Source Rule, the voice. Enforced by <code>tools/check_variance.py</code>.</p>
+<div class="rowhead"><h2>The register</h2><span class="pill" id="cnt"></span></div>
+<div id="sys"></div>
+<div class="rowhead"><h2>Where new systems come from</h2>
+ <span class="more">open one you haven't used recently</span></div>
+<div class="chips" id="filters" style="margin-bottom:12px"></div>
+<div id="srcs"></div>
+<script src="/_nav.js"></script>
+<script>
+mount("build",{title:"Style Systems",sub:"Twenty-four ways to make a page, and thirty-five places to find more."});
+let SRC=[],grp="all";
+fetch("/data/style-register.json").then(r=>r.json()).then(R=>{
+ document.getElementById("cnt").textContent=R.length+" systems";
+ document.getElementById("sys").innerHTML=R.map(s=>`
+  <div class="sys">
+   <div class="sw">${(s.pal[0]==="mixed"?["#c9b892","#8a7f6a","#e8dfcd","#6b5a45"]:s.pal)
+     .map(c=>`<i style="background:${c}"></i>`).join("")}</div>
+   <div class="sy"><h3>${s.n}</h3>
+    <div class="meta">${s.type}</div>
+    <div class="feel">${s.feel}</div>
+    <div class="tags"><span class="pill">${s.inks===0?"photographed":s.inks+" ink"+(s.inks>1?"s":"")}</span>
+     <span class="pill">${s.proc}</span><span class="pill on">${s.src}</span></div></div></div>`).join("");
+});
+fetch("/data/style-sources.json").then(r=>r.json()).then(S=>{
+ SRC=S;
+ const gs=["all",...[...new Set(S.map(x=>x.g))]];
+ document.getElementById("filters").innerHTML=gs.map(g=>
+  `<button class="chip ${g==="all"?"on":""}" data-g="${g}">${g==="all"?"Everything":g}</button>`).join("");
+ document.querySelectorAll("#filters .chip").forEach(b=>b.onclick=()=>{
+  grp=b.dataset.g;document.querySelectorAll("#filters .chip").forEach(x=>x.classList.toggle("on",x===b));draw();});
+ draw();
+});
+function draw(){
+ const rows=grp==="all"?SRC:SRC.filter(x=>x.g===grp);
+ document.getElementById("srcs").innerHTML=rows.map(x=>
+  `<a class="src" href="${x.u}" target="_blank" rel="noopener noreferrer">
+   <span class="g">${x.g}</span><b>${x.n}</b><span>${x.why}</span></a>`).join("");
+}
+</script></body></html>
