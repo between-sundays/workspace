@@ -117,3 +117,34 @@ def press(render, inks, angles=None, cell=5.0, misreg=None, seed=7,
         # transparent ink: multiply toward the ink colour
         sheet = sheet * (1 - a) + (sheet * (k / 255.0)) * a
     return Image.fromarray(np.clip(sheet, 0, 255).astype(np.uint8))
+
+
+# ---------------------------------------------------------------- photographs
+def duotone(img, dark, light, angles=(45, 15), cell=5.0, seed=7,
+            paper_tone=(247, 242, 231), roughness=1.0, contrast=1.0, knockout=0.93):
+    """Press a PHOTOGRAPH.
+
+    Flat art separates by colour; a photograph separates by TONE. Luminance maps
+    to ink density directly — shadows carry the dark ink, midtones carry the
+    second. Anything brighter than `knockout` is treated as reversed-out type and
+    left as bare paper, which is how white text on a dark photo actually prints.
+    """
+    a = np.asarray(img.convert("RGB"), np.float32)
+    h, w, _ = a.shape
+    lum = (0.299 * a[:, :, 0] + 0.587 * a[:, :, 1] + 0.114 * a[:, :, 2]) / 255.0
+    ko = (lum >= knockout).astype(np.float32)           # reversed-out type
+    ko = np.array(Image.fromarray((ko * 255).astype(np.uint8))
+                  .filter(ImageFilter.GaussianBlur(0.4)), np.float32) / 255.0
+    d = np.clip((1.0 - lum - 0.5) * contrast + 0.5, 0, 1)
+    d = d * (1.0 - ko)
+    sheet = paper(w, h, seed=seed, tone=paper_tone, roughness=roughness)
+    # dark ink carries the shadows, second ink lifts the midtones
+    d_dark = np.clip((d - 0.28) / 0.72, 0, 1) ** 0.9
+    d_mid = np.clip(d * 1.15, 0, 1) ** 1.5 * 0.55
+    for i, (dens, ink) in enumerate(((d_mid, light), (d_dark, dark))):
+        scr = halftone(dens, angles[i % len(angles)], cell=cell, seed=seed + i * 7)
+        if i: scr = shift(scr, 1, -1)                   # the register slips
+        k = np.array(ink, np.float32).reshape(1, 1, 3)
+        al = scr[:, :, None]
+        sheet = sheet * (1 - al) + (sheet * (k / 255.0)) * al
+    return Image.fromarray(np.clip(sheet, 0, 255).astype(np.uint8))
