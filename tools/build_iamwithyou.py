@@ -34,9 +34,15 @@ def build(plate_path):
     plate = plate.crop((x0, y0, x0 + W, y0 + H))
     plate.save(f"{OUT}/_plate.png")
 
-    boxes = [(int(6.2 * len(t)) + 16, 30) for t in NOW]
-    boxes += [(int(6.2 * len(f"{r} — {w}")) + 16, 44) for r, w, _ in THEN[:8]]
-    pos = label_space.place(plate, boxes, margin=22, seed=9)
+    # a label is measured at ~5.6px/char at 12.5px Inter; the promise block is wider
+    def wid(s, px=5.6): return int(px * len(s)) + 14
+    boxes = [(min(wid(t), 300), 26) for t in NOW]
+    boxes += [(min(wid(f"{r} · to {w}, {what}", 4.4), 360), 40) for r, w, what in THEN[:8]]
+    KEEPOUT = [(0, 0, W, 74),            # folio strip and its rule
+               (0, H - 250, W, 250),     # headline, deck and credit
+               (W - 40, 0, 40, H)]       # right trim — nothing may run off the edge
+    pos = label_space.place(plate, boxes, margin=30, seed=9, keepout=KEEPOUT,
+                            prefer_dark=1.35)
 
     labs = []
     for i, t in enumerate(NOW):
@@ -55,23 +61,22 @@ def build(plate_path):
 *{{box-sizing:border-box;margin:0;padding:0}}
 .page{{position:relative;width:{W}px;height:{H}px;overflow:hidden;background:#0e0d0c}}
 .plate{{position:absolute;inset:0;width:{W}px;height:{H}px;object-fit:cover}}
-.now{{position:absolute;font-family:'Inter',sans-serif;font-size:12.5px;font-weight:400;
- color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.9);letter-spacing:.01em;white-space:nowrap}}
+.now{{position:absolute;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:500;
+ color:#fff;letter-spacing:.02em;white-space:nowrap}}
 .then{{position:absolute;white-space:nowrap}}
-.then b{{display:block;font-family:'Inter',sans-serif;font-size:12.5px;font-weight:800;
- letter-spacing:.16em;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.95)}}
-.then span{{display:block;font-family:'Inter',sans-serif;font-size:9.5px;font-weight:600;
- letter-spacing:.05em;color:#f0c98a;text-shadow:0 1px 3px rgba(0,0,0,.95);margin-top:2px}}
+.then b{{display:block;font-family:'Inter',sans-serif;font-size:13px;font-weight:800;
+ letter-spacing:.16em;color:#fff}}
+.then span{{display:block;font-family:'Inter',sans-serif;font-size:10.5px;font-weight:600;
+ letter-spacing:.04em;color:#fff;margin-top:2px}}
 .folio{{position:absolute;left:44px;right:44px;top:30px;display:flex;
  font-family:'Inter',sans-serif;font-size:10px;font-weight:800;letter-spacing:.2em;
  text-transform:uppercase;color:rgba(255,255,255,.82);z-index:5}}
 .rule{{position:absolute;left:44px;right:44px;top:52px;height:1px;background:rgba(255,255,255,.4);z-index:5}}
 .hed{{position:absolute;left:44px;bottom:150px;font-family:'Inter',sans-serif;
  font-size:44px;font-weight:800;letter-spacing:-.01em;line-height:1;color:#fff;
- text-shadow:0 2px 10px rgba(0,0,0,.85);z-index:5}}
+ z-index:5}}
 .dek{{position:absolute;left:44px;right:300px;bottom:96px;font-family:'Newsreader',serif;
- font-size:16px;line-height:1.45;color:rgba(255,255,255,.9);
- text-shadow:0 1px 6px rgba(0,0,0,.9);z-index:5}}
+ font-size:16px;line-height:1.45;color:#fff;z-index:5}}
 .src{{position:absolute;right:44px;bottom:38px;font-family:'Inter',sans-serif;font-size:9px;
  font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6);z-index:5}}
 </style></head><body><div class="page">
@@ -105,7 +110,7 @@ def build(plate_path):
     # a photograph, so tone-separated, not colour-separated
     out = press.duotone(im, dark=(24, 21, 19), light=(176, 132, 74), angles=(45, 15),
                         cell=4.4, seed=21, paper_tone=(244, 239, 228), roughness=1.0,
-                        contrast=1.12, knockout=0.90)
+                        contrast=1.05, knockout=0.88)
     out.save(f"{OUT}/BTS-IAmWithYou-PRESSED.jpg", "JPEG", quality=93, optimize=True, progressive=True)
     for f in (pdf, shot): os.path.exists(f) and os.remove(f)
     print("built:", f"{OUT}/BTS-IAmWithYou-PRESSED.jpg")

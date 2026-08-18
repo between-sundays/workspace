@@ -19,12 +19,17 @@ def busy_map(img, blur=9):
                  .filter(ImageFilter.GaussianBlur(blur)), np.float32) / 255.0
     return b
 
-def place(img, boxes, margin=18, tries=4000, seed=5):
-    """boxes: list of (w,h). Returns [(x,y)] on the quietest non-overlapping spots."""
+def place(img, boxes, margin=18, tries=6000, seed=5, keepout=None, prefer_dark=0.0):
+    """boxes: list of (w,h). Returns [(x,y)] on the quietest non-overlapping spots.
+    keepout: list of (x,y,w,h) the type may never enter — the folio strip, the
+    headline block, the gutter. A label that lands on the headline is not a
+    placement bug, it is a missing reservation."""
     W, H = img.size
     b = busy_map(img)
+    # Reversed-out white type only reads on dark ground. Ask for quiet AND dark.
+    lum = np.asarray(img.convert("L").filter(ImageFilter.GaussianBlur(7)), np.float32) / 255.0
     rng = np.random.default_rng(seed)
-    taken = []
+    taken = list(keepout or [])
     out = []
     for (bw, bh) in boxes:
         best = None
@@ -35,6 +40,8 @@ def place(img, boxes, margin=18, tries=4000, seed=5):
                         y + bh + 10 < ty or ty + th + 10 < y) for tx, ty, tw, th in taken):
                 continue
             cost = float(b[y:y + bh, x:x + bw].mean())
+            if prefer_dark:
+                cost += prefer_dark * float(lum[y:y + bh, x:x + bw].mean())
             # nudge toward the edges so the centre of the picture stays open
             cx, cy = (x + bw / 2) / W - 0.5, (y + bh / 2) / H - 0.5
             cost -= 0.05 * (abs(cx) + abs(cy))
