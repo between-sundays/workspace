@@ -2276,5 +2276,24 @@
 "where": "Negative standard \u2014 pin it",
 "tier": "SKIP",
 "skipwhy": "AI-generated; kept as the definition of the tell we must avoid"
+},
+"__iamwithyou__": {
+"t": "I AM WITH YOU \u2014 the labelled crowd",
+"what": "Two aerial crowd photographs with hand-set labels: 'dealing with miscarriage', 'starting a new business', 'everyone has a preference' \u2014 the label naming what each person is carrying",
+"mech": "An aerial photograph plus typography. The labels do all the work: strangers become specific, and the crowd stops being a texture and becomes a list of people. The empty ground between groups is where the design lives.",
+"ours": "A spread of ordinary people from above, labelled TWICE over. In one weight, what people are carrying right now \u2014 the modern labels. In another, scattered among them and set differently, the fourteen times God says I AM WITH YOU in scripture, each tagged with who he said it to and what was happening to them: to a man asleep on a rock running from his brother \u00b7 to a man hiding in a winepress \u00b7 to someone told they were too young \u00b7 to eleven people, some of whom still doubted. Same visual field, same size type. The argument is made by adjacency and never stated: the promise was always made to somebody mid-situation.",
+"v": [
+"Genesis 28:15",
+"Exodus 3:12",
+"Joshua 1:9",
+"Judges 6:12",
+"Isaiah 41:10",
+"Jeremiah 1:8",
+"Matthew 28:20"
+],
+"where": "Full spread \u2014 the strongest page in the issue",
+"tier": "BUILD",
+"style": "darkroom",
+"mj": "public/data/mj-iamwithyou.md"
 }
 }
