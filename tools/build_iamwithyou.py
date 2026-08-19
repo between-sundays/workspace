@@ -35,12 +35,14 @@ def build(plate_path):
     plate.save(f"{OUT}/_plate.png")
 
     # a label is measured at ~5.6px/char at 12.5px Inter; the promise block is wider
-    def wid(s, px=5.6): return int(px * len(s)) + 14
+    # Inter at 13px measures ~6.6px/char; at 10.5px ~5.4. Estimate GENEROUSLY —
+    # an underestimate is what lets a label run off the trim.
+    def wid(s, px=6.6): return int(px * len(s)) + 18
     boxes = [(min(wid(t), 300), 26) for t in NOW]
-    boxes += [(min(wid(f"{r} · to {w}, {what}", 4.4), 360), 40) for r, w, what in THEN[:8]]
-    KEEPOUT = [(0, 0, W, 74),            # folio strip and its rule
-               (0, H - 250, W, 250),     # headline, deck and credit
-               (W - 40, 0, 40, H)]       # right trim — nothing may run off the edge
+    boxes += [(min(wid(f"{r} · to {w}, {what}", 5.4), 470), 42) for r, w, what in THEN[:8]]
+    KEEPOUT = [(0, 0, W, 78),            # folio strip and its rule
+               (0, H - 268, W, 268),     # headline, deck and credit
+               (W - 52, 0, 52, H)]       # right trim — nothing runs off the edge
     pos = label_space.place(plate, boxes, margin=30, seed=9, keepout=KEEPOUT,
                             prefer_dark=1.35)
 
@@ -75,7 +77,7 @@ def build(plate_path):
 .hed{{position:absolute;left:44px;bottom:150px;font-family:'Inter',sans-serif;
  font-size:44px;font-weight:800;letter-spacing:-.01em;line-height:1;color:#fff;
  z-index:5}}
-.dek{{position:absolute;left:44px;right:300px;bottom:96px;font-family:'Newsreader',serif;
+.dek{{position:absolute;left:44px;right:120px;bottom:74px;font-family:'Newsreader',serif;
  font-size:16px;line-height:1.45;color:#fff;z-index:5}}
 .src{{position:absolute;right:44px;bottom:38px;font-family:'Inter',sans-serif;font-size:9px;
  font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6);z-index:5}}
@@ -87,8 +89,7 @@ def build(plate_path):
  <div class="rule"></div>
  {''.join(labs)}
  <div class="hed">Fourteen times, to somebody<br/>in the middle of something.</div>
- <div class="dek">Every one of them was said to a person on their way somewhere, mid-situation,
-  not at the end of it. None of them were said to somebody who had earned it.</div>
+ <div class="dek">Every one said to somebody on their way somewhere &mdash; mid-situation, not at the end of it.</div>
  <div class="src">Scripture: Genesis 28:15 and thirteen others, NLT</div>
 </div></body></html>"""
     open(f"{OUT}/iamwithyou.html", "w").write(html)
@@ -100,20 +101,21 @@ def build(plate_path):
         "--virtual-time-budget=9000", "--run-all-compositor-stages-before-draw",
         f"--print-to-pdf={pdf}", "--no-margins", f"file://{OUT}/iamwithyou.html"],
         capture_output=True, timeout=420)
-    subprocess.run(["pdftoppm", "-png", "-r", "150", "-f", "1", "-l", "1", pdf, f"{OUT}/_i{uid}"],
+    subprocess.run(["pdftoppm", "-png", "-r", "300", "-f", "1", "-l", "1", pdf, f"{OUT}/_i{uid}"],
         capture_output=True, timeout=420)
     shot = f"{OUT}/_i{uid}-1.png"
     if not os.path.exists(shot):
         print("render failed"); return
     im = Image.open(shot).convert("RGB")
-    # darkroom system: one dark ink plus a warm second, coarse screen on newsprint
-    # a photograph, so tone-separated, not colour-separated
-    out = press.duotone(im, dark=(24, 21, 19), light=(176, 132, 74), angles=(45, 15),
-                        cell=4.4, seed=21, paper_tone=(244, 239, 228), roughness=1.0,
-                        contrast=1.05, knockout=0.88)
-    out.save(f"{OUT}/BTS-IAmWithYou-PRESSED.jpg", "JPEG", quality=93, optimize=True, progressive=True)
+    # THE PAGE — full colour, full resolution. This is what a reader sees.
+    im.save(f"{OUT}/BTS-IAmWithYou.jpg", "JPEG", quality=94, optimize=True, progressive=True)
+    # A light newsprint pass: FOUR-COLOUR at a fine screen, so it still reads as a
+    # photograph. A coarse two-ink duotone destroys a colour picture.
+    out = press.process(im, cell=1.5, seed=21, paper_tone=(250, 247, 240),
+                        roughness=0.45, gain=0.06)
+    out.save(f"{OUT}/BTS-IAmWithYou-NEWSPRINT.jpg", "JPEG", quality=94, optimize=True, progressive=True)
     for f in (pdf, shot): os.path.exists(f) and os.remove(f)
-    print("built:", f"{OUT}/BTS-IAmWithYou-PRESSED.jpg")
+    print("built:", f"{OUT}/BTS-IAmWithYou.jpg", "+ NEWSPRINT")
 
 if PLATE and os.path.exists(PLATE):
     build(PLATE)

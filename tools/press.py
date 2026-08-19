@@ -152,3 +152,30 @@ def duotone(img, dark, light, angles=(45, 15), cell=5.0, seed=7,
         al = scr[:, :, None]
         sheet = sheet * (1 - al) + (sheet * (k / 255.0)) * al
     return Image.fromarray(np.clip(sheet, 0, 255).astype(np.uint8))
+
+
+def process(img, cell=1.6, seed=7, paper_tone=(250, 247, 240), roughness=0.5, gain=0.06):
+    """Four-colour process at a FINE screen — how a modern newspaper prints a
+    photograph. A coarse two-ink duotone destroys a colour picture; this keeps the
+    picture and adds only what the paper does to it: a fine rosette, slight dot
+    gain, a warm sheet, and a whisper of misregistration."""
+    a = np.asarray(img.convert("RGB"), np.float32) / 255.0
+    h, w, _ = a.shape
+    k = 1.0 - a.max(axis=2)
+    denom = np.clip(1.0 - k, 1e-4, None)
+    c = (1.0 - a[:, :, 0] - k) / denom
+    m = (1.0 - a[:, :, 1] - k) / denom
+    y = (1.0 - a[:, :, 2] - k) / denom
+    sheet = paper(w, h, seed=seed, tone=paper_tone, roughness=roughness)
+    INK = {"c": (0, 158, 224), "m": (222, 0, 126), "y": (255, 221, 0), "k": (26, 23, 21)}
+    ANG = {"c": 15, "m": 75, "y": 0, "k": 45}
+    OFF = {"c": (0, 0), "m": (1, 0), "y": (0, 1), "k": (0, 0)}
+    for name, dens in (("y", y), ("c", c), ("m", m), ("k", k)):
+        d = np.clip(dens, 0, 1)
+        scr = halftone(d, ANG[name], cell=cell, gain=gain, jitter=0.15, seed=seed + ord(name))
+        dx, dy = OFF[name]
+        if dx or dy: scr = shift(scr, dx, dy)
+        ink = np.array(INK[name], np.float32).reshape(1, 1, 3)
+        al = scr[:, :, None]
+        sheet = sheet * (1 - al) + (sheet * (ink / 255.0)) * al
+    return Image.fromarray(np.clip(sheet, 0, 255).astype(np.uint8))
